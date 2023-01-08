@@ -31,6 +31,7 @@ class GUI {
 
         btn_profile.addEventListener('click', ()=> {
             //show about tab
+            document.querySelector('.about').classList.toggle('slideAboutAnim');
         });
 
         leftContainer.append(myName, subtitle, intro, btn_profile);
@@ -93,6 +94,7 @@ class GUI {
 
     loadAboutTab() {
         const aboutTab = document.createElement('div');
+        aboutTab.classList.add('about');
 
         const extendedIntro = document.createElement('p');
         extendedIntro.textContent = "I am a multidisciplinary creative operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science. I am a multidisciplinary creative operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science.";
@@ -105,11 +107,9 @@ class GUI {
 
         aboutTab.append(extendedIntro, biographyTitle, bioBody);
 
-        this.app.appendChild(AboutTab);
+        this.app.appendChild(aboutTab);
 
-     
-
-
+    
         return aboutTab;
     }
 }
