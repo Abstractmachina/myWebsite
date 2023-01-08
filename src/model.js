@@ -1,9 +1,11 @@
+import { LinkedList } from "./LinkedList";
+
 class Model {
 
-    projects = [];
+    _projects = null;
 
     constructor() {
-
+        this._projects = new LinkedList();
     }
 
     

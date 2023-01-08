@@ -1,6 +1,6 @@
 import { LinkedList } from "./LinkedList";
 
-class Project {
+export class Project {
 
     title = 'none';
     subtitle = '';
@@ -13,7 +13,6 @@ class Project {
         this.year = year;
         categories = new Set();
         content = new LinkedList();
-
     }
 
     addCategory(category) {

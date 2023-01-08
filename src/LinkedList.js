@@ -1,3 +1,5 @@
+import { areEqual } from "./util";
+
 export class Node {
     value = null;
     next = null;
@@ -49,10 +51,14 @@ export class LinkedList {
 
         while (current.next !== null) {
 
-            //TODO how to determine equality? not so simple
+            if (areEqual(val, current.next)) {
+                current.next = current.next.next;
+                break;
+            }
 
             current = current.next;
         }
+        this._size--;
     }
 
     get Head() {
