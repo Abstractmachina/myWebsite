@@ -5,7 +5,7 @@ body {
     
 }
 
-#root {
+.root {
     display: flex;
     justify-content: center;
 }
@@ -18,14 +18,14 @@ body {
     flex-shrink: 0;
 }
 
-#right {
+.right {
     background-color: rgb(15, 15, 15);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#circleContainer {
+.circleContainer {
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -39,7 +39,7 @@ body {
 
 }
 
-#projectIndexContainer{
+.projectIndexContainer{
     position: fixed;
     background-color: aqua;
     width: 50%;
@@ -80,10 +80,10 @@ body {
 
 
 
-#footer {
+.footer {
     position: fixed;
     bottom: 0px;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     display: flex;
     align-items: center;

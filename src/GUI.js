@@ -1,8 +1,7 @@
 class GUI {
 
     constructor() {
-        this.app = document.querySelector('#root');
-        //this.header = this.loadHeader();
+        this.app = document.querySelector('.root');
         this.leftMain = this.loadLeftMain();
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
@@ -13,8 +12,7 @@ class GUI {
     loadLeftMain() {
 
         const leftContainer = document.createElement('div');
-        leftContainer.classList.add("mainContainer");
-        leftContainer.id = "left";
+        leftContainer.classList.add("mainContainer", "left");
 
         const myName = document.createElement('h1');
         myName.textContent = 'Taole Chen';
@@ -30,7 +28,7 @@ class GUI {
         btn_profile.textContent = "Full Profile"
 
         btn_profile.addEventListener('click', ()=> {
-            //show about tab
+            //transition in about tab
             document.querySelector('.about').classList.toggle('slideAboutAnim');
         });
 
@@ -43,11 +41,10 @@ class GUI {
 
     loadRightMain() {
         const rightContainer = document.createElement('div');
-        rightContainer.classList.add("mainContainer");
-        rightContainer.id = "right";
+        rightContainer.classList.add("mainContainer", "right");
 
         const circleContainer = document.createElement('div');
-        circleContainer.id = 'circleContainer';
+        circleContainer.classList.add('circleContainer');
 
         const c1 = document.createElement('div');
         c1.classList.add('circle');
@@ -66,7 +63,7 @@ class GUI {
 
     loadFooter() {
         const footer = document.createElement('div');
-        footer.id = 'footer';
+        footer.classList.add('footer');
 
         const copyright = document.createElement('p');
         copyright.textContent = "This page was designed and built by me :) All rights reserved &#169; Taole Chen";
@@ -79,7 +76,7 @@ class GUI {
 
     loadProjectIndex() {
         const projectIndex = document.createElement('div');
-        projectIndex.id = 'projectIndexContainer';
+        projectIndex.classList.add('projectIndexContainer');
 
         //get relevant information from databse
         const placeholder = document.createElement('div');
