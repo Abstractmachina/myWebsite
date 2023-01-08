@@ -1,14 +1,6 @@
 import './style.css';
 import Model from './model.js';
 
-class Project {
-    
-    constructor(title){
-        this.title = title;
-
-    }
-}
-
 class View {
 
     constructor() {
