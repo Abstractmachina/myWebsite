@@ -1,6 +1,11 @@
 body {
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+
+#root {
     display: flex;
     justify-content: center;
 }
@@ -34,11 +39,22 @@ body {
 
 }
 
-#projectsContainer{
+#projectIndexContainer{
     position: fixed;
     background-color: aqua;
     width: 50%;
-    top: 100%;
+    top: 70%;
     left: 0px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0px;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
 }
 
