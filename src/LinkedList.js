@@ -1,4 +1,4 @@
-import { areEqual } from "./util";
+
 
 export class Node {
     value = null;
@@ -36,6 +36,7 @@ export class LinkedList {
     //insert value after specified index. If list is shorter than index, 
     //value will be pushed to the end.
     insert(val, idx) {
+        if (idx < 0) return false;
         let current = this._head;
         let prev = null;
         for (let i = 0; i < idx && current !== null; i++){
@@ -49,13 +50,28 @@ export class LinkedList {
 
         this._size++;
     }
+    
+    deleteAt(idx){
+        if (idx >= this._size || idx < 0) return false;
+        let current = this._head;
+        let prev = null;
+        for (let i = 0; i < idx && current !== null; i++){
+            prev = current;
+            current = current.next;
+        }
+        prev.next = current.next;
 
-    delete(val) {
+        this._size--;
+    }
+
+    /* pass in function for comparing two elements required, as
+    equality for two objects is not clear cut. */
+    delete(val, func) {
         let current = this._head;
 
         while (current.next !== null) {
 
-            if (areEqual(val, current.next)) {
+            if (func(val, current.next.value)) {
                 current.next = current.next.next;
                 break;
             }
