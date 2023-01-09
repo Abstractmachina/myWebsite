@@ -5,14 +5,16 @@ export class Project {
     title = 'none';
     subtitle = '';
     year = 0;
+    location = '';
     _categories = null;
     _content = null;
     
-    constructor(title, year){
+    constructor(title, year, location){
         this.title = title;
         this.year = year;
-        categories = new Set();
-        content = new LinkedList();
+        this.location = location;
+        this._categories = new Set();
+        this._content = new LinkedList();
     }
 
     addCategory(category) {

@@ -24,7 +24,7 @@ export class LinkedList {
         else {
             //iterate to last node
             let current = this._head;
-            while (this._head.next !== null) {
+            while (current.next !== null) {
                 current = current.next;
             }
             current.next = node;

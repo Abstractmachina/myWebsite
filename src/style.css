@@ -91,3 +91,11 @@ body {
     background-color: aqua;
 }
 
+/*TODO: remove */
+.test {
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    background-color:beige;
+}
