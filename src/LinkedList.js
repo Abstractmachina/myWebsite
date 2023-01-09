@@ -37,11 +37,15 @@ export class LinkedList {
     //value will be pushed to the end.
     insert(val, idx) {
         let current = this._head;
-        for (let i = 0; i < idx && current.next !== null; i++){
+        let prev = null;
+        for (let i = 0; i < idx && current !== null; i++){
+            prev = current;
             current = current.next;
         }
-
-        current.next = new Node(val);
+        
+        let n = new Node(val);
+        prev.next = n;
+        n.next = current;
 
         this._size++;
     }
@@ -61,6 +65,14 @@ export class LinkedList {
         this._size--;
     }
 
+    at(idx) {
+        let curr = this._head;
+        for (let i = 0; i < idx && curr !== null; i++){
+            curr = curr.next;
+        }
+        return curr.value;
+    }
+
     get Head() {
         return this._head;
     }
@@ -71,6 +83,5 @@ export class LinkedList {
 
     get Size() {
         return this._size;
-    }
+    }   
 }
-
