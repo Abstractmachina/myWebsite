@@ -35,7 +35,7 @@ export class Project {
 
     pushContents() {
        for (let i = 0; i < arguments.length; i++) {
-            //this.pushContent(element);
+            this.pushContent(arguments[i]);
         };
     }
     
