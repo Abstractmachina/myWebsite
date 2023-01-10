@@ -2,16 +2,16 @@ import { LinkedList } from "./LinkedList";
 
 export class Project {
 
-    title = 'none';
-    subtitle = '';
-    year = 0;
-    location = '';
+    _title = 'none';
+    _subtitle = '';
+    _year = 0;
+    _location = '';
     _categories = null;
     _content = null;
     
     constructor(title, year, location){
-        this.title = title;
-        this.year = year;
+        this._title = title;
+        this._year = year;
         this.location = location;
         this._categories = new Set();
         this._content = new LinkedList();
@@ -41,5 +41,24 @@ export class Project {
         this._content.delete(element);
     }
 
+    get Categories() {
+        return this._categories;
+    }
+
+    get Title() {
+        return this._title;
+    }
+
+    get Year() {
+        return this._year;
+    }
+
+    get Location() {
+        return this._location;
+    }
+
+    get Content() {
+        return this._content;
+    }
 
 }

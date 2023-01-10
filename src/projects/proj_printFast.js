@@ -1,7 +1,7 @@
 import { Project } from "../Project"
 
 const printFast = () => {
-    let proj = new Project("Print Fast, Pile High!", 2019, "Copenhagen");
+    let proj = new Project("Print Fast, Pile High!", 2019, "Copenhagen, Denmark");
 
     proj.addCategory("academic");
     proj.addCategory("teaching");

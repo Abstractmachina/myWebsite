@@ -5,7 +5,7 @@ class GUI {
         this.leftMain = this.loadLeftMain();
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
-        this.projectIndexContainer = this.loadProjectIndex();
+       // this.projectIndexContainer = this.loadProjectIndex();
         this.aboutTab = this.loadAboutTab();
     }
 
@@ -74,20 +74,50 @@ class GUI {
         return footer;
     }
 
-    loadProjectIndex() {
-        const projectIndex = document.createElement('div');
-        projectIndex.classList.add('projectIndexContainer');
+    loadProjectIndex(projects) {
+        if (projects === 'undefined') return;
+        const projectIndexContainer = document.createElement('div');
+        projectIndexContainer.classList.add('projectIndexContainer');
 
         //get relevant information from databse
         const placeholder = document.createElement('div');
         placeholder.textContent = "asasdf asdfas asdfasdf asdasdf";
 
+        projects.forEach((key, project) => {
+            const row = document.createElement("div");
+            row.id = key;
 
-        projectIndex.append(placeholder);
-        this.app.appendChild(projectIndex);
-        return projectIndex;
+            const title = document.createElement('div');
+            title.textContent = project.Title;
+            const year = document.createElement('div');
+            year.textContent = project.Year.toString();
+            const location = document.createElement('div');
+            location.textContent = project.Location;
+            const categories = document.createElement('div');
+            let cats = '';
+            project.Categories.forEach(element => {
+                cats += element + ", ";
+            })
+
+            cats = cats.substring(0, cats.length-2);
+
+            categories.textContent = cats;
+
+            row.append(title, year, location, categories);
+            projectIndexContainer.append(row);
+        });
+
+        projectIndexContainer.append(placeholder);
+        this.app.appendChild(projectIndexContainer);
+        return projectIndexContainer;
 
     }
+
+    processProject(project) {
+
+    }
+
+
 
     loadAboutTab() {
         const aboutTab = document.createElement('div');

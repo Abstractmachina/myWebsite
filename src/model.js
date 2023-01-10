@@ -7,11 +7,11 @@ class Model {
     _projects = null;
 
     constructor() {
-        this._projects = new LinkedList();
+        this._projects = new Map();
     }
 
-    addProject(project) {
-        this._projects.push(project);
+    addProject(key, project) {
+        this._projects.set(key, project);
     }
 
 
