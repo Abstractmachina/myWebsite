@@ -33,6 +33,13 @@ export class Project {
         this._content.push(element);
     }
 
+    pushContents() {
+       for (let i = 0; i < arguments.length; i++) {
+            //this.pushContent(element);
+        };
+    }
+    
+
     insertContent(element, index) {
         this._content.insert(element, index);
     }
@@ -59,6 +66,10 @@ export class Project {
 
     get Content() {
         return this._content;
+    }
+
+    get ContentCount() {
+        return this._content.Size;
     }
 
 }
