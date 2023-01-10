@@ -9,3 +9,10 @@ export function areEqual(a, b) {
     if (a.textContent !== b.textContent) return false;
     return true;
 }
+
+export function createElementText(tag, text) {
+    if (typeof tag !== 'string' || typeof text !== 'string') return null;
+    const output = document.createElement(tag);
+    output.textContent = text;
+    return output;
+}
