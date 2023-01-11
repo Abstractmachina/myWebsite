@@ -1,5 +1,6 @@
 import { Project } from "../Project";
 import { createElementText } from "../util";
+import aag_cover from '../assets/aag/aag_cover.jpg'
 
 const aag = () => {
     let proj = new Project(
@@ -16,7 +17,7 @@ const aag = () => {
     const ti = createElementText('h1', proj.Title);
     const introheading = document.createElement("h2");
     const img_cover = new Image();
-    img_cover.src = 
+    img_cover.src = aag_cover;
     //INTRO
     introheading.textContent = "Introduction";
     const intro1 = document.createElement("p");
@@ -24,7 +25,7 @@ const aag = () => {
     const intro2 = document.createElement("p");
     intro2.textContent = "The objective was to demonstrate to students the workings and benefits of the computational design paradigm that allows seamless integration between design, fabrication and assembly in settings where many complex constraints come together, thus making it unsuitable for conventional, analog design methodologies. Pedagogically, the students experienced it firsthand by designing funicular shell structures that hold together without formwork assembly and mortar through a parametric model that embeds fabrication data, subsequently sending their design elements to a robotic arm for hotwire fabrication. This results in a tight feedback loop where students were able to see the effects of their design decisions in a real-world prototype with a minimal delay and adapt their design in the next iteration."; 
     //Features
-    const featuresHeading = document.createElementText("h2", 'Features');
+    const featuresHeading = createElementText("h2", 'Features');
     const features = document.createElement("ul");
     const feat1 = createElementText("li", 'Bespoke Grasshopper plugin providing functionality for the creation of shell segments ready for fabrication');
     const feat2 = createElementText("li", 'Integrates SpatialSlur, a geometric data manipulation library');
@@ -40,8 +41,10 @@ const aag = () => {
     const tech4 = createElementText('li', 'Half-edge mesh structure to faciliate geometric operations and force simulation');
     tech.append(tech1, tech2, tech3,tech4);
 
-    proj.pushContents(ti, introheading, intro1, intro2, 
+    proj.pushContents(ti, img_cover, introheading, intro1, intro2, 
         featuresHeading, features, techHeading, tech);
 
     return proj;
 }
+
+export default aag;
