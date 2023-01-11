@@ -6,6 +6,10 @@ const printFast = () => {
     proj.addCategory("academic");
     proj.addCategory("teaching");
     proj.addCategory("additive manufacturing");
+    proj.addCategory("design");
+    proj.addCategory("code");
+
+
 
     const introHeading = document.createElement('h2');
     introHeading.textContent = "Introduction";

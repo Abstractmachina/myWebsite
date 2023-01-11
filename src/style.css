@@ -1,5 +1,9 @@
-body {
+*{
     box-sizing: border-box;
+}
+
+body {
+    
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     
@@ -18,6 +22,24 @@ body {
     flex-shrink: 0;
 }
 
+/* left ui */
+.left {
+    padding: 2em;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#projectArrow {
+    height: 40%;
+}
+
+#projectArrow:hover {
+    content: url("./assets/arrow_projectIndex_hover.svg");
+}
+
+/*right ui*/
 .right {
     background-color: rgb(15, 15, 15);
     display: flex;
@@ -95,7 +117,7 @@ body {
 .test {
     position: fixed;
     top: 20%;
-    left: 20%;
+    left: 100%;
     width: 60%;
     background-color:beige;
     display: flex;

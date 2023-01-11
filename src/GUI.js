@@ -1,4 +1,8 @@
+import pArrowBase from './assets/arrow_projectIndex_base.svg';
+
 class GUI {
+
+    projectArrow = null;
 
     constructor() {
         this.app = document.querySelector('.root');
@@ -32,11 +36,33 @@ class GUI {
             document.querySelector('.about').classList.toggle('slideAboutAnim');
         });
 
-        leftContainer.append(myName, subtitle, intro, btn_profile);
+
+
+        this.projectArrow = new Image();
+        this.projectArrow.src = pArrowBase;
+        this.projectArrow.id = 'projectArrow';
+        
+
+        leftContainer.append(myName, subtitle, intro, btn_profile, this.projectArrow);
 
         this.app.appendChild(leftContainer);
 
         return leftContainer;
+    }
+
+    bindCallProjectIndex(handler) {
+        this.projectArrow.addEventListener('click', () => {
+            handler();
+            console.log("click registered1");
+        });
+    }
+
+
+    
+
+
+    displayProjectIndex(projectIndexTable) {
+
     }
 
     loadRightMain() {

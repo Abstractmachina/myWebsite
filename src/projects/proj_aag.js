@@ -12,6 +12,8 @@ const aag = () => {
     proj.addCategory("academic");
     proj.addCategory("teaching");
     proj.addCategory("fabrication");
+    proj.addCategory("code");
+
 
 
     const ti = createElementText('h1', proj.Title);
