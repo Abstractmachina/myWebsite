@@ -114,13 +114,31 @@ body {
 }
 
 /*TODO: remove */
-.test {
+.projectIndex {
     position: fixed;
-    top: 20%;
-    left: 100%;
-    width: 60%;
+    top: 100%;
+    left: 0%;
+    width: 50%;
     background-color:beige;
     display: flex;
     flex-direction: column;
     padding: 1em;
+}
+
+.projectIndexSlideIn {
+    top:30%;
+    opacity: 1;
+}
+
+.projectFilter {
+    display: flex;
+}
+
+#academic{
+    color: rgb(55, 255, 0);
+    border-style: solid;
+}
+
+input { 
+    color: aqua;
 }

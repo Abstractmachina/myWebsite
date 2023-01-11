@@ -2,7 +2,7 @@ import pArrowBase from './assets/arrow_projectIndex_base.svg';
 
 class GUI {
 
-    projectArrow = null;
+    _projectArrow = null;
 
     constructor() {
         this.app = document.querySelector('.root');
@@ -11,8 +11,14 @@ class GUI {
         this.footer = this.loadFooter();
        // this.projectIndexContainer = this.loadProjectIndex();
         this.aboutTab = this.loadAboutTab();
+
+        this._projectIndexTab = document.createElement('div');
+        this._projectIndexTab.classList.add('projectIndex');
+        this.app.appendChild(this._projectIndexTab);
     }
 
+
+    //left UI
     loadLeftMain() {
 
         const leftContainer = document.createElement('div');
@@ -38,12 +44,12 @@ class GUI {
 
 
 
-        this.projectArrow = new Image();
-        this.projectArrow.src = pArrowBase;
-        this.projectArrow.id = 'projectArrow';
+        this._projectArrow = new Image();
+        this._projectArrow.src = pArrowBase;
+        this._projectArrow.id = 'projectArrow';
         
 
-        leftContainer.append(myName, subtitle, intro, btn_profile, this.projectArrow);
+        leftContainer.append(myName, subtitle, intro, btn_profile, this._projectArrow);
 
         this.app.appendChild(leftContainer);
 
@@ -51,53 +57,51 @@ class GUI {
     }
 
     bindCallProjectIndex(handler) {
-        this.projectArrow.addEventListener('click', () => {
+        this._projectArrow.addEventListener('click', () => {
             handler();
-            console.log("click registered1");
         });
     }
 
 
-    
+    displayProjectIndex(projectIndex) {
+        console.log("clicked");
 
+        this.removeAllChildren(this._projectIndexTab);
 
-    displayProjectIndex(projectIndexTable) {
-
+        //contains search categories.
+        const filterContainer = document.createElement('div');
+        filterContainer.classList.add('projectFilter');
+        this._projectIndexTab.append(filterContainer);
+        for (let i = 0; i < projectIndex.length; i++) {
+            const el = projectIndex[i];
+            //categories
+            for (let ca of el.categories) {
+                console.log("*" + ca.toString() + "*");
+                let catCheck = !!document.getElementById(ca.toString());
+                console.log("catcheck status: " + catCheck);
+                //if category doesnt exist yet, create filter option
+                if (catCheck === false) {
+                    const container = document.createElement('div');
+                    const newCat = document.createElement('input');
+                    newCat.setAttribute('type', 'checkbox');
+                    newCat.id = ca.toString();
+                    //catCheck.textContent = ca;
+                    newCat.setAttribute('name', ca);
+                    const label = document.createElement('label');
+                    label.setAttribute("for", ca);
+                    label.textContent = ca;
+                    container.append(newCat, label);
+                    filterContainer.append(container);
+                }
+            }
+        }
+        this._projectIndexTab.classList.add('projectIndexSlideIn');
     }
 
-    loadRightMain() {
-        const rightContainer = document.createElement('div');
-        rightContainer.classList.add("mainContainer", "right");
-
-        const circleContainer = document.createElement('div');
-        circleContainer.classList.add('circleContainer');
-
-        const c1 = document.createElement('div');
-        c1.classList.add('circle');
-        const c2 = document.createElement('div');
-        c2.classList.add('circle');
-        const c3 = document.createElement('div');
-        c3.classList.add('circle');
-
-        circleContainer.append(c1, c2, c3);
-        rightContainer.append(circleContainer);
-
-        this.app.appendChild(rightContainer);
-
-        return rightContainer;
-    }
-
-    loadFooter() {
-        const footer = document.createElement('div');
-        footer.classList.add('footer');
-
-        const copyright = document.createElement('p');
-        copyright.textContent = "This page was designed and built by me :) All rights reserved &#169; Taole Chen";
-        footer.append(copyright);
-
-        this.app.appendChild(footer);
-
-        return footer;
+    removeAllChildren(element) {
+        while (element.firstChild) {
+            element.removeLastChild();
+        }
     }
 
     loadProjectIndex(projects) {
@@ -139,6 +143,45 @@ class GUI {
 
     }
 
+
+
+    //right ui
+    loadRightMain() {
+        const rightContainer = document.createElement('div');
+        rightContainer.classList.add("mainContainer", "right");
+
+        const circleContainer = document.createElement('div');
+        circleContainer.classList.add('circleContainer');
+
+        const c1 = document.createElement('div');
+        c1.classList.add('circle');
+        const c2 = document.createElement('div');
+        c2.classList.add('circle');
+        const c3 = document.createElement('div');
+        c3.classList.add('circle');
+
+        circleContainer.append(c1, c2, c3);
+        rightContainer.append(circleContainer);
+
+        this.app.appendChild(rightContainer);
+
+        return rightContainer;
+    }
+
+    loadFooter() {
+        const footer = document.createElement('div');
+        footer.classList.add('footer');
+
+        const copyright = document.createElement('p');
+        copyright.textContent = "This page was designed and built by me :) All rights reserved &#169; Taole Chen";
+        footer.append(copyright);
+
+        this.app.appendChild(footer);
+
+        return footer;
+    }
+
+    
     processProject(project) {
 
     }
