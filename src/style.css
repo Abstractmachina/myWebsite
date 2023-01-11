@@ -132,6 +132,7 @@ body {
 
 .projectFilter {
     display: flex;
+    padding: 1em;
 }
 
 #academic{

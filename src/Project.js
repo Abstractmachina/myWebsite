@@ -12,7 +12,7 @@ export class Project {
     constructor(title, year, location){
         this._title = title;
         this._year = year;
-        this.location = location;
+        this._location = location;
         this._categories = new Set();
         this._content = new LinkedList();
     }

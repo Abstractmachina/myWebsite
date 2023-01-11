@@ -1,4 +1,5 @@
 import pArrowBase from './assets/arrow_projectIndex_base.svg';
+import { createElementText } from './util';
 
 class GUI {
 
@@ -68,34 +69,66 @@ class GUI {
 
         this.removeAllChildren(this._projectIndexTab);
 
-        //contains search categories.
+        //list all filterable categories
         const filterContainer = document.createElement('div');
         filterContainer.classList.add('projectFilter');
         this._projectIndexTab.append(filterContainer);
-        for (let i = 0; i < projectIndex.length; i++) {
-            const el = projectIndex[i];
-            //categories
-            for (let ca of el.categories) {
-                console.log("*" + ca.toString() + "*");
-                let catCheck = !!document.getElementById(ca.toString());
-                console.log("catcheck status: " + catCheck);
-                //if category doesnt exist yet, create filter option
-                if (catCheck === false) {
-                    const container = document.createElement('div');
-                    const newCat = document.createElement('input');
-                    newCat.setAttribute('type', 'checkbox');
-                    newCat.id = ca.toString();
-                    //catCheck.textContent = ca;
-                    newCat.setAttribute('name', ca);
-                    const label = document.createElement('label');
-                    label.setAttribute("for", ca);
-                    label.textContent = ca;
-                    container.append(newCat, label);
-                    filterContainer.append(container);
-                }
+
+        //table with all projects
+        const projectIndexTable = document.createElement("table");
+        projectIndexTable.classList.add('projectIndexTable');
+        const head_title = createElementText('th', "Title");
+        const head_year = createElementText('th', 'Year');
+        const head_loc = createElementText('th','Location');
+        const head_cat = createElementText('th', 'Categories');
+        projectIndexTable.append(head_title, head_year, head_loc, head_cat);
+
+        //generate rows for each project
+        for (let el of projectIndex) {
+            this._generateTableRow(el, filterContainer, projectIndexTable);
+        }
+        this._projectIndexTab.appendChild(projectIndexTable);
+
+        this._projectIndexTab.classList.add('projectIndexSlideIn');
+    }
+
+    _generateTableRow(el, filterContainer, projectIndexTable) {
+        const newRow = document.createElement('tr');
+
+        const rowTitle = createElementText("td", el.title);
+        const rowYear = createElementText('td', el.year.toString());
+        const rowLoc = createElementText('td', el.location);
+
+        //categories
+        let categoryTags = '';
+        for (let ca of el.categories) {
+            const split = ca.split(" ");
+            split.forEach((s) => {
+                categoryTags += s.slice(0, 1);
+            });
+            categoryTags += '.';
+
+            let catCheck = !!document.getElementById(ca.toString());
+            console.log("catcheck status: " + catCheck);
+            //if category doesnt exist yet, create filter option
+            if (catCheck === false) {
+                const container = document.createElement('div');
+                const newCat = document.createElement('input');
+                newCat.setAttribute('type', 'checkbox');
+                newCat.id = ca.toString();
+                //catCheck.textContent = ca;
+                newCat.setAttribute('name', ca);
+                const label = document.createElement('label');
+                label.setAttribute("for", ca);
+                label.textContent = ca;
+                container.append(newCat, label);
+                filterContainer.append(container);
             }
         }
-        this._projectIndexTab.classList.add('projectIndexSlideIn');
+        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
+
+        newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
+        projectIndexTable.appendChild(newRow);
     }
 
     removeAllChildren(element) {
@@ -104,48 +137,8 @@ class GUI {
         }
     }
 
-    loadProjectIndex(projects) {
-        if (projects === 'undefined') return;
-        const projectIndexContainer = document.createElement('div');
-        projectIndexContainer.classList.add('projectIndexContainer');
 
-        //get relevant information from databse
-        const placeholder = document.createElement('div');
-        placeholder.textContent = "asasdf asdfas asdfasdf asdasdf";
-
-        projects.forEach((key, project) => {
-            const row = document.createElement("div");
-            row.id = key;
-
-            const title = document.createElement('div');
-            title.textContent = project.Title;
-            const year = document.createElement('div');
-            year.textContent = project.Year.toString();
-            const location = document.createElement('div');
-            location.textContent = project.Location;
-            const categories = document.createElement('div');
-            let cats = '';
-            project.Categories.forEach(element => {
-                cats += element + ", ";
-            })
-
-            cats = cats.substring(0, cats.length-2);
-
-            categories.textContent = cats;
-
-            row.append(title, year, location, categories);
-            projectIndexContainer.append(row);
-        });
-
-        projectIndexContainer.append(placeholder);
-        this.app.appendChild(projectIndexContainer);
-        return projectIndexContainer;
-
-    }
-
-
-
-    //right ui
+    //======================    right ui    =============================
     loadRightMain() {
         const rightContainer = document.createElement('div');
         rightContainer.classList.add("mainContainer", "right");
