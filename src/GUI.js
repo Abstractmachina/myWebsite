@@ -67,14 +67,25 @@ class GUI {
     displayProjectIndex(projectIndex) {
         console.log("clicked");
 
-        this.removeAllChildren(this._projectIndexTab);
+        this._removeAllChildren(this._projectIndexTab);
 
         //list all filterable categories
         const filterContainer = document.createElement('div');
         filterContainer.classList.add('projectFilter');
         this._projectIndexTab.append(filterContainer);
 
-        //table with all projects
+        //init table
+        const projectIndexTable = this._initTable();
+        //generate rows for each project
+        this._generateAllTableRows(projectIndex, filterContainer, projectIndexTable);
+        //add table to project tab
+        this._projectIndexTab.appendChild(projectIndexTable);
+        //show index table
+        this._projectIndexTab.classList.add('projectIndexSlideIn');
+    }
+
+    //initiate table with preset headers (title, year, location, categories)
+    _initTable() {
         const projectIndexTable = document.createElement("table");
         projectIndexTable.classList.add('projectIndexTable');
         const head_title = createElementText('th', "Title");
@@ -82,26 +93,36 @@ class GUI {
         const head_loc = createElementText('th','Location');
         const head_cat = createElementText('th', 'Categories');
         projectIndexTable.append(head_title, head_year, head_loc, head_cat);
-
-        //generate rows for each project
-        for (let el of projectIndex) {
-            this._generateTableRow(el, filterContainer, projectIndexTable);
-        }
-        this._projectIndexTab.appendChild(projectIndexTable);
-
-        this._projectIndexTab.classList.add('projectIndexSlideIn');
+        return projectIndexTable;
     }
 
-    _generateTableRow(el, filterContainer, projectIndexTable) {
+    /*inputs: 
+    projectData     ... array of objects with structure {title, year, location, categories(set)} 
+    filterContainer ... div that contains filterable category terms
+    targetTable     ... table that holds generated rows */ 
+    _generateAllTableRows(projectData, filterContainer, targetTable) {
+        for (let project of projectData) {
+            this._generateTableRow(project, filterContainer, targetTable);
+        }
+    }
+
+    _generateTableRow(project, filterContainer, targetTable) {
         const newRow = document.createElement('tr');
 
-        const rowTitle = createElementText("td", el.title);
-        const rowYear = createElementText('td', el.year.toString());
-        const rowLoc = createElementText('td', el.location);
-
+        const rowTitle = createElementText("td", project.title);
+        const rowYear = createElementText('td', project.year.toString());
+        const rowLoc = createElementText('td', project.location);
         //categories
         let categoryTags = '';
-        for (let ca of el.categories) {
+        this._generateCategoryFilters(filterContainer, project.categories, categoryTags);
+        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
+
+        newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
+        targetTable.appendChild(newRow);
+    }
+
+    _generateCategoryFilters(filterContainer, categories, categoryTags) {
+        for (let ca of categories) {
             const split = ca.split(" ");
             split.forEach((s) => {
                 categoryTags += s.slice(0, 1);
@@ -125,13 +146,9 @@ class GUI {
                 filterContainer.append(container);
             }
         }
-        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
-
-        newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
-        projectIndexTable.appendChild(newRow);
     }
 
-    removeAllChildren(element) {
+    _removeAllChildren(element) {
         while (element.firstChild) {
             element.removeLastChild();
         }

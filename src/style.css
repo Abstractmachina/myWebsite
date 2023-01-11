@@ -112,17 +112,20 @@ body {
     justify-content: center;
     background-color: aqua;
 }
-
-/*TODO: remove */
 .projectIndex {
     position: fixed;
     top: 100%;
     left: 0%;
     width: 50%;
+    height:200%;
     background-color:beige;
     display: flex;
     flex-direction: column;
     padding: 1em;
+    opacity: 0;
+    transition-property: top, opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
 }
 
 .projectIndexSlideIn {
