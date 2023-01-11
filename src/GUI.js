@@ -10,18 +10,13 @@ class GUI {
         this.leftMain = this.loadLeftMain();
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
-       // this.projectIndexContainer = this.loadProjectIndex();
         this.aboutTab = this.loadAboutTab();
-
-        this._projectIndexTab = document.createElement('div');
-        this._projectIndexTab.classList.add('projectIndex');
-        this.app.appendChild(this._projectIndexTab);
+        this._projectIndexTab = this.loadProjectIndexTab();
     }
 
 
     //left UI
     loadLeftMain() {
-
         const leftContainer = document.createElement('div');
         leftContainer.classList.add("mainContainer", "left");
 
@@ -43,8 +38,6 @@ class GUI {
             document.querySelector('.about').classList.toggle('slideAboutAnim');
         });
 
-
-
         this._projectArrow = new Image();
         this._projectArrow.src = pArrowBase;
         this._projectArrow.id = 'projectArrow';
@@ -57,14 +50,25 @@ class GUI {
         return leftContainer;
     }
 
+    loadProjectIndexTab() {
+        const projectIndexTab = document.createElement('div');
+        projectIndexTab.classList.add('projectIndex');
+        this.app.appendChild(projectIndexTab);
+        return projectIndexTab;
+    }
+
     bindCallProjectIndex(handler) {
         this._projectArrow.addEventListener('click', () => {
             handler();
         });
     }
 
-
-    displayProjectIndex(projectIndex) {
+    /**
+     * Generates project index tab, containing filterable search terms and all projects laid out in a table.
+     * After build, the project index tab is displayed.
+     * @param {object array} projectData  - {title, year, location, categories(set)}
+     */
+    displayProjectIndex(projectData) {
         console.log("clicked");
 
         this._removeAllChildren(this._projectIndexTab);
@@ -77,14 +81,17 @@ class GUI {
         //init table
         const projectIndexTable = this._initTable();
         //generate rows for each project
-        this._generateAllTableRows(projectIndex, filterContainer, projectIndexTable);
+        this._generateAllTableRows(projectData, filterContainer, projectIndexTable);
         //add table to project tab
         this._projectIndexTab.appendChild(projectIndexTable);
         //show index table
         this._projectIndexTab.classList.add('projectIndexSlideIn');
     }
 
-    //initiate table with preset headers (title, year, location, categories)
+    /**
+     * initiate table with preset headers (title, year, location, categories)
+     * @returns empty <table> with headers.
+     */
     _initTable() {
         const projectIndexTable = document.createElement("table");
         projectIndexTable.classList.add('projectIndexTable');
@@ -96,16 +103,24 @@ class GUI {
         return projectIndexTable;
     }
 
-    /*inputs: 
-    projectData     ... array of objects with structure {title, year, location, categories(set)} 
-    filterContainer ... div that contains filterable category terms
-    targetTable     ... table that holds generated rows */ 
+    /**
+     * Internal helper method. Generate table from projects
+     * @param {Object[]} projectData ... array of objects with structure {title, year, location, categories(set)} 
+     * @param {<div>} filterContainer ... div that contains filterable category terms
+     * @param {<table>} targetTable ... table that holds generated rows
+     */
     _generateAllTableRows(projectData, filterContainer, targetTable) {
         for (let project of projectData) {
             this._generateTableRow(project, filterContainer, targetTable);
         }
     }
 
+    /**
+     * internal helper method. generate a table row for one project.
+     * @param {Object} project ... object with structure {title, year, location, categories(set)} 
+     * @param {<div>} filterContainer ... div that contains filterable category terms
+     * @param {<table>} targetTable ... table that holds generated rows
+     */
     _generateTableRow(project, filterContainer, targetTable) {
         const newRow = document.createElement('tr');
 
@@ -113,19 +128,24 @@ class GUI {
         const rowYear = createElementText('td', project.year.toString());
         const rowLoc = createElementText('td', project.location);
         //categories
-        let categoryTags = '';
-        this._generateCategoryFilters(filterContainer, project.categories, categoryTags);
-        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
+        let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
 
         newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
         targetTable.appendChild(newRow);
     }
 
-    _generateCategoryFilters(filterContainer, categories, categoryTags) {
+    /**
+     * internal helper function. Generate category filter search terms without duplicates.
+     * @param {<div>} filterContainer - div that contains filterable category terms
+     * @param {Set} categories - set holding categories as strings 
+     * @returns a string for categories in an abbreviated tag
+     */
+    _generateCategoryFilters(filterContainer, categories) {
+        let categoryTags = '';
         for (let ca of categories) {
             const split = ca.split(" ");
             split.forEach((s) => {
-                categoryTags += s.slice(0, 1);
+                categoryTags += s.slice(0, 2);
             });
             categoryTags += '.';
 
@@ -146,8 +166,14 @@ class GUI {
                 filterContainer.append(container);
             }
         }
+        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
+        return categoryTags;
     }
 
+    /**
+     * Reset an element
+     * @param {HTML Element} element 
+     */
     _removeAllChildren(element) {
         while (element.firstChild) {
             element.removeLastChild();

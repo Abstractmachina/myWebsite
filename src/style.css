@@ -138,11 +138,10 @@ body {
     padding: 1em;
 }
 
-#academic{
-    color: rgb(55, 255, 0);
-    border-style: solid;
+.projectIndex table {
+    background-color: brown;
 }
 
-input { 
-    color: aqua;
+.projectIndex tr:hover {
+    background-color:aquamarine;
 }
