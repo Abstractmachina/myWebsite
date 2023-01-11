@@ -31,6 +31,10 @@ class Model {
 
     }
 
+    get ProjectCount() {
+        return this._projects.size;
+    }
+
 }
 
 export default Model
