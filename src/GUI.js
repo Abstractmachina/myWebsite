@@ -80,10 +80,22 @@ class GUI {
     }
 
     displayProject(htmlContent) {
+        console.log("displayProject()");
+        const animationClass = 'slideInFromRight';
+
+        if (this._projectTab.classList.contains(animationClass)) {
+            this._projectTab.classList.remove(animationClass);
+            this._removeAllChildren(this._projectTab);
+            setTimeout(() => {
+                this._projectTab.appendChild(htmlContent);
+                this._projectTab.classList.add(animationClass);
+            }, 200);
+            return;
+        }
+
         this._removeAllChildren(this._projectTab);
         this._projectTab.appendChild(htmlContent);
-
-        this._projectTab.classList.add('slideInFromRight');
+        this._projectTab.classList.add(animationClass);
 
     }
 
@@ -204,8 +216,8 @@ class GUI {
      * @param {HTML Element} element 
      */
     _removeAllChildren(element) {
-        while (element.firstChild) {
-            element.removeLastChild();
+        while (element.lastChild) {
+            element.removeChild(element.lastChild);
         }
     }
 

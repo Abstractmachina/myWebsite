@@ -126,7 +126,7 @@ body {
     top: 0%;
     width: 50%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0;
     z-index: 1;
     transition-property: left, opacity;
     transition-duration: 0.2s;
