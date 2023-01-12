@@ -61,8 +61,14 @@ export class Project {
         return this._location;
     }
 
-    get FullContent() {
-        
+    get HtmlContent() {
+        const container = document.createElement('div');
+        let node = this._content.Head;
+        while (node !== null) {
+            container.appendChild(node.Value);
+            node = node.next;
+        }
+        return container;
     }
 
     get Content() {

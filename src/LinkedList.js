@@ -1,14 +1,18 @@
 
 
 export class Node {
-    value = null;
+    _value = null;
     next = null;
     constructor(value) {
-        this.value = value;
+        this.Value = value;
     }
+
+    get Value() { return this._value;}
+    set Value(val) { this._value = val;}
 }
 
 export class LinkedList {
+    //TODO: implement iterator
     _head = null;
     _size = 0;
 

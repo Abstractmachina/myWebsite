@@ -84,7 +84,7 @@ body {
     transition-timing-function: ease-out;
 }
 
-.slideAboutAnim {
+.slideInFromRight {
     /* animation-name: slideAboutIn;
     animation-duration: 2s;
     /* animation-timing-function: ease-out; */
@@ -144,4 +144,17 @@ body {
 
 .projectIndex tr:hover {
     background-color:aquamarine;
+}
+
+.projectTab {
+    position: fixed;
+    left:70%;
+    top: 0%;
+    width: 50%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+    transition-property: left, opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
 }

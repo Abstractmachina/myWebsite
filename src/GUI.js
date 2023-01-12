@@ -6,12 +6,13 @@ class GUI {
     _projectArrow = null;
 
     constructor() {
-        this.app = document.querySelector('.root');
+        this._app = document.querySelector('.root');
         this.leftMain = this.loadLeftMain();
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
         this.aboutTab = this.loadAboutTab();
         this._projectIndexTab = this.loadProjectIndexTab();
+        this._projectTab = this.loadProjectTab();
     }
 
 
@@ -35,7 +36,7 @@ class GUI {
 
         btn_profile.addEventListener('click', ()=> {
             //transition in about tab
-            document.querySelector('.about').classList.toggle('slideAboutAnim');
+            document.querySelector('.about').classList.toggle('slideInFromRight');
         });
 
         this._projectArrow = new Image();
@@ -45,7 +46,7 @@ class GUI {
 
         leftContainer.append(myName, subtitle, intro, btn_profile, this._projectArrow);
 
-        this.app.appendChild(leftContainer);
+        this._app.appendChild(leftContainer);
 
         return leftContainer;
     }
@@ -53,7 +54,7 @@ class GUI {
     loadProjectIndexTab() {
         const projectIndexTab = document.createElement('div');
         projectIndexTab.classList.add('projectIndex');
-        this.app.appendChild(projectIndexTab);
+        this._app.appendChild(projectIndexTab);
         return projectIndexTab;
     }
 
@@ -78,7 +79,11 @@ class GUI {
 
     }
 
-    displayProject(id) {
+    displayProject(htmlContent) {
+        this._removeAllChildren(this._projectTab);
+        this._projectTab.appendChild(htmlContent);
+
+        this._projectTab.classList.add('slideInFromRight');
 
     }
 
@@ -223,7 +228,7 @@ class GUI {
         circleContainer.append(c1, c2, c3);
         rightContainer.append(circleContainer);
 
-        this.app.appendChild(rightContainer);
+        this._app.appendChild(rightContainer);
 
         return rightContainer;
     }
@@ -236,14 +241,9 @@ class GUI {
         copyright.textContent = "This page was designed and built by me :) All rights reserved &#169; Taole Chen";
         footer.append(copyright);
 
-        this.app.appendChild(footer);
+        this._app.appendChild(footer);
 
         return footer;
-    }
-
-    
-    processProject(project) {
-
     }
 
 
@@ -263,10 +263,17 @@ class GUI {
 
         aboutTab.append(extendedIntro, biographyTitle, bioBody);
 
-        this.app.appendChild(aboutTab);
+        this._app.appendChild(aboutTab);
 
     
         return aboutTab;
+    }
+
+    loadProjectTab() {
+        const projectTab = document.createElement('div');
+        projectTab.classList.add('projectTab');
+        this._app.appendChild(projectTab);
+        return projectTab;
     }
 }
 

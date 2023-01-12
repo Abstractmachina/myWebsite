@@ -30,6 +30,6 @@ export class Controller{
 
     onProjectPageCalled = (id) => {
         const project = this._model.getProject(id);
-        
+        this._view.displayProject(project.HtmlContent);
     }
 }
