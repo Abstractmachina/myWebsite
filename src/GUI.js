@@ -79,10 +79,15 @@ class GUI {
 
     }
 
+    /**
+     * 
+     * @param {<div>} htmlContent ... html div containing all page layout elements
+     */
     displayProject(htmlContent) {
         console.log("displayProject()");
         const animationClass = 'slideInFromRight';
 
+        //if project page already shown, slide out, swap content and slide back in.
         if (this._projectTab.classList.contains(animationClass)) {
             this._projectTab.classList.remove(animationClass);
             this._removeAllChildren(this._projectTab);
