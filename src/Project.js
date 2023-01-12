@@ -54,6 +54,14 @@ export class Project {
     get Title() {
         return this._title;
     }
+
+    get Subtitle() {
+        return this._subtitle;
+    }
+    set Subtitle(val) {
+        this._subtitle = val;
+    }
+
     get Year() {
         return this._year;
     }

@@ -18,10 +18,10 @@ const aag = () => {
 
     const ti = createElementText('h1', proj.Title);
     const introheading = document.createElement("h2");
+    introheading.textContent = "Introduction";
     const img_cover = new Image();
     img_cover.src = aag_cover;
     //INTRO
-    introheading.textContent = "Introduction";
     const intro1 = document.createElement("p");
     intro1.textContent = "Formwork-Free and Mortar-Free Shell Assembly is a workshop I led in Gothenburg, Sweden, for the Advances in Architectural Geometry Conference in 2018.";
     const intro2 = document.createElement("p");
