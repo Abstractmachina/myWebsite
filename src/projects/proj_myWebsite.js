@@ -21,9 +21,9 @@ const myWebsite = () => {
     intro.textContent = 'This website was built completely from scratch by me to showcase the projects I have done over the years. It served as a great project to put everything I have learned about web development into practice. Please feel free to browse around and I am happy to receive any and all feedback.'
     const featuresHeading = createElementText('h2', 'Features');
     const features = document.createElement("ul");
-    const feat1 = createElementText("li", 'Bespoke Grasshopper plugin providing functionality for the creation of shell segments ready for fabrication');
-    const feat2 = createElementText("li", 'Integrates SpatialSlur, a geometric data manipulation library');
-    const feat3 = createElementText("li", 'Shell structural evaluation implementing thrust network analysis on half-edge mesh structures');
+    const feat1 = createElementText("li", 'MVC architecture');
+    const feat2 = createElementText("li", 'Vanilla JS');
+    const feat3 = createElementText("li", 'Unit testing');
     const feat4 = createElementText("li", 'Integration with custom-made robotic hotwire-cutter');
     features.append(feat1, feat2,feat3, feat4);
 
