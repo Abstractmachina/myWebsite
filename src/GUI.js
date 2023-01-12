@@ -15,7 +15,6 @@ class GUI {
         this._projectTab = this.loadProjectTab();
     }
 
-
     //left UI
     loadLeftMain() {
         const leftContainer = document.createElement('div');
@@ -71,27 +70,27 @@ class GUI {
                 console.log("dasdasd");
                 console.log(e.target.parentNode.id);
             }
-
             const id = e.target.parentNode.id;
             handler(id);
-            
         });
-
     }
 
     /**
-     * 
+     * Populates Project tab container with content and slides into view.
      * @param {<div>} htmlContent ... html div containing all page layout elements
      */
     displayProject(htmlContent) {
-        console.log("displayProject()");
+
+
         const animationClass = 'slideInFromRight';
 
         //if project page already shown, slide out, swap content and slide back in.
+        //timeout added to allow animation to finish.
         if (this._projectTab.classList.contains(animationClass)) {
             this._projectTab.classList.remove(animationClass);
             this._removeAllChildren(this._projectTab);
             setTimeout(() => {
+                this._addCloseProjectButton();
                 this._projectTab.appendChild(htmlContent);
                 this._projectTab.classList.add(animationClass);
             }, 200);
@@ -99,9 +98,22 @@ class GUI {
         }
 
         this._removeAllChildren(this._projectTab);
+        this._addCloseProjectButton();
         this._projectTab.appendChild(htmlContent);
         this._projectTab.classList.add(animationClass);
 
+    }
+
+    _addCloseProjectButton() {
+        const closeProject = document.createElement('div');
+        closeProject.classList.add('closeProject');
+        this._projectTab.appendChild(closeProject);
+
+        closeProject.addEventListener('click', () => {
+            this._projectTab.classList.remove('slideInFromRight');
+        });
+
+        return closeProject;
     }
 
     /**
@@ -196,7 +208,6 @@ class GUI {
             categoryTags += '.';
 
             let catCheck = !!document.getElementById(ca.toString());
-            console.log("catcheck status: " + catCheck);
             //if category doesnt exist yet, create filter option
             if (catCheck === false) {
                 const container = document.createElement('div');

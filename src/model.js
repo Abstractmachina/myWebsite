@@ -11,8 +11,11 @@ class Model {
     }
 
 
-    //get relevant information from each project to build an index table,
-    //returns an array of entry objects
+
+    /**
+     * get relevant information from each project to build an index table,
+    //returns an array of objects
+     */
     get ProjectIndex() {
 
         let entries = [];

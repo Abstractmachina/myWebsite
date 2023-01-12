@@ -119,6 +119,8 @@ body {
     background-color:aquamarine;
 }
 
+
+
 .projectTab {
     background-color: white;
     position: fixed;
@@ -132,6 +134,16 @@ body {
     transition-property: left, opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
+}
+
+.closeProject {
+    background-color: brown;
+    width: 2em;
+    height: 2em;
+}
+
+.closeProject:hover {
+    background-color:azure;
 }
 
 .projectTab img {
