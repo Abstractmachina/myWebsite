@@ -15,21 +15,8 @@ export class Controller{
         this._model.addProject('printFast',  printFast());
         this._model.addProject('aag', aag());
 
-        const test = document.createElement('div');
-        test.classList.add('test');
-
-        let curr = aag()._content._head;
-
-        while (curr !== null) {
-            test.appendChild(curr.value);
-            curr = curr.next;
-        }
-
-
-        const root = document.querySelector('.root');
-        //root.appendChild(test);
-
         this._view.bindCallProjectIndex(this.onProjectIndexCalled);
+        this._view.bindCallProjectPages(this.onProjectPageCalled);
     }
 
     //need to use arrow function as otherwise this will unbind itself!
@@ -39,5 +26,10 @@ export class Controller{
         }
 
         this._view.displayProjectIndex(this._projectIndex);
+    }
+
+    onProjectPageCalled = (id) => {
+        const project = this._model.getProject(id);
+        
     }
 }

@@ -63,6 +63,25 @@ class GUI {
         });
     }
 
+    bindCallProjectPages(handler) {
+        this._projectIndexTab.addEventListener('click', (e) => {
+            console.log(e.target);
+            if (e.target.parentNode.nodeName === 'TR') {
+                console.log("dasdasd");
+                console.log(e.target.parentNode.id);
+            }
+
+            const id = e.target.parentNode.id;
+            handler(id);
+            
+        });
+
+    }
+
+    displayProject(id) {
+
+    }
+
     /**
      * Generates project index tab, containing filterable search terms and all projects laid out in a table.
      * After build, the project index tab is displayed.
@@ -130,6 +149,11 @@ class GUI {
         //categories
         let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
 
+        newRow.id = project.id;
+        newRow.addEventListener('click', () => {
+
+        });
+
         newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
         targetTable.appendChild(newRow);
     }
@@ -171,7 +195,7 @@ class GUI {
     }
 
     /**
-     * Reset an element
+     * clear an element
      * @param {HTML Element} element 
      */
     _removeAllChildren(element) {

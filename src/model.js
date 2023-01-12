@@ -31,8 +31,16 @@ class Model {
 
     }
 
+    getProject(id) {
+        return this._projects.get(id);
+    }
+
     get ProjectCount() {
         return this._projects.size;
+    }
+
+    get Ids() {
+        return this._projects.keys();
     }
 
 }

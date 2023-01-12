@@ -39,7 +39,6 @@ export class Project {
         };
     }
     
-
     insertContent(element, index) {
         this._content.insert(element, index);
     }
@@ -48,26 +47,27 @@ export class Project {
         this._content.delete(element);
     }
 
+    //Getters, Setters
     get Categories() {
         return this._categories;
     }
-
     get Title() {
         return this._title;
     }
-
     get Year() {
         return this._year;
     }
-
     get Location() {
         return this._location;
+    }
+
+    get FullContent() {
+        
     }
 
     get Content() {
         return this._content;
     }
-
     get ContentCount() {
         return this._content.Size;
     }
