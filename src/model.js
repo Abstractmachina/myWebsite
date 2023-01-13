@@ -11,12 +11,29 @@ class Model {
     }
 
 
+    addProjects = (newProjects) => {
+        if (!newProjects instanceof Map) throw "Must be a map";
+        if (this._projects.size > 0) {
+            var merged = new Map([this._projects, newProjects]);
+            this._projects = merged;
+            return;
+        }
+
+        this._projects = newProjects;
+
+    }
+
+
 
     /**
      * get relevant information from each project to build an index table,
     //returns an array of objects
      */
     get ProjectIndex() {
+        if (this._projects === null) throw 'No projects added!';
+
+        // console.log("dasdfasdf")
+        // console.log(this._projects);
 
         let entries = [];
         for (let [key, project] of this._projects.entries()) {

@@ -3,12 +3,12 @@ import printFast from "./projects/proj_printFast";
 import aag from "./projects/proj_aag";
 
 const loadProjects = () => {
-    projects = new Map();
+    const projects = new Map();
     projects.set('printFast',  printFast());
     projects.set('aag', aag());
-    projects.set('website', myWebsite)
+    projects.set('website', myWebsite())
 
     return projects;
-}
+};
 
 export default loadProjects;

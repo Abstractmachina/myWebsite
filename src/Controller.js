@@ -15,12 +15,8 @@ export class Controller{
     constructor(model, view) {
         this._model = new Model();
         this._view = new GUI();
-
-        this._model.addProject('printFast',  printFast());
-        this._model.addProject('aag', aag());
-        this._model.addProject('website', myWebsite());
-
-        // loadProjects(this._model);
+        
+        this._model.addProjects(loadProjects());
 
         this._view.bindCallProjectIndex(this.onProjectIndexCalled);
         this._view.bindCallProjectPages(this.onProjectPageCalled);

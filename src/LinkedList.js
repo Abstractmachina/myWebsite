@@ -1,14 +1,11 @@
 
 
 export class Node {
-    _value = null;
+    value = null;
     next = null;
     constructor(value) {
-        this.Value = value;
+        this.value = value;
     }
-
-    get Value() { return this._value;}
-    set Value(val) { this._value = val;}
 }
 
 export class LinkedList {

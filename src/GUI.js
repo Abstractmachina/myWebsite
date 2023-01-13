@@ -65,56 +65,12 @@ class GUI {
 
     bindCallProjectPages(handler) {
         this._projectIndexTab.addEventListener('click', (e) => {
-            console.log(e.target);
-            if (e.target.parentNode.nodeName === 'TR') {
-                console.log("dasdasd");
-                console.log(e.target.parentNode.id);
-            }
             const id = e.target.parentNode.id;
             handler(id);
         });
     }
 
-    /**
-     * Populates Project tab container with content and slides into view.
-     * @param {<div>} htmlContent ... html div containing all page layout elements
-     */
-    displayProject(htmlContent) {
-
-
-        const animationClass = 'slideInFromRight';
-
-        //if project page already shown, slide out, swap content and slide back in.
-        //timeout added to allow animation to finish.
-        if (this._projectTab.classList.contains(animationClass)) {
-            this._projectTab.classList.remove(animationClass);
-            this._removeAllChildren(this._projectTab);
-            setTimeout(() => {
-                this._addCloseProjectButton();
-                this._projectTab.appendChild(htmlContent);
-                this._projectTab.classList.add(animationClass);
-            }, 200);
-            return;
-        }
-
-        this._removeAllChildren(this._projectTab);
-        this._addCloseProjectButton();
-        this._projectTab.appendChild(htmlContent);
-        this._projectTab.classList.add(animationClass);
-
-    }
-
-    _addCloseProjectButton() {
-        const closeProject = document.createElement('div');
-        closeProject.classList.add('closeProject');
-        this._projectTab.appendChild(closeProject);
-
-        closeProject.addEventListener('click', () => {
-            this._projectTab.classList.remove('slideInFromRight');
-        });
-
-        return closeProject;
-    }
+    
 
     /**
      * Generates project index tab, containing filterable search terms and all projects laid out in a table.
@@ -302,6 +258,45 @@ class GUI {
         projectTab.classList.add('projectTab');
         this._app.appendChild(projectTab);
         return projectTab;
+    }
+
+    /**
+     * Populates Project tab container with content and slides into view.
+     * @param {<div>} htmlContent ... html div containing all page layout elements
+     */
+    displayProject(htmlContent) {
+        const animationClass = 'slideInFromRight';
+
+        //if project page already shown, slide out, swap content and slide back in.
+        //timeout added to allow animation to finish.
+        if (this._projectTab.classList.contains(animationClass)) {
+            this._projectTab.classList.remove(animationClass);
+            this._removeAllChildren(this._projectTab);
+            setTimeout(() => {
+                this._addCloseProjectButton();
+                this._projectTab.appendChild(htmlContent);
+                this._projectTab.classList.add(animationClass);
+            }, 200);
+            return;
+        }
+
+        this._removeAllChildren(this._projectTab);
+        this._addCloseProjectButton();
+        this._projectTab.appendChild(htmlContent);
+        this._projectTab.classList.add(animationClass);
+
+    }
+
+    _addCloseProjectButton() {
+        const closeProject = document.createElement('div');
+        closeProject.classList.add('closeProject');
+        this._projectTab.appendChild(closeProject);
+
+        closeProject.addEventListener('click', () => {
+            this._projectTab.classList.remove('slideInFromRight');
+        });
+
+        return closeProject;
     }
 }
 

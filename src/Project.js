@@ -73,7 +73,7 @@ export class Project {
         const container = document.createElement('div');
         let node = this._content.Head;
         while (node !== null) {
-            container.appendChild(node.Value);
+            container.appendChild(node.value);
             node = node.next;
         }
         return container;
