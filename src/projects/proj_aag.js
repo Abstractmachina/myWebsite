@@ -36,7 +36,7 @@ const aag = () => {
     features.append(feat1, feat2,feat3, feat4);
     //Technologies
     const techHeading = createElementText('h2', 'Technologies');
-    const tech = document.createElement('div');
+    const tech = document.createElement('ul');
     const tech1 = createElementText('li', 'C#');
     const tech2 = createElementText('li', 'KukaPRC for robotic kinematic simulation and GCode generation');
     const tech3 = createElementText('li', 'SpatialSlur');

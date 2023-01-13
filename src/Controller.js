@@ -1,7 +1,11 @@
-import printFast from "./projects/proj_printFast";
-import aag from "./projects/proj_aag";
+
 import Model from './Model.js';
 import GUI from './GUI.js'
+import loadProjects from "./loadProjects";
+
+import myWebsite from "./projects/proj_myWebsite";
+import printFast from "./projects/proj_printFast";
+import aag from "./projects/proj_aag";
 
 export class Controller{
     _model = null;
@@ -14,6 +18,9 @@ export class Controller{
 
         this._model.addProject('printFast',  printFast());
         this._model.addProject('aag', aag());
+        this._model.addProject('website', myWebsite());
+
+        // loadProjects(this._model);
 
         this._view.bindCallProjectIndex(this.onProjectIndexCalled);
         this._view.bindCallProjectPages(this.onProjectPageCalled);
