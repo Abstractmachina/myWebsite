@@ -53,8 +53,7 @@ class GUI {
     loadProjectIndexTab() {
         const projectIndexTab = document.createElement('div');
         projectIndexTab.classList.add('projectIndex');
-        let table = this._initTable();
-        projectIndexTab.appendChild(table);
+        this._initIndexTable(projectIndexTab);
         this._app.appendChild(projectIndexTab);
         
         return projectIndexTab;
@@ -102,18 +101,19 @@ class GUI {
     }
 
     /**
-     * initiate table with preset headers (title, year, location, categories)
+     * initiate table with preset headers (title, year, location, categories) and attach to parent
      * @returns empty <table> with headers.
      */
-    _initTable() {
-        const projectIndexTable = document.createElement("table");
-        projectIndexTable.classList.add('projectIndexTable');
+    _initIndexTable(parent) {
+        const indexTable = document.createElement("table");
+        indexTable.classList.add('projectIndexTable');
         const head_title = createElementText('th', "Title");
         const head_year = createElementText('th', 'Year');
         const head_loc = createElementText('th','Location');
         const head_cat = createElementText('th', 'Categories');
-        projectIndexTable.append(head_title, head_year, head_loc, head_cat);
-        return projectIndexTable;
+        indexTable.append(head_title, head_year, head_loc, head_cat);
+        parent.appendChild(indexTable);
+        return indexTable;
     }
 
     /**
@@ -142,13 +142,13 @@ class GUI {
         const rowLoc = createElementText('td', project.location);
         //categories
         let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
-
+        const tags = createElementText('td', categoryTags);
         newRow.id = project.id;
         newRow.addEventListener('click', () => {
 
         });
 
-        newRow.append(rowTitle, rowYear, rowLoc, categoryTags);
+        newRow.append(rowTitle, rowYear, rowLoc, tags);
         targetTable.appendChild(newRow);
     }
 
@@ -189,11 +189,19 @@ class GUI {
 
                     let filtered = [...checkBoxes]
                         .filter(box => box.checked === true)
-                        .map(box => box.id);
+                        .map(box => box.id.slice(0,2));
 
                     console.log(filtered);
 
-                    
+                    let table = document.querySelector(".projectIndexTable");
+                    if (table.childNodes !== null) {
+                        console.log(table.childNodes);
+                    }
+
+                    filtered.forEach(term => {
+                        let tag = term.slice(0,2);
+
+                    });
 
                     if (e.target.checked) {
                         console.log(newCat.id + " checked");
