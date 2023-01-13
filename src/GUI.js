@@ -15,7 +15,7 @@ class GUI {
         this._projectTab = this.loadProjectTab();
     }
 
-    //left UI
+    //==================    left UI =====================================
     loadLeftMain() {
         const leftContainer = document.createElement('div');
         leftContainer.classList.add("mainContainer", "left");
@@ -53,7 +53,10 @@ class GUI {
     loadProjectIndexTab() {
         const projectIndexTab = document.createElement('div');
         projectIndexTab.classList.add('projectIndex');
+        let table = this._initTable();
+        projectIndexTab.appendChild(table);
         this._app.appendChild(projectIndexTab);
+        
         return projectIndexTab;
     }
 
@@ -64,7 +67,8 @@ class GUI {
     }
 
     bindCallProjectPages(handler) {
-        this._projectIndexTab.addEventListener('click', (e) => {
+        const table = document.querySelector('.projectIndexTable');
+        table.addEventListener('click', (e) => {
             const id = e.target.parentNode.id;
             handler(id);
         });
@@ -78,9 +82,9 @@ class GUI {
      * @param {object array} projectData  - {title, year, location, categories(set)}
      */
     displayProjectIndex(projectData) {
-        console.log("clicked");
+        const projectIndexTable = document.querySelector('.projectIndexTable');
 
-        this._removeAllChildren(this._projectIndexTab);
+        this._removeAllChildren(projectIndexTable);
 
         //list all filterable categories
         const filterContainer = document.createElement('div');
@@ -88,7 +92,7 @@ class GUI {
         this._projectIndexTab.append(filterContainer);
 
         //init table
-        const projectIndexTable = this._initTable();
+        // const projectIndexTable = this._initTable();
         //generate rows for each project
         this._generateAllTableRows(projectData, filterContainer, projectIndexTable);
         //add table to project tab
@@ -170,13 +174,34 @@ class GUI {
                 const newCat = document.createElement('input');
                 newCat.setAttribute('type', 'checkbox');
                 newCat.id = ca.toString();
-                //catCheck.textContent = ca;
                 newCat.setAttribute('name', ca);
                 const label = document.createElement('label');
                 label.setAttribute("for", ca);
                 label.textContent = ca;
-                container.append(newCat, label);
+                label.appendChild(newCat);
+                container.append(label);
                 filterContainer.append(container);
+
+                newCat.addEventListener('change', (e) => {
+                    let checkBoxes = filterContainer.querySelectorAll('input');
+                    console.log(checkBoxes);
+
+
+                    let filtered = [...checkBoxes]
+                        .filter(box => box.checked === true)
+                        .map(box => box.id);
+
+                    console.log(filtered);
+
+                    
+
+                    if (e.target.checked) {
+                        console.log(newCat.id + " checked");
+                    }
+                    else {
+                        console.log(newCat.id + " unchecked");
+                    }
+                });
             }
         }
         categoryTags = categoryTags.slice(0, categoryTags.length - 1);

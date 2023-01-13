@@ -1,11 +1,6 @@
-
 import Model from './Model.js';
 import GUI from './GUI.js'
 import loadProjects from "./loadProjects";
-
-import myWebsite from "./projects/proj_myWebsite";
-import printFast from "./projects/proj_printFast";
-import aag from "./projects/proj_aag";
 
 export class Controller{
     _model = null;
@@ -15,7 +10,7 @@ export class Controller{
     constructor(model, view) {
         this._model = new Model();
         this._view = new GUI();
-        
+
         this._model.addProjects(loadProjects());
 
         this._view.bindCallProjectIndex(this.onProjectIndexCalled);
