@@ -11,7 +11,7 @@ class GUI {
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
         this.aboutTab = this.loadAboutTab();
-        this._projectIndexTab = this.loadProjectIndexTab();
+        this._indexTab = this.loadProjectIndexTab();
         this._projectTab = this.loadProjectTab();
     }
 
@@ -51,12 +51,16 @@ class GUI {
     }
 
     loadProjectIndexTab() {
-        const projectIndexTab = document.createElement('div');
-        projectIndexTab.classList.add('projectIndex');
-        this._initIndexTable(projectIndexTab);
-        this._app.appendChild(projectIndexTab);
+        const indexTab = document.createElement('div');
+        indexTab.classList.add('projectIndex');
+
+        const filterContainer = document.createElement('div');
+        filterContainer.classList.add('projectFilter');
+        indexTab.appendChild(filterContainer);
+        this._initIndexTable(indexTab);
+        this._app.appendChild(indexTab);
         
-        return projectIndexTab;
+        return indexTab;
     }
 
     bindCallProjectIndex(handler) {
@@ -81,39 +85,89 @@ class GUI {
      * @param {object array} projectData  - {title, year, location, categories(set)}
      */
     displayProjectIndex(projectData) {
-        const projectIndexTable = document.querySelector('.projectIndexTable');
 
-        this._removeAllChildren(projectIndexTable);
+        let categories = new Set();
+            projectData.forEach(p => {
+                p.categories.forEach(c => {
+                categories.add(c);
+            });
+        })
+        this._loadFilters(categories);
+
+
+        const idxTableContainer = document.querySelector('.projectIndexTable');
+
+        //if no index has been created yet
+        if (!idxTableContainer.lastChild) {
+            //build index
+            this._buildIndexTable();
+        }
+
+        this._indexTab.classList.add('projectIndexSlideIn');
+        return;
+        this._removeAllChildren(idxTableContainer);
 
         //list all filterable categories
         const filterContainer = document.createElement('div');
         filterContainer.classList.add('projectFilter');
-        this._projectIndexTab.append(filterContainer);
+        this._indexTab.append(filterContainer);
 
         //init table
         // const projectIndexTable = this._initTable();
         //generate rows for each project
-        this._generateAllTableRows(projectData, filterContainer, projectIndexTable);
+        this._generateAllTableRows(projectData, filterContainer, idxTableContainer);
         //add table to project tab
-        this._projectIndexTab.appendChild(projectIndexTable);
+        this._indexTab.appendChild(idxTableContainer);
         //show index table
-        this._projectIndexTab.classList.add('projectIndexSlideIn');
+        this._indexTab.classList.add('projectIndexSlideIn');
+    }
+
+    _buildIndexTable(parent) {
+       // this._initIndexHeaders(parent);
+
+    }
+
+    _loadFilters(categories) {
+        const filterContainer = document.querySelector('.projectFilter');
+
+        categories.forEach(ca => {
+            const newCat = document.createElement('input');
+            newCat.setAttribute('type', 'checkbox');
+            newCat.id = ca.toString();
+            newCat.setAttribute('name', ca);
+            newCat.checked = true;
+            const label = document.createElement('label');
+            label.setAttribute("for", ca);
+            label.textContent = ca;
+            label.appendChild(newCat);
+            // container.append(label);
+            filterContainer.append(label);
+
+            newCat.addEventListener('change', () => {
+                
+            });
+        });
+
+    }
+
+    _initIndexTable(parent){
+        const indexTable = document.createElement("table");
+        indexTable.classList.add('projectIndexTable');
+
+        parent.appendChild(indexTable);
+        return indexTable;
     }
 
     /**
      * initiate table with preset headers (title, year, location, categories) and attach to parent
      * @returns empty <table> with headers.
      */
-    _initIndexTable(parent) {
-        const indexTable = document.createElement("table");
-        indexTable.classList.add('projectIndexTable');
+    _initIndexHeaders(tableContainer) {
         const head_title = createElementText('th', "Title");
         const head_year = createElementText('th', 'Year');
         const head_loc = createElementText('th','Location');
         const head_cat = createElementText('th', 'Categories');
-        indexTable.append(head_title, head_year, head_loc, head_cat);
-        parent.appendChild(indexTable);
-        return indexTable;
+        tableContainer.append(head_title, head_year, head_loc, head_cat);
     }
 
     /**
