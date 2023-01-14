@@ -86,13 +86,8 @@ class GUI {
      */
     displayProjectIndex(projectData) {
 
-        let categories = new Set();
-            projectData.forEach(p => {
-                p.categories.forEach(c => {
-                categories.add(c);
-            });
-        })
-        this._loadFilters(categories);
+        
+        this._loadFilters(projectData);
 
 
         const idxTableContainer = document.querySelector('.projectIndexTable');
@@ -122,15 +117,23 @@ class GUI {
         this._indexTab.classList.add('projectIndexSlideIn');
     }
 
-    _buildIndexTable(parent) {
-       // this._initIndexHeaders(parent);
-
+    _getUniqueCategories(projectData) {
+        let categories = new Set();
+        projectData.forEach(p => {
+            p.categories.forEach(c => {
+                categories.add(c);
+            });
+        });
+        return categories;
     }
 
-    _loadFilters(categories) {
+    
+
+    _loadFilters(projectData) {
+        let categoryFilters = this._getUniqueCategories(projectData);
         const filterContainer = document.querySelector('.projectFilter');
 
-        categories.forEach(ca => {
+        categoryFilters.forEach(ca => {
             const newCat = document.createElement('input');
             newCat.setAttribute('type', 'checkbox');
             newCat.id = ca.toString();
@@ -144,11 +147,50 @@ class GUI {
             filterContainer.append(label);
 
             newCat.addEventListener('change', () => {
-                
+                let checkBoxes = filterContainer.querySelectorAll('input');
+
+                let filtered = [...checkBoxes]
+                    .filter(box => box.checked === true)
+                    .map(box => box.id);
+
+                console.log(filtered);
+
+                let table = document.querySelector(".projectIndexTable");
+                if (table.childNodes !== null) {
+                    console.log(table.childNodes);
+                }
+                this._buildIndexTable(projectData, categoryFilters);
             });
         });
 
     }
+
+    _buildIndexTable(projectData, categoryFilters) {
+        let parent = document.querySelector(".projectIndexTable");
+        this._initIndexHeaders(parent);
+
+        
+
+        for (let project of projectData) {
+            const newRow = document.createElement('tr');
+
+            const rowTitle = createElementText("td", project.title);
+            const rowYear = createElementText('td', project.year.toString());
+            const rowLoc = createElementText('td', project.location);
+            //categories
+            //let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
+            const tags = document.createElement('td');
+            tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
+            newRow.id = project.id;
+            // newRow.addEventListener('click', () => {
+
+            // });
+
+            newRow.append(rowTitle, rowYear, rowLoc, tags);
+            parent.appendChild(newRow);
+        }
+        
+     }
 
     _initIndexTable(parent){
         const indexTable = document.createElement("table");
@@ -163,6 +205,7 @@ class GUI {
      * @returns empty <table> with headers.
      */
     _initIndexHeaders(tableContainer) {
+        this._removeAllChildren(tableContainer);
         const head_title = createElementText('th', "Title");
         const head_year = createElementText('th', 'Year');
         const head_loc = createElementText('th','Location');
