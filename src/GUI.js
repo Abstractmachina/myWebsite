@@ -5,6 +5,8 @@ class GUI {
 
     _projectArrow = null;
 
+    _projectFilterClass = 'projectFilter';
+
     constructor() {
         this._app = document.querySelector('.root');
         this.leftMain = this.loadLeftMain();
@@ -80,41 +82,28 @@ class GUI {
     
 
     /**
-     * Generates project index tab, containing filterable search terms and all projects laid out in a table.
+     * Generates project index tab, containing filterable search terms and all projects laid out in a table. filter terms and index are rebuilt everytime tab is called.
      * After build, the project index tab is displayed.
      * @param {object array} projectData  - {title, year, location, categories(set)}
      */
     displayProjectIndex(projectData) {
 
-        
+        //create filters
+        const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
+        this._removeAllChildren(filterContainer); //reset container
         this._loadFilters(projectData);
-
 
         const idxTableContainer = document.querySelector('.projectIndexTable');
 
         //if no index has been created yet
         if (!idxTableContainer.lastChild) {
+            const cats = Array.from(this._getUniqueCategories(projectData));
             //build index
-            this._buildIndexTable();
+            this._buildIndexTable(projectData, cats);
         }
-
+        //init animation
         this._indexTab.classList.add('projectIndexSlideIn');
         return;
-        this._removeAllChildren(idxTableContainer);
-
-        //list all filterable categories
-        const filterContainer = document.createElement('div');
-        filterContainer.classList.add('projectFilter');
-        this._indexTab.append(filterContainer);
-
-        //init table
-        // const projectIndexTable = this._initTable();
-        //generate rows for each project
-        this._generateAllTableRows(projectData, filterContainer, idxTableContainer);
-        //add table to project tab
-        this._indexTab.appendChild(idxTableContainer);
-        //show index table
-        this._indexTab.classList.add('projectIndexSlideIn');
     }
 
     _getUniqueCategories(projectData) {
@@ -126,8 +115,6 @@ class GUI {
         });
         return categories;
     }
-
-    
 
     _loadFilters(projectData) {
         let categoryFilters = this._getUniqueCategories(projectData);
@@ -159,7 +146,7 @@ class GUI {
                 if (table.childNodes !== null) {
                     console.log(table.childNodes);
                 }
-                this._buildIndexTable(projectData, categoryFilters);
+                this._buildIndexTable(projectData, filtered);
             });
         });
 
@@ -172,22 +159,26 @@ class GUI {
         
 
         for (let project of projectData) {
-            const newRow = document.createElement('tr');
 
-            const rowTitle = createElementText("td", project.title);
-            const rowYear = createElementText('td', project.year.toString());
-            const rowLoc = createElementText('td', project.location);
-            //categories
-            //let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
-            const tags = document.createElement('td');
-            tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
-            newRow.id = project.id;
-            // newRow.addEventListener('click', () => {
+            let contains = false;
+            console.log(project.categories);
+            for (let c of project.categories) {
+                if (categoryFilters.includes(c)) {
+                    const newRow = document.createElement('tr');
 
-            // });
+                    const rowTitle = createElementText("td", project.title);
+                    const rowYear = createElementText('td', project.year.toString());
+                    const rowLoc = createElementText('td', project.location);
+                    //let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
+                    const tags = document.createElement('td');
+                    tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
+                    newRow.id = project.id;
 
-            newRow.append(rowTitle, rowYear, rowLoc, tags);
-            parent.appendChild(newRow);
+                    newRow.append(rowTitle, rowYear, rowLoc, tags);
+                    parent.appendChild(newRow);
+                    break;
+                }
+            }
         }
         
      }
@@ -241,10 +232,6 @@ class GUI {
         let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
         const tags = createElementText('td', categoryTags);
         newRow.id = project.id;
-        newRow.addEventListener('click', () => {
-
-        });
-
         newRow.append(rowTitle, rowYear, rowLoc, tags);
         targetTable.appendChild(newRow);
     }
@@ -366,16 +353,28 @@ class GUI {
         const aboutTab = document.createElement('div');
         aboutTab.classList.add('about');
 
-        const extendedIntro = document.createElement('p');
-        extendedIntro.textContent = "I am a multidisciplinary creative operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science. I am a multidisciplinary creative operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science.";
+        const cv = document.createElement('a');
+        cv.setAttribute('href', '');
+        cv.textContent = "Download CV";
+
+
+
+        const intro1 = document.createElement('p');
+        intro1.textContent ="I worked as a computational designer at Zaha Hadid Architects at their London HQ, initially at ZHCode, later as project member within the wider office-internal ecosystem. I contributed as a conventional designer from concept to construction, but also leveraged my knowledge in computational design methodologies through developing bespoke design solutions and project-specific software tools. I have previously also worked as a freelancer, providing general design services as well as consultation for studios who are in need of computational/parametric workflow integration, but lack the capacity to have their own in-house specialists.";
+
+        const intro2 = document.createElement('p');
+        intro2.textContent = "I hold a MArch in Architecture and Urbanism from the Architectural Association in London UK and a BArch in Architecture with high distinction from the California College of the Arts in San Francisco, California. Most recently, I have pursued continued education in Computer Science at Imperial College London, where I completed a MSc in Computing, with a focus on computer graphics and Machine Learning, as I believe that a deep understanding of the underlying technological foundation, which increasingly supports and drives all aspects of architecture, as well as future trajectories, is essential to stay relevant in our profession."; 
+
+        const intro3 = document.createElement('p');
+        intro3.textContent = "I have a keen interest in design research and fabrication. My specialization is in additive manufacturing and AI in architecture, having done two master thesis on the topic and having led workshops at universities around the globe (For more details, please check out the Projects section). I am always on the lookout for continued research opportunities, so please don't hesitate to get in touch!";
 
         const biographyTitle = document.createElement('h3');
         biographyTitle.textContent = "Biography";
 
         const bioBody = document.createElement('p');
-        bioBody.textContent = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu. Curabitur pellentesque nibh nibh, at maximus ante fermentum sit amet. Pellentesque commodo lacus at sodales sodales. Quisque sagittis orci ut diam condimentum, vel euismod erat placerat. In iaculis arcu eros, eget tempus orci facilisis id. Praesent lorem orci, mattis non efficitur id, ultricies vel nibh. Sed volutpat lacus vitae gravida viverra. Fusce vel tempor elit. Proin tempus, magna id scelerisque vestibulum, nulla ex pharetra sapien, tempor posuere massa neque nec felis. Aliquam sem ipsum, vehicula ac tortor vel, egestas ullamcorper dui. Curabitur at risus sodales, tristique est id, euismod justo. Mauris nec leo non libero sodales lobortis. Quisque a neque pretium, dictum tellus vitae, euismod neque. Nulla facilisi. Phasellus ultricies dignissim nibh ut cursus. Nam et quam sit amet turpis finibus maximus tempor eget augue. Aenean at ultricies lorem. Sed egestas ligula tortor, sit amet mattis ex feugiat non. Duis purus diam, dictum et ante at, commodo iaculis urna. Aenean lacinia, nisl id vehicula condimentum, enim massa tempor nibh, vitae volutpat sapien metus aliquet nisl. Etiam dui eros, tincidunt tristique blandit id, gravida vitae augue. Proin imperdiet mi nec justo convallis gravida. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris consectetur nibh in mattis commodo. Etiam in pellentesque eros. Etiam tempus.";
+        bioBody.textContent = "Having lived in four countries on three continents (Austria, China, US, UK) and counting, my multi-cultural experience has perhaps given me a unique perspective on matters. I often try to see and understand the complex systems that weave through our environments, and consequently I believe that design should be approached from a systemic perspective, rather than the prevailing design-as-a-monument paradigm. I am fascinated by the concept of the Renaissance Man and I enjoy to indulge in the pursuit of diverging interests. My origins are actually in the fine arts. Having painted, drawn, sculpted all my childhood, at the end of high school, I was entirely prepared to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. As an aspiring renaissance man, I have not given up my passion in the arts and I still practice whenever possible. Similarly, ";
 
-        aboutTab.append(extendedIntro, biographyTitle, bioBody);
+        aboutTab.append(cv, intro1, intro2, intro3, biographyTitle, bioBody);
 
         this._app.appendChild(aboutTab);
 

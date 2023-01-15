@@ -32,9 +32,6 @@ class Model {
     get ProjectIndex() {
         if (this._projects === null) throw 'No projects added!';
 
-        // console.log("dasdfasdf")
-        // console.log(this._projects);
-
         let entries = [];
         for (let [key, project] of this._projects.entries()) {
             const entry = {
