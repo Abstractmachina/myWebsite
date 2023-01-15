@@ -97,7 +97,7 @@ class GUI {
 
         //if no index has been created yet
         if (!idxTableContainer.lastChild) {
-            const cats = Array.from(this._getUniqueCategories(projectData));
+            const cats = this._getUniqueCategories(projectData);
             //build index
             this._buildIndexTable(projectData, cats);
         }
@@ -106,6 +106,11 @@ class GUI {
         return;
     }
 
+    /**
+     * 
+     * @param {Array[Object]} projectData ... field labeled 'categories' required
+     * @returns an array of unique categories
+     */
     _getUniqueCategories(projectData) {
         let categories = new Set();
         projectData.forEach(p => {
@@ -113,55 +118,56 @@ class GUI {
                 categories.add(c);
             });
         });
-        return categories;
+        return Array.from(categories);
     }
 
     _loadFilters(projectData) {
         let categoryFilters = this._getUniqueCategories(projectData);
         const filterContainer = document.querySelector('.projectFilter');
 
+        // create checkbox for each category
         categoryFilters.forEach(ca => {
-            const newCat = document.createElement('input');
-            newCat.setAttribute('type', 'checkbox');
-            newCat.id = ca.toString();
-            newCat.setAttribute('name', ca);
-            newCat.checked = true;
-            const label = document.createElement('label');
-            label.setAttribute("for", ca);
-            label.textContent = ca;
-            label.appendChild(newCat);
-            // container.append(label);
-            filterContainer.append(label);
+            const newCat = this._createCheckbox(filterContainer, ca.toString());
 
+            //query checkbox states and rebuild index on click
             newCat.addEventListener('change', () => {
                 let checkBoxes = filterContainer.querySelectorAll('input');
 
+                //return only the ids that are checked
                 let filtered = [...checkBoxes]
                     .filter(box => box.checked === true)
                     .map(box => box.id);
 
-                console.log(filtered);
-
                 let table = document.querySelector(".projectIndexTable");
-                if (table.childNodes !== null) {
-                    console.log(table.childNodes);
-                }
                 this._buildIndexTable(projectData, filtered);
             });
         });
 
     }
 
-    _buildIndexTable(projectData, categoryFilters) {
+    _createCheckbox(parent, id) {
+        const newCat = document.createElement('input');
+            newCat.setAttribute('type', 'checkbox');
+            newCat.id = id;
+            newCat.setAttribute('name', id);
+            newCat.checked = true;
+            const label = document.createElement('label');
+            label.setAttribute("for", id);
+            label.textContent = id;
+            label.appendChild(newCat);
+            parent.append(label);
+
+            return newCat;
+    }
+
+    _buildIndexTable(projects, categoryFilters) {
+
+        if (!Array.isArray(categoryFilters)) throw "Error: parameter is not of type Array";
+
         let parent = document.querySelector(".projectIndexTable");
         this._initIndexHeaders(parent);
 
-        
-
-        for (let project of projectData) {
-
-            let contains = false;
-            console.log(project.categories);
+        for (let project of projects) {
             for (let c of project.categories) {
                 if (categoryFilters.includes(c)) {
                     const newRow = document.createElement('tr');
@@ -169,7 +175,6 @@ class GUI {
                     const rowTitle = createElementText("td", project.title);
                     const rowYear = createElementText('td', project.year.toString());
                     const rowLoc = createElementText('td', project.location);
-                    //let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
                     const tags = document.createElement('td');
                     tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
                     newRow.id = project.id;
@@ -202,102 +207,6 @@ class GUI {
         const head_loc = createElementText('th','Location');
         const head_cat = createElementText('th', 'Categories');
         tableContainer.append(head_title, head_year, head_loc, head_cat);
-    }
-
-    /**
-     * Internal helper method. Generate table from projects
-     * @param {Object[]} projectData ... array of objects with structure {title, year, location, categories(set)} 
-     * @param {<div>} filterContainer ... div that contains filterable category terms
-     * @param {<table>} targetTable ... table that holds generated rows
-     */
-    _generateAllTableRows(projectData, filterContainer, targetTable) {
-        for (let project of projectData) {
-            this._generateTableRow(project, filterContainer, targetTable);
-        }
-    }
-
-    /**
-     * internal helper method. generate a table row for one project.
-     * @param {Object} project ... object with structure {title, year, location, categories(set)} 
-     * @param {<div>} filterContainer ... div that contains filterable category terms
-     * @param {<table>} targetTable ... table that holds generated rows
-     */
-    _generateTableRow(project, filterContainer, targetTable) {
-        const newRow = document.createElement('tr');
-
-        const rowTitle = createElementText("td", project.title);
-        const rowYear = createElementText('td', project.year.toString());
-        const rowLoc = createElementText('td', project.location);
-        //categories
-        let categoryTags = this._generateCategoryFilters(filterContainer, project.categories);
-        const tags = createElementText('td', categoryTags);
-        newRow.id = project.id;
-        newRow.append(rowTitle, rowYear, rowLoc, tags);
-        targetTable.appendChild(newRow);
-    }
-
-    /**
-     * internal helper function. Generate category filter search terms without duplicates.
-     * @param {<div>} filterContainer - div that contains filterable category terms
-     * @param {Set} categories - set holding categories as strings 
-     * @returns a string for categories in an abbreviated tag
-     */
-    _generateCategoryFilters(filterContainer, categories) {
-        let categoryTags = '';
-        for (let ca of categories) {
-            const split = ca.split(" ");
-            split.forEach((s) => {
-                categoryTags += s.slice(0, 2);
-            });
-            categoryTags += '.';
-
-            let catCheck = !!document.getElementById(ca.toString());
-            //if category doesnt exist yet, create filter option
-            if (catCheck === false) {
-                const container = document.createElement('div');
-                const newCat = document.createElement('input');
-                newCat.setAttribute('type', 'checkbox');
-                newCat.id = ca.toString();
-                newCat.setAttribute('name', ca);
-                const label = document.createElement('label');
-                label.setAttribute("for", ca);
-                label.textContent = ca;
-                label.appendChild(newCat);
-                container.append(label);
-                filterContainer.append(container);
-
-                newCat.addEventListener('change', (e) => {
-                    let checkBoxes = filterContainer.querySelectorAll('input');
-                    console.log(checkBoxes);
-
-
-                    let filtered = [...checkBoxes]
-                        .filter(box => box.checked === true)
-                        .map(box => box.id.slice(0,2));
-
-                    console.log(filtered);
-
-                    let table = document.querySelector(".projectIndexTable");
-                    if (table.childNodes !== null) {
-                        console.log(table.childNodes);
-                    }
-
-                    filtered.forEach(term => {
-                        let tag = term.slice(0,2);
-
-                    });
-
-                    if (e.target.checked) {
-                        console.log(newCat.id + " checked");
-                    }
-                    else {
-                        console.log(newCat.id + " unchecked");
-                    }
-                });
-            }
-        }
-        categoryTags = categoryTags.slice(0, categoryTags.length - 1);
-        return categoryTags;
     }
 
     /**
