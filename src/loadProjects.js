@@ -1,6 +1,6 @@
-import myWebsite from "./projects/proj_myWebsite";
-import printFast from "./projects/proj_printFast";
-import aag from "./projects/proj_aag";
+import myWebsite from "./content/proj_myWebsite";
+import printFast from "./content/proj_printFast";
+import aag from "./content/proj_aag";
 
 const loadProjects = () => {
     const projects = new Map();

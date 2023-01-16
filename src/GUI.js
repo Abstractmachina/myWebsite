@@ -86,20 +86,20 @@ class GUI {
      * After build, the project index tab is displayed.
      * @param {object array} projectData  - {title, year, location, categories(set)}
      */
-    displayProjectIndex(projectData) {
+    displayProjectIndex(projectIndexData) {
 
         //create filters
         const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
         this._removeAllChildren(filterContainer); //reset container
-        this._loadFilters(projectData);
+        this._loadFilters(projectIndexData);
 
         const idxTableContainer = document.querySelector('.projectIndexTable');
 
         //if no index has been created yet
         if (!idxTableContainer.lastChild) {
-            const cats = this._getUniqueCategories(projectData);
+            const cats = this._getUniqueCategories(projectIndexData);
             //build index
-            this._buildIndexTable(projectData, cats);
+            this._buildIndexTable(projectIndexData, cats);
         }
         //init animation
         this._indexTab.classList.add('projectIndexSlideIn');
@@ -121,8 +121,8 @@ class GUI {
         return Array.from(categories);
     }
 
-    _loadFilters(projectData) {
-        let categoryFilters = this._getUniqueCategories(projectData);
+    _loadFilters(projects) {
+        let categoryFilters = this._getUniqueCategories(projects);
         const filterContainer = document.querySelector('.projectFilter');
 
         // create checkbox for each category
@@ -139,7 +139,7 @@ class GUI {
                     .map(box => box.id);
 
                 let table = document.querySelector(".projectIndexTable");
-                this._buildIndexTable(projectData, filtered);
+                this._buildIndexTable(projects, filtered);
             });
         });
 
@@ -163,6 +163,10 @@ class GUI {
     _buildIndexTable(projects, categoryFilters) {
 
         if (!Array.isArray(categoryFilters)) throw "Error: parameter is not of type Array";
+
+        //sort projects descending by year
+        projects.sort((a, b) => b.year - a.year);
+
 
         let parent = document.querySelector(".projectIndexTable");
         this._initIndexHeaders(parent);
