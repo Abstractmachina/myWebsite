@@ -7,9 +7,9 @@ export class Controller{
     _view = null;
     _projectIndex = null;
 
-    constructor(model, view) {
+    constructor() {
         this._model = new Model();
-        this._view = new GUI();
+        this._view = new GUI(this._model.ProjectIndex);
 
         this._model.addProjects(loadProjects());
 
@@ -24,7 +24,7 @@ export class Controller{
             this._projectIndex = this._model.ProjectIndex;
         }
 
-        this._view.displayProjectIndex(this._projectIndex);
+        this._view._displayProjectIndex(this._projectIndex);
     }
 
     onProjectPageCalled = (id) => {
