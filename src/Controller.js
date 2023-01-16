@@ -15,6 +15,7 @@ export class Controller{
 
         this._view.bindCallProjectIndex(this.onProjectIndexCalled);
         this._view.bindCallProjectPages(this.onProjectPageCalled);
+        this._view.bindHoverProjects(this.onProjectHovered);
     }
 
     //need to use arrow function as otherwise this will unbind itself!
@@ -29,5 +30,11 @@ export class Controller{
     onProjectPageCalled = (id) => {
         const project = this._model.getProject(id);
         this._view.displayProject(project.HtmlContent);
+    }
+
+    onProjectHovered = (id) => {
+        const project = this._model.getProject(id);
+        this._view.callPreviewCircles(Array.from(project.Categories));
+
     }
 }

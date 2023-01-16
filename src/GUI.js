@@ -6,6 +6,7 @@ class GUI {
 
     _projectArrow = null;
 
+    //class names for query selection
     _projectFilterClass = 'projectFilter';
 
     constructor() {
@@ -13,13 +14,12 @@ class GUI {
         this.leftMain = this.loadLeftMain();
         this.rightMain = this.loadRightMain();
         this.footer = this.loadFooter();
-        this.aboutTab = loadAboutTab();
-        this._app.appendChild(this.aboutTab);
-
+        this.aboutTab = loadAboutTab(this._app);
         this._indexTab = this.loadProjectIndexTab();
         this._projectTab = this.loadProjectTab();
 
         this.bindExitProjectIndex();
+        // this.bindHoverProjects();
     }
 
     //==================    left UI =====================================
@@ -94,8 +94,18 @@ class GUI {
         });
     }
 
+    bindHoverProjects(handler) {
+        const table = document.querySelector('.projectIndexTable');
+        table.addEventListener('mouseover', (e) => {
+            if (e.target.parentNode.nodeName === "TR")
+            handler(e.target.parentNode.id);
+        });
+    }
 
 
+    callPreviewCircles(categories) {
+        console.log(categories);
+    }
 
     /**
      * Generates project index tab, containing filterable search terms and all projects laid out in a table. filter terms and index are rebuilt everytime tab is called.
@@ -144,10 +154,16 @@ class GUI {
         // create checkbox for each category
         categoryFilters.forEach(ca => {
             const newCat = this._createCheckbox(filterContainer, ca.toString());
+            this._bindCategoryCheckbox(newCat, filterContainer, projects);
+        });
+
+    }
+
+    _bindCategoryCheckbox(newCat, parent, projects) {
 
             //query checkbox states and rebuild index on click
             newCat.addEventListener('change', () => {
-                let checkBoxes = filterContainer.querySelectorAll('input');
+                let checkBoxes = parent.querySelectorAll('input');
 
                 //return only the ids that are checked
                 let filtered = [...checkBoxes]
@@ -157,8 +173,6 @@ class GUI {
                 let table = document.querySelector(".projectIndexTable");
                 this._buildIndexTable(projects, filtered);
             });
-        });
-
     }
 
     _createCheckbox(parent, id) {
@@ -217,7 +231,7 @@ class GUI {
     }
 
     /**
-     * initiate table with preset headers (title, year, location, categories) and attach to parent
+     * populate table with preset headers (title, year, location, categories) and attach to parent
      * @returns empty <table> with headers.
      */
     _initIndexHeaders(tableContainer) {

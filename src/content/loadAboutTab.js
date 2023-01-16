@@ -1,4 +1,4 @@
-const loadAboutTab = () => {
+const loadAboutTab = (parent) => {
     const aboutTab = document.createElement('div');
     aboutTab.classList.add('about');
 
@@ -24,7 +24,7 @@ const loadAboutTab = () => {
 
     aboutTab.append(cv, intro1, intro2, intro3, biographyTitle, bioBody);
 
-
+    parent.appendChild(aboutTab);
 
     return aboutTab;
 }
