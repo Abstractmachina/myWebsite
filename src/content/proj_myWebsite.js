@@ -36,7 +36,18 @@ const myWebsite = () => {
     const tech3 = createElementText('li', 'Webpack asset bundling');
     tech.append(tech1, tech2, tech3);
 
-    project.pushContents(ti, subTi, introheading, intro, featuresHeading, features, techHeading, tech);
+    //development
+    const devHeading = createElementText('h3', 'Development');
+    const dev = document.createElement('ul');
+    const dev1 = createElementText('li', 'blog section');
+    dev.append(dev1);
+
+
+    project.pushContents(
+        ti, subTi, introheading, intro, 
+        featuresHeading, features, 
+        techHeading, tech,
+        devHeading, dev);
 
     return project;
 }
