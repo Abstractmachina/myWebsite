@@ -1,6 +1,9 @@
 import pArrowBase from './assets/arrow_projectIndex_base.svg';
+import preview_design from './assets/designPreview.jpg';
+
 import { createElementText } from './util';
 import loadAboutTab from './content/loadAboutTab.js';
+
 
 class GUI {
 
@@ -96,6 +99,8 @@ class GUI {
 
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
+        const kids = table.querySelectorAll("tr");
+        console.log(kids);
         table.addEventListener('mouseover', (e) => {
             if (e.target.parentNode.nodeName === "TR")
             handler(e.target.parentNode.id);
@@ -104,7 +109,19 @@ class GUI {
 
 
     callPreviewCircles(categories) {
-        console.log(categories);
+        // console.log(categories);
+        // if (categories.includes("design")) {
+        //     console.log("design detected");
+        //     const container = this.rightMain.querySelector(".circleDesign");
+        //     console.log(container);
+        //     container.style.backgroundImage = preview_design;
+        //     container.style.backgroundColor = 'yellow';
+
+        //     container.addEventListener('mouseout', () => {
+        //         container.style.backgroundColor = null;
+        //         console("mouseout");
+        //     })
+        //  }
     }
 
     /**
@@ -264,10 +281,13 @@ class GUI {
 
         const c1 = document.createElement('div');
         c1.classList.add('circle');
+        c1.classList.add('circleDesign');
         const c2 = document.createElement('div');
         c2.classList.add('circle');
+        c2.classList.add('circleCode');
         const c3 = document.createElement('div');
         c3.classList.add('circle');
+        c3.classList.add('circleArt');
 
         circleContainer.append(c1, c2, c3);
         rightContainer.append(circleContainer);
