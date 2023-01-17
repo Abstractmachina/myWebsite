@@ -17,17 +17,26 @@ const matnet = () => {
     proj.pushContents(introHeading, intro);
 
     //project structure
-    const structureHeading = document.createElement('h3');
-    structureHeading.textContent = "Project Structure";
-    const struct0 = document.createElement('p');
-    struct0.textContent = "The research is broken up into three levels of enquiry.";
-    const struct1 = document.createElement('p');
-    struct1.innerHTML = '<strong>Organization:</strong> On the organization level the research looks into constructing spatial configurations of social structure. Using a relational model, buildings are generated based on the social relationships in a community.';
-    const struct2 = document.createElement('p');
-    struct2.innerHTML = '<strong>Unit:</strong> On the next scale down, we are proposing a customization system where the housing configuration is defined as a matrix of parameters, allowing units to respond to the daily patterns of each individual in the network.'
-    const struct3 = document.createElement('p');
-    struct3.innerHTML = '<strong>Construction:</strong> Additive manufacturing in clay-like materials using industrial robots is investigated as a fabrication technology that can deliver mass-customized, integrated dwellings.'
-    proj.pushContents(structureHeading, struct0, struct1, struct2, struct3);
+    const neighHead = createElementText('h3', "Level 0 Neighborhood");
+    const neighsubHead = createElementText('h4', 'The Building as a Network')
+
+    const neigh0 = createElementText('p', 
+        "Co-opting techniques from complex network analysis, at the neighborhood level, the research looks into developing an operational tool for extracting meaningful spatial relationship from the social network of a community.");
+    const neigh1 = createElementText('p', 
+        'The social relationships of a given community are captured in a relational roster in the form of an encoded data matrix, allowing computers to easily read and process the information. The data matrix is subsequently used to construct a network graph. The graph is useful because it captures multi-scalar information in a single, cohesive data structure, opening up computational ways of engaging with the information.');
+    const neigh2 = createElementText('p', 
+        'The graph is given agency by deploying a rule-based growth algorithm on the project site. A path-finding logic is used to generate schemes, with specific rule determining the resulting character of the neighborhood while ensuring the computed spatial relationships are maintained. The decoupling of formal agency from the hands of the human designer signifies a crucial step towards a fully autonomous construction framework. Yet, with the rule-based system, designers are still given control without the possibility to resort to the sculpting of form, thus prioritizing a logic-driven approach, rather than aesthetics.');
+    proj.pushContents(neighHead, neighsubHead, neigh0, neigh1, neigh2);
+    const unitHead = createElementText('h3', "Level 1 Home");
+    const unitSubHead = createElementText('h4', 'Home Is What You Do')
+    const unit0 = createElementText('p', 
+        'On the next scale down, a customisation system for the individual home allows the architecture to respond to the daily patterns to each member of the community.');
+    const unit1 = createElementText('p', 
+        'The actual units on site are a negotiated result where site constraints, unit requirements and shared activities come together. Using a relational model allows the unit to adapt to the site while still maintaining its important connections.');
+    const unit2 = createElementText('p', 
+        'Level of details (LOD) are gradually added to the raw space distribution from the growth algorithm, turning abstract space into concrete architecture.');
+
+    proj.pushContents(unitHead, unitSubHead, unit0, unit1, unit2);
 
     const featureList = document.createElement('ul');
     const p1 = document.createElement('li');
