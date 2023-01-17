@@ -21,8 +21,6 @@ export class Controller{
     }
 
     onProjectHovered = (id) => {
-        const project = this._model.getProject(id);
-        //this._view.callPreviewCircles(Array.from(project.Categories));
-        return project.Categories;
+        return this._model.getProject(id).Categories;
     }
 }

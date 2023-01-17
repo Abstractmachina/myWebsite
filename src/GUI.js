@@ -175,7 +175,6 @@ class GUI {
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
         const rows = table.querySelectorAll('tr');
-        console.log(rows);
 
         for (let i = 0; i < rows.length; i++) {
             const row = rows[i];
@@ -187,17 +186,11 @@ class GUI {
                 this.dismissPreviewCircles(categories);
             })
         }
-        // table.addEventListener('mouseout', (e) => {
-        //     if (e.target.parentNode.nodeName === "TR")
-        //     handler(e.target.parentNode.id);
-        // });
     }
 
     callPreviewCircles(categories) {
-        console.log(categories);
         if (categories.has("design")) {
             const container = this._rightMain.querySelector(".circleDesign");
-            console.log(preview_design.src);
             container.style.backgroundImage = "url(" + preview_design + ")";
         }
         if (categories.has("code")) {
