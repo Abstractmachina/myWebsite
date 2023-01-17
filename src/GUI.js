@@ -1,5 +1,8 @@
 import pArrowBase from './assets/arrow_projectIndex_base.svg';
 import preview_design from './assets/designPreview.jpg';
+import preview_code from './assets/codePreview.jpg';
+import preview_art from './assets/artPreview.jpg';
+
 
 import { createElementText } from './util';
 
@@ -193,17 +196,18 @@ class GUI {
     callPreviewCircles(categories) {
         console.log(categories);
         if (categories.has("design")) {
-            console.log("design detected");
             const container = this._rightMain.querySelector(".circleDesign");
-            console.log(container);
-            container.style.backgroundImage = preview_design;
-            container.style.backgroundColor = 'yellow';
-
-            // container.addEventListener('mouse', () => {
-            //     container.style.backgroundColor = null;
-            //     console("mouseout");
-            // })
-         }
+            console.log(preview_design.src);
+            container.style.backgroundImage = "url(" + preview_design + ")";
+        }
+        if (categories.has("code")) {
+            const container = this._rightMain.querySelector(".circleCode");
+            container.style.backgroundImage = "url(" + preview_code + ")";
+        }
+        if (categories.has("art")) {
+            const container = this._rightMain.querySelector(".circleArt");
+            container.style.backgroundImage = "url(" + preview_art + ")";
+        }
     }
 
     dismissPreviewCircles(categories) {
@@ -211,7 +215,7 @@ class GUI {
         const circles = this._rightMain.querySelectorAll('.circle');
         for (let i = 0; i < circles.length; i++) {
             const c = circles[i];
-            c.style.backgroundColor = null;
+            c.style.backgroundImage = null;
         }
     }
 

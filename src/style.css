@@ -58,7 +58,8 @@ body {
     width: 10em;
     height: 10em;
     border-radius: 50%;
-
+    background-position: center;
+    background-size: cover;
 }
 
 .about {
