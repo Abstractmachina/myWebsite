@@ -22,16 +22,20 @@ class GUI {
         this._leftMain = loadLeftMain(this._app);
         this._btn_index = this._loadProjectIndexButton(this._leftMain);
         
-        this.rightMain = loadRightMain(this._app);
-        this.footer = loadFooter(this._app);
-        this.aboutTab = loadAboutTab(this._app);
+        this._rightMain = loadRightMain(this._app);
+        this._footer = loadFooter(this._app);
+        this._aboutTab = loadAboutTab(this._app);
         this._indexTab = loadIndexTab(this._app);
-        this._loadFilterContainer(projects);
+        this._prebuildIndexTab(projects);
+
+
         this._projectTab = loadProjectTab(this._app);
 
+        //setup bindings
         this._bindProfileButton();
         this.bindExitProjectIndex();
         // this.bindHoverProjects();
+        this.bindCallProjectIndex();
     }
 
     
@@ -44,32 +48,24 @@ class GUI {
         return btn_index;
     }
 
-    _loadFilterContainer(projects) {
+    _prebuildIndexTab(projects) {
         const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
         this._removeAllChildren(filterContainer); //reset container
         // this._loadFilters(projectIndexData);
 
         let categoryFilters = this._getUniqueCategories(projects);
+        console.log(categoryFilters);
 
         // create checkbox for each category
         categoryFilters.forEach(ca => {
+            console.log(ca);
             const newCat = this._createCheckbox(filterContainer, ca.toString());
             this._bindCategoryCheckbox(newCat, filterContainer, projects);
         });
 
+        //pre-build index with everything
+        this._buildIndexTable(projects, this._getUniqueCategories(projects));
     }
-
-    
-    // _loadFilters(projects) {
-    //     let categoryFilters = this._getUniqueCategories(projects);
-    //     const filterContainer = document.querySelector('.projectFilter');
-
-    //     // create checkbox for each category
-    //     categoryFilters.forEach(ca => {
-    //         const newCat = this._createCheckbox(filterContainer, ca.toString());
-    //         this._bindCategoryCheckbox(newCat, filterContainer, projects);
-    //     });
-    // }
 
     _createCheckbox(parent, id) {
         const newCat = document.createElement('input');
@@ -86,17 +82,12 @@ class GUI {
             return newCat;
     }
 
-    _loadIndexTable() {
-
-    }
-
     _buildIndexTable(projects, categoryFilters) {
 
         if (!Array.isArray(categoryFilters)) throw "Error: parameter is not of type Array";
 
         //sort projects descending by year
         projects.sort((a, b) => b.year - a.year);
-
 
         let parent = document.querySelector(".projectIndexTable");
         this._initIndexHeaders(parent);
@@ -118,9 +109,8 @@ class GUI {
                     break;
                 }
             }
-        }
-        
-     }
+        }   
+    }
     /**
      * populate table with preset headers (title, year, location, categories) and attach to parent
      * @returns empty <table> with headers.
@@ -134,31 +124,11 @@ class GUI {
         tableContainer.append(head_title, head_year, head_loc, head_cat);
     }
 
-
-
     /**
-     * Generates project index tab, containing filterable search terms and all projects laid out in a table. filter terms and index are rebuilt everytime tab is called.
-     * After build, the project index tab is displayed.
-     * @param {object array} projectData  - {title, year, location, categories(set)}
+     * slide in index tab
      */
-    _displayProjectIndex(projectIndexData) {
-
-        // //create filters
-        // const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-        // this._removeAllChildren(filterContainer); //reset container
-        // this._loadFilters(projectIndexData);
-
-        // const idxTableContainer = document.querySelector('.projectIndexTable');
-
-        // //if no index has been created yet
-        // if (!idxTableContainer.lastChild) {
-        //     const cats = this._getUniqueCategories(projectIndexData);
-        //     //build index
-        //     this._buildIndexTable(projectIndexData, cats);
-        // }
-        //init animation
+    _showIndexTab() {
         this._indexTab.classList.add('projectIndexSlideIn');
-        return;
     }
 
     //==================    BINDINGS =====================================
@@ -171,19 +141,26 @@ class GUI {
         });
     }
 
-    bindCallProjectIndex(handler) {
+    bindCallProjectIndex() {
         this._btn_index.addEventListener('click', () => {
-            handler();
+            this._showIndexTab();
         });
-        
     }
 
     bindExitProjectIndex() {
         this._leftMain.addEventListener('click', (e) =>{
-                console.log(e);
                 e.stopPropagation();
-                if (e.target.id !== "projectArrow")
-                this._indexTab.classList.remove('projectIndexSlideIn');
+                if (e.target.id !== "projectArrow") {
+                    this._indexTab.classList.remove('projectIndexSlideIn');
+                    this._projectTab.classList.remove('slideInFromRight');
+                }
+                console.log(e.target.classList);
+                if (e.target.id !== 'btn_profile') {
+                    this._aboutTab.classList.remove('slideInFromRight');
+                    console.log("about tab not clicked")
+                }
+
+                
             
         });
     }

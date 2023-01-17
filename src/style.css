@@ -61,14 +61,6 @@ body {
 
 }
 
-.projectIndexContainer{
-    position: fixed;
-    background-color: aqua;
-    width: 50%;
-    top: 70%;
-    left: 0px;
-}
-
 .about {
     position: fixed;
     left:100%;

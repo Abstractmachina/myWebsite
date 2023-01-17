@@ -8,23 +8,11 @@ export class Controller{
     _projectIndex = null;
 
     constructor() {
-        this._model = new Model();
+        this._model = new Model(loadProjects());
         this._view = new GUI(this._model.ProjectIndex);
 
-        this._model.addProjects(loadProjects());
-
-        this._view.bindCallProjectIndex(this.onProjectIndexCalled);
         this._view.bindCallProjectPages(this.onProjectPageCalled);
         this._view.bindHoverProjects(this.onProjectHovered);
-    }
-
-    //need to use arrow function as otherwise this will unbind itself!
-    onProjectIndexCalled = () => {
-        if (this._projectIndex === null) {
-            this._projectIndex = this._model.ProjectIndex;
-        }
-
-        this._view._displayProjectIndex(this._projectIndex);
     }
 
     onProjectPageCalled = (id) => {

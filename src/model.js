@@ -2,8 +2,12 @@ class Model {
 
     _projects = null;
 
-    constructor() {
-        this._projects = new Map();
+    // constructor() {
+    //     this._projects = new Map();
+    // }
+
+    constructor(projects) {
+        this.addProjects(projects);
     }
 
     addProject(key, project) {
@@ -13,12 +17,12 @@ class Model {
 
     addProjects = (newProjects) => {
         if (!newProjects instanceof Map) throw "Must be a map";
-        if (this._projects.size > 0) {
+        if (this._projects !== null && this._projects.size > 0) {
             var merged = new Map([this._projects, newProjects]);
             this._projects = merged;
             return;
         }
-
+        if (this._projects === null)
         this._projects = newProjects;
 
     }
