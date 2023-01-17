@@ -54,11 +54,9 @@ class GUI {
         // this._loadFilters(projectIndexData);
 
         let categoryFilters = this._getUniqueCategories(projects);
-        console.log(categoryFilters);
 
         // create checkbox for each category
         categoryFilters.forEach(ca => {
-            console.log(ca);
             const newCat = this._createCheckbox(filterContainer, ca.toString());
             this._bindCategoryCheckbox(newCat, filterContainer, projects);
         });
@@ -154,50 +152,67 @@ class GUI {
                     this._indexTab.classList.remove('projectIndexSlideIn');
                     this._projectTab.classList.remove('slideInFromRight');
                 }
-                console.log(e.target.classList);
                 if (e.target.id !== 'btn_profile') {
                     this._aboutTab.classList.remove('slideInFromRight');
-                    console.log("about tab not clicked")
                 }
-
-                
-            
         });
     }
 
     bindCallProjectPages(handler) {
         const table = document.querySelector('.projectIndexTable');
-        table.addEventListener('click', (e) => {
-            const id = e.target.parentNode.id;
-            handler(id);
-        });
+        const rows = table.querySelectorAll('tr');
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            row.addEventListener('click', () => {
+                handler(row.id);
+            })
+        }
     }
 
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
-        const kids = table.querySelectorAll("tr");
-        console.log(kids);
-        table.addEventListener('mouseover', (e) => {
-            if (e.target.parentNode.nodeName === "TR")
-            handler(e.target.parentNode.id);
-        });
+        const rows = table.querySelectorAll('tr');
+        console.log(rows);
+
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const categories = handler(row.id);
+            row.addEventListener('mouseover', () => {
+                this.callPreviewCircles(categories);
+            });
+            row.addEventListener('mouseout', () => {
+                this.dismissPreviewCircles(categories);
+            })
+        }
+        // table.addEventListener('mouseout', (e) => {
+        //     if (e.target.parentNode.nodeName === "TR")
+        //     handler(e.target.parentNode.id);
+        // });
     }
 
-
     callPreviewCircles(categories) {
-        // console.log(categories);
-        // if (categories.includes("design")) {
-        //     console.log("design detected");
-        //     const container = this.rightMain.querySelector(".circleDesign");
-        //     console.log(container);
-        //     container.style.backgroundImage = preview_design;
-        //     container.style.backgroundColor = 'yellow';
+        console.log(categories);
+        if (categories.has("design")) {
+            console.log("design detected");
+            const container = this._rightMain.querySelector(".circleDesign");
+            console.log(container);
+            container.style.backgroundImage = preview_design;
+            container.style.backgroundColor = 'yellow';
 
-        //     container.addEventListener('mouseout', () => {
-        //         container.style.backgroundColor = null;
-        //         console("mouseout");
-        //     })
-        //  }
+            // container.addEventListener('mouse', () => {
+            //     container.style.backgroundColor = null;
+            //     console("mouseout");
+            // })
+         }
+    }
+
+    dismissPreviewCircles(categories) {
+
+        const circles = this._rightMain.querySelectorAll('.circle');
+        for (let i = 0; i < circles.length; i++) {
+            const c = circles[i];
+            c.style.backgroundColor = null;
+        }
     }
 
 
