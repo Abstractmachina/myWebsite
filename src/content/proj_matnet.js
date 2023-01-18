@@ -9,11 +9,11 @@ const matnet = () => {
     proj.addCategory("design");
     proj.addCategory("code");
 
-    proj.Subtitle = "Mass-customized Housing for Cohesive Communities"
+    proj.Subtitle = "Mass-customized Housing for Cohesive Communities. AADRL Master Thesis"
     const introHeading = createElementText('h3', 
         "Introduction");
     const intro = createElementText('p', 
-        'Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.');
+        'Material Networks is the culmination of my research at the Architectural Association - DRL. The project engages with the rapid digitization of the built environment and looks at proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.');
     proj.pushContents(introHeading, intro);
 
     //level 0 neighborhood
@@ -44,7 +44,8 @@ const matnet = () => {
     const tectoHead = createElementText('h3', "Level 2 Tectonics");
     const tectoSubHead = createElementText('h4', 'Home Is What You Do')
     const tecto0 = createElementText('p', 
-        'On the next scale down, a customisation system for the individual home allows the architecture to respond to the daily patterns of each member of the community.');
+        'Additive Manufacturing was identified as the primary candidate for the construction system, as it offers the ability to manufacture free-form geometries while providing cost and time savings, and increased onsite safety for automated systems. A robotics-first approach was needed for the construction system to integrate into the overall framework.');
+    proj.pushContents(tectoHead, tectoSubHead, tecto0);
 
 
 
