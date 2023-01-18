@@ -10,16 +10,15 @@ const matnet = () => {
     proj.addCategory("code");
 
     proj.Subtitle = "Mass-customized Housing for Cohesive Communities"
-    const introHeading = document.createElement('h3');
-    introHeading.textContent = "Introduction";
-    const intro = document.createElement('p');
-    intro.textContent = 'Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.';
+    const introHeading = createElementText('h3', 
+        "Introduction");
+    const intro = createElementText('p', 
+        'Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.');
     proj.pushContents(introHeading, intro);
 
-    //project structure
+    //level 0 neighborhood
     const neighHead = createElementText('h3', "Level 0 Neighborhood");
     const neighsubHead = createElementText('h4', 'The Building as a Network')
-
     const neigh0 = createElementText('p', 
         "Co-opting techniques from complex network analysis, at the neighborhood level, the research looks into developing an operational tool for extracting meaningful spatial relationship from the social network of a community.");
     const neigh1 = createElementText('p', 
@@ -27,16 +26,28 @@ const matnet = () => {
     const neigh2 = createElementText('p', 
         'The graph is given agency by deploying a rule-based growth algorithm on the project site. A path-finding logic is used to generate schemes, with specific rule determining the resulting character of the neighborhood while ensuring the computed spatial relationships are maintained. The decoupling of formal agency from the hands of the human designer signifies a crucial step towards a fully autonomous construction framework. Yet, with the rule-based system, designers are still given control without the possibility to resort to the sculpting of form, thus prioritizing a logic-driven approach, rather than aesthetics.');
     proj.pushContents(neighHead, neighsubHead, neigh0, neigh1, neigh2);
-    const unitHead = createElementText('h3', "Level 1 Home");
-    const unitSubHead = createElementText('h4', 'Home Is What You Do')
+
+    //level 1 home
+    const unitHead = createElementText('h3', 
+        "Level 1 Home");
+    const unitSubHead = createElementText('h4', 
+        'Home Is What You Do')
     const unit0 = createElementText('p', 
-        'On the next scale down, a customisation system for the individual home allows the architecture to respond to the daily patterns to each member of the community.');
+        'On the next scale down, a customisation system for the individual home allows the architecture to respond to the daily patterns of each member of the community.');
     const unit1 = createElementText('p', 
         'The actual units on site are a negotiated result where site constraints, unit requirements and shared activities come together. Using a relational model allows the unit to adapt to the site while still maintaining its important connections.');
     const unit2 = createElementText('p', 
         'Level of details (LOD) are gradually added to the raw space distribution from the growth algorithm, turning abstract space into concrete architecture.');
-
     proj.pushContents(unitHead, unitSubHead, unit0, unit1, unit2);
+
+    //level 2 tectonics
+    const tectoHead = createElementText('h3', "Level 2 Tectonics");
+    const tectoSubHead = createElementText('h4', 'Home Is What You Do')
+    const tecto0 = createElementText('p', 
+        'On the next scale down, a customisation system for the individual home allows the architecture to respond to the daily patterns of each member of the community.');
+
+
+
 
     const featureList = document.createElement('ul');
     const p1 = document.createElement('li');
