@@ -10,11 +10,18 @@ const matnet = () => {
     proj.addCategory("code");
 
     proj.Subtitle = "Mass-customized Housing for Cohesive Communities. AADRL Master Thesis"
+
+
+    const title = createElementText('h1', proj.Title);
+    const subtitle = createElementText('h2', proj.Subtitle);
+    const year = createElementText('h5', 'Project Year: ' + proj.Year);
+    const location = createElementText('h5', 'Project Location: ' + proj.Location);
+
     const introHeading = createElementText('h3', 
         "Introduction");
     const intro = createElementText('p', 
-        'Material Networks is the culmination of my research at the Architectural Association - DRL. The project engages with the rapid digitization of the built environment and looks at proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.');
-    proj.pushContents(introHeading, intro);
+        'Material Networks is the culmination of my research at the Architectural Association - Design Research Lab. The project engages with the rapid digitization of the built environment and looks at how design agency can adapt to a fully automated, computer-driven world while bringing the human element to the forefront of the discourse. Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.');
+    proj.pushContents(title, subtitle, year, location, introHeading, intro);
 
     //level 0 neighborhood
     const neighHead = createElementText('h3', "Level 0 Neighborhood");
