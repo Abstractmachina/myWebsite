@@ -101,17 +101,6 @@ const matnet = () => {
 
     proj.pushContents(tectoHead, tectoSubHead, tecto0, vid_graphToConstruction, tecto1, vid_constructionSeq, tecto2, vid_fabHighlights, vid_experiments);
 
-
-    const featureList = document.createElement('ul');
-    const p1 = document.createElement('li');
-    p1.textContent = "Blending, boolean and plane trimming operations to manipulate field functions";
-    const p2 = document.createElement('li');
-    p2.textContent = "Multi-threading for calculation-intensive components";
-    const p3 = document.createElement('li');
-    p3.textContent = "Display components to visualize geometric output";
-    featureList.append(p1,p2,p3);
-    proj.pushContent(featureList);
-
     return proj;
 };
 

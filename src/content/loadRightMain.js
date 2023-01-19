@@ -1,5 +1,5 @@
 const loadRightMain = (parent) => {
-    const rightContainer = document.createElement('div');
+    const rightContainer = document.createElement('main');
     rightContainer.classList.add("mainContainer", "right");
 
     const circleContainer = document.createElement('div');

@@ -1,5 +1,5 @@
 const loadFooter = (parent) => {
-    const footer = document.createElement('div');
+    const footer = document.createElement('footer');
     footer.classList.add('footer');
 
     const copyright = document.createElement('p');

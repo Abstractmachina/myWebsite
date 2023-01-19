@@ -153,6 +153,19 @@ body {
     margin-bottom: -0.5em;
 }
 
+.projectTab p {
+    /* text-indent: 2em; */
+}
+
+.projectTab a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+.projectTab a:hover {
+    background-color: rgb(255, 221, 0);
+}
+
 
 .slideInFromRight {
     left: 50%;

@@ -18,34 +18,35 @@ class GUI {
 
     //class names for query selection
     _projectFilterClass = 'projectFilter';
+    _indexButtonId = 'projectArrow';
 
     constructor(projects) {
         this._app = document.querySelector('.root');
 
+        //load elements
         this._leftMain = loadLeftMain(this._app);
-        this._btn_index = this._loadProjectIndexButton(this._leftMain);
-        
+        this._btn_index = this._loadProjectIndexButton(this._leftMain); //calls index tab
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
         this._aboutTab = loadAboutTab(this._app);
         this._indexTab = loadIndexTab(this._app);
         this._prebuildIndexTab(projects);
-
-
         this._projectTab = loadProjectTab(this._app);
 
         //setup bindings
         this._bindProfileButton();
         this.bindExitProjectIndex();
-        // this.bindHoverProjects();
         this.bindCallProjectIndex();
+        this._bindSelAllCheckbox();
+        this._bindSelNoneCheckbox();
     }
 
     
+    //========= INDEX TAB ======================
     _loadProjectIndexButton(parent) {
         const btn_index = new Image();
         btn_index.src = pArrowBase;
-        btn_index.id = 'projectArrow';
+        btn_index.id = this._indexButtonId;
         parent.append(btn_index);
 
         return btn_index;
@@ -54,13 +55,17 @@ class GUI {
     _prebuildIndexTab(projects) {
         const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
         this._removeAllChildren(filterContainer); //reset container
-        // this._loadFilters(projectIndexData);
+
+
+        this._createSelAllCheckbox(filterContainer);
+        this._createSelNoneCheckbox(filterContainer);
+        
 
         let categoryFilters = this._getUniqueCategories(projects);
 
         // create checkbox for each category
         categoryFilters.forEach(ca => {
-            const newCat = this._createCheckbox(filterContainer, ca.toString());
+            const newCat = this._createCategoryCheckbox(filterContainer, ca.toString());
             this._bindCategoryCheckbox(newCat, filterContainer, projects);
         });
 
@@ -68,7 +73,7 @@ class GUI {
         this._buildIndexTable(projects, this._getUniqueCategories(projects));
     }
 
-    _createCheckbox(parent, id) {
+    _createCategoryCheckbox(parent, id) {
         const newCat = document.createElement('input');
             newCat.setAttribute('type', 'checkbox');
             newCat.id = id;
@@ -81,6 +86,33 @@ class GUI {
             parent.append(label);
 
             return newCat;
+    }
+
+    _createSelAllCheckbox(parent) {
+        //select all checkbox
+        const selAll = document.createElement('input');
+        selAll.setAttribute('type', 'checkbox');
+        selAll.id = 'selAll';
+        selAll.setAttribute('name', selAll.id);
+        selAll.checked = true;
+        const lbl_selAll = document.createElement('label');
+        lbl_selAll.setAttribute("for", selAll.id);
+        lbl_selAll.textContent = 'All';
+        lbl_selAll.appendChild(selAll);
+        parent.append(lbl_selAll);
+    }
+    _createSelNoneCheckbox(parent) {
+        //select none checkbox
+        const selNone = document.createElement('input');
+        selNone.setAttribute('type', 'checkbox');
+        selNone.id = 'selNone';
+        selNone.setAttribute('name', selNone.id);
+        selNone.checked = false;
+        const lbl_selNone = document.createElement('label');
+        lbl_selNone.setAttribute("for", selNone.id);
+        lbl_selNone.textContent = 'None';
+        lbl_selNone.appendChild(selNone);
+        parent.append(lbl_selNone);
     }
 
     _buildIndexTable(projects, categoryFilters) {
@@ -180,15 +212,16 @@ class GUI {
             const row = rows[i];
             const categories = handler(row.id);
             row.addEventListener('mouseover', () => {
-                this.callPreviewCircles(categories);
+                this._callPreviewCircles(categories);
             });
             row.addEventListener('mouseout', () => {
-                this.dismissPreviewCircles(categories);
+                this._dismissPreviewCircles(categories);
             })
         }
     }
 
-    callPreviewCircles(categories) {
+    //populate preview circles with predefined graphics
+    _callPreviewCircles(categories) {
         if (categories.has("design")) {
             const container = this._rightMain.querySelector(".circleDesign");
             container.style.backgroundImage = "url(" + preview_design + ")";
@@ -203,8 +236,7 @@ class GUI {
         }
     }
 
-    dismissPreviewCircles(categories) {
-
+    _dismissPreviewCircles(categories) {
         const circles = this._rightMain.querySelectorAll('.circle');
         for (let i = 0; i < circles.length; i++) {
             const c = circles[i];
@@ -228,6 +260,48 @@ class GUI {
                 let table = document.querySelector(".projectIndexTable");
                 this._buildIndexTable(projects, filtered);
             });
+    }
+
+    _bindSelAllCheckbox() {
+        const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
+        const selAll = filterContainer.querySelector('#selAll');
+
+        selAll.addEventListener('change', () => {
+            if (selAll.checked) {
+                //get all checkboxes, turn on
+                const allChecks = filterContainer.querySelectorAll('input');
+                console.log(allChecks);
+                for (let i = 0; i < allChecks.length; i++) {
+                    const box = allChecks[i];
+                    if (box.id === 'selNone') box.checked = false;
+                    else if (box.id !== 'selAll') {
+                        box.checked = true;
+                        const e = new Event("change");
+                        box.dispatchEvent(e);
+                    } 
+                }
+            }
+        });
+    }
+
+    _bindSelNoneCheckbox() {
+        const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
+        const selNone = filterContainer.querySelector('#selNone');
+
+        selNone.addEventListener('change', () => {
+            if (selNone.checked) {
+                //get all checkboxes, turn on
+                const allChecks = filterContainer.querySelectorAll('input');
+                console.log(allChecks);
+                for (let i = 0; i < allChecks.length; i++) {
+                    const box = allChecks[i];
+                    if (box.id === selNone.id) continue;
+                    box.checked = false;
+                    const e = new Event("change");
+                    box.dispatchEvent(e);
+                }
+            }
+        });
     }
 
 

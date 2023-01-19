@@ -1,5 +1,5 @@
 const loadLeftMain = (parent) => {
-    const leftContainer = document.createElement('div');
+    const leftContainer = document.createElement('main');
     leftContainer.classList.add("mainContainer", "left");
 
     const myName = document.createElement('h1');
