@@ -16,3 +16,9 @@ export function createElementText(tag, text) {
     output.textContent = text;
     return output;
 }
+
+export function createImage(source = '') {
+    const img = new Image();
+    img.src = source;
+    return img;
+}
