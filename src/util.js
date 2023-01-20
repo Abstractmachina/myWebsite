@@ -22,3 +22,15 @@ export function createImage(source = '') {
     img.src = source;
     return img;
 }
+
+export function createFigure(source = '', caption = '') {
+    if (typeof caption !== 'string') throw new Error("caption must be a string!");
+
+    const figure = document.createElement('figure');
+    const img = new Image();
+    img.src = source;
+    const capt = document.createElement('figcaption');
+    capt.textContent = 'fig: ' + caption;
+    figure.append(img, capt);
+    return figure;
+}
