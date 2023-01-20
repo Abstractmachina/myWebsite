@@ -10,7 +10,7 @@ const nlp4ms = () => {
     proj.addCategory("code");
     proj.addCategory("AI");
 
-    proj.Subtitle = "Implementing a Learning-Based Change Detection Framework for a Self-Corrective Behavioural Model in Aerial Additive Manufacturing | Imperial College Master Thesis";
+    proj.Subtitle = "Diagnosis Tool for Researchers working on Multiple Sclerosis";
 
 
     const title = createElementText('h1', proj.Title);
@@ -25,48 +25,46 @@ const nlp4ms = () => {
     const introHeading = createElementText('h3', 
         "Introduction");
     const intro = createElementText('p', 
-        'Learning-Based Design was my master thesis for the MSc in Computing at Imperial College London. Due to the confidential nature of the project, I am not able to publish any concrete results, however, I will include here some general information and technologies used. If there is interest, please feel free to contact me for further discussion while avoiding any sensitive topics :).');
+        'Natural Language Processing for the Diagnosis of Multiple Sclerosis was a group research project done as part of the software engineering design course at Imperial. The app is designed to be used by researchers at the UK MS Register, where a large collection of unprompted free-text data (patient reported outcomes) was amassed over the years, but there has been no effective tool to process and take advantage of that information to date. Our app sought to provide a simple interface to extract meaningful free-text data in the medical research for the diagnosis of MS. There was no prior code base, as our group was the first to collaborate with the MS Register, however, the intention is to continue the development in subsequent years.');
 
     const team = document.createElement('div');
-    team.innerHTML = '<strong>Team:</strong> Matt Barker, Colin Taylor, Taole Chen, Kaixuan Khoo, Ronan Patrick, Gus Levinson, Jack Cheng<br><strong>Supervisors:</strong> Chiraag Lala, Rod Middleton, Richard Nicholas<br>In collaboration with the <a href = "https://ukmsregister.org/">UK MS Register</a>';
+    team.innerHTML = 
+        '<strong>Team:</strong> Matt Barker, Colin Taylor, Taole Chen, Kaixuan Khoo, Ronan Patrick, Gus Levinson, Jack Cheng<br><strong>Supervisors:</strong> Chiraag Lala, Rod Middleton, Richard Nicholas<br>In collaboration with the <a href = "https://ukmsregister.org/">UK MS Register</a>';
 
     proj.pushContents(title, subtitle, year, location, git, introHeading, intro, team);
-
-    const summaryHead = createElementText('h3', "Summary");
-    // const neighsubHead = createElementText('h4', 'The Building as a Network')
-    const sum0 = document.createElement('p');
-    sum0.innerHTML = 
-        'The project situates design in the context of Industry 4.0 and the radically new discipline of <a href="http://www.aerial-abm.com/">Aerial Additive Building Manufacturing</a>. With the proliferation of digital technologies in the AEC industry, the future trajectory of the industry is pointing towards autonomous, closed-loop robotic systems, creating the need to develop design methodologies that can engage with machine-centric processes.';
-    const sum1 = createElementText('p', 
-        'Aerial Additive Manufacturing (AAM) is an early-stage research that is developing a pioneering framework for multi-agent additive manufacturing with Unmanned Aerial vehicles (UAV). Currently, AAM does not have a design-to-fabrication workflow nor a dedicated design framework to interface with due to its infancy. To address this gap, my research aimed to develop the first stages of a design interface for multi-agent AAM. More specifically, a realtime, in-situ change detection and correction framework with a machine learning approach based on point clouds was developed and subsequently validated through physical experiments.');
-
-    proj.pushContents(summaryHead, sum0, sum1);
 
     const featuresHeading = createElementText("h3", 'Features');
     const featlist = document.createElement('ul');
     const feat0 = createElementText('li', 
-        'Behavioural Model for AAM using point clouds as a data medium. Point clouds have the advantage of being an integral part of drone vision, so no additional translation is required between design and fabrication.')
+        'Free-text analyzer for simple text processing, looking at frequency of terms and phrases, n-grams to identify trends and key terminologies used by patients')
     const feat1 = document.createElement('li');
     feat1.innerHTML = 
-        'C# Wrapper for the popular C++ <a href="https://pointclouds.org/">Point Cloud Library</a> (pcl), a 2D/3D processing library that is popular among robotic development communities and integrates with the ROS framework.';
+        'Logistic regression classifier with bag-of-words model for predicting MS in patients based on their text prompts.';
     const feat2 = createElementText('li', 
-        'Machine Learning model implementing a custom random forest classifier with JSON export for ease of distribution. Other classifiers, such as a neural network, were also implemented, though not used for the final experiment.');
+        'Sentiment and Extendend Disability Status Analysis to identify trends in individual users and dempgraphics. Implementation of the VADER sentiment library.');
     const feat3 = createElementText('li', 
-        'Tensor data object implementation in Grasshopper using Tensorflow.NET\'s Numpy, allowing multidimensional matrix operations in the GH environment.');
+        'Custom CSV import capabalities, giving researchers more freedom in adapting the app to specific needs.');
     const feat4 = createElementText('li', 
-        'Stand-alone core C# library with testing that can be ported to other applications.');
-
-
+        'Hexagonal Architecture, allowing the swapping of modules in the future, thus improving re-useability of the code base');
     featlist.append(feat0, feat1, feat2, feat3, feat4);
     proj.pushContents(featuresHeading, featlist);
 
-    const archheading = createElementText("h3", 'Architecture');
-    const arch0 = createElementText('p', 'The code for the paper was implemented as a Grasshopper plug-in library. The core library is written in C# and care was taken to maintain a hexagonal architecture for future adaptability. Functionality for point clouds and machine learning is added with the adapter pattern so it can be replaced with updated modules. A controller library named HiveMindGH establishes a connection between the core library and Grasshopper’s visual interface.')
+    const techHeading = createElementText("h3", 'Technologies');
+    const techlist = document.createElement('ul');
+    const tech0 = createElementText('li', 
+        'Python')
+    const tech1 = document.createElement('li');
+    feat1.innerHTML = 
+        'tkinter Front-end';
+    const tech2 = createElementText('li', 
+        'VADER sentiment analysis implementation');
+    const tech3 = createElementText('li', 
+        'VADER sentiment analysis implementation');
     
     const img_classDiagram = new Image();
     img_classDiagram.src = diagram_classes;
-
-    proj.pushContents(archheading, arch0, img_classDiagram);
+    techlist.append( tech0, tech1);
+    proj.pushContents(techHeading, techlist);
 
     return proj;
 };
