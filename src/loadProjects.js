@@ -3,6 +3,7 @@ import printFast from "./content/proj_printFast";
 import aag from "./content/proj_aag";
 import matnet from './content/proj_matnet';
 import drones from './content/proj_drones';
+import nlp4ms from "./content/proj_nlp4ms";
 
 const loadProjects = () => {
     const projects = new Map();
@@ -11,6 +12,7 @@ const loadProjects = () => {
     projects.set('website', myWebsite());
     projects.set('matnet', matnet());
     projects.set('drones', drones());
+    projects.set('nlp4ms', nlp4ms());
 
     return projects;
 };

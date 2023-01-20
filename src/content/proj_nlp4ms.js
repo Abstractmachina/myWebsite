@@ -2,13 +2,11 @@ import { Project } from "../Project"
 import { createElementText, createImage } from "../util";
 
 //media
-import diagram_classes from '../assets/lbd/HiveMindClasses.jpg';
 
-const drones = () => {
-    let proj = new Project("Learning-Based Design", 2022, "London, UK");
+const nlp4ms = () => {
+    let proj = new Project("NLP for Multiple Sclerosis", 2022, "London, UK");
 
     proj.addCategory("academic");
-    proj.addCategory("additive manufacturing");
     proj.addCategory("code");
     proj.addCategory("AI");
 
@@ -20,7 +18,9 @@ const drones = () => {
     const year = createElementText('h5', 'Project Year: ' + proj.Year);
     const location = createElementText('h5', 'Project Location: ' + proj.Location);
 
-    const cover = new Image();
+    const git = document.createElement('h5');
+    git.innerHTML = '<a href=https://github.com/Abstractmachina/icc_NLP4MS>Repo</a>'
+    //const cover = new Image();
 
     const introHeading = createElementText('h3', 
         "Introduction");
@@ -28,9 +28,9 @@ const drones = () => {
         'Learning-Based Design was my master thesis for the MSc in Computing at Imperial College London. Due to the confidential nature of the project, I am not able to publish any concrete results, however, I will include here some general information and technologies used. If there is interest, please feel free to contact me for further discussion while avoiding any sensitive topics :).');
 
     const team = document.createElement('div');
-    team.innerHTML = '<strong>Team:</strong> Taole Chen, Yusuf Kaya, Lachlan Orr<br><strong>Advisor:</strong>Dr.   Basaran Bahadir Kocer<br>In collaboration with the <a href = "https://www.imperial.ac.uk/aeronautics/about/">Imperial Aeronautics Department</a> and <a href="https://www.empa.ch/web/empa/research-areas">EMPA</a>';
+    team.innerHTML = '<strong>Team:</strong> Matt Barker, Colin Taylor, Taole Chen, Kaixuan Khoo, Ronan Patrick, Gus Levinson, Jack Cheng<br><strong>Supervisors:</strong> Chiraag Lala, Rod Middleton, Richard Nicholas<br>In collaboration with the <a href = "https://ukmsregister.org/">UK MS Register</a>';
 
-    proj.pushContents(title, subtitle, year, location, cover, introHeading, intro, team);
+    proj.pushContents(title, subtitle, year, location, git, introHeading, intro, team);
 
     const summaryHead = createElementText('h3', "Summary");
     // const neighsubHead = createElementText('h4', 'The Building as a Network')
@@ -72,4 +72,4 @@ const drones = () => {
 };
 
 
-export default drones;
+export default nlp4ms;
