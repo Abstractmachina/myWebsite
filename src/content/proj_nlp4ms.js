@@ -1,7 +1,13 @@
-import { Project } from "../Project"
-import { createElementText, createImage } from "../util";
+git import { Project } from "../Project"
+import { createElementText, createFigure, createImage } from "../util";
 
 //media
+import home from '../assets/nlp4ms/home.png';
+import freetxt_00 from '../assets/nlp4ms/gui_freetext_00.jpg';
+import guiMain from '../assets/nlp4ms/gui_main.jpg';
+import sampleSentiment from '../assets/nlp4ms/gui_sampleAnalysis.jpg';
+import gui_userAnalysis from '../assets/nlp4ms/gui_userAnalysis_01.jpg';
+import classDiagram from '../assets/nlp4ms/classDiagram.jpg';
 
 const nlp4ms = () => {
     let proj = new Project("NLP for Multiple Sclerosis", 2022, "London, UK");
@@ -19,7 +25,7 @@ const nlp4ms = () => {
     const location = createElementText('h5', 'Project Location: ' + proj.Location);
 
     const git = document.createElement('h5');
-    git.innerHTML = '<a href=https://github.com/Abstractmachina/icc_NLP4MS>Repo</a>'
+    git.innerHTML = '<a href=https://github.com/Abstractmachina/icc_NLP4MS>Github</a>'
     //const cover = new Image();
 
     const introHeading = createElementText('h3', 
@@ -34,37 +40,45 @@ const nlp4ms = () => {
     proj.pushContents(title, subtitle, year, location, git, introHeading, intro, team);
 
     const featuresHeading = createElementText("h3", 'Features');
+
     const featlist = document.createElement('ul');
     const feat0 = createElementText('li', 
-        'Free-text analyzer for simple text processing, looking at frequency of terms and phrases, n-grams to identify trends and key terminologies used by patients')
+    'Free-text analyzer for simple text processing, looking at frequency of terms and phrases, n-grams to identify trends and key terminologies used by patients')
     const feat1 = document.createElement('li');
     feat1.innerHTML = 
-        'Logistic regression classifier with bag-of-words model for predicting MS in patients based on their text prompts.';
+    'Logistic regression classifier with bag-of-words model for predicting MS in patients based on their text prompts.';
     const feat2 = createElementText('li', 
-        'Sentiment and Extendend Disability Status Analysis to identify trends in individual users and dempgraphics. Implementation of the VADER sentiment library.');
+    'Sentiment and Extendend Disability Status Analysis to identify trends in individual users and dempgraphics. Implementation of the VADER sentiment library.');
     const feat3 = createElementText('li', 
-        'Custom CSV import capabalities, giving researchers more freedom in adapting the app to specific needs.');
+    'Custom CSV import capabalities, giving researchers more freedom in adapting the app to specific needs.');
     const feat4 = createElementText('li', 
-        'Hexagonal Architecture, allowing the swapping of modules in the future, thus improving re-useability of the code base');
+    'Hexagonal Architecture, allowing the swapping of modules in the future, thus improving re-useability of the code base');
+    const feat5 = createElementText('li', 
+    'All modules limited to the NLTK platform, as code is hosted on secure servers of the MS Register.');
     featlist.append(feat0, feat1, feat2, feat3, feat4);
-    proj.pushContents(featuresHeading, featlist);
+    
+    const img_home = createFigure(home, 'App Home Page');
+    const img_gui_freetxt = createFigure(freetxt_00, 'Free text analysis page');
+    const img_guiMain = createFigure(guiMain, 'Main menu');
+    const img_SampleSentiment = createFigure(sampleSentiment, 'Example of generated trend graphs for a group of patients');
+    const img_guiUser = createFigure(gui_userAnalysis, 'User sentiment analysis page');
 
+  
+    proj.pushContents(featuresHeading, featlist, img_home, img_guiMain, img_gui_freetxt, img_SampleSentiment, img_guiUser);
+    
     const techHeading = createElementText("h3", 'Technologies');
     const techlist = document.createElement('ul');
     const tech0 = createElementText('li', 
-        'Python')
-    const tech1 = document.createElement('li');
-    feat1.innerHTML = 
-        'tkinter Front-end';
+        'Python back-end')
+    const tech1 = createElementText('li', 
+        'tkinter front-end');
     const tech2 = createElementText('li', 
         'VADER sentiment analysis implementation');
     const tech3 = createElementText('li', 
-        'VADER sentiment analysis implementation');
-    
-    const img_classDiagram = new Image();
-    img_classDiagram.src = diagram_classes;
-    techlist.append( tech0, tech1);
-    proj.pushContents(techHeading, techlist);
+        'Sci-kit Learn text classification implementation');
+    const img_classDiagram = createFigure(classDiagram, 'Class Diagram');
+    techlist.append( tech0, tech1, tech2, tech3);
+    proj.pushContents(techHeading, techlist, img_classDiagram);
 
     return proj;
 };
