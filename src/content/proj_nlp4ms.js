@@ -1,4 +1,4 @@
-git import { Project } from "../Project"
+import { Project } from "../Project"
 import { createElementText, createFigure, createImage } from "../util";
 
 //media
