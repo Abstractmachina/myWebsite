@@ -28,10 +28,10 @@ class GUI {
         this._btn_index = this._loadProjectIndexButton(this._leftMain); //calls index tab
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
-        this._aboutTab = loadAboutTab(this._app);
-        this._indexTab = loadIndexTab(this._app);
+        this._aboutTab = loadAboutTab(this._rightMain);
+        this._indexTab = loadIndexTab(this._leftMain);
         this._prebuildIndexTab(projects);
-        this._projectTab = loadProjectTab(this._app);
+        this._projectTab = loadProjectTab(this._rightMain);
 
         //setup bindings
         this._bindProfileButton();

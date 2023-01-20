@@ -112,7 +112,7 @@ body {
     background-color:aquamarine;
 }
 
-
+/* PROJECT TAB */
 
 .projectTab {
     background-color: white;
@@ -153,6 +153,11 @@ body {
     margin-bottom: -0.5em;
 }
 
+.projectTab h5 {
+    margin-top: 1em;
+    margin-bottom: -0.5em;
+}
+
 .projectTab p {
     /* text-indent: 2em; */
 }
@@ -161,12 +166,25 @@ body {
     color: black;
     text-decoration: underline;
     text-decoration-color: rgb(255, 221, 0);
-    text-decoration-thickness: 1em;
+    text-decoration-thickness: 0.3em;
 }
 .projectTab a:hover {
     background-color: rgb(255, 221, 0);
 }
 
+.projectTab img {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.projectTab figcaption {
+    font-family: 'Source Serif Pro', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.8em;
+    padding-top: 0.3em;
+}
 
 .slideInFromRight {
     left: 50%;
