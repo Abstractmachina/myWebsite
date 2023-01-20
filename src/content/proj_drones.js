@@ -37,16 +37,31 @@ const drones = () => {
     const sum0 = document.createElement('p');
     sum0.innerHTML = 
         'The project situates design in the context of Industry 4.0 and the radically new discipline of <a href="http://www.aerial-abm.com/">Aerial Additive Building Manufacturing</a>. With the proliferation of digital technologies in the AEC industry, the future trajectory of the industry is heading towards autonomous, closed-loop robotic systems, creating the need to develop design methodologies that can engage with machine-centric processes.';
-    const neigh1 = createElementText('p', 
-        'Aerial Additive Manufacturing (AAM) is an early-stage research that is developing a framework for multi-agent additive manufacturing with Unmanned Aerial vehicles(UAV). Currently, AAM does not have a design-to-fabrication workflow nor a dedicated design framework to interface with due to its infancy. Hence, my research aimed to develop the first stages of a design interface for multi-agent AAM. More specifically, a realtime, in-situ change detection and correction framework with a machine learning approach based on point clouds was developed and subsequently validated through physical experiments.');
+    const sum1 = createElementText('p', 
+        'Aerial Additive Manufacturing (AAM) is an early-stage research that is developing a pioneering framework for multi-agent additive manufacturing with Unmanned Aerial vehicles(UAV). Currently, AAM does not have a design-to-fabrication workflow nor a dedicated design framework to interface with due to its infancy. To address this gap, my research aimed to develop the first stages of a design interface for multi-agent AAM. More specifically, a realtime, in-situ change detection and correction framework with a machine learning approach based on point clouds was developed and subsequently validated through physical experiments.');
     const neigh2 = createElementText('p', 
-        'The graph is given agency by deploying a rule-based growth algorithm on the project site. A path-finding logic is used to generate schemes, with specific rule determining the resulting character of the neighborhood while ensuring the computed spatial relationships are maintained. The decoupling of formal agency from the hands of the human designer signifies a crucial step towards a fully autonomous construction framework. Yet, with the rule-based system, designers are still given control without the possibility to resort to the sculpting of form, thus prioritizing a logic-driven approach, rather than aesthetics.');
+        'The change detection framework ');
 
     // const vid_zoomScales = createImage(anim_zoomScales_00);
     // const vid_growth_all = createImage(anim_growth_all);
     // const vid_growth_turntable = createImage(anim_growth_turntable);
 
-    proj.pushContents(summaryHead, sum0, neigh1, neigh2);
+    proj.pushContents(summaryHead, sum0, sum1, neigh2);
+
+    const featuresHeading = createElementText("h3", 'Features');
+    const featlist = document.createElement('ul');
+    const feat0 = createElementText('li', 'Designed and developed change detection framework to detect defects in point clouds gathered from Lidar scans using a machine learning approach for the Aerial Additive Building Manufacturing Research Fund, creating a proof of concept for the first design framework by building a C# Library that integrates TensorFlow and Point Cloud Library with Grasshopper3D')
+    const feat1 = createElementText('li', 'Behavioural Model for AAM using point clouds as a data medium. Point clouds have the advantage of being an integral part of drone vision, so no additional translation is required between design and fabrication.')
+    const feat2 = createElementText('li', 'Machine Learning model imple')
+
+    featlist.append(feat0, feat1)
+    proj.pushContents(featuresHeading, featlist);
+
+    const archheading = createElementText("h3", 'Features');
+    const archlist = document.createElement('ul');
+    const arch0 = createElementText('li', '')
+
+    proj.pushContents(archheading);
 
     // //level 1 home
     // const unitHead = createElementText('h3', 
