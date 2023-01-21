@@ -5,7 +5,7 @@
 body {
     
     margin: 0;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     
 }
 
@@ -172,6 +172,9 @@ header :first-child h2 {
     flex-shrink: 0;
     border-right: 0.5px dotted rgb(148, 148, 148);
     border-left: 1px dotted black;
+    writing-mode:vertical-lr;
+    text-align: center;
+    font-weight: lighter;
 }
 
 .leftEdge:hover {

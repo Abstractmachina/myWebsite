@@ -4,6 +4,7 @@ const loadProjectTab = (parent) => {
 
     const leftEdge = document.createElement('div');
     leftEdge.classList.add('leftEdge');
+    leftEdge.textContent = 'close'
 
     const projectContentContainer = document.createElement('div');
     projectContentContainer.classList.add('projectContentContainer');
