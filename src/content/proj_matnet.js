@@ -17,6 +17,7 @@ const matnet = () => {
     proj.addCategory("additive manufacturing");
     proj.addCategory("design");
     proj.addCategory("code");
+    proj.addCategory("fabrication");
 
     proj.Subtitle = "Mass-Customized Housing for Cohesive Communities. AADRL Master Thesis"
 

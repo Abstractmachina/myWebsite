@@ -15,7 +15,10 @@ const loadLeftMain = (parent) => {
     btn_profile.id = 'btn_profile';
     btn_profile.textContent = "Full Profile"   
 
-    leftContainer.append(myName, subtitle, intro, btn_profile);
+    const header = document.createElement('header');
+    header.append(myName, subtitle, intro, btn_profile);
+
+    leftContainer.append(header);
 
     parent.appendChild(leftContainer);
 

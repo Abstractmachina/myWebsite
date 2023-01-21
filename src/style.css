@@ -25,14 +25,15 @@ body {
 /* left ui */
 .left {
     padding: 2em;
-    background-color: yellow;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: flex-start;
 }
 
 #projectArrow {
     height: 40%;
+    margin-bottom: 10%;
 }
 
 #projectArrow:hover {
@@ -117,17 +118,40 @@ body {
 .projectTab {
     background-color: white;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     left:100%;
     top: 0%;
     width: 50%;
     height: 98%;
     opacity: 0.5;
     z-index: 1;
-    padding: 2em 4em;
+    /* padding: 2em 4em; */
     transition-property: left, opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
+}
+
+.leftEdge {
+    /* height: 100%; */
+    width: 20px;
+    /* flex-grow: 1; */
+    flex-shrink: 0;
+    border-right: 1px solid black;
+    border-left: 2px solid black;
+}
+
+.leftEdge:hover {
+    background-color: aquamarine;
+}
+
+.projectContentContainer {
+    height: 100%;
+    padding: 2em 4em;
+
     overflow: auto;
+    
 }
 
 .closeProject {
@@ -155,7 +179,7 @@ body {
 
 .projectTab h5 {
     margin-top: 1em;
-    margin-bottom: -0.5em;
+    /* margin-bottom: -0.5em; */
 }
 
 .projectTab p {
@@ -172,7 +196,7 @@ body {
     background-color: rgb(255, 221, 0);
 }
 
-.projectTab img {
+.projectTab figure img {
     border-style: solid;
     border-color: black;
     border-width: 1px;

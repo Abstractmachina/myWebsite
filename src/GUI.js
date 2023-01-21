@@ -29,16 +29,17 @@ class GUI {
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
         this._aboutTab = loadAboutTab(this._rightMain);
-        this._indexTab = loadIndexTab(this._leftMain);
+        this._indexTab = loadIndexTab(this._app);
         this._prebuildIndexTab(projects);
         this._projectTab = loadProjectTab(this._rightMain);
 
         //setup bindings
         this._bindProfileButton();
-        this.bindExitProjectIndex();
-        this.bindCallProjectIndex();
+        this._bindExitProjectIndex();
+        this._bindCallIndex();
         this._bindSelAllCheckbox();
         this._bindSelNoneCheckbox();
+        this._bindExitProjectTab();
     }
 
     
@@ -174,14 +175,15 @@ class GUI {
         });
     }
 
-    bindCallProjectIndex() {
+    _bindCallIndex() {
         this._btn_index.addEventListener('click', () => {
             this._showIndexTab();
         });
     }
 
-    bindExitProjectIndex() {
+    _bindExitProjectIndex() {
         this._leftMain.addEventListener('click', (e) =>{
+                console.log(e);
                 e.stopPropagation();
                 if (e.target.id !== "projectArrow") {
                     this._indexTab.classList.remove('projectIndexSlideIn');
@@ -202,6 +204,13 @@ class GUI {
                 handler(row.id);
             })
         }
+    }
+
+    _bindExitProjectTab() {
+        const leftEdge = this._projectTab.querySelector('.leftEdge');
+        leftEdge.addEventListener('click', () => {
+            this._projectTab.classList.remove('slideInFromRight');
+        });
     }
 
     bindHoverProjects(handler) {
@@ -312,22 +321,23 @@ class GUI {
     displayProject(htmlContent) {
         const animationClass = 'slideInFromRight';
 
+        const contentContainer = this._projectTab.querySelector('.projectContentContainer');
         //if project page already shown, slide out, swap content and slide back in.
         //timeout added to allow animation to finish.
         if (this._projectTab.classList.contains(animationClass)) {
             this._projectTab.classList.remove(animationClass);
-            this._removeAllChildren(this._projectTab);
+            this._removeAllChildren(contentContainer);
             setTimeout(() => {
-                this._addCloseProjectButton();
-                this._projectTab.appendChild(htmlContent);
+                // this._addCloseProjectButton();
+                contentContainer.appendChild(htmlContent);
                 this._projectTab.classList.add(animationClass);
             }, 200);
             return;
         }
 
-        this._removeAllChildren(this._projectTab);
-        this._addCloseProjectButton();
-        this._projectTab.appendChild(htmlContent);
+        this._removeAllChildren(contentContainer);
+        // this._addCloseProjectButton();
+        contentContainer.appendChild(htmlContent);
         this._projectTab.classList.add(animationClass);
 
     }
