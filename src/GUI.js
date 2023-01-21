@@ -211,6 +211,12 @@ class GUI {
         leftEdge.addEventListener('click', () => {
             this._projectTab.classList.remove('slideInFromRight');
         });
+        leftEdge.addEventListener('mouseover', () => {
+            this._projectTab.style.left = '49.5%';
+        })
+        leftEdge.addEventListener('mouseout', () => {
+            this._projectTab.style.left = null;
+        })
     }
 
     bindHoverProjects(handler) {
