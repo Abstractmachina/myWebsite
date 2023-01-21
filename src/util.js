@@ -23,6 +23,17 @@ export function createImage(source = '') {
     return img;
 }
 
+export function createImages() {
+    const output = [];
+    for (let i = 0; i < arguments.length; i++) {
+        const img = new Image();
+        img.src = arguments[i];
+        output.push(img);
+    }
+
+    return output;
+}
+
 export function createFigure(source = '', caption = '') {
     if (typeof caption !== 'string') throw new Error("caption must be a string!");
 

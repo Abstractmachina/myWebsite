@@ -25,21 +25,45 @@ body {
 /* left ui */
 .left {
     margin: 0;
-    padding: 0em 2em;
+    padding: 0em 5em;
+    padding-top: 4em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-#projectArrow {
+header :first-child {
+    width:10.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    white-space:nowrap;
+    margin-bottom: 2em;
+}
+
+/*logo*/
+header :first-child h1 {
+    margin:0;
+    font-weight: 800;
+    font-size: 2em;
+    padding: 0;
+}
+
+header :first-child h2 {
+    margin:0;
+    font-size: 1em;
+    font-weight: 200;
+}
+
+/* #projectArrow {
     height: 40%;
     margin-bottom: 10%;
 }
 
 #projectArrow:hover {
     content: url("./assets/arrow_projectIndex_hover.svg");
-}
+} */
 
 /*right ui*/
 .right {
@@ -69,7 +93,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    left:100%;
+    left:calc(100% - 25px);
     top: 0%;
     width: 50%;
     height: 100%;

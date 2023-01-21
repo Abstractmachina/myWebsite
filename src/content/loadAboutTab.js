@@ -4,6 +4,7 @@ const loadAboutTab = (parent) => {
 
     const leftEdge = document.createElement('div');
     leftEdge.classList.add('leftEdge')
+    leftEdge.textContent = 'information';
 
     const abtContainer = document.createElement('div');
     abtContainer.classList.add('aboutContainer');

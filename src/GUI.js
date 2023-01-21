@@ -12,6 +12,7 @@ import loadRightMain from './content/loadRightMain';
 import loadFooter from './content/loadFooter';
 import loadProjectTab from './content/loadProjectTab';
 import loadIndexTab from './content/loadIndexTab';
+import loadProjectArrow from './content/loadProjectArrow';
 
 
 class GUI {
@@ -25,7 +26,8 @@ class GUI {
 
         //load elements
         this._leftMain = loadLeftMain(this._app);
-        this._btn_index = this._loadProjectIndexButton(this._leftMain); //calls index tab
+        // this._btn_index = this._loadProjectIndexButton(this._leftMain); //calls index tab
+        this._btn_index = loadProjectArrow(this._leftMain);
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
         this._aboutTab = loadAboutTab(this._rightMain);
@@ -207,16 +209,38 @@ class GUI {
     }
 
     _bindExitProjectTab() {
-        const leftEdge = this._projectTab.querySelector('.leftEdge');
-        leftEdge.addEventListener('click', () => {
-            this._projectTab.classList.remove('slideInFromRight');
-        });
-        leftEdge.addEventListener('mouseover', () => {
-            this._projectTab.style.left = '49.5%';
-        })
-        leftEdge.addEventListener('mouseout', () => {
-            this._projectTab.style.left = null;
-        })
+        // const leftEdge = this._projectTab.querySelector('.leftEdge');
+        // leftEdge.addEventListener('click', () => {
+        //     this._projectTab.classList.remove('slideInFromRight');
+        // });
+        // leftEdge.addEventListener('mouseover', () => {
+        //     this._projectTab.style.left = '49.5%';
+        // })
+        // leftEdge.addEventListener('mouseout', () => {
+        //     this._projectTab.style.left = null;
+        // })
+
+        const edges = document.querySelectorAll('.leftEdge');
+
+        for (let i = 0; i < edges.length;i++) {
+            let e = edges[i];
+            let parent = e.parentNode;
+
+            e.addEventListener('click', () => {
+                parent.classList.toggle('slideInFromRight');
+            });
+            e.addEventListener('mouseover', () => {
+                var style = window.getComputedStyle(parent),
+                    left = style.getPropertyValue('left');
+                    let splits = left.split('px');
+                    let shift = parseFloat(splits[0]) - 5;
+                    parent.style.left = shift + 'px';
+
+            })
+            e.addEventListener('mouseout', () => {
+                parent.style.left = null;
+            })
+        }
     }
 
     bindHoverProjects(handler) {
