@@ -1,12 +1,4 @@
 const loadProjectArrow = (parent) => {
-    // <a class="link" href="#">
-    //     <span class="link__arrow">
-    //       <span></span>
-    //       <span></span>
-    //     </span>
-    //     <span class="link__line"></span>
-    //     <span class="link__text">Projects</span>
-    //   </a>
 
     const container = document.createElement('a');
     container.classList.add('link');

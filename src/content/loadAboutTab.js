@@ -23,13 +23,14 @@ const loadAboutTab = (parent) => {
     const intro3 = document.createElement('p');
     intro3.textContent = "I have a keen interest in design research and fabrication. My specialization is in additive manufacturing and AI in architecture, having done two master thesis on the topic and having led workshops at universities around the globe (For more details, please check out the Projects section). I am always on the lookout for continued research opportunities, so please don't hesitate to get in touch!";
 
+    abtContainer.append(cv, intro1, intro2, intro3);
     const biographyTitle = document.createElement('h3');
     biographyTitle.textContent = "Biography";
 
     const bioBody = document.createElement('p');
     bioBody.textContent = "Having lived in four countries on three continents (Austria, China, US, UK) and counting, my multi-cultural experience has perhaps given me a unique perspective on matters. I often try to see and understand the complex systems that weave through our environments, and consequently I believe that design should be approached from a systemic perspective, rather than the prevailing design-as-a-monument paradigm. I am fascinated by the concept of the Renaissance Man and I enjoy to indulge in the pursuit of diverging interests. My origins are actually in the fine arts. Having painted, drawn, sculpted all my childhood, at the end of high school, I was entirely prepared to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. As an aspiring renaissance man, I have not given up my passion in the arts and I still practice whenever possible. Similarly, ";
 
-    abtContainer.append(cv, intro1, intro2, intro3, biographyTitle, bioBody);
+    abtContainer.append(biographyTitle, document.createElement('hr'), bioBody);
     aboutTab.append(leftEdge, abtContainer);
     parent.appendChild(aboutTab);
 

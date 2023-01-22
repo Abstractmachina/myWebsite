@@ -1,4 +1,5 @@
 import loadReturnArrow from "./loadReturnArrow";
+import { createElementText } from "../util";
 
 const loadLeftMain = (parent) => {
     const leftContainer = document.createElement('main');
@@ -16,9 +17,10 @@ const loadLeftMain = (parent) => {
     const intro = document.createElement('p');
     intro.textContent = "I am a multi-disciplinary designer operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science. ";
 
-    const btn_profile = document.createElement('button');
+    const btn_profile = document.createElement('div');
     btn_profile.id = 'btn_profile';
-    btn_profile.textContent = "Full Profile"   
+    const profileText = createElementText('div', "Full Profile");   
+    btn_profile.appendChild(profileText);
 
     const returnArrow = loadReturnArrow(btn_profile);
 

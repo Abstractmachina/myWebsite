@@ -172,9 +172,21 @@ class GUI {
     
     _bindProfileButton() {
         const btn_profile = this._leftMain.querySelector('#btn_profile');
-        btn_profile.addEventListener('click', () => {
+        btn_profile.addEventListener('click', (e) => {
             //transition in about tab
-            document.querySelector('.about').classList.toggle('slideInFromRight');
+            console.log(e)
+            let target = e.target;
+
+            while (target.parentNode) {
+                console.log(target);
+                console.log(target.id);
+                target = target.parentNode;
+                if (target.id === 'btn_profile') {
+                    document.querySelector('.about').classList.toggle('slideInFromRight');
+                    break;
+                }
+            }
+            
         });
     }
 
@@ -186,13 +198,23 @@ class GUI {
 
     _bindExitProjectIndex() {
         this._leftMain.addEventListener('click', (e) =>{
-                console.log(e);
-                e.stopPropagation();
-                if (e.target.id !== "projectArrow") {
+                // e.stopPropagation();
+
+
+                let t = e.target;
+                let isProjectArrow = false;
+                let isProfileButton = false;
+                while (t.parentNode) {
+                    if (t.id === 'projectArrow') isProjectArrow = true;
+                    if (t.id === 'btn_profile') isProfileButton = true;
+                    t = t.parentNode
+
+                }
+                if (!isProjectArrow) {
                     this._indexTab.classList.remove('projectIndexSlideIn');
                     this._projectTab.classList.remove('slideInFromRight');
                 }
-                if (e.target.id !== 'btn_profile') {
+                if (!isProfileButton) {
                     this._aboutTab.classList.remove('slideInFromRight');
                 }
         });
