@@ -78,9 +78,7 @@ header :first-child h2 {
     display: flex;
     height:2em;
     width: 8em;
-    /* justify-content: center; */
     align-items: center;
-    /* background-color: aqua; */
     font-size: 0.7em;
 }
 
@@ -198,22 +196,49 @@ header :first-child h2 {
 }
 
 .projectFilter {
-    padding: 1em 4em;
+    padding: 1em 2em;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5em;
+    justify-content: space-evenly;
+    gap: 0.75em;
 }
 
-.projectIndex table {
-    background-color: brown;
+.projectIndexTable {
+    margin: 0em 1em;
+    border-collapse: collapse;
+    font-size: 0.8em;
 }
 
-.projectIndex tr:hover {
-    background-color:aquamarine;
+
+.projectIndexTable th {
+    /* background-color: brown; */
+    font-size: 0.7em;
+    font-weight: 200;
+    text-align: left;
+    padding: 0.2em 0.5em;
 }
 
-/* PROJECT TAB */
+.projectIndexTable td {
+    padding: 0.5em 0.5em;
+    overflow-wrap: break-word;
+}
+.projectIndexTable tr {
+    
+}
+.projectIndexTable tr:hover {
+    cursor: pointer;
+    border-color: transparent; /* remove the border's colour */
+    box-shadow: 0 0 0 0.5px rgb(211, 211, 211); /* emulate the border */
+}
+.projectIndexTable tr:active {
+    background-color: var(--col_emphasis);
+}
+
+ .selected {
+    background-color: rgb(234, 234, 234);
+}
+
+/* ======   PROJECT TAB     =======*/
 
 .projectTab {
     background-color: white;
@@ -251,6 +276,20 @@ header :first-child h2 {
     font-weight: 400;
     cursor: pointer;
 }
+
+.topEdge {
+    height: 10px;
+    width: 100%;
+    /* flex-grow: 1; */
+    flex-shrink: 0;
+    border-bottom: 0.5px dotted rgb(148, 148, 148);
+    border-top: 1px dotted black;
+    /* writing-mode:vertical-lr; */
+    text-align: center;
+    font-weight: lighter;
+    vertical-align: middle;
+}
+
 
 .projectContentContainer {
     height: 100%;

@@ -2,13 +2,16 @@ const loadIndexTab = (parent) => {
     const indexTab = document.createElement('div');
     indexTab.classList.add('projectIndex');
 
+    const topedge = document.createElement('div');
+    topedge.classList.add('topEdge');
+
     const filterContainer = document.createElement('div');
     filterContainer.classList.add('projectFilter');
-    indexTab.appendChild(filterContainer);
 
     const indexTable = document.createElement("table");
     indexTable.classList.add('projectIndexTable');
-    indexTab.appendChild(indexTable);
+
+    indexTab.append(topedge, filterContainer, indexTable);
     
     parent.appendChild(indexTab);
     

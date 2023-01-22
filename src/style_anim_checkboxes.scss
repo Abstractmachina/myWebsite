@@ -1,20 +1,14 @@
-:root{
-    --col_emphasis: rgb(255, 221, 0);
-}
+$col_emphasis: rgb(255, 221, 0);
 
 
 .projectFilter>div{
-    // height: 5em;
     text-align: center;
     display: flex;
     align-items: center;
-    width: min-content;
-    // background-color: aqua;
 }
 
 .tgl {
   display: none;
-//   background-color: aqua;
 
   + .tgl-btn {
     // display: inline-block;
@@ -28,15 +22,17 @@
     overflow: hidden;
     backface-visibility: hidden;
     transition: all 0.2s ease;
-    // white-space: nowrap;
+    vertical-align: middle;
+
+    font-size: 0.8em;
 
     &:after,
     &:before {
         transition: all 0.2s ease;
         width: 100%;
-        text-align: center;
         position: absolute;
-        line-height: 2em;
+        // vertical-align: middle;
+        line-height: 1.8em;
         font-weight: 400;
         color: black;
     }
@@ -52,8 +48,10 @@
   
       &:active {
         background: #888;
+        border-radius: 0.5em;
         &:before {
           left: -10%;
+          border-radius: 0.5em;
         }
       }
 
@@ -61,20 +59,30 @@
   }
 
   &:checked + .tgl-btn {
-    background: var(--col_emphasis);
+    // border-color: var(--col_emphasis);
+    border-color: transparent; /* remove the border's colour */
+    box-shadow: 0 0 0 2px $col_emphasis; /* emulate the border */
+    // border-style: solid;
     border-radius: 1em;
+    vertical-align: middle;
+    // line-height: 1.5em;
+
+    &:after,
     &:before {
-      left: -100%;
-      border-radius: 0;
+    }
+    &:before {
+        left: -100%;
+        border-radius: 0;
     }
 
     &:after {
-      left: 0;
+        left: 0;
     }
 
     &:active:after {
         background: #888;
-      left: 10%;
+        border-radius: 0.5em;
+        left: 10%;
     }
   }
 }

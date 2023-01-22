@@ -160,7 +160,7 @@ class GUI {
                     tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
                     newRow.id = project.id;
 
-                    newRow.append(rowTitle, rowYear, rowLoc, tags);
+                    newRow.append(rowYear, rowTitle, rowLoc, tags);
                     parent.appendChild(newRow);
                     break;
                 }
@@ -243,6 +243,10 @@ class GUI {
             const row = rows[i];
             row.addEventListener('click', () => {
                 handler(row.id);
+                for (let j = 0; j < rows.length; j++) {
+                    rows[j].classList.remove('selected');
+                }
+                row.classList.add('selected');
             })
         }
     }
