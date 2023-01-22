@@ -1,3 +1,5 @@
+import { createElementText } from "../util";
+
 const loadAboutTab = (parent) => {
     const aboutTab = document.createElement('div');
     aboutTab.classList.add('about');
@@ -10,27 +12,30 @@ const loadAboutTab = (parent) => {
     abtContainer.classList.add('aboutContainer');
 
     const cv = document.createElement('a');
-    cv.setAttribute('href', '');
+    cv.setAttribute('href', '#');
     cv.textContent = "Download CV";
 
 
-    const intro1 = document.createElement('p');
-    intro1.textContent ="I worked as a computational designer at Zaha Hadid Architects at their London HQ, initially at ZHCode, later as project member within the wider office-internal ecosystem. I contributed as a conventional designer from concept to construction, but also leveraged my knowledge in computational design methodologies through developing bespoke design solutions and project-specific software tools. I have previously also worked as a freelancer, providing general design services as well as consultation for studios who are in need of computational/parametric workflow integration, but lack the capacity to have their own in-house specialists.";
+    const about0 = document.createElement('p');
+    about0.innerHTML = 
+        '<br>I am currently open for new projects. If you\'re looking to collaborate, please feel free to <a href="#">get in touch!</a><br>';
+    const about1 = createElementText('p', 
+        "I am a multi-disciplinary designer/software developer with a strong focus on computational geometry and fabrication. Previously, I have worked at international architectural practices, most notably Zaha Hadid Architects in London, developing bespoke design solutions and project-specific software tools. I have also collaborated with smaller practices in architecture and fabrication as an independent consultant to improve/establish computational workflow integration.");
+    const intro2 = createElementText('p',
+        "I hold a MArch in Architecture and Urbanism from the Architectural Association in London UK and a BArch in Architecture with high distinction from the California College of the Arts in San Francisco, California. After getting more and more involved with the development side and the exciting possibilites of marrying design with computation, I decided to pursue continued education in Computer Science at Imperial College London, where I completed a MSc in Computing, with a focus on computer graphics and Machine Learning."); 
 
-    const intro2 = document.createElement('p');
-    intro2.textContent = "I hold a MArch in Architecture and Urbanism from the Architectural Association in London UK and a BArch in Architecture with high distinction from the California College of the Arts in San Francisco, California. Most recently, I have pursued continued education in Computer Science at Imperial College London, where I completed a MSc in Computing, with a focus on computer graphics and Machine Learning, as I believe that a deep understanding of the underlying technological foundation, which increasingly supports and drives all aspects of architecture, as well as future trajectories, is essential to stay relevant in our profession."; 
+    abtContainer.append(cv, about0, about1, intro2);
+    const biographyTitle = createElementText('h3', 
+        "Biography");
 
-    const intro3 = document.createElement('p');
-    intro3.textContent = "I have a keen interest in design research and fabrication. My specialization is in additive manufacturing and AI in architecture, having done two master thesis on the topic and having led workshops at universities around the globe (For more details, please check out the Projects section). I am always on the lookout for continued research opportunities, so please don't hesitate to get in touch!";
-
-    abtContainer.append(cv, intro1, intro2, intro3);
-    const biographyTitle = document.createElement('h3');
-    biographyTitle.textContent = "Biography";
-
-    const bioBody = document.createElement('p');
-    bioBody.textContent = "Having lived in four countries on three continents (Austria, China, US, UK) and counting, my multi-cultural experience has perhaps given me a unique perspective on matters. I often try to see and understand the complex systems that weave through our environments, and consequently I believe that design should be approached from a systemic perspective, rather than the prevailing design-as-a-monument paradigm. I am fascinated by the concept of the Renaissance Man and I enjoy to indulge in the pursuit of diverging interests. My origins are actually in the fine arts. Having painted, drawn, sculpted all my childhood, at the end of high school, I was entirely prepared to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. As an aspiring renaissance man, I have not given up my passion in the arts and I still practice whenever possible. Similarly, ";
-
-    abtContainer.append(biographyTitle, document.createElement('hr'), bioBody);
+    const bio0 = createElementText('p', 
+        "Growing up between cultures and still following a globe-trotting lifetyle in adulthood (Austria, China, US, UK and counting), my multi-cultural experience has perhaps given me a unique perspective on matters. I often try to see and understand the complex systems that weave through our environments, and consequently I believe that design should be approached from a systemic perspective, rather than the prevailing design-as-a-monument paradigm.");
+    const bio2 = document.createElement('p');
+        bio2.textContent = "I have a keen interest in design research and fabrication. My specialization is in additive manufacturing and AI in architecture, having done two master thesis on the topic and having led workshops at universities around the globe (For more details, please check out the Projects section). I am always on the lookout for continued research opportunities, so please don't hesitate to get in touch!";
+    const bio1 = createElementText('p', 
+        "I am fascinated by the concept of the Renaissance Man and I enjoy indulging in the pursuit of diverging interests in my free time. My origins are in the fine arts. Having painted, drawn and sculpted all my childhood, I was originally planning to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. I have not given up my passion in the arts and I still practice whenever I can. My hope is that some day I can find a happy, amalgamating medium between all my interests and create something novel and meaningful.");
+        
+    abtContainer.append(biographyTitle, document.createElement('hr'), bio0, bio2, bio1);
     aboutTab.append(leftEdge, abtContainer);
     parent.appendChild(aboutTab);
 
