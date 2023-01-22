@@ -1,7 +1,7 @@
 import pArrowBase from './assets/arrow_projectIndex_base.svg';
-import preview_design from './assets/designPreview.jpg';
-import preview_code from './assets/codePreview.jpg';
-import preview_art from './assets/artPreview.jpg';
+import preview_design from './assets/matnet/fab_05.jpg';
+import preview_code from './assets/lbd/HiveMindClasses.jpg';
+import preview_art from './assets/barbican_00.jpg';
 
 
 import { createElementText } from './util';
@@ -262,6 +262,10 @@ class GUI {
                 parent.classList.toggle('slideInFromRight');
                 parent.style.left = null;
                 parent.style.width = null;
+                const projectselections = document.querySelectorAll('.selected');
+                for (let i =0; i < projectselections.length; i++) {
+                    projectselections[i].classList.remove('selected');
+                }
             });
             e.addEventListener('mouseover', () => {
                 var style = window.getComputedStyle(parent),
@@ -327,7 +331,6 @@ class GUI {
             c.style.backgroundImage = null;
         }
         const banners = this._app.querySelectorAll('.banner');
-        console.log(banners);
         for (let i = 0 ; i < banners.length;i++) {
             this._app.removeChild(banners[i]);
         }

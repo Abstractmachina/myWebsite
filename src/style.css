@@ -131,8 +131,8 @@ header :first-child h2 {
 
 .circle {
     background-color: white;
-    width: 10em;
-    height: 10em;
+    width: 15em;
+    height: 15em;
     border-radius: 50%;
     background-position: center;
     background-size: cover;
