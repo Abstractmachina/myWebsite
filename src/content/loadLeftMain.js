@@ -1,3 +1,5 @@
+import loadReturnArrow from "./loadReturnArrow";
+
 const loadLeftMain = (parent) => {
     const leftContainer = document.createElement('main');
     leftContainer.classList.add("mainContainer", "left");
@@ -17,6 +19,8 @@ const loadLeftMain = (parent) => {
     const btn_profile = document.createElement('button');
     btn_profile.id = 'btn_profile';
     btn_profile.textContent = "Full Profile"   
+
+    const returnArrow = loadReturnArrow(btn_profile);
 
     const header = document.createElement('header');
     header.append(banner, intro, btn_profile);

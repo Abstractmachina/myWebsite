@@ -26,7 +26,6 @@ class GUI {
 
         //load elements
         this._leftMain = loadLeftMain(this._app);
-        // this._btn_index = this._loadProjectIndexButton(this._leftMain); //calls index tab
         this._btn_index = loadProjectArrow(this._leftMain);
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
@@ -41,7 +40,9 @@ class GUI {
         this._bindCallIndex();
         this._bindSelAllCheckbox();
         this._bindSelNoneCheckbox();
-        this._bindExitProjectTab();
+        this._bindTabLeftEdges();
+
+        
     }
 
     
@@ -208,18 +209,7 @@ class GUI {
         }
     }
 
-    _bindExitProjectTab() {
-        // const leftEdge = this._projectTab.querySelector('.leftEdge');
-        // leftEdge.addEventListener('click', () => {
-        //     this._projectTab.classList.remove('slideInFromRight');
-        // });
-        // leftEdge.addEventListener('mouseover', () => {
-        //     this._projectTab.style.left = '49.5%';
-        // })
-        // leftEdge.addEventListener('mouseout', () => {
-        //     this._projectTab.style.left = null;
-        // })
-
+    _bindTabLeftEdges() {
         const edges = document.querySelectorAll('.leftEdge');
 
         for (let i = 0; i < edges.length;i++) {
