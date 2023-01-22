@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald');
 :root{
     --col_emphasis: rgb(255, 221, 0);
 }
@@ -80,6 +79,7 @@
 
     &:hover {
         font-weight: 400;
+        background-color: transparent;
         #{$self} {
             &__line {
             &:after {

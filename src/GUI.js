@@ -78,45 +78,64 @@ class GUI {
     }
 
     _createCategoryCheckbox(parent, id) {
+        const container = document.createElement('div');
         const newCat = document.createElement('input');
-            newCat.setAttribute('type', 'checkbox');
-            newCat.id = id;
-            newCat.setAttribute('name', id);
-            newCat.checked = true;
-            const label = document.createElement('label');
-            label.setAttribute("for", id);
-            label.textContent = id;
-            label.appendChild(newCat);
-            parent.append(label);
+        newCat.setAttribute('type', 'checkbox');
+        newCat.id = id;
+        newCat.setAttribute('name', id);
+        newCat.classList.add("tgl");
+        newCat.classList.add("tgl-skewed");
+        newCat.checked = true;
+        const label = document.createElement('label');
+        label.setAttribute("for", id);
+        label.classList.add("tgl-btn");
+        // label.textContent = id;
+        label.setAttribute('data-tg-off',id);
+        label.setAttribute('data-tg-on', id);
+        // label.textContent = id;
+        label.style.width = (id.length*0.7) + 'em';
+        container.append(newCat, label);
+        parent.append(container);
 
-            return newCat;
+        return newCat;
     }
 
     _createSelAllCheckbox(parent) {
-        //select all checkbox
+        const container = document.createElement('div');
         const selAll = document.createElement('input');
         selAll.setAttribute('type', 'checkbox');
         selAll.id = 'selAll';
         selAll.setAttribute('name', selAll.id);
+        selAll.classList.add("tgl");
+        selAll.classList.add("tgl-skewed");
         selAll.checked = true;
-        const lbl_selAll = document.createElement('label');
-        lbl_selAll.setAttribute("for", selAll.id);
-        lbl_selAll.textContent = 'All';
-        lbl_selAll.appendChild(selAll);
-        parent.append(lbl_selAll);
+        const label = document.createElement('label');
+        label.setAttribute("for", selAll.id);
+        // lbl_selAll.textContent = 'All';
+        label.classList.add("tgl-btn");
+        label.setAttribute('data-tg-off','All');
+        label.setAttribute('data-tg-on', 'All');
+        label.style.width = 3 + 'em';
+        container.append(selAll, label);
+        parent.append(container);
     }
     _createSelNoneCheckbox(parent) {
-        //select none checkbox
+        const container = document.createElement('div');
         const selNone = document.createElement('input');
         selNone.setAttribute('type', 'checkbox');
         selNone.id = 'selNone';
         selNone.setAttribute('name', selNone.id);
+        selNone.classList.add("tgl");
+        selNone.classList.add("tgl-skewed");
         selNone.checked = false;
-        const lbl_selNone = document.createElement('label');
-        lbl_selNone.setAttribute("for", selNone.id);
-        lbl_selNone.textContent = 'None';
-        lbl_selNone.appendChild(selNone);
-        parent.append(lbl_selNone);
+        const label = document.createElement('label');
+        label.setAttribute("for", selNone.id);
+        label.classList.add("tgl-btn");
+        label.setAttribute('data-tg-off','None');
+        label.setAttribute('data-tg-on', 'None')
+        label.style.width = 4 + 'em';
+        container.append(selNone, label);
+        parent.append(container);
     }
 
     _buildIndexTable(projects, categoryFilters) {
@@ -174,12 +193,9 @@ class GUI {
         const btn_profile = this._leftMain.querySelector('#btn_profile');
         btn_profile.addEventListener('click', (e) => {
             //transition in about tab
-            console.log(e)
             let target = e.target;
 
             while (target.parentNode) {
-                console.log(target);
-                console.log(target.id);
                 target = target.parentNode;
                 if (target.id === 'btn_profile') {
                     document.querySelector('.about').classList.toggle('slideInFromRight');
@@ -240,6 +256,8 @@ class GUI {
 
             e.addEventListener('click', () => {
                 parent.classList.toggle('slideInFromRight');
+                parent.style.left = null;
+                parent.style.width = null;
             });
             e.addEventListener('mouseover', () => {
                 var style = window.getComputedStyle(parent),
@@ -248,9 +266,15 @@ class GUI {
                     let shift = parseFloat(splits[0]) - 5;
                     parent.style.left = shift + 'px';
 
+                    let width = style.getPropertyValue('width');
+                    let w_splits = width.split('px');
+                    let w_shift = parseFloat(w_splits[0]) + 5;
+                    parent.style.width = w_shift + 'px';
+
             })
             e.addEventListener('mouseout', () => {
                 parent.style.left = null;
+                parent.style.width = null;
             })
         }
     }
@@ -300,7 +324,7 @@ class GUI {
     _bindCategoryCheckbox(newCat, parent, projects) {
 
             //query checkbox states and rebuild index on click
-            newCat.addEventListener('change', () => {
+            newCat.addEventListener('change', (e) => {
                 let checkBoxes = parent.querySelectorAll('input');
 
                 //return only the ids that are checked
@@ -321,7 +345,6 @@ class GUI {
             if (selAll.checked) {
                 //get all checkboxes, turn on
                 const allChecks = filterContainer.querySelectorAll('input');
-                console.log(allChecks);
                 for (let i = 0; i < allChecks.length; i++) {
                     const box = allChecks[i];
                     if (box.id === 'selNone') box.checked = false;
@@ -343,7 +366,6 @@ class GUI {
             if (selNone.checked) {
                 //get all checkboxes, turn on
                 const allChecks = filterContainer.querySelectorAll('input');
-                console.log(allChecks);
                 for (let i = 0; i < allChecks.length; i++) {
                     const box = allChecks[i];
                     if (box.id === selNone.id) continue;
