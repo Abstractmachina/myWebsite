@@ -11,9 +11,19 @@ const loadAboutTab = (parent) => {
     const abtContainer = document.createElement('div');
     abtContainer.classList.add('aboutContainer');
 
+   
+    
+
     const cv = document.createElement('a');
     cv.setAttribute('href', '#');
     cv.textContent = "Download CV";
+
+    const insta = document.createElement('a');
+    insta.setAttribute('href', 'https://www.instagram.com/taole.chen/');
+    insta.textContent = 'Instagram';
+    const linksContainer = document.createElement('div');
+    linksContainer.classList.add('links');
+    linksContainer.append(cv, insta);
 
 
     const about0 = document.createElement('p');
@@ -24,7 +34,7 @@ const loadAboutTab = (parent) => {
     const intro2 = createElementText('p',
         "I hold a MArch in Architecture and Urbanism from the Architectural Association in London UK and a BArch in Architecture with high distinction from the California College of the Arts in San Francisco, California. After getting more and more involved with the development side and the exciting possibilites of marrying design with computation, I decided to pursue continued education in Computer Science at Imperial College London, where I completed a MSc in Computing, with a focus on computer graphics and Machine Learning."); 
 
-    abtContainer.append(cv, about0, about1, intro2);
+    abtContainer.append(linksContainer, about0, about1, intro2);
     const biographyTitle = createElementText('h3', 
         "Biography");
 
