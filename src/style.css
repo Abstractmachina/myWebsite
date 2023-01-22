@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Monolisk Black";
+    src: url('./assets/monolisk_black.woff') format('woff');
+  }
+
 :root{
     --col_emphasis: rgb(255, 221, 0);
 }
@@ -238,6 +243,17 @@ header :first-child h2 {
     background-color: rgb(234, 234, 234);
 }
 
+
+/* ======   CIRCLE PREVIEWS     =======*/
+.banner {
+    position:fixed;
+    color: var(--col_emphasis);
+    text-align: center;
+    font-family: "Monolisk Black", sans-serif;
+    font-size: 10em;
+}
+
+
 /* ======   PROJECT TAB     =======*/
 
 .projectTab {
@@ -352,10 +368,7 @@ header :first-child h2 {
     opacity: 1;
 }
 
-/* @keyframes slideAboutIn {
-    from {left: 80%;};
-    to { left: 20%;};
-} */
+
 
 .footer {
     /* font-family: 'Source Serif Pro', serif; */

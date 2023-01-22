@@ -304,14 +304,19 @@ class GUI {
         if (categories.has("design")) {
             const container = this._rightMain.querySelector(".circleDesign");
             container.style.backgroundImage = "url(" + preview_design + ")";
+            this._instantiateBanner(container, 200, 'DESIGN');
         }
         if (categories.has("code")) {
             const container = this._rightMain.querySelector(".circleCode");
             container.style.backgroundImage = "url(" + preview_code + ")";
+            this._instantiateBanner(container, 200, 'CODE');
+
         }
         if (categories.has("art")) {
             const container = this._rightMain.querySelector(".circleArt");
             container.style.backgroundImage = "url(" + preview_art + ")";
+            this._instantiateBanner(container, 200, 'ART');
+
         }
     }
 
@@ -321,7 +326,48 @@ class GUI {
             const c = circles[i];
             c.style.backgroundImage = null;
         }
+        const banners = this._app.querySelectorAll('.banner');
+        console.log(banners);
+        for (let i = 0 ; i < banners.length;i++) {
+            this._app.removeChild(banners[i]);
+        }
     }
+
+    _instantiateBanner(spawnElement, range, content) {
+        const banner = document.createElement('div');
+            banner.textContent = content;
+            banner.classList.add('banner');
+
+            let {x, y} = this._getCenterPos(spawnElement)
+
+            let {newX, newY} = this._getRandomPoint(x,y, range);
+
+            banner.style.left = newX + 'px';
+            banner.style.top = newY + 'px';
+
+            this._app.append(banner);
+
+            return banner;
+    }
+
+    _getRandomPoint(x,y,range) {
+        let x_r = Math.random() * range - range/2;
+        let y_r = Math.random() * range - range/2;
+
+        let newX = x + x_r;
+        let newY = y+ y_r;
+
+        return {newX, newY};
+    }
+
+    _getCenterPos(element) {
+        var position = element.getBoundingClientRect();
+            var x = (position.left + position.right)/2;
+            var y = (position.top + position.bottom)/2;
+
+            return {x, y};
+    }
+
 
 
 
