@@ -150,7 +150,7 @@ header :first-child h2 {
     width: 50%;
     height: 100%;
     background-color: white;
-    z-index: 1;
+    z-index: 10;
     opacity: 1;
     transition-property: left, width;
     transition-duration: 0.2s;
@@ -222,7 +222,6 @@ header :first-child h2 {
 
 
 .projectIndexTable th {
-    /* background-color: brown; */
     font-size: 0.7em;
     font-weight: 200;
     text-align: left;
@@ -271,7 +270,7 @@ header :first-child h2 {
     left:100%;
     top: 0%;
     width: 50%;
-    height: 98%;
+    height: 100%;
     opacity: 0.5;
     z-index: 5;
     /* padding: 2em 4em; */
@@ -346,14 +345,7 @@ header :first-child h2 {
 
 .projectTab h5 {
     margin-top: 1em;
-    /* margin-bottom: -0.5em; */
 }
-
-.projectTab p {
-    /* text-indent: 2em; */
-}
-
-
 
 .projectTab figure img {
     border-style: solid;
