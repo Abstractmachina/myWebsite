@@ -1,0 +1,14 @@
+
+$color_paper: white;
+$color_registration:black;
+$color_accent: rgb(255, 221, 0);
+$color_active: rgb(229, 229, 229);
+
+
+@font-face {
+    font-family: "Monolisk Black";
+    src: url('../assets/monolisk_black.woff') format('woff');
+}
+
+$font_default: 'Montserrat', sans-serif;
+$font_special: 'Monoloisk Black', sans-serif;

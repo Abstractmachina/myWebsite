@@ -1,11 +1,4 @@
-@font-face {
-    font-family: "Monolisk Black";
-    src: url('./assets/monolisk_black.woff') format('woff');
-  }
-
-:root{
-    --col_emphasis: rgb(255, 221, 0);
-}
+@import "themes";
 
 *{
     box-sizing: border-box;
@@ -14,7 +7,7 @@
 body {
     
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font_default;
     font-size: 0.9em;
     
 }
@@ -27,11 +20,11 @@ body {
 a {
     color: black;
     text-decoration: underline;
-    text-decoration-color: rgb(255, 221, 0);
+    text-decoration-color: $color_accent;
     text-decoration-thickness: 0.2em;
 }
 a:hover {
-    background-color: rgb(255, 221, 0);
+    background-color: $color_accent;
 }
 
 .mainContainer {
@@ -64,7 +57,7 @@ header :first-child {
     margin-bottom: 2em;
     margin-left:0.3em;
 }
-
+btn
 /*logo*/
 header :first-child h1 {
     margin:0;
@@ -112,6 +105,11 @@ header :first-child h2 {
     cursor: pointer;
     font-weight: 600;
     stroke-width: 5;
+}
+
+#btn_profile:active {
+    background-color: $color_accent;
+    border-radius: 1em;
 }
 
 
@@ -293,9 +291,13 @@ header :first-child h2 {
 }
 
 .leftEdge:hover {
-    background-color: var(--col_emphasis);
+    background-color: $color_accent;
     font-weight: 400;
     cursor: pointer;
+}
+
+.leftEdge:active {
+    background-color: $color_active;
 }
 
 .topEdge {

@@ -1,10 +1,24 @@
-:root{
-    --col_emphasis: rgb(255, 221, 0);
-}
-// body {
-//   padding: 100px;
-//   text-align: center;
+@import 'themes';
+
+// #projectArrow {
+
 // }
+
+#projectArrow:active {
+
+    &.link{
+
+        color: $color_accent;
+        // font-weight: bold;
+        border-color: transparent;
+        // box-shadow: 0 0 0 3px $color_accent;
+        background-color: $color_active;
+    }
+    // background-color: $color_accent;
+    
+    border-radius: 1em;
+}
+
 .link {
     $self: &;
     display: flex;
@@ -44,7 +58,7 @@
             left: 0;
             width: 0;
             height: 6px;
-            background: rgb(255, 221, 0);
+            background: $color_accent;
             }
         }
     }
@@ -66,15 +80,13 @@
         left: 140px;
         width: 20px;
         height: 4px;
-        background: var(--col_emphasis);
+        background: $color_accent;
     }
     }
 
     &__text {
     color: #4A4A4A;
-    // font-family: 'Oswald', sans-serif;
     font-size: 1em;
-    // text-transform: uppercase;
     }
 
     &:hover {

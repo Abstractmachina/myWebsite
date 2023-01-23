@@ -1,7 +1,7 @@
-import './style.css';
-import './style_anim_projectArrow.scss';
-import './style_anim_checkboxes.scss';
-import './style_mobile.scss'
+import './styles/style_main.scss';
+import './styles/style_anim_projectArrow.scss';
+import './styles/style_anim_checkboxes.scss';
+import './styles/style_mobile.scss'
 
 import { Controller } from './Controller';
 
