@@ -9,12 +9,9 @@
     &.link{
 
         color: $color_accent;
-        // font-weight: bold;
         border-color: transparent;
-        // box-shadow: 0 0 0 3px $color_accent;
         background-color: $color_active;
     }
-    // background-color: $color_accent;
     
     border-radius: 1em;
 }
@@ -25,8 +22,7 @@
     align-items: center;
     padding: 5px;
     text-decoration: none;
-    //   transform: rotate(-90deg) translate3d(-300px, 0, 0);
-    transform: rotate(-90deg) translate3d(200px, -130px, 0);
+    transform: rotate(-90deg) translate3d(150px, -120px, 0);
     cursor: pointer;
 
     &__arrow {
@@ -35,7 +31,7 @@
         span {
             position: relative;
             width: 14px;
-            height: 2px;
+            height: 4px;
             border-radius: 2px;
             overflow: hidden;
             background: #BEBDBE;
@@ -43,7 +39,7 @@
 
             &:nth-child(1) {
             transform-origin: left bottom;
-            transform: rotate(45deg) translate3d(8px, -10px, 0);
+            transform: rotate(45deg) translate3d(7px, -9px, 0);
             }
 
             &:nth-child(2) {
@@ -67,7 +63,7 @@
     position: relative;
     margin-left: -14px;
     margin-right: 30px;
-    width: 150px;
+    width: 140px;
     height: 4px;
     background: #BEBDBE;
     overflow: hidden;

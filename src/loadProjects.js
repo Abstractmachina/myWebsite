@@ -1,10 +1,10 @@
-import myWebsite from "./content/proj_myWebsite";
-import printFast from "./content/proj_printFast";
-import aag from "./content/proj_aag";
-import matnet from './content/proj_matnet';
-import drones from './content/proj_drones';
-import nlp4ms from "./content/proj_nlp4ms";
-import organic from "./content/proj_organic";
+import myWebsite from "./projects/proj_myWebsite";
+import printFast from "./projects/proj_printFast";
+import aag from "./projects/proj_aag";
+import matnet from './projects/proj_matnet';
+import drones from './projects/proj_drones';
+import nlp4ms from "./projects/proj_nlp4ms";
+import organic from "./projects/proj_organic";
 
 const loadProjects = () => {
     const projects = new Map();

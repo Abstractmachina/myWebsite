@@ -11,12 +11,9 @@ $col_emphasis: rgb(255, 221, 0);
   display: none;
 
   + .tgl-btn {
-    // display: inline-block;
-    // width: 6em;
     content: attr(data-tg-on);
     height: 2em;
     position: relative;
-    // position: absolute;
     cursor: pointer;
     user-select: none;
     overflow: hidden;
@@ -31,7 +28,6 @@ $col_emphasis: rgb(255, 221, 0);
         transition: all 0.2s ease;
         width: 100%;
         position: absolute;
-        // vertical-align: middle;
         line-height: 1.8em;
         font-weight: 400;
         color: black;
@@ -59,13 +55,10 @@ $col_emphasis: rgb(255, 221, 0);
   }
 
   &:checked + .tgl-btn {
-    // border-color: var(--col_emphasis);
     border-color: transparent; /* remove the border's colour */
     box-shadow: 0 0 0 2px $col_emphasis; /* emulate the border */
-    // border-style: solid;
     border-radius: 1em;
     vertical-align: middle;
-    // line-height: 1.5em;
 
     &:after,
     &:before {

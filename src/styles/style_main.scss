@@ -15,6 +15,7 @@ body {
 .root {
     display: flex;
     justify-content: center;
+    height: 100vh;
 }
 
 a {
@@ -56,14 +57,17 @@ header :first-child {
     white-space:nowrap;
     margin-bottom: 2em;
     margin-left:0.3em;
+    // background-color: red;
 }
-btn
 /*logo*/
-header :first-child h1 {
-    margin:0;
+header :first-child>h1 {
+    // margin:0;
     font-weight: 800;
     font-size: 2em;
     padding: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    // background-color: red;
 }
 
 header :first-child h2 {
@@ -119,12 +123,16 @@ header :first-child h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .circleContainer {
     display: flex;
     flex-direction: column;
     gap: 2em;
+    // height: 100vh;
+    overflow: hidden;
 }
 
 .circle {
@@ -193,7 +201,6 @@ header :first-child h2 {
     flex-direction: column;
     
     padding: 1em 0;
-    opacity: 0;
     transition-property: top, opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
@@ -201,7 +208,6 @@ header :first-child h2 {
 
 .projectIndexSlideIn {
     top:30%;
-    opacity: 1;
 }
 
 .projectFilter {
@@ -216,6 +222,7 @@ header :first-child h2 {
     margin: 0em 1em;
     border-collapse: collapse;
     font-size: 0.8em;
+    overflow: auto;
 }
 
 

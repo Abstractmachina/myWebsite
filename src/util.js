@@ -45,3 +45,6 @@ export function createFigure(source = '', caption = '') {
     figure.append(img, capt);
     return figure;
 }
+
+
+

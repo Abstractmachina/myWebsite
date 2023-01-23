@@ -36,11 +36,13 @@ class GUI {
 
         //setup bindings
         this._bindProfileButton();
-        this._bindExitProjectIndex();
+        this._bindExitTabsOnLeftMainClicked();
         this._bindCallIndex();
         this._bindSelAllCheckbox();
         this._bindSelNoneCheckbox();
         this._bindTabLeftEdges();
+        this._bindSwipeProjectExit();
+        this._bindSwipeAboutExit();
 
         
     }
@@ -212,7 +214,7 @@ class GUI {
         });
     }
 
-    _bindExitProjectIndex() {
+    _bindExitTabsOnLeftMainClicked() {
         this._leftMain.addEventListener('click', (e) =>{
                 // e.stopPropagation();
 
@@ -285,6 +287,44 @@ class GUI {
                 parent.style.width = null;
             })
         }
+    }
+
+    _bindSwipeProjectExit() {
+
+        const pTab = this._projectTab;
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        pTab.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        pTab.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX > touchstartX) {
+                pTab.classList.remove('slideInFromRight');
+            }
+        });
+
+    }
+
+    _bindSwipeAboutExit() {
+
+        const aTab = this._aboutTab;
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        aTab.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        aTab.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX > touchstartX) {
+                aTab.classList.remove('slideInFromRight');
+            }
+        });
+
     }
 
     bindHoverProjects(handler) {
