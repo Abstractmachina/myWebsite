@@ -172,24 +172,17 @@
             width: 60px;
         }
     }
+    .circleContainer {
+        // margin-left: -10em;
+    }
+    // .circle {
+    //     width: 10em;
+    // height: 10em;
+    
+    // }
 }
 
 @media (max-height: 500px) {
-
-    header {
-        // &>*:first-child {
-            
-        //     background-color: red;
-        //     justify-content:flex-start;
-
-        //     h1 {
-        //         margin-bottom: 0em;
-        //     }
-        // }
-    }
-
-
-
     .link {
         flex-wrap: wrap;
         transform: rotate(-90deg) translate3d(45px, -43px, 0);
@@ -205,10 +198,18 @@
     }
 
     .projectIndex {
-        height:75%;
+        height:75vh;
+    }
+
+    .projectIndexTable {
     }
 
     .projectIndexSlideIn {
         top: 25%;
+    }
+
+    .circle {
+        width: 10em;
+    height: 10em;
     }
 }

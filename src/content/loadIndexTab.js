@@ -8,10 +8,14 @@ const loadIndexTab = (parent) => {
     const filterContainer = document.createElement('div');
     filterContainer.classList.add('projectFilter');
 
+    const tableContainer = document.createElement('div');
+    tableContainer.classList.add('indexTableContainer');
     const indexTable = document.createElement("table");
     indexTable.classList.add('projectIndexTable');
 
-    indexTab.append(topedge, filterContainer, indexTable);
+    tableContainer.appendChild(indexTable);
+
+    indexTab.append(topedge, filterContainer, tableContainer);
     
     parent.appendChild(indexTab);
     

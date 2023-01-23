@@ -121,18 +121,21 @@ header :first-child h2 {
 .right {
     background-color: rgb(15, 15, 15);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    height: 100vh;
+    // height: 100vh;
     overflow: hidden;
 }
 
 .circleContainer {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
     gap: 2em;
     // height: 100vh;
-    overflow: hidden;
+    height: 100%;
+    // overflow: hidden;
 }
 
 .circle {
@@ -165,7 +168,8 @@ header :first-child h2 {
 }
 
 .aboutContainer {
-    padding: 4em 8em;
+    padding: 6em 5em;
+    overflow: auto;
 }
 
 .about hr {
@@ -185,6 +189,9 @@ header :first-child h2 {
 .about .links{
     display: flex;
     justify-content:space-between;
+    flex-wrap: wrap;
+    font-size: 0.8em;
+    margin-bottom: 3em;
 
 }
 
@@ -218,11 +225,14 @@ header :first-child h2 {
     gap: 0.75em;
 }
 
+.indexTableContainer {
+    overflow: auto;
+}
+
 .projectIndexTable {
     margin: 0em 1em;
     border-collapse: collapse;
     font-size: 0.8em;
-    overflow: auto;
 }
 
 
@@ -257,7 +267,7 @@ header :first-child h2 {
 /* ======   CIRCLE PREVIEWS     =======*/
 .banner {
     position:fixed;
-    color: var(--col_emphasis);
+    color: $color_accent;
     text-align: center;
     font-family: "Monolisk Black", sans-serif;
     font-size: 10em;
@@ -375,8 +385,12 @@ header :first-child h2 {
     opacity: 1;
 }
 
+/*=========  CONTACT  ====================*/
 
 
+
+
+/*========= FOOTER  ====================*/
 .footer {
     /* font-family: 'Source Serif Pro', serif; */
     font-size: 0.8em;

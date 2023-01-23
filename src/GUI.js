@@ -4,7 +4,7 @@ import preview_code from './assets/lbd/HiveMindClasses.jpg';
 import preview_art from './assets/barbican_00.jpg';
 
 
-import { createElementText } from './util';
+import { createElementText , getRandomPoint, getCenterPos } from './util';
 
 import loadAboutTab from './content/loadAboutTab.js';
 import loadLeftMain from './content/loadLeftMain';
@@ -264,10 +264,7 @@ class GUI {
                 parent.classList.toggle('slideInFromRight');
                 parent.style.left = null;
                 parent.style.width = null;
-                const projectselections = document.querySelectorAll('.selected');
-                for (let i =0; i < projectselections.length; i++) {
-                    projectselections[i].classList.remove('selected');
-                }
+                this.clearAllSelectedProjects();
             });
             e.addEventListener('mouseover', () => {
                 var style = window.getComputedStyle(parent),
@@ -289,6 +286,13 @@ class GUI {
         }
     }
 
+    clearAllSelectedProjects() {
+        const projectselections = document.querySelectorAll('.selected');
+        for (let i = 0; i < projectselections.length; i++) {
+            projectselections[i].classList.remove('selected');
+        }
+    }
+
     _bindSwipeProjectExit() {
 
         const pTab = this._projectTab;
@@ -303,6 +307,7 @@ class GUI {
             touchendX = e.changedTouches[0].screenX;
             if (touchendX > touchstartX) {
                 pTab.classList.remove('slideInFromRight');
+                this.clearAllSelectedProjects();
             }
         });
 
@@ -381,9 +386,9 @@ class GUI {
             banner.textContent = content;
             banner.classList.add('banner');
 
-            let {x, y} = this._getCenterPos(spawnElement)
+            let {x, y} = getCenterPos(spawnElement)
 
-            let {newX, newY} = this._getRandomPoint(x,y, range);
+            let {newX, newY} = getRandomPoint(x,y, range);
 
             banner.style.left = newX + 'px';
             banner.style.top = newY + 'px';
@@ -391,24 +396,6 @@ class GUI {
             this._app.append(banner);
 
             return banner;
-    }
-
-    _getRandomPoint(x,y,range) {
-        let x_r = Math.random() * range - range/2;
-        let y_r = Math.random() * range - range/2;
-
-        let newX = x + x_r;
-        let newY = y+ y_r;
-
-        return {newX, newY};
-    }
-
-    _getCenterPos(element) {
-        var position = element.getBoundingClientRect();
-            var x = (position.left + position.right)/2;
-            var y = (position.top + position.bottom)/2;
-
-            return {x, y};
     }
 
 

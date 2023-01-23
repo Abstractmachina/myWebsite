@@ -47,4 +47,20 @@ export function createFigure(source = '', caption = '') {
 }
 
 
+export function getRandomPoint(x,y,range) {
+    let x_r = Math.random() * range - range/2;
+    let y_r = Math.random() * range - range/2;
 
+    let newX = x + x_r;
+    let newY = y+ y_r;
+
+    return {newX, newY};
+}
+
+export function getCenterPos(element) {
+    var position = element.getBoundingClientRect();
+        var x = (position.left + position.right)/2;
+        var y = (position.top + position.bottom)/2;
+
+        return {x, y};
+}

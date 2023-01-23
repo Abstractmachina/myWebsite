@@ -1,26 +1,32 @@
 import { createElementText } from "../util";
 
-const loadAboutTab = (parent) => {
-    const aboutTab = document.createElement('div');
-    aboutTab.classList.add('about');
+const loadContactTab = (parent) => {
+    const contactTab = document.createElement('div');
+    contactTab.classList.add('contact');
 
-    const leftEdge = document.createElement('div');
-    leftEdge.classList.add('leftEdge')
-    leftEdge.textContent = 'information';
+    const heading = createElementText('h1', 'Contact');
+    const email = createElementText('h2', 'taole.chen@protonmail.com');
 
-    const abtContainer = document.createElement('div');
-    abtContainer.classList.add('aboutContainer');
+    const linkContainer = document.createElement('div');
+    const linkedin = document.createElement('a');
+    linkedin.setAttribute('href', 'https://www.linkedin.com/in/taole-chen-1166b25a/')
+    const img_linkedin = new Image();
+    linkedin.appendChild(img_linkedin);
+
+    const insta = document.createElement('a');
+    insta.setAttribute('href', 'https://www.instagram.com/taole.chen/')
+    const img_insta = new Image();
+    insta.appendChild(img_insta);
+
+    linkContainer.append(linkedin, insta)
+
+    contactTab.append(heading, email, linkContainer);
+
+
 
     const cv = document.createElement('a');
     cv.setAttribute('href', '#');
-    cv.textContent = "taole.chen@protonmail.com";
-
-    const insta = document.createElement('a');
-    insta.setAttribute('href', 'https://www.instagram.com/taole.chen/');
-    insta.textContent = 'Instagram';
-    const linksContainer = document.createElement('div');
-    linksContainer.classList.add('links');
-    linksContainer.append(cv, insta);
+    cv.textContent = "Download CV";
 
 
     const about0 = document.createElement('p');
@@ -43,10 +49,10 @@ const loadAboutTab = (parent) => {
         "I am fascinated by the concept of the Renaissance Man and I enjoy indulging in the pursuit of diverging interests in my free time. My origins are in the fine arts. Having painted, drawn and sculpted all my childhood, I was originally planning to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. I have not given up my passion in the arts and I still practice whenever I can. My hope is that some day I can find a happy, amalgamating medium between all my interests and create something novel and meaningful.");
         
     abtContainer.append(biographyTitle, document.createElement('hr'), bio0, bio2, bio1);
-    aboutTab.append(leftEdge, abtContainer);
-    parent.appendChild(aboutTab);
+    contactTab.append(leftEdge, abtContainer);
+    parent.appendChild(contactTab);
 
-    return aboutTab;
+    return contactTab;
 }
 
-export default loadAboutTab;
+export default loadContactTab;
