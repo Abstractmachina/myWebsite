@@ -1,0 +1,25 @@
+@charset "utf-8";
+	.NormalCharacterStyle
+{
+	font-family : Amidic Regular;
+	font-size : 87px;
+	line-height : 202px;
+	color : #000000;
+	color : rgb(0, 0, 0);
+}
+.NormalCharacterStyle1
+{
+	font-family : FiraCode Light;
+	font-size : 95px;
+	line-height : 202px;
+	color : #000000;
+	color : rgb(0, 0, 0);
+}
+.NormalCharacterStyle2
+{
+	font-family : Muar Regular;
+	font-size : 116px;
+	line-height : 202px;
+	color : #000000;
+	color : rgb(0, 0, 0);
+}

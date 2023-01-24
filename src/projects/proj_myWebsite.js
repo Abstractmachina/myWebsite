@@ -15,6 +15,11 @@ const myWebsite = () => {
 
     const ti = createElementText('h1', project.Title);
     const subTi = createElementText('h2', project.Subtitle);
+
+    const year = createElementText('h5', 'Project Year: ' + project.Year);
+    const location = createElementText('h5', 'Project Location: ' + project.Location);
+    const github = document.createElement('h5');
+    github.innerHTML = '<a href="https://github.com/Abstractmachina/myWebsite">Github</a>'
     //intro
     const introheading = createElementText('h3', 'Introduction');
     const intro = document.createElement('p');
@@ -27,11 +32,12 @@ const myWebsite = () => {
     const feat3 = createElementText("li", 'Unit testing for core classes');
     const feat4 = createElementText("li", 'Streamlined method for adding more projects as packaged objects in the future to improve maintainability');
     const feat5 = createElementText("li", 'Projects are searchable by category to ease navigation');
-    features.append(feat1, feat2,feat3, feat4, feat5);
+    const feat6 = createElementText("li", 'Responsive design');
+    features.append(feat1, feat2,feat3, feat4, feat5, feat6);
     //technologies
     const techHeading = createElementText('h3', 'Technologies');
     const tech = document.createElement('ul');
-    const tech1 = createElementText('li', 'HTML, CSS, JS');
+    const tech1 = createElementText('li', 'HTML, SCSS, JS');
     const tech2 = createElementText('li', 'Jest Unit Testing');
     const tech3 = createElementText('li', 'Webpack asset bundling');
     tech.append(tech1, tech2, tech3);
@@ -44,7 +50,8 @@ const myWebsite = () => {
 
 
     project.pushContents(
-        ti, subTi, introheading, intro, 
+        ti, subTi, year, location, github, 
+        introheading, intro, 
         featuresHeading, features, 
         techHeading, tech,
         devHeading, dev);

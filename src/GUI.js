@@ -12,7 +12,7 @@ import loadRightMain from './content/loadRightMain';
 import loadFooter from './content/loadFooter';
 import loadProjectTab from './content/loadProjectTab';
 import loadIndexTab from './content/loadIndexTab';
-import loadProjectArrow from './content/loadProjectArrow';
+import loadContactTab from './content/loadContactTab';
 
 
 class GUI {
@@ -26,13 +26,14 @@ class GUI {
 
         //load elements
         this._leftMain = loadLeftMain(this._app);
-        this._btn_index = loadProjectArrow(this._leftMain);
+        this._btn_index = this._leftMain.querySelector('#' + this._indexButtonId);
         this._rightMain = loadRightMain(this._app);
         this._footer = loadFooter(this._app);
         this._aboutTab = loadAboutTab(this._rightMain);
         this._indexTab = loadIndexTab(this._app);
         this._prebuildIndexTab(projects);
         this._projectTab = loadProjectTab(this._rightMain);
+        this._contactCard = loadContactTab(this._app);
 
         //setup bindings
         this._bindProfileButton();
@@ -43,7 +44,8 @@ class GUI {
         this._bindTabLeftEdges();
         this._bindSwipeProjectExit();
         this._bindSwipeAboutExit();
-
+        this._bindCallContactCard();
+        this._bindExitContactCard();
         
     }
 
@@ -398,9 +400,6 @@ class GUI {
             return banner;
     }
 
-
-
-
     _bindCategoryCheckbox(newCat, parent, projects) {
 
             //query checkbox states and rebuild index on click
@@ -496,6 +495,41 @@ class GUI {
         });
 
         return closeProject;
+    }
+
+    _bindCallContactCard() {
+        const callElements = document.querySelectorAll('.contactCall');
+        console.log(callElements);
+
+        for (let i = 0; i < callElements.length; i++) {
+            let e = callElements[i];
+            e.addEventListener('click', () => {
+                const contactCard = document.querySelector('.contact');
+                contactCard.classList.add('slideDown')
+            });
+        }
+    }
+
+    _bindExitContactCard() {
+        const card = this._contactCard;
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        card.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        card.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX > touchstartX) {
+                card.classList.remove('slideDown');
+            }
+        });
+
+        const close = card.querySelector('.bottomEdge');
+        close.addEventListener('click', () => {
+            card.classList.remove('slideDown');
+        });
     }
 
 
