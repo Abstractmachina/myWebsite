@@ -406,20 +406,24 @@ a:hover {
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
 
+    h1 {
+        margin-top: 2em;
+
+    }
 
     h2 {
-
+        margin-bottom: 2em;
     }
 
     img {
         width: 3em;
         height: 3em;
-        background-color: black;
+        // background-color: black;
     }
 
-    & > div:last-child {
+    & > div:nth-child(3) {
         display: flex;
-        gap: 2em;
+        gap: 4em;
     }
 
     & > *:last-child {
