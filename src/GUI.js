@@ -361,7 +361,6 @@ class GUI {
             const container = this._rightMain.querySelector(".circleCode");
             container.style.backgroundImage = "url(" + preview_code + ")";
             this._instantiateBanner(container, 200, 'CODE');
-
         }
         if (categories.has("art")) {
             const container = this._rightMain.querySelector(".circleArt");
