@@ -15,6 +15,7 @@ const aag = () => {
         "Formwork-Free and Mortar-Free Shell Assembly", 
         2018, 
         "Gothenburg Sweden");
+    proj.Subtitle = "Building Design Intution Through Tight-Loop Prototyping";
 
     proj.addCategory("design");
     proj.addCategory("academic");
@@ -25,6 +26,11 @@ const aag = () => {
 
 
     const ti = createElementText('h1', proj.Title);
+    const subtitle = createElementText('h2', proj.Subtitle);
+    const year = createElementText('h5', 'Project Year: ' + proj.Year);
+    const location = createElementText('h5', 'Project Location: ' + proj.Location);
+
+
     const introheading = document.createElement("h2");
     introheading.textContent = "Introduction";
     const img_cover = new Image();
@@ -64,7 +70,10 @@ const aag = () => {
     const img_exhibit0 = createFigure(exhibit0, "Our spot in the final exhibition")
     const img_exhibit1 = createFigure(exhibit1, "Final exhibition space")
 
-    proj.pushContents(ti, img_cover, introheading, intro1, img_ws0, img_ws1, intro2, vid_fab, img_exhibit0, img_exhibit1,
+    proj.pushContents(
+        ti, subtitle, year, location,
+        img_cover, introheading, intro1, 
+        img_ws0, img_ws1, intro2, vid_fab, img_exhibit0, img_exhibit1,
         featuresHeading, features, img_process, img_tests, techHeading, tech);
 
     return proj;
