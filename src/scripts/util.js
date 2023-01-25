@@ -46,6 +46,23 @@ export function createFigure(source = '', caption = '') {
     return figure;
 }
 
+export function createCompositeFigure(sources, caption) {
+    if (!Array.isArray(sources)) throw new Error('Input is not an array!');
+    if (typeof caption !== 'string') throw new Error("caption must be a string!");
+
+    const figure = document.createElement('figure');
+    for (let i = 0; i < sources.length; i++) {
+        const img = new Image();
+        img.src = sources[i];
+        figure.appendChild(img);
+    }
+    const capt = document.createElement('figcaption');
+    capt.textContent = 'fig: ' + caption;
+    figure.appendChild(capt);
+    return figure;
+
+}
+
 
 export function getRandomPoint(x,y,range) {
     let x_r = Math.random() * range - range/2;

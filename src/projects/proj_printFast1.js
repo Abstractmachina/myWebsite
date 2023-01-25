@@ -31,7 +31,7 @@ const printFast1 = () => {
 
     const team = document.createElement('p');
     team.innerHTML = 
-        '<strong>Team:</strong> Shajay Bhooshan, Taole Chen, Federico Borello, Xuexin (Snow) Duan<br><strong>Assistants:</strong>';
+        '<strong>Team:</strong> Shajay Bhooshan, Taole Chen, Federico Borello, Xuexin (Snow) Duan<br><strong>Assistants:</strong> Yifan Zhou, Ce Li<br>';
   
     const img_cover = new Image();
     img_cover.src = cat0;
