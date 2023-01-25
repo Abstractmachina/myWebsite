@@ -3,6 +3,7 @@ import { createElementText, createImage } from "../util";
 
 //media
 import render_facade from '../assets/matnet/render_facade.jpg';
+import render_interior from '../assets/matnet/render_interior.jpg';
 import anim_zoomScales_00 from '../assets/matnet/anim_zoomScales_00.gif';
 import anim_growth_all from '../assets/matnet/anim_growth_all.gif';
 import anim_growth_turntable from '../assets/matnet/anim_growth_turntable.gif';
@@ -27,8 +28,8 @@ const matnet = () => {
     const year = createElementText('h5', 'Project Year: ' + proj.Year);
     const location = createElementText('h5', 'Project Location: ' + proj.Location);
 
-    const cover = new Image();
-    cover.src = render_facade;
+    const img_cover = new Image();
+    img_cover.src = render_facade;
 
     const introHeading = createElementText('h3', 
         "Introduction");
@@ -38,7 +39,9 @@ const matnet = () => {
     const team = document.createElement('p');
     team.innerHTML = 'Design Team: Taole Chen, Suchart (Bon) Ouypornchaisakul, Jeffrey Widjaja<br>Tutors: Shajay Bhooshan, Alicia Nahmad<br><a href="https://drl.aaschool.ac.uk/">AADRL</a>';
 
-    proj.pushContents(title, subtitle, year, location, cover, introHeading, intro, team);
+    const img_interior = new Image();
+    img_interior.src = render_interior;
+    proj.pushContents(title, subtitle, year, location, img_cover, introHeading, intro, team, img_interior);
 
     //level 0 neighborhood
     const neighHead = createElementText('h3', "Level 0 Neighborhood");

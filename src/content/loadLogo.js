@@ -23,7 +23,7 @@ const loadLogo = (parent) => {
     let shape = document.createElementNS(svgns, 'svg');
     shape.setAttribute("x", "-5");
     shape.setAttribute("y", "2px");
-    shape.setAttribute("viewBox", "0 0 560 125");
+    shape.setAttribute("viewBox", "0 0 560 127");
     shape.setAttribute("fill", "#5cceee");
 
     const p0 = document.createElementNS(svgns, 'path');
