@@ -1,5 +1,5 @@
-import { Project } from "../Project"
-import { createElementText, createImages, createImage } from "../util";
+import { Project } from "../scripts/Project"
+import { createElementText, createImages, createImage } from "../scripts/util";
 
 //media
 import cover from '../assets/organic/oc_yoga-4398.jpg';

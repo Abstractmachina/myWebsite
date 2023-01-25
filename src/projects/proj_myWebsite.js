@@ -1,5 +1,5 @@
-import { Project } from "../Project";
-import { createElementText } from "../util";
+import { Project } from "../scripts/Project";
+import { createElementText } from "../scripts/util";
 
 const myWebsite = () => {
     let project = new Project(

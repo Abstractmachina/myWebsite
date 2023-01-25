@@ -1,5 +1,5 @@
-import { Project } from "../Project";
-import { createElementText, createFigure} from "../util";
+import { Project } from "../scripts/Project";
+import { createElementText, createFigure} from "../scripts/util";
 
 //media
 import aag_cover from '../assets/aag/aag_cover.jpg';

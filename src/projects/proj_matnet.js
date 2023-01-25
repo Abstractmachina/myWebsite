@@ -1,5 +1,5 @@
-import { Project } from "../Project"
-import { createElementText, createImage } from "../util";
+import { Project } from "../scripts/Project"
+import { createElementText, createImage } from "../scripts/util";
 
 //media
 import render_facade from '../assets/matnet/render_facade.jpg';
