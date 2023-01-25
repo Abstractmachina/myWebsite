@@ -1,20 +1,24 @@
-import pArrowBase from './assets/arrow_projectIndex_base.svg';
-import preview_design from './assets/matnet/fab_05.jpg';
-import preview_code from './assets/lbd/HiveMindClasses.jpg';
-import preview_art from './assets/barbican_00.jpg';
+import pArrowBase from '../assets/arrow_projectIndex_base.svg';
+import preview_design from '../assets/matnet/fab_05.jpg';
+import preview_code from '../assets/lbd/HiveMindClasses.jpg';
+import preview_art from '../assets/barbican_00.jpg';
 
 
 import { createElementText , getRandomPoint, getCenterPos } from './util';
 
-import loadAboutTab from './content/loadAboutTab.js';
-import loadLeftMain from './content/loadLeftMain';
-import loadRightMain from './content/loadRightMain';
-import loadFooter from './content/loadFooter';
-import loadProjectTab from './content/loadProjectTab';
-import loadIndexTab from './content/loadIndexTab';
-import loadContactTab from './content/loadContactTab';
+import loadAboutTab from '../content/loadAboutTab';
+import loadLeftMain from '../content/loadLeftMain';
+import loadRightMain from '../content/loadRightMain';
+import loadFooter from '../content/loadFooter';
+import loadProjectTab from '../content/loadProjectTab';
+import loadIndexTab from '../content/loadIndexTab';
+import loadContactTab from '../content/loadContactTab';
 
 
+
+/**
+ * View Object for websites. 
+ */
 class GUI {
 
     //class names for query selection

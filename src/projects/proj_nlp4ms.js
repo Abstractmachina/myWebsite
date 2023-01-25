@@ -1,5 +1,5 @@
-import { Project } from "../Project"
-import { createElementText, createFigure, createImage } from "../util";
+import { Project } from "../scripts/Project"
+import { createElementText, createFigure, createImage } from "../scripts/util";
 
 //media
 import home from '../assets/nlp4ms/home.png';

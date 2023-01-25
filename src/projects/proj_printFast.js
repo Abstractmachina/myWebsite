@@ -1,4 +1,4 @@
-import { Project } from "../Project"
+import { Project } from "../scripts/Project"
 
 const printFast = () => {
     let proj = new Project("Print Fast, Pile High!", 2019, "Copenhagen, Denmark");

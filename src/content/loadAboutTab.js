@@ -1,4 +1,4 @@
-import { createElementText } from "../util";
+import { createElementText } from "../scripts/util";
 
 const loadAboutTab = (parent) => {
     const aboutTab = document.createElement('div');

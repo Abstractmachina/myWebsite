@@ -1,5 +1,5 @@
 import loadReturnArrow from "./loadReturnArrow";
-import { createElementText } from "../util";
+import { createElementText } from "../scripts/util";
 import loadLogo from "./loadLogo";
 import loadProjectArrow from "./loadProjectArrow";
 

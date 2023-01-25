@@ -1,4 +1,4 @@
-import { createElementText } from "../util";
+import { createElementText } from "../scripts/util";
 
 import instalogo from '../assets/logo_insta.svg';
 import linkedinLogo from '../assets/logo_linkedin.svg';
