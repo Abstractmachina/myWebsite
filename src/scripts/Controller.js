@@ -1,6 +1,6 @@
 import Model from './Model.js';
 import GUI from './GUI.js'
-import loadProjects from "./loadProjects";
+import loadProjects from "../projects/loadProjects";
 
 export class Controller{
     _model = null;
