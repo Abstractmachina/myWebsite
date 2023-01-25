@@ -241,6 +241,7 @@ a:hover {
     transition-property: top, opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
+    z-index: 4;
 }
 
 .projectIndexSlideIn {
@@ -384,7 +385,8 @@ a:hover {
     & img, & figure {
         width: 100%;
         margin: 0;
-        margin-right: 25px;
+        // margin-right: 0;
+        // padding-right: 1em;
     }
 
     ul{
@@ -406,7 +408,8 @@ a:hover {
 
 
 .projectVideoContainer {
-    margin: 0;
+    margin: 0.5em 0em;
+    
 }
 
 .projectTab h3 {
@@ -418,18 +421,26 @@ a:hover {
     margin-top: 1em;
 }
 
+.projectTab figure {
+    margin-right: 5em;
+}
+
 .projectTab figure img {
     border-style: solid;
     border-color: black;
     border-width: 1px;
+    width:100%;
+    height:auto;
 }
 
 .projectTab figcaption {
     font-family: 'Source Serif Pro', serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 0.8em;
-    padding-top: 0.3em;
+    font-size: 0.9em;
+    margin-top: 0.1em;
+    margin-bottom: 0.3em;
+    margin-left: 2em;
 }
 
 .slideInFromRight {
