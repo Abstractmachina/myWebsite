@@ -1,5 +1,4 @@
-$col_emphasis: rgb(255, 221, 0);
-
+@import "themes";
 
 .projectFilter>div{
     text-align: center;
@@ -30,7 +29,7 @@ $col_emphasis: rgb(255, 221, 0);
         position: absolute;
         line-height: 1.8em;
         font-weight: 400;
-        color: black;
+        color: $color_registration;
     }
     &:after {
         left: 100%;
@@ -56,7 +55,7 @@ $col_emphasis: rgb(255, 221, 0);
 
   &:checked + .tgl-btn {
     border-color: transparent; /* remove the border's colour */
-    box-shadow: 0 0 0 2px $col_emphasis; /* emulate the border */
+    box-shadow: 0 0 0 2px $color_accent; /* emulate the border */
     border-radius: 1em;
     vertical-align: middle;
 
