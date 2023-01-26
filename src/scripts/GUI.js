@@ -302,21 +302,55 @@ class GUI {
     _bindSwipeProjectExit() {
 
         const pTab = this._projectTab;
+        // let touchstartX = 0;
+        // let touchendX = 0;
+
+        // pTab.addEventListener('touchstart', e => {
+        //     touchstartX = e.changedTouches[0].screenX;
+        // });
+
+        // pTab.addEventListener('touchend', e => {
+        //     touchendX = e.changedTouches[0].screenX;
+        //     if (touchendX > touchstartX) {
+        //         pTab.classList.remove('slideInFromRight');
+        //         this.clearAllSelectedProjects();
+        //     }
+        // });
+
+        this._bindSwipeEvent(pTab, 'right', 50, () => {
+            pTab.classList.remove('slideInFromRight');
+            this.clearAllSelectedProjects();
+        })
+    }
+
+    _bindSwipeEvent(element, direction, sensitivity, handler) {
+        if (direction !== 'left' && direction !== 'right' && direction !== 'up' && direction !== 'down') throw new Error("Not a valid direction");
         let touchstartX = 0;
         let touchendX = 0;
+        let touchstartY = 0;
+        let touchendY = 0;
 
-        pTab.addEventListener('touchstart', e => {
+        element.addEventListener('touchstart', e => {
             touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY;
         });
 
-        pTab.addEventListener('touchend', e => {
+        element.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
-            if (touchendX > touchstartX) {
-                pTab.classList.remove('slideInFromRight');
-                this.clearAllSelectedProjects();
+            touchendY = e.changedTouches[0].screenY;
+            
+            if (direction === 'right') {
+                if (touchendX > touchstartX + sensitivity) {
+                    handler();
+                }
             }
+            if (direction === 'left') {
+                if (touchendX + sensitivity < touchstartX ) {
+                    handler();
+                }
+            }
+            
         });
-
     }
 
     _bindSwipeAboutExit() {
