@@ -1,5 +1,5 @@
 import { Project } from "../scripts/Project"
-import { createElementText, createFigure} from "../scripts/util";
+import { createCompositeFigure, createElementText, createFigure, createImage} from "../scripts/util";
 
 import cita0 from '../assets/printFast2/cita0.jpg';
 import cita1 from '../assets/printFast2/cita1.jpg';
@@ -43,46 +43,28 @@ const printFast2 = () => {
     const introHeading = createElementText('h3', 
         "Introduction");
     const intro0 = createElementText('p', 
-        "In the second iteration of the workshop, the toolkit was refined and implemented as a dedicated Grasshopper Plugin. We had the chance to apply the toolkit to a different setup with different robots and different students and it was enlightening to see how much ");
-    const intro1 = createElementText('p', 
-        "Students were encouraged to iterate fast and fail fast, building an intuitive understanding of the design space in the process. A custom toolkit connecting design with fabrication developed specifically for this workshop took out the need for the students to learn the non-essential details and get to designing from day 1.")
-    
-    const vid_failures = document.createElement('div');
-    vid_failures.classList.add('projectVideoContainer');
-    vid_failures.innerHTML = 
-        '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/792779095?h=c1320e9415&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Print Fast Pile High - Clay 3D printing failures"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>';
+        "In the second iteration of the workshop, the toolkit was refined and implemented as a dedicated Grasshopper plugin. We had the chance to apply the toolkit to a different setup with different robots and different students. As a whole, the workshop ran much more smoothly and we were able to focus on the design exploration rather than technical troubleshooting, which gave us some interesting results. E.g. one group tried to print interlocking pieces with a dowel-like system which was unexpected.");
 
+    const img0 = createImage(cita0);
+        const img1 = createFigure(cita4, "Printing to fail is the desired approach in iterative design")
+    const img2 = createFigure(cita3, 
+        "Experimentation with toolpath modulation");
+    const img3 = createImage(cita6);
+    const img4 = createFigure(cita8, "Student outcome");
+    const img5 = createFigure(cita7, 'Exhibit at the final jury review');
+    const img6 = createImage(cita2); 
+    const img7 = createFigure(cita9, "Students working in teams, learning from each other");
 
-    const img_print0 = createFigure(print0, "Students operating robot")
-    const img_print1 = createFigure(print1, "students working around the lab");
-    const img_cat1 = createFigure(cat1, 'print failures. Accidental beauty is sometimes also found');
-    const img_cat2 = createFigure(cat2, 'Successful prints. Over time, failures turn to sucesses, turn to refined objects');
-    const  img_cat3 = createFigure(cat3, 'Quantity in iterative design trumps quality');
-
-    proj.pushContents(introHeading, intro0, intro1, vid_failures,img_print0, img_print1, img_cat1, img_cat2,img_cat3);
-
-
+    proj.pushContents(introHeading, intro0,img0, img1, img2, img3, img4, img5, img6, img7);
 
     //FEATURES
     const featureHeading = createElementText('h2', 
         "Features");
     const feature = document.createElement('p');
     feature.innerHTML = 
-        "The plugin implements the SDF function approach to generate 3D-printable forms outlined in the paper <em>Function Representation for Robotic 3D Printed Concrete</em> (Bhooshan 2018).";
+        "In terms of features, the toolkit is roughly the same. A main difference is the implementation as a GH plugin and the addition of concurrent computing, making it more robust and much faster.";
 
-    const featureList = document.createElement('ul');
-    const p1 = document.createElement('li');
-    p1.textContent = "Blending, boolean and plane trimming operations to manipulate field functions";
-    const p2 = document.createElement('li');
-    p2.textContent = "Robotic kinematic simulation and GCode Generation for direct fabrication link";
-    const p3 = document.createElement('li');
-    p3.textContent = "Display components to visualize geometric output";
-    featureList.append(p1,p2,p3);
-
-    const img_diagram0 = createFigure(dia0, 'Summary diagram');
-    const img_diagram1 = createFigure(dia1, 'Basic principle of Frep-modeling');
-
-    proj.pushContents(featureHeading, feature, img_diagram0, img_diagram1, featureList);
+    proj.pushContents(featureHeading, feature);
 
     //TECHNOLOGIES
     const techHeading = createElementText('h2', 'Technologies');

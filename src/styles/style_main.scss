@@ -381,12 +381,9 @@ a:hover {
 
     }
 
-
-    & img, & figure {
+    & img {
         width: 100%;
         margin: 0;
-        // margin-right: 0;
-        // padding-right: 1em;
     }
 
     ul{
@@ -407,10 +404,7 @@ a:hover {
 
 
 
-.projectVideoContainer {
-    margin: 0.5em 0em;
-    
-}
+
 
 .projectTab h3 {
     margin-top: 2em;
@@ -421,11 +415,16 @@ a:hover {
     margin-top: 1em;
 }
 
-.projectTab figure {
+
+
+//======    Media/Graphics  ==============
+figure {
     margin-right: 5em;
+    width: 100%;
+    margin: 0;
 }
 
-.projectTab figure img {
+figure img {
     border-style: solid;
     border-color: black;
     border-width: 1px;
@@ -433,7 +432,7 @@ a:hover {
     height:auto;
 }
 
-.projectTab figcaption {
+figcaption {
     font-family: 'Source Serif Pro', serif;
     font-style: italic;
     font-weight: 400;
@@ -441,6 +440,44 @@ a:hover {
     margin-top: 0.1em;
     margin-bottom: 0.3em;
     margin-left: 2em;
+}
+
+
+.compositeFigure{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    & >div {
+        display: flex;
+        justify-content: flex-start;
+        // align-items: flex-start;
+        gap: 0.2em;
+        width: 100%;
+        // max-height: 30px;
+        background-color: red;
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+
+        .imageWrapper {
+            // width: auto;
+            // align-self: center;
+            max-height: 20vh;
+            margin: 0;
+            
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
+    }
+
+}
+
+.projectVideoContainer {
+    margin: 0.5em 0em;
+    
 }
 
 .slideInFromRight {

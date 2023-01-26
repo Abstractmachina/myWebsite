@@ -51,14 +51,21 @@ export function createCompositeFigure(sources, caption) {
     if (typeof caption !== 'string') throw new Error("caption must be a string!");
 
     const figure = document.createElement('figure');
+    const imageContainer = document.createElement('div');
+
     for (let i = 0; i < sources.length; i++) {
+        const img_wrap = document.createElement('div');
+        img_wrap.classList.add('imageWrapper');
         const img = new Image();
         img.src = sources[i];
-        figure.appendChild(img);
+        img_wrap.appendChild(img);
+        imageContainer.appendChild(img_wrap);
     }
     const capt = document.createElement('figcaption');
     capt.textContent = 'fig: ' + caption;
-    figure.appendChild(capt);
+    figure.classList.add('compositeFigure');
+
+    figure.append(imageContainer, capt);
     return figure;
 
 }
