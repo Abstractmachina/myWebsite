@@ -6,6 +6,7 @@ import matnet from './proj_matnet';
 import drones from './proj_drones';
 import nlp4ms from "./proj_nlp4ms";
 import organic from "./proj_organic";
+import londonBldg from "./proj_londonB";
 
 const loadProjects = () => {
     const projects = new Map();
@@ -17,6 +18,7 @@ const loadProjects = () => {
     projects.set('drones', drones());
     projects.set('nlp4ms', nlp4ms());
     projects.set('organic', organic());
+    projects.set('londonB', londonBldg());
 
     return projects;
 };
