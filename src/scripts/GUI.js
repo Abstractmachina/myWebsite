@@ -517,6 +517,12 @@ class GUI {
 
     _bindExitContactCard() {
         const card = this._contactCard;
+
+        const bottomEdge = card.querySelector('.bottomEdge');
+        bottomEdge.addEventListener('click', () => {
+            this._exitContactCard();
+        })
+
         bindSwipeEvent(card, 'up', 60, () => {
             this._exitContactCard();
         })
