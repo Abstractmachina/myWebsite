@@ -18,11 +18,31 @@
         background-repeat: no-repeat;
         background-size: auto 60%;
         background-position: 100% 100%;
+
+        .logo {
+            width: calc(100vw - 26px);
+        }
     }   
 
-    .logo {
-        width: calc(100vw - 26px);
+
+    .contact {
+        .contactWrapper {
+            & h1 {
+                font-size: 30vw;
+            }
+            & h2 {
+                font-size: 5.2vw;
+            }
+            img {
+                width: 15vw;
+                height: auto;
+                // background-color: black;
+            }
+        }
+
     }
+
+    
 
     .right {
         flex-shrink: 1;
@@ -88,7 +108,6 @@
         h4{
             font-weight: 600;
             margin-top: 0.5em;
-
         }
         h5{
             font-weight: 600;
