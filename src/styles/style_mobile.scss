@@ -2,18 +2,14 @@
     .root {
         display: block;
         flex-direction: column;
-        overflow: hidden;;
-        height: 100vh;
+        overflow: hidden;
     }
 
     .mainContainer {
-        // height: 50%;
         width: 100%;
     }
 
     .left {
-        height: 100vh;
-        // padding: 3em;
         background-image: url('../assets/profilePic01.JPG');
         background-repeat: no-repeat;
         background-size: auto 60%;
@@ -23,7 +19,6 @@
             width: calc(100vw - 26px);
         }
     }   
-
 
     .contact {
         .contactWrapper {
@@ -42,38 +37,8 @@
 
     }
 
-    
-
-    .right {
-        flex-shrink: 1;
-        .background {
-            background-image: none;
-   
-        }
-    }
-    .right {
-        position: relative;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        height: 100vh;
-    
-        overflow: hidden;
-    
-        .background {
-            position: absolute;
-            background-image: url('../assets/profilePic00.JPG');
-            background-repeat: no-repeat;
-            background-size: auto 100%;
-            background-position: 0.2 * 100vh center;
-            height: 110vh;
-            width: 0.7*100vh;
-    
-        }
-    }
-
     .about {
-        width: 100vw;
+        width: 100%;
         .aboutContainer {
             overflow: auto;
             padding: 3em 2em;
@@ -83,7 +48,8 @@
     
 
     .projectIndex {
-        width: 100vw;
+        width: 100%;
+        height:65%;
     }
     
     .projectIndexSlideIn {
@@ -278,18 +244,9 @@
     }
 
     .projectIndex {
-        height:75vh;
+        height:80%;
     }
-
-    .projectIndexTable {
-    }
-
     .projectIndexSlideIn {
         top: 25%;
-    }
-
-    .circle {
-        width: 10em;
-    height: 10em;
     }
 }
