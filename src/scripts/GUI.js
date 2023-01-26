@@ -4,7 +4,7 @@ import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
 
 
-import { createElementText , getRandomPoint, getCenterPos } from './util';
+import { createElementText , getRandomPoint, getCenterPos, bindSwipeEvent } from './util';
 
 import loadAboutTab from '../content/loadAboutTab';
 import loadLeftMain from '../content/loadLeftMain';
@@ -25,7 +25,7 @@ class GUI {
     _projectFilterClass = 'projectFilter';
     _indexButtonId = 'projectArrow';
 
-    _swipeSensitivity = 50;
+    _swipeSensitivity = 60;
 
     constructor(projects) {
         this._app = document.querySelector('.root');
@@ -52,6 +52,7 @@ class GUI {
         this._bindSwipeAboutExit();
         this._bindCallContactCard();
         this._bindExitContactCard();
+        this._bindSwipeIndexExit();
         
     }
 
@@ -303,65 +304,28 @@ class GUI {
 
     _bindSwipeProjectExit() {
         const pTab = this._projectTab;
-        this._bindSwipeEvent(pTab, 'right', this._swipeSensitivity, () => {
+        bindSwipeEvent(pTab, 'right', this._swipeSensitivity, () => {
             pTab.classList.remove('slideInFromRight');
             this.clearAllSelectedProjects();
-        })
+        });
     }
 
 
-    
     _bindSwipeAboutExit() {
-        
         const aTab = this._aboutTab;
-        this._bindSwipeEvent(aTab, 'right', this._swipeSensitivity, () => {
+        bindSwipeEvent(aTab, 'right', this._swipeSensitivity, () => {
             aTab.classList.remove('slideInFromRight');
+        });        
+    }
+
+    _bindSwipeIndexExit() {
+        const iTab = this._indexTab;
+        bindSwipeEvent(iTab, 'down', this._swipeSensitivity, () => {
+            iTab.classList.remove('projectIndexSlideIn');
         })
-        // let touchstartX = 0;
-        // let touchendX = 0;
-
-        // aTab.addEventListener('touchstart', e => {
-        //     touchstartX = e.changedTouches[0].screenX;
-        // });
-
-        // aTab.addEventListener('touchend', e => {
-        //     touchendX = e.changedTouches[0].screenX;
-        //     if (touchendX > touchstartX) {
-        //         aTab.classList.remove('slideInFromRight');
-        //     }
-        // });
-        
     }
     
-    _bindSwipeEvent(element, direction, sensitivity, handler) {
-        if (direction !== 'left' && direction !== 'right' && direction !== 'up' && direction !== 'down') throw new Error("Not a valid direction");
-        let touchstartX = 0;
-        let touchendX = 0;
-        let touchstartY = 0;
-        let touchendY = 0;
-
-        element.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-            touchstartY = e.changedTouches[0].screenY;
-        });
-
-        element.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            touchendY = e.changedTouches[0].screenY;
-            
-            if (direction === 'right') {
-                if (touchendX > touchstartX + sensitivity) {
-                    handler();
-                }
-            }
-            if (direction === 'left') {
-                if (touchendX + sensitivity < touchstartX ) {
-                    handler();
-                }
-            }
-            
-        });
-    }
+    
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
         const rows = table.querySelectorAll('tr');
@@ -440,6 +404,9 @@ class GUI {
 
                 let table = document.querySelector(".projectIndexTable");
                 this._buildIndexTable(projects, filtered);
+
+                let noneCheck = parent.querySelector('#selNone');
+                noneCheck.checked = false;
             });
     }
 
