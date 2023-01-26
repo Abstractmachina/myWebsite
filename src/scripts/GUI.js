@@ -53,6 +53,7 @@ class GUI {
         this._bindCallContactCard();
         this._bindExitContactCard();
         this._bindSwipeIndexExit();
+        this._bindSwipeMainMenu();
         
     }
 
@@ -191,12 +192,6 @@ class GUI {
         tableContainer.append(head_title, head_year, head_loc, head_cat);
     }
 
-    /**
-     * slide in index tab
-     */
-    _showIndexTab() {
-        this._indexTab.classList.add('projectIndexSlideIn');
-    }
 
     //==================    BINDINGS =====================================
     
@@ -219,7 +214,7 @@ class GUI {
 
     _bindCallIndex() {
         this._btn_index.addEventListener('click', () => {
-            this._showIndexTab();
+            this._enterIndexTab();
         });
     }
 
@@ -238,7 +233,7 @@ class GUI {
 
                 }
                 if (!isProjectArrow) {
-                    this._indexTab.classList.remove('projectIndexSlideIn');
+                    this._exitIndexTab();
                     this._projectTab.classList.remove('slideInFromRight');
                 }
                 if (!isProfileButton) {
@@ -302,6 +297,8 @@ class GUI {
         }
     }
 
+
+    //===================   SWIPES  ================================
     _bindSwipeProjectExit() {
         const pTab = this._projectTab;
         bindSwipeEvent(pTab, 'right', this._swipeSensitivity, () => {
@@ -314,18 +311,32 @@ class GUI {
     _bindSwipeAboutExit() {
         const aTab = this._aboutTab;
         bindSwipeEvent(aTab, 'right', this._swipeSensitivity, () => {
-            aTab.classList.remove('slideInFromRight');
+            this._exitAboutTab();
         });        
     }
 
     _bindSwipeIndexExit() {
         const iTab = this._indexTab;
         bindSwipeEvent(iTab, 'down', this._swipeSensitivity, () => {
-            iTab.classList.remove('projectIndexSlideIn');
+            this._exitIndexTab();
         })
     }
     
-    
+    _bindSwipeMainMenu() {
+        const main = this._leftMain;
+        bindSwipeEvent(main, "left", this._swipeSensitivity, () => {
+            this._enterAboutTab();
+        });
+        bindSwipeEvent(main, "up", this._swipeSensitivity, () => {
+            this._enterIndexTab();
+        });
+        bindSwipeEvent(main, "down", this._swipeSensitivity, () => {
+            this._enterContactCard();
+        });
+    }
+
+
+    //===============   HOVER PREVIEW   ===========================
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
         const rows = table.querySelectorAll('tr');
@@ -479,17 +490,17 @@ class GUI {
 
     }
 
-    _addCloseProjectButton() {
-        const closeProject = document.createElement('div');
-        closeProject.classList.add('closeProject');
-        this._projectTab.appendChild(closeProject);
+    // _addCloseProjectButton() {
+    //     const closeProject = document.createElement('div');
+    //     closeProject.classList.add('closeProject');
+    //     this._projectTab.appendChild(closeProject);
 
-        closeProject.addEventListener('click', () => {
-            this._projectTab.classList.remove('slideInFromRight');
-        });
+    //     closeProject.addEventListener('click', () => {
+    //         this._projectTab.classList.remove('slideInFromRight');
+    //     });
 
-        return closeProject;
-    }
+    //     return closeProject;
+    // }
 
     _bindCallContactCard() {
         const callElements = document.querySelectorAll('.contactCall');
@@ -499,33 +510,39 @@ class GUI {
             let e = callElements[i];
             e.addEventListener('click', () => {
                 const contactCard = document.querySelector('.contact');
-                contactCard.classList.add('slideDown')
+                this._enterContactCard();
             });
         }
     }
 
     _bindExitContactCard() {
         const card = this._contactCard;
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        card.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        card.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            if (touchendX > touchstartX) {
-                card.classList.remove('slideDown');
-            }
-        });
-
-        const close = card.querySelector('.bottomEdge');
-        close.addEventListener('click', () => {
-            card.classList.remove('slideDown');
-        });
+        bindSwipeEvent(card, 'up', 60, () => {
+            this._exitContactCard();
+        })
     }
 
+    //======================    ANIMATION   ============================
+
+    _enterAboutTab() {
+        this._aboutTab.classList.add('slideInFromRight');
+    }
+    _exitAboutTab() {
+        this._aboutTab.classList.remove('slideInFromRight');
+    }
+    _enterIndexTab() {
+        this._indexTab.classList.add('slideUp');
+    }
+    _exitIndexTab() {
+        this._indexTab.classList.remove('slideUp');
+
+    }
+    _enterContactCard() {
+        this._contactCard.classList.add('slideDown');
+    }
+    _exitContactCard() {
+        this._contactCard.classList.remove('slideDown');
+    }
 
     // ==========================   UTILITY ===============================
      /**
