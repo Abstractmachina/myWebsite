@@ -2,6 +2,8 @@
 
 #projectArrow {
   margin-top: auto;
+  align-self: flex-end;
+
 }
 
 #projectArrow:active {
@@ -22,7 +24,8 @@
     align-items: center;
     padding: 5px;
     text-decoration: none;
-    transform: rotate(-90deg) translate3d(150px, -120px, 0);
+    transform: rotate(-90deg) translate3d(-250px, 0px, 0);
+    transform-origin: left top;
     cursor: pointer;
 
     &__arrow {

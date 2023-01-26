@@ -16,7 +16,7 @@
         // padding: 3em;
         background-image: url('../assets/profilePic01.JPG');
         background-repeat: no-repeat;
-        background-size: auto 80%;
+        background-size: auto 60%;
         background-position: 100% 100%;
     }   
 
@@ -177,6 +177,25 @@
           width: 100%;
         }
       }
+
+      .contact {
+        h1 {
+            
+        }
+
+        h2{
+
+        }
+
+        & > div:nth-child(3) {
+            gap: 5vw;
+        }
+
+        & img {
+            height: 10vw;
+            width: auto;
+        }
+      }
     
 }
 
@@ -204,6 +223,23 @@
     // height: 10em;
     
     // }
+
+    .contact {
+        h1 {
+            font-size: 18vh;
+        }
+        h2 {
+            font-size: 2.5vh;
+        }
+        & > div:nth-child(3) {
+            gap: 3vh;
+        }
+
+        & img {
+            height: 7vh;
+            width: auto;
+        }
+    }
 }
 
 @media (max-height: 500px) {
