@@ -8,6 +8,7 @@ import nlp4ms from "./proj_nlp4ms";
 import organic from "./proj_organic";
 import londonBldg from "./proj_londonB";
 import gaudi from "./proj_gaudi";
+import barbican from "./proj_barbican";
 
 const loadProjects = () => {
     const projects = new Map();
@@ -21,6 +22,7 @@ const loadProjects = () => {
     projects.set('organic', organic());
     projects.set('londonB', londonBldg());
     projects.set('gaudi', gaudi());
+    projects.set('barbican', barbican());
 
     return projects;
 };
