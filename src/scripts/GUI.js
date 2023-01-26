@@ -25,6 +25,8 @@ class GUI {
     _projectFilterClass = 'projectFilter';
     _indexButtonId = 'projectArrow';
 
+    _swipeSensitivity = 50;
+
     constructor(projects) {
         this._app = document.querySelector('.root');
 
@@ -300,29 +302,37 @@ class GUI {
     }
 
     _bindSwipeProjectExit() {
-
         const pTab = this._projectTab;
-        // let touchstartX = 0;
-        // let touchendX = 0;
-
-        // pTab.addEventListener('touchstart', e => {
-        //     touchstartX = e.changedTouches[0].screenX;
-        // });
-
-        // pTab.addEventListener('touchend', e => {
-        //     touchendX = e.changedTouches[0].screenX;
-        //     if (touchendX > touchstartX) {
-        //         pTab.classList.remove('slideInFromRight');
-        //         this.clearAllSelectedProjects();
-        //     }
-        // });
-
-        this._bindSwipeEvent(pTab, 'right', 50, () => {
+        this._bindSwipeEvent(pTab, 'right', this._swipeSensitivity, () => {
             pTab.classList.remove('slideInFromRight');
             this.clearAllSelectedProjects();
         })
     }
 
+
+    
+    _bindSwipeAboutExit() {
+        
+        const aTab = this._aboutTab;
+        this._bindSwipeEvent(aTab, 'right', this._swipeSensitivity, () => {
+            aTab.classList.remove('slideInFromRight');
+        })
+        // let touchstartX = 0;
+        // let touchendX = 0;
+
+        // aTab.addEventListener('touchstart', e => {
+        //     touchstartX = e.changedTouches[0].screenX;
+        // });
+
+        // aTab.addEventListener('touchend', e => {
+        //     touchendX = e.changedTouches[0].screenX;
+        //     if (touchendX > touchstartX) {
+        //         aTab.classList.remove('slideInFromRight');
+        //     }
+        // });
+        
+    }
+    
     _bindSwipeEvent(element, direction, sensitivity, handler) {
         if (direction !== 'left' && direction !== 'right' && direction !== 'up' && direction !== 'down') throw new Error("Not a valid direction");
         let touchstartX = 0;
@@ -352,26 +362,6 @@ class GUI {
             
         });
     }
-
-    _bindSwipeAboutExit() {
-
-        const aTab = this._aboutTab;
-        let touchstartX = 0;
-        let touchendX = 0;
-
-        aTab.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        aTab.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            if (touchendX > touchstartX) {
-                aTab.classList.remove('slideInFromRight');
-            }
-        });
-
-    }
-
     bindHoverProjects(handler) {
         const table = document.querySelector('.projectIndexTable');
         const rows = table.querySelectorAll('tr');
