@@ -206,11 +206,7 @@
     }
 
     .link{
-
-
-        transform: rotate(-90deg) translate3d(80px, -80px, 0);
-
-
+        transform: rotate(-90deg);
         &__line{
             width: 60px;
         }
@@ -225,19 +221,24 @@
     // }
 
     .contact {
-        h1 {
-            font-size: 18vh;
-        }
-        h2 {
-            font-size: 2.5vh;
-        }
-        & > div:nth-child(3) {
-            gap: 3vh;
-        }
+        .contactWrapper {
 
-        & img {
-            height: 7vh;
-            width: auto;
+            & h1 {
+                font-size: 18vh;
+            }
+            h2 {
+                font-size: 2.5vh;
+                margin-top: 5vh;
+                margin-bottom: 2vh;
+            }
+            & > div:nth-child(3) {
+                gap: 3vh;
+            }
+    
+            & img {
+                height: 7vh;
+                width: auto;
+            }
         }
     }
 }
@@ -245,7 +246,7 @@
 @media (max-height: 500px) {
     .link {
         flex-wrap: wrap;
-        transform: rotate(-90deg) translate3d(45px, -43px, 0);
+        transform: rotate(-90deg);
         // background-color: red;
         width: 120px;
         padding-left: 10px;

@@ -35,9 +35,12 @@ const loadContactTab = (parent) => {
 
     const bottomEdge = document.createElement('div');
     bottomEdge.classList.add('bottomEdge');
-    bottomEdge.textContent = 'close'
+    bottomEdge.textContent = 'close';
 
-    contactTab.append(heading, email, linkContainer, bottomEdge);
+    const contactWrapper =document.createElement('div');
+    contactWrapper.classList.add('contactWrapper');
+    contactWrapper.append(heading, email, linkContainer);
+    contactTab.append(contactWrapper, bottomEdge);
 
 
     parent.appendChild(contactTab);

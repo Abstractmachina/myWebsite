@@ -1,8 +1,7 @@
 @import 'themes';
 
 #projectArrow {
-  margin-top: auto;
-  align-self: flex-end;
+//   display: inline-block;
 
 }
 
@@ -19,12 +18,13 @@
 }
 
 .link {
+    // background-color: red;
     $self: &;
     display: flex;
     align-items: center;
     padding: 5px;
     text-decoration: none;
-    transform: rotate(-90deg) translate3d(-250px, 0px, 0);
+    transform: rotate(-90deg) translate3d(0px, 0px, 0);
     transform-origin: left top;
     cursor: pointer;
 

@@ -11,8 +11,6 @@ const loadLeftMain = (parent) => {
     
     const banner = document.createElement('div');
     banner.classList.add('logo', 'contactCall');
-    // const myName = document.createElement('h1');
-    // myName.textContent = 'Taole Chen';
 
     const subtitle = document.createElement('h2');
     subtitle.textContent = 'design | code | art';
@@ -27,17 +25,20 @@ const loadLeftMain = (parent) => {
     btn_profile.id = 'btn_profile';
     const profileText = createElementText('div', "Full Profile");   
     btn_profile.appendChild(profileText);
-
     const returnArrow = loadReturnArrow(btn_profile);
-
+    const btn_index = loadProjectArrow(header);
    
-    header.append(intro, btn_profile);
+    const introWrapper = document.createElement('div');
+    introWrapper.classList.add('wrapper');
 
 
+    introWrapper.append(banner, intro, btn_profile);
+
+    header.append(introWrapper, btn_index);
     
 
     main.append(banner, header);
-    const btn_index = loadProjectArrow(main);
+    
     parent.appendChild(main);
 
     
