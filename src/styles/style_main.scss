@@ -19,6 +19,7 @@ body {
     display: flex;
     justify-content: center;
     height: 100%;
+    width:100%;
     background-color: antiquewhite;
     align-items: stretch;
 }
@@ -139,11 +140,9 @@ a:hover {
 
 /* =======  RIGHT MAIN  ==========*/
 .right {
-    position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    height: 100%;
 
     overflow: hidden;
 
