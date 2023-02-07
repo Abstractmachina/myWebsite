@@ -2,12 +2,16 @@
 ## Introduction
 This is the source code for my personal website. Please feel free to browse around and leave any feedback!
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+[Visit Live Website](https://taolechen.com "Taole's Homepage")
+
+![alt text](./screenshot1.jpg "Screenshot of home page")
+![alt text](./screenshot2.jpg "Screenshot of project page")
 
 ## Features
-Designed and built responsive client-side website to showcase personal project
+* responsive client-side website
 * MVC architecture
-* emphasized expandable project structure for future maintainability, and smooth user experience.
+* emphasized expandable project structure for future maintainability and smooth user experience.
+* unit testing for core library
 
 ## Technologies
 * HTML
@@ -22,5 +26,6 @@ This website is continually being improved. Features will be added and upgraded 
 
 Features currently under development:
 * Migration to React
+* front-end testing
 * Separate art section
 * content management system for blog section
