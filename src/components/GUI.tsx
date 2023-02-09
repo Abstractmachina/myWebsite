@@ -19,6 +19,8 @@ import preview_art from '../assets/barbican_00.jpg';
 import React, { FC } from 'react';
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
+import Footer from './Footer';
+import AboutTab from './AboutTab';
 
 /**
  * View Object for websites. 
@@ -61,10 +63,14 @@ const GUI:FC = () => {
         
     // }
 
+    let showAbout:boolean = true;
+
     return (
         <div>
             <LeftMain/>
             <RightMain/>
+            <Footer/>
+            <AboutTab/>
         </div>
     );
 

@@ -195,7 +195,7 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    left:calc(100% - 25px);
+    left:calc(50% - 25px);
     top: 0%;
     width: 50%;
     height: 100%;
@@ -578,7 +578,7 @@ figcaption {
 }
 
 /*========= FOOTER  ====================*/
-.footer {
+footer {
     font-size: 0.8em;
     font-weight: 100;
     background-color: $color_paper;
