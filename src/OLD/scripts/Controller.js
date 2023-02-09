@@ -2,7 +2,7 @@ import Model from './Model.js';
 import GUI from './GUI.js'
 import loadProjects from "../projects/loadProjects";
 
-export class Controller{
+class Controller{
     _model = null;
     _view = null;
     _projectIndex = null;
@@ -23,4 +23,4 @@ export class Controller{
     onProjectHovered = (id) => {
         return this._model.getProject(id).Categories;
     }
-}
+} export default Controller;
