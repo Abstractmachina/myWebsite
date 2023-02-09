@@ -1,18 +1,7 @@
-import pArrowBase from '../assets/arrow_projectIndex_base.svg';
+// import pArrowBase from '../assets/arrow_projectIndex_base.svg';
 import preview_design from '../assets/matnet/fab_05.jpg';
 import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
-
-
-// import { createElementText , getRandomPoint, getCenterPos, bindSwipeEvent } from './OLD/scripts/util';
-
-// import loadAboutTab from './OLD/content/loadAboutTab';
-// import loadLeftMain from './OLD/content/loadLeftMain';
-// import loadRightMain from './OLD/content/loadRightMain';
-// import loadFooter from './OLD/content/loadFooter';
-// import loadProjectTab from './OLD/content/loadProjectTab';
-// import loadIndexTab from './OLD/content/loadIndexTab';
-// import loadContactTab from './OLD/content/loadContactTab';
 
 
 
@@ -21,6 +10,9 @@ import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
 import AboutTab from './AboutTab';
+import IndexTab from './IndexTab';
+import ProjectTab from './ProjectTab';
+import ContactTab from './ContactTab';
 
 /**
  * View Object for websites. 
@@ -71,6 +63,9 @@ const GUI:FC = () => {
             <RightMain/>
             <Footer/>
             <AboutTab/>
+            <IndexTab/>
+            <ProjectTab/>
+            <ContactTab/>
         </div>
     );
 

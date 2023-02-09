@@ -189,52 +189,6 @@ a:hover {
 }
 
 
-/*ABOUT TAB*/
-.about {
-    position: fixed;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    left:calc(50% - 25px);
-    top: 0%;
-    width: 50%;
-    height: 100%;
-    background-color: $color_paper;
-    z-index: 10;
-    opacity: 1;
-    transition-property: left, width;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out;
-    
-}
-
-.aboutContainer {
-    padding: 6em 5em;
-    overflow: auto;
-}
-
-.about hr {
-    border: 0 none;
-    height: 1px;
-    background-color: #eee;
-    margin-bottom: 2em;
-}
-
-.about h3 {
-    font-weight: 200;
-    margin-bottom: -0.4em;
-    margin-top: 6em;
-
-}
-
-.about .links{
-    display: flex;
-    justify-content:space-between;
-    flex-wrap: wrap;
-    font-size: 0.8em;
-    margin-bottom: 3em;
-
-}
 
 
 /*=======   INDEX TAB   ============*/
