@@ -18,6 +18,7 @@ import preview_art from '../assets/barbican_00.jpg';
 
 import React, { FC } from 'react';
 import LeftMain from './LeftMain';
+import RightMain from './RightMain';
 
 /**
  * View Object for websites. 
@@ -63,6 +64,7 @@ const GUI:FC = () => {
     return (
         <div>
             <LeftMain/>
+            <RightMain/>
         </div>
     );
 

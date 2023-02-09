@@ -1,5 +1,5 @@
 @media (max-width: 600px) {
-    .root {
+    #root, #root>* {
         display: block;
         flex-direction: column;
         overflow: hidden;

@@ -8,9 +8,7 @@ import '../styles/style_mobile.scss'
 
 function App() {
   return (
-    <div className="App">
         <Controller/>
-    </div>
   );
 }
 
