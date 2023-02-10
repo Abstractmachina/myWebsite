@@ -21,7 +21,7 @@ const ContactTab : FC<ContactProps> = ( {show, hideContact}):ReactElement => {
     return (
         <CSSTransition
         in = {show}
-        timeout={1000}
+        timeout={0}
         classNames="slideFromTop"
         unmountOnExit>
         <div className='contact'>

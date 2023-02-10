@@ -21,3 +21,36 @@
 .slideFromTop-exit-done {
     bottom: 100%;
 }
+
+
+/*  SLIDE IN FROM RIGHT */
+.slideFromRight-appear-done {
+    left:calc(100% - 25px) ;
+    opacity: 1;
+}
+
+.slideFromRight-enter {
+    left:calc(100% - 25px) ;
+}
+
+.slideFromRight-enter-active {
+    left:50% !important;
+    transition: left 200ms ease-out 
+}
+
+.slideFromRight-enter-done {
+    left:50% !important;
+}
+
+.slideFromRight-exit {
+    left:50% !important;
+}
+
+.slideFromRight-exit-active {
+    left:calc(100% - 25px) !important;
+    transition: left 200ms ease-out 
+}
+
+.slideFromRight-enter-done {
+    left:50% !important;
+}

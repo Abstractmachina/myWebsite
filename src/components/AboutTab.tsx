@@ -5,19 +5,18 @@ const AboutTab = () => {
 
     const [show, setShow] = useState(false);
 
-    function showThisPage(e:any) {
-
-        const parent = e.target.parentNode;
-        parent.classList.toggle('slideInFromRight');
-                parent.style.left = null;
-                parent.style.width = null;
-        //         this.clearAllSelectedProjects();
+    function toggleThisPage(e:any) {
+        setShow(!show);
     }
 
     return (
-
+        <CSSTransition
+        in = {show}
+        appear = {true}
+        timeout={0}
+        classNames="slideFromRight">
             <div className="about">
-                <div className="leftEdge" onClick={showThisPage}>information</div>
+                <div className="leftEdge" onClick={toggleThisPage}>information</div>
                 <div className="aboutContainer">
                     <div className="links">
                         <a>taole.chen@protonmail.com</a>
@@ -34,6 +33,7 @@ const AboutTab = () => {
                     <p>I am fascinated by the concept of the Renaissance Man and I enjoy indulging in the pursuit of diverging interests in my free time. My origins are in the fine arts. Having painted, drawn and sculpted all my childhood, I was originally planning to start a career in painting. However, the breadth and rigor of the architectural education was more appealing to me, so I pivoted early on. I have not given up my passion in the arts and I still practice whenever I can. My hope is that some day I can find a happy, amalgamating medium between all my interests and create something novel and meaningful.</p>
                 </div>
             </div>
+        </CSSTransition>
     );
 }
 

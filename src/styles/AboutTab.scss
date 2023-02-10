@@ -4,16 +4,17 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    left:calc(100% - 25px);
+    
     top: 0%;
     width: 50%;
     height: 100%;
+    left:calc(100% - 25px);
     background-color: $color_paper;
     z-index: 10;
     opacity: 1;
-    transition-property: left, width;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out;
+    // transition-property: left, width;
+    // transition-duration: 0.2s;
+    // transition-timing-function: ease-out;
     
     p {
         margin: 1em 0em;
@@ -46,10 +47,4 @@
 .aboutContainer {
     padding: 6em 5em;
     overflow: auto;
-}
-
-
-.slideInFromRight {
-    left: 50%;
-    opacity: 1;
 }
