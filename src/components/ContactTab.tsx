@@ -1,8 +1,10 @@
-// import { createElementText } from "../scripts/util";
 
 import instalogo from '../assets/logo_insta.svg';
 import linkedinLogo from '../assets/logo_linkedin.svg';
-import cvLogo from '../assets/logo_cv.svg';
+// import cvLogo from '../assets/logo_cv.svg';
+
+import React, { FC, useState } from 'react';
+
 
 const ContactTab = () => {
 

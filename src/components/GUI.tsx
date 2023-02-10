@@ -19,6 +19,22 @@ import ContactTab from './ContactTab';
  */
 const GUI:FC = () => {
 
+
+    let showAbout:boolean = true;
+
+    return (
+        <div>
+            <LeftMain/>
+            <RightMain/>
+            <Footer/>
+            <AboutTab/>
+            <IndexTab/>
+            <ProjectTab/>
+            <ContactTab/>
+        </div>
+    );
+
+    
     //class names for query selection
     // _projectFilterClass = 'projectFilter';
     // _indexButtonId = 'projectArrow';
@@ -54,22 +70,6 @@ const GUI:FC = () => {
     //     this._bindSwipeMainMenu();
         
     // }
-
-    let showAbout:boolean = true;
-
-    return (
-        <div>
-            <LeftMain/>
-            <RightMain/>
-            <Footer/>
-            <AboutTab/>
-            <IndexTab/>
-            <ProjectTab/>
-            <ContactTab/>
-        </div>
-    );
-
-    
     // //========= INDEX TAB ======================
     // _loadProjectIndexButton(parent) {
     //     const btn_index = new Image();

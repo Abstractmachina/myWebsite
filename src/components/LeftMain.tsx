@@ -13,12 +13,12 @@ const LeftMain : FC = () => {
 
     return(
     <main className="mainContainer left">
+        <div className="logo contactCall">
+            <Logo/>
+            <h2>design | code | art</h2>
+        </div>
         <header>
             <div className="wrapper"> 
-                <div className="logo contactCall">
-                    <Logo/>
-                    <h2>design | code | art</h2>
-                </div>
                 <p>I am a multi-disciplinary designer and developer operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science.</p>
                 <div id="btn_profile">
                     <div>
