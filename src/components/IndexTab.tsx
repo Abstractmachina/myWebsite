@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import ProjectFilter from './Index_ProjectFilter';
+import ProjectFilterGroup from './ProjectFilterGroup';
 
 
 type IndexProps = {
@@ -70,7 +70,7 @@ const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler}):ReactElement =
         >
             <div className="projectIndex">
                 <div className="topEdge"></div>
-                <ProjectFilter handleGetCategories={handleGetCategories}/>
+                <ProjectFilterGroup handleGetCategories={handleGetCategories}/>
                 <div className="indexTableContainer">
                     <table className="projectIndexTable"></table>
                 </div>

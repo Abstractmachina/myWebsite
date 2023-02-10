@@ -63,23 +63,23 @@
 }
 
 .slideFromBottom-enter-active {
-    top:40%;
+    top:40% !important;
     opacity: 1;
-    transition: all 2000ms ease-out;
+    transition: all 200ms ease-out;
 }
 
 .slideFromBottom-enter-done {
-    top:40%;
+    top:40% !important;
     opacity: 1;
 }
 
 .slideFromBottom-exit {
-    top:40%;
+    top:40% !important;
     opacity: 1;
 }
 
 .slideFromBottom-exit-active {
-    top:100%;
+    top:100%  !important;
     opacity: 0;
     transition: all 200ms;
 }

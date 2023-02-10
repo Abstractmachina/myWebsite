@@ -1,10 +1,14 @@
-import React, { FC, ReactElement, useEffect, useRef } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import ProjectFilter from './Index_ProjectFilter';
+import ProjectFilterGroup from './ProjectFilterGroup';
 
+type CategoryCheckBoxProps = {
+    id: string;
+}
 
+const CategoryCheckbox : FC<CategoryCheckBoxProps> = ( {id}):ReactElement => {
 
-const CategoryCheckbox : FC = ( {}):ReactElement => {
+    const [isChecked, setChecked] = useState(true);
         // _createCategoryCheckbox(parent, id) {
     //     const container = document.createElement('div');
     //     const newCat = document.createElement('input');
@@ -28,8 +32,27 @@ const CategoryCheckbox : FC = ( {}):ReactElement => {
     //     return newCat;
     // }
 
+    function toggleCheck(e:any) {
+        console.log(e.target.htmlFor);
+        setChecked(!isChecked);
+    }
+
     return (
-        <div></div>
+        <div className="checkboxContainer" id={id} onClick={toggleCheck}>
+            <input 
+            type="checkbox" 
+            name={id} 
+            id={id}
+            className= "tgl" 
+            checked={isChecked}></input>
+            <label 
+            htmlFor={id} 
+            className="tgl-btn"
+            data-tg-off={id}
+            data-tg-on ={id}
+            style={{width:  (id.length*0.7) + 'em'}}>
+            </label>
+        </div>
     )
 };
 

@@ -1,16 +1,24 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import CategoryCheckbox from './CategoryCheckBox';
 
 
 type ProjectFilterProps = {
     handleGetCategories:() => string[] | null,
 }
 
-const ProjectFilter : FC<ProjectFilterProps> = ( {handleGetCategories}):ReactElement => {
+const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):ReactElement => {
 
-    const[categories, setCategories] = useState(handleGetCategories());
+    const[categories, setCategories] = useState(new Array<string>());
 
-    
+    useEffect(() => {
+        processCategories();
+    }, []);
+
+    function processCategories() {
+        let cats = handleGetCategories();
+        if (cats !== null) setCategories(cats);
+    }
     // _prebuildIndexTab(projects) {
     //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
     //     this._removeAllChildren(filterContainer); //reset container
@@ -94,9 +102,13 @@ const ProjectFilter : FC<ProjectFilterProps> = ( {handleGetCategories}):ReactEle
     // }
 
     return (
-        <div className='projectFilter'>projectFilter</div>
+        <div className='projectFilter'>
+            {categories.map(c => {
+                return <CategoryCheckbox id={c} key={c}/>;
+            })}
+        </div>
     )
 };
 
 
-export default ProjectFilter;
+export default ProjectFilterGroup;
