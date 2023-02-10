@@ -1,4 +1,8 @@
 const RightMain = () => {
+
+        // onProjectHovered = (id) => {
+    //     return this._model.getProject(id).Categories;
+    // }
     return (
         <main className="mainContainer right">
             <div className="background">

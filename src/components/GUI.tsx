@@ -16,13 +16,14 @@ import ContactTab from './ContactTab';
 
 import '../styles/animations.scss'
 
-/**
- * View Object for websites. 
- */
-const GUI:FC = (): ReactElement => {
+type GuiProps = {
+    getCategoriesHandler: () => string[] | null;
+}
 
+const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
 
-    let showAbout:boolean = true;
+    const _swipeSensitivity:number = 60;
+
     const [showContact, setShowContact] = useState(false);
     const [showIndex, setShowIndex] = useState(false);
 
@@ -37,43 +38,35 @@ const GUI:FC = (): ReactElement => {
     function callIndexTab() {
         console.log("gui: call index invoked")
         setShowIndex(true);
-   }
-   function hideIndexTab() {
-       setShowIndex(false);
-   }
+    }
+    function hideIndexTab() {
+        setShowIndex(false);
+    }
+
+    function handleGetCategories():string[] | null {
+        return getCategoriesHandler();
+    }
+
+       // onProjectPageCalled = (id) => {
+    //     const project = this._model.getProject(id);
+    //     this._view.displayProject(project.HtmlContent);
+    // }
 
     return (
-        <div>
-            <LeftMain callContactCardHandler={callContactCard} callIndexTabHandler={callIndexTab}/>
+        <div className='gui'>
+            <LeftMain 
+            callContactCardHandler={callContactCard} 
+            callIndexTabHandler={callIndexTab} 
+            hideIndexTabHandler= {hideIndexTab}
+            hideContactCardHandler = {hideContactCard}/>
             <RightMain/>
             <Footer/>
             <AboutTab/>
-            <IndexTab show={showIndex}/>
+            <IndexTab show={showIndex} getCategoriesHandler={handleGetCategories}/>
             <ProjectTab/>
             <ContactTab show={showContact} hideContact={hideContactCard}/>
         </div>
     );
-
-    
-    //class names for query selection
-    // _projectFilterClass = 'projectFilter';
-    // _indexButtonId = 'projectArrow';
-
-    // _swipeSensitivity = 60;
-
-    // constructor(projects) {
-    //     this._app = document.querySelector('.root');
-
-    //     //load elements
-    //     this._leftMain = loadLeftMain(this._app);
-    //     this._btn_index = this._leftMain.querySelector('#' + this._indexButtonId);
-    //     this._rightMain = loadRightMain(this._app);
-    //     this._footer = loadFooter(this._app);
-    //     this._aboutTab = loadAboutTab(this._rightMain);
-    //     this._indexTab = loadIndexTab(this._app);
-    //     this._prebuildIndexTab(projects);
-    //     this._projectTab = loadProjectTab(this._rightMain);
-    //     this._contactCard = loadContactTab(this._app);
 
     //     //setup bindings
     //     this._bindProfileButton();
@@ -90,141 +83,7 @@ const GUI:FC = (): ReactElement => {
     //     this._bindSwipeMainMenu();
         
     // }
-    // //========= INDEX TAB ======================
-    // _loadProjectIndexButton(parent) {
-    //     const btn_index = new Image();
-    //     btn_index.src = pArrowBase;
-    //     btn_index.id = this._indexButtonId;
-    //     parent.append(btn_index);
-
-    //     return btn_index;
-    // }
-
-    // _prebuildIndexTab(projects) {
-    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-    //     this._removeAllChildren(filterContainer); //reset container
-
-
-    //     this._createSelAllCheckbox(filterContainer);
-    //     this._createSelNoneCheckbox(filterContainer);
-        
-
-    //     let categoryFilters = this._getUniqueCategories(projects);
-
-    //     // create checkbox for each category
-    //     categoryFilters.forEach(ca => {
-    //         const newCat = this._createCategoryCheckbox(filterContainer, ca.toString());
-    //         this._bindCategoryCheckbox(newCat, filterContainer, projects);
-    //     });
-
-    //     //pre-build index with everything
-    //     this._buildIndexTable(projects, this._getUniqueCategories(projects));
-    // }
-
-    // _createCategoryCheckbox(parent, id) {
-    //     const container = document.createElement('div');
-    //     const newCat = document.createElement('input');
-    //     newCat.setAttribute('type', 'checkbox');
-    //     newCat.id = id;
-    //     newCat.setAttribute('name', id);
-    //     newCat.classList.add("tgl");
-    //     newCat.classList.add("tgl-skewed");
-    //     newCat.checked = true;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", id);
-    //     label.classList.add("tgl-btn");
-    //     // label.textContent = id;
-    //     label.setAttribute('data-tg-off',id);
-    //     label.setAttribute('data-tg-on', id);
-    //     // label.textContent = id;
-    //     label.style.width = (id.length*0.7) + 'em';
-    //     container.append(newCat, label);
-    //     parent.append(container);
-
-    //     return newCat;
-    // }
-
-    // _createSelAllCheckbox(parent) {
-    //     const container = document.createElement('div');
-    //     const selAll = document.createElement('input');
-    //     selAll.setAttribute('type', 'checkbox');
-    //     selAll.id = 'selAll';
-    //     selAll.setAttribute('name', selAll.id);
-    //     selAll.classList.add("tgl");
-    //     selAll.classList.add("tgl-skewed");
-    //     selAll.checked = true;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", selAll.id);
-    //     // lbl_selAll.textContent = 'All';
-    //     label.classList.add("tgl-btn");
-    //     label.setAttribute('data-tg-off','All');
-    //     label.setAttribute('data-tg-on', 'All');
-    //     label.style.width = 3 + 'em';
-    //     container.append(selAll, label);
-    //     parent.append(container);
-    // }
-    // _createSelNoneCheckbox(parent) {
-    //     const container = document.createElement('div');
-    //     const selNone = document.createElement('input');
-    //     selNone.setAttribute('type', 'checkbox');
-    //     selNone.id = 'selNone';
-    //     selNone.setAttribute('name', selNone.id);
-    //     selNone.classList.add("tgl");
-    //     selNone.classList.add("tgl-skewed");
-    //     selNone.checked = false;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", selNone.id);
-    //     label.classList.add("tgl-btn");
-    //     label.setAttribute('data-tg-off','None');
-    //     label.setAttribute('data-tg-on', 'None')
-    //     label.style.width = 4 + 'em';
-    //     container.append(selNone, label);
-    //     parent.append(container);
-    // }
-
-    // _buildIndexTable(projects, categoryFilters) {
-
-    //     if (!Array.isArray(categoryFilters)) throw "Error: parameter is not of type Array";
-
-    //     //sort projects descending by year
-    //     projects.sort((a, b) => b.year - a.year);
-
-    //     let parent = document.querySelector(".projectIndexTable");
-    //     this._initIndexHeaders(parent);
-
-    //     for (let project of projects) {
-    //         for (let c of project.categories) {
-    //             if (categoryFilters.includes(c)) {
-    //                 const newRow = document.createElement('tr');
-
-    //                 const rowTitle = createElementText("td", project.title);
-    //                 const rowYear = createElementText('td', project.year.toString());
-    //                 const rowLoc = createElementText('td', project.location);
-    //                 const tags = document.createElement('td');
-    //                 tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
-    //                 newRow.id = project.id;
-
-    //                 newRow.append(rowYear, rowTitle, rowLoc, tags);
-    //                 parent.appendChild(newRow);
-    //                 break;
-    //             }
-    //         }
-    //     }   
-    // }
-    // /**
-    //  * populate table with preset headers (title, year, location, categories) and attach to parent
-    //  * @returns empty <table> with headers.
-    //  */
-    // _initIndexHeaders(tableContainer) {
-    //     this._removeAllChildren(tableContainer);
-    //     const head_title = createElementText('th', "Title");
-    //     const head_year = createElementText('th', 'Year');
-    //     const head_loc = createElementText('th','Location');
-    //     const head_cat = createElementText('th', 'Categories');
-    //     tableContainer.append(head_title, head_year, head_loc, head_cat);
-    // }
-
-
+    
     // //==================    BINDINGS =====================================
     
     // _bindProfileButton() {

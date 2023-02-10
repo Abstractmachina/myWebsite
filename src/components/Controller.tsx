@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import loadProjects from '../projects/loadProjects';
+import Model from '../types/Model';
 
 // import Model from './Model.js';
 // import GUI from './GUI.js'
@@ -8,30 +10,21 @@ import React, { FC } from 'react';
 import GUI from './GUI';
 
 const Controller : FC  = () => {
-    // _model = null;
-    // _view = null;
-    // _projectIndex = null;
+    const _model : Model = new Model(loadProjects());
+    // let p = _model.Projects?.get("printFast1");
+    // console.log(p?.Content?.toString());
 
-    // constructor() {
-    //     this._model = new Model(loadProjects());
-    //     this._view = new GUI(this._model.ProjectIndex);
+    const [categories, setCategories] = useState(_model.GetUniqueCategories());
+    
+    function getCategories(): string[] | null {
+        return _model.GetUniqueCategories();
+    }
 
-    //     this._view.bindCallProjectPages(this.onProjectPageCalled);
-    //     this._view.bindHoverProjects(this.onProjectHovered);
-    // }
 
-    // onProjectPageCalled = (id) => {
-    //     const project = this._model.getProject(id);
-    //     this._view.displayProject(project.HtmlContent);
-    // }
-
-    // onProjectHovered = (id) => {
-    //     return this._model.getProject(id).Categories;
-    // }
-
+    // _view is the GUI component
 
     return (
-            <GUI/>
+            <GUI getCategoriesHandler={getCategories}/>
     );
 } 
 export default Controller;
