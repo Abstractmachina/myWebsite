@@ -1,0 +1,23 @@
+.slideFromTop-enter {
+    bottom:100%;
+}
+.slideFromTop-enter-active {
+    bottom: 50%;
+    transition: bottom 200ms ease-out;
+}
+.slideFromTop-enter-done {
+    bottom: 50%;
+}
+
+.slideFromTop-exit {
+    bottom:50%;
+}
+
+.slideFromTop-exit-active {
+    bottom: 100%;
+    transition: bottom 200ms ease-out;
+}
+
+.slideFromTop-exit-done {
+    bottom: 100%;
+}

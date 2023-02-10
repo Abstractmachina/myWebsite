@@ -5,7 +5,7 @@ import preview_art from '../assets/barbican_00.jpg';
 
 
 
-import React, { FC } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
@@ -14,23 +14,34 @@ import IndexTab from './IndexTab';
 import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 
+import '../styles/animations.scss'
+
 /**
  * View Object for websites. 
  */
-const GUI:FC = () => {
+const GUI:FC = (): ReactElement => {
 
 
     let showAbout:boolean = true;
+    const [showContact, setShowContact] = useState(false);
+
+    function callContactCard() {
+         setShowContact(true);
+    }
+    function hideContactCard() {
+        setShowContact(false);
+    }
+
 
     return (
         <div>
-            <LeftMain/>
+            <LeftMain callContactCardHandler={callContactCard}/>
             <RightMain/>
             <Footer/>
             <AboutTab/>
             <IndexTab/>
             <ProjectTab/>
-            <ContactTab/>
+            <ContactTab show={showContact} hideContact={hideContactCard}/>
         </div>
     );
 

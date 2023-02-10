@@ -4,16 +4,24 @@
 // import loadProjectArrow from "./loadProjectArrow";
 
 
-import React, { FC } from "react";
+import React, { FC, ReactElement } from "react";
 import Logo from "./Logo";
 import ProjectArrow from "./ProjectArrow";
 import ReturnArrow from "./ReturnArrow";
 
-const LeftMain : FC = () => {
+type LeftMainProps = {
+    callContactCardHandler: () => void;
+}
+
+const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler}): ReactElement => {
+
+    function handleCallContactCard() {
+        callContactCardHandler();
+    }
 
     return(
     <main className="mainContainer left">
-        <div className="logo contactCall">
+        <div className="logo contactCall" onClick={handleCallContactCard}>
             <Logo/>
             <h2>design | code | art</h2>
         </div>

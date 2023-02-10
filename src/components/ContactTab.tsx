@@ -3,12 +3,27 @@ import instalogo from '../assets/logo_insta.svg';
 import linkedinLogo from '../assets/logo_linkedin.svg';
 // import cvLogo from '../assets/logo_cv.svg';
 
-import React, { FC, useState } from 'react';
+import React, { FC, useState, ReactElement } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 
-const ContactTab = () => {
+type ContactProps = {
+    show: boolean;
+    hideContact: () => void;
+}
+
+const ContactTab : FC<ContactProps> = ( {show, hideContact}):ReactElement => {
+
+    function handleHideContact() {
+        hideContact();
+    }
 
     return (
+        <CSSTransition
+        in = {show}
+        timeout={1000}
+        classNames="slideFromTop"
+        unmountOnExit>
         <div className='contact'>
             <div className='contactWrapper'>
                 <h1>Contact</h1>
@@ -22,8 +37,9 @@ const ContactTab = () => {
                     </a>
                 </div>
             </div>
-            <div className='bottomEdge'>close</div>
+            <div className='bottomEdge' onClick={handleHideContact}>close</div>
         </div>
+        </CSSTransition>
     );
 }
 
