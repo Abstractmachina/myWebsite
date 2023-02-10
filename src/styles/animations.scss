@@ -54,3 +54,21 @@
 .slideFromRight-enter-done {
     left:50% !important;
 }
+
+/*  SLIDE IN FROM BOTTOM */
+
+.slideFromBottom-enter {
+    top:100%;
+    opacity: 0;
+}
+
+.slideFromBottom-enter-active {
+    top:40%;
+    opacity: 1;
+    transition: all 200ms ease-out;
+}
+
+.slideFromBottom-enter-done {
+    top:40%;
+    opacity: 1;
+}

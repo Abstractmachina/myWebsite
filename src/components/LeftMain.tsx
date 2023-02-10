@@ -6,17 +6,22 @@
 
 import React, { FC, ReactElement } from "react";
 import Logo from "./Logo";
-import ProjectArrow from "./ProjectArrow";
+import IndexArrow from "./IndexArrow";
 import ReturnArrow from "./ReturnArrow";
 
 type LeftMainProps = {
     callContactCardHandler: () => void;
+    callIndexTabHandler: () => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHandler}): ReactElement => {
 
     function handleCallContactCard() {
         callContactCardHandler();
+    }
+    function handleCallIndexTab() {
+        console.log("leftmain: call index invoked")
+        callIndexTabHandler();
     }
 
     return(
@@ -35,7 +40,7 @@ const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler}): ReactElement =
                     <ReturnArrow/>
                 </div>
             </div>
-            <ProjectArrow/>
+            <IndexArrow clickHandler={handleCallIndexTab}/>
         </header>
     </main>
     );

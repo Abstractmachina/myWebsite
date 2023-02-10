@@ -24,6 +24,8 @@ const GUI:FC = (): ReactElement => {
 
     let showAbout:boolean = true;
     const [showContact, setShowContact] = useState(false);
+    const [showIndex, setShowIndex] = useState(false);
+
 
     function callContactCard() {
          setShowContact(true);
@@ -32,14 +34,21 @@ const GUI:FC = (): ReactElement => {
         setShowContact(false);
     }
 
+    function callIndexTab() {
+        console.log("gui: call index invoked")
+        setShowIndex(true);
+   }
+   function hideIndexTab() {
+       setShowIndex(false);
+   }
 
     return (
         <div>
-            <LeftMain callContactCardHandler={callContactCard}/>
+            <LeftMain callContactCardHandler={callContactCard} callIndexTabHandler={callIndexTab}/>
             <RightMain/>
             <Footer/>
             <AboutTab/>
-            <IndexTab/>
+            <IndexTab show={showIndex}/>
             <ProjectTab/>
             <ContactTab show={showContact} hideContact={hideContactCard}/>
         </div>

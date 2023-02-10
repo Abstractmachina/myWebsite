@@ -194,7 +194,7 @@ a:hover {
 /*=======   INDEX TAB   ============*/
 .projectIndex {
     position: fixed;
-    top: 100%;
+    // top: 100%;
     left: 0%;
     width: 50%;
     height:60%;
@@ -203,15 +203,15 @@ a:hover {
     flex-direction: column;
     justify-content: flex-start;
     // box-shadow: 0 -4px 10px 2px rgba(0, 0, 0, 0.311);
-    transition-property: top, opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-out;
+    // transition-property: top, opacity;
+    // transition-duration: 0.2s;
+    // transition-timing-function: ease-out;
     z-index: 4;
 }
 
-.slideUp {
-    top:40%;
-}
+// .slideUp {
+//     top:40%;
+// }
 
 .projectFilter {
     padding: 1em 2em;
