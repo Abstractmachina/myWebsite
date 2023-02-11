@@ -1,100 +1,51 @@
-import React, { FC, ReactElement, useEffect, useRef } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { ProjectInfo } from '../types/interfaces';
 import ProjectFilterGroup from './ProjectFilterGroup';
+import ProjectIndexTable from './ProjectIndexTable';
 
 type IndexProps = {
     show:boolean,
-    getCategoriesHandler: () => string[] | null
+    getCategoriesHandler: () => string[] | null,
+    getProjectInfoHandler: (categoryFilters: string[]) => ProjectInfo[],
 }
 
-const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler}):ReactElement => {
+const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler}):ReactElement => {
 
     
+    const [projectInfo, setProjectInfo] = useState(new Array<ProjectInfo>());
+
     useEffect(() => {
-    })
+        let allCategories = getCategoriesHandler();
 
-    // //========= INDEX TAB ======================
-
-    // _prebuildIndexTab(projects) {
-    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-    //     this._removeAllChildren(filterContainer); //reset container
-
-
-    //     this._createSelAllCheckbox(filterContainer);
-    //     this._createSelNoneCheckbox(filterContainer);
-        
-
-    //     let categoryFilters = this._getUniqueCategories(projects);
-
-    //     // create checkbox for each category
-    //     categoryFilters.forEach(ca => {
-    //         const newCat = this._createCategoryCheckbox(filterContainer, ca.toString());
-    //         this._bindCategoryCheckbox(newCat, filterContainer, projects);
-    //     });
-
-    //     //pre-build index with everything
-    //     this._buildIndexTable(projects, this._getUniqueCategories(projects));
-    // }
-
-    // _buildIndexTable(projects, categoryFilters) {
-
-    //     if (!Array.isArray(categoryFilters)) throw "Error: parameter is not of type Array";
-
-    //     //sort projects descending by year
-    //     projects.sort((a, b) => b.year - a.year);
-
-    //     let parent = document.querySelector(".projectIndexTable");
-    //     this._initIndexHeaders(parent);
-
-    //     for (let project of projects) {
-    //         for (let c of project.categories) {
-    //             if (categoryFilters.includes(c)) {
-    //                 const newRow = document.createElement('tr');
-
-    //                 const rowTitle = createElementText("td", project.title);
-    //                 const rowYear = createElementText('td', project.year.toString());
-    //                 const rowLoc = createElementText('td', project.location);
-    //                 const tags = document.createElement('td');
-    //                 tags.textContent = Array.from(project.categories).map(c => {return c.slice(0,2)}).join('.');
-    //                 newRow.id = project.id;
-
-    //                 newRow.append(rowYear, rowTitle, rowLoc, tags);
-    //                 parent.appendChild(newRow);
-    //                 break;
-    //             }
-    //         }
-    //     }   
-    // }
-    // /**
-    //  * populate table with preset headers (title, year, location, categories) and attach to parent
-    //  * @returns empty <table> with headers.
-    //  */
-    // _initIndexHeaders(tableContainer) {
-    //     this._removeAllChildren(tableContainer);
-    //     const head_title = createElementText('th', "Title");
-    //     const head_year = createElementText('th', 'Year');
-    //     const head_loc = createElementText('th','Location');
-    //     const head_cat = createElementText('th', 'Categories');
-    //     tableContainer.append(head_title, head_year, head_loc, head_cat);
-    // }
+        if (allCategories!== null) {
+            let allProjects = getProjectInfoHandler(allCategories);
+            setProjectInfo(allProjects);
+        }
+    }, [])
 
     function handleGetCategories(): string[] | null {
         return getCategoriesHandler();
     }
 
+    function handleFilterRequest(filters:string[]): void {
+        let infoObjects = getProjectInfoHandler(filters);
+        setProjectInfo(infoObjects);
+    }
+
     return (
         <CSSTransition
-        in={show}
-        appear={true}
-        timeout={200}
-        classNames="slideFromBottom"
+            in={show}
+            appear={true}
+            timeout={200}
+            classNames="slideFromBottom"
         >
             <div className="projectIndex">
                 <div className="topEdge"></div>
-                <ProjectFilterGroup handleGetCategories={handleGetCategories}/>
-                <div className="indexTableContainer">
-                    <table className="projectIndexTable"></table>
-                </div>
+                <ProjectFilterGroup 
+                    getCategoriesHandler={handleGetCategories}
+                    filterRequestHandler={handleFilterRequest}/>
+                <ProjectIndexTable projectInfo={projectInfo}/>
             </div>
         </CSSTransition>
     )

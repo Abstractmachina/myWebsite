@@ -15,14 +15,14 @@ import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 
 import '../styles/animations.scss'
+import { ProjectInfo } from '../types/interfaces';
 
 type GuiProps = {
     getCategoriesHandler: () => string[] | null;
+    getProjectInfoHandler: (categories:string[]) => ProjectInfo[];
 }
 
-const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
-
- 
+const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): ReactElement => {
 
     const _swipeSensitivity:number = 60;
 
@@ -48,6 +48,10 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
         return getCategoriesHandler();
     }
 
+    function handleGetProjectInfo(categories:string[]):|ProjectInfo[] {
+        return getProjectInfoHandler(categories);
+    }
+
        // onProjectPageCalled = (id) => {
     //     const project = this._model.getProject(id);
     //     this._view.displayProject(project.HtmlContent);
@@ -63,7 +67,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
             <RightMain/>
             <Footer/>
             <AboutTab/>
-            <IndexTab show={showIndex} getCategoriesHandler={handleGetCategories}/>
+            <IndexTab show={showIndex} getCategoriesHandler={handleGetCategories} getProjectInfoHandler={handleGetProjectInfo}/>
             <ProjectTab/>
             <ContactTab show={showContact} hideContact={hideContactCard}/>
         </div>

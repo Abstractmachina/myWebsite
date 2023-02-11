@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
+// import { CSSTransition } from 'react-transition-group';
 import CategoryCheckbox from './CategoryCheckBox';
 
 export type CategoryCheckboxState = {
@@ -8,10 +8,11 @@ export type CategoryCheckboxState = {
 }
 
 type ProjectFilterProps = {
-    handleGetCategories:() => string[] | null,
+    getCategoriesHandler:() => string[] | null,
+    filterRequestHandler: (cats:string[]) => void;
 }
 
-const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):ReactElement => {
+const ProjectFilterGroup : FC<ProjectFilterProps> = ( {getCategoriesHandler, filterRequestHandler}):ReactElement => {
 
     const[checkboxStates, setCheckboxStates] = useState(new Array<CategoryCheckboxState>());
     const[selAllState, setSelAllState] = useState({id:"all", checkIsOn:true} as CategoryCheckboxState);
@@ -19,17 +20,24 @@ const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):Rea
 
     useEffect(() => {
         processCategories();
-        
     }, []);
 
     function processCategories() {
-        let categories = handleGetCategories();
+        let categories = getCategoriesHandler();
         if (categories !== null) {
             let states = categories.map(c => {
                 return {id:c, checkIsOn: true} as CategoryCheckboxState;
             });
             setCheckboxStates(states);
+            buildFilterRequest();
+
         }
+    }
+
+    function buildFilterRequest() {
+        let result = checkboxStates.filter(s => s.checkIsOn).map(s=>s.id);
+
+        filterRequestHandler(result);
     }
 
     function categorySelected(id?:string) {
@@ -44,6 +52,7 @@ const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):Rea
 
         turnOffSelNone();
         checkIfAllIsSelected();
+        buildFilterRequest();
     }
 
     function allSelected(id?:string) {
@@ -55,6 +64,7 @@ const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):Rea
         setCheckboxStates(copiedStates);
         turnOnSelAll();
         turnOffSelNone();
+        buildFilterRequest();
     }
     function noneSelected(id?:string) {
         let copiedStates = [...checkboxStates];
@@ -65,6 +75,7 @@ const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):Rea
         setCheckboxStates(copiedStates);
         turnOnSelNone();
         turnOffSelAll();
+        buildFilterRequest();
     }
 
     function checkIfAllIsSelected() {
