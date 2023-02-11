@@ -2,6 +2,10 @@ import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import CategoryCheckbox from './CategoryCheckBox';
 
+export type CategoryCheckboxState = {
+    id:string;
+    checkIsOn:boolean;
+}
 
 type ProjectFilterProps = {
     handleGetCategories:() => string[] | null,
@@ -9,102 +13,110 @@ type ProjectFilterProps = {
 
 const ProjectFilterGroup : FC<ProjectFilterProps> = ( {handleGetCategories}):ReactElement => {
 
-    const[categories, setCategories] = useState(new Array<string>());
+    const[checkboxStates, setCheckboxStates] = useState(new Array<CategoryCheckboxState>());
+    const[selAllState, setSelAllState] = useState({id:"all", checkIsOn:true} as CategoryCheckboxState);
+    const [selNoneState, setSelNoneState] = useState({id: "none", checkIsOn:false} as CategoryCheckboxState);
 
     useEffect(() => {
         processCategories();
+        
     }, []);
 
     function processCategories() {
-        let cats = handleGetCategories();
-        if (cats !== null) setCategories(cats);
+        let categories = handleGetCategories();
+        if (categories !== null) {
+            let states = categories.map(c => {
+                return {id:c, checkIsOn: true} as CategoryCheckboxState;
+            });
+            setCheckboxStates(states);
+        }
     }
-    // _prebuildIndexTab(projects) {
-    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-    //     this._removeAllChildren(filterContainer); //reset container
 
+    function categorySelected(id?:string) {
 
-    //     this._createSelAllCheckbox(filterContainer);
-    //     this._createSelNoneCheckbox(filterContainer);
+        let copiedStates = [...checkboxStates];
+
+        let idx = copiedStates.findIndex(s => s.id === id);
+
+        let isChecked = copiedStates[idx].checkIsOn;
+        copiedStates[idx].checkIsOn = !isChecked;
+        setCheckboxStates(copiedStates);
+
+        turnOffSelNone();
+        checkIfAllIsSelected();
+    }
+
+    function allSelected(id?:string) {
         
+        let copiedStates = [...checkboxStates];
+        for (let i = 0; i < copiedStates.length;i++) {
+            copiedStates[i].checkIsOn = true;
+        }
+        setCheckboxStates(copiedStates);
+        turnOnSelAll();
+        turnOffSelNone();
+    }
+    function noneSelected(id?:string) {
+        let copiedStates = [...checkboxStates];
 
-    //     let categoryFilters = this._getUniqueCategories(projects);
+        for (let i =0; i < copiedStates.length; i++) {
+            copiedStates[i].checkIsOn = false;
+        }
+        setCheckboxStates(copiedStates);
+        turnOnSelNone();
+        turnOffSelAll();
+    }
 
-    //     // create checkbox for each category
-    //     categoryFilters.forEach(ca => {
-    //         const newCat = this._createCategoryCheckbox(filterContainer, ca.toString());
-    //         this._bindCategoryCheckbox(newCat, filterContainer, projects);
-    //     });
+    function checkIfAllIsSelected() {
+        let allSelected = true;
+        for (let i =0; i < checkboxStates.length; i++) {
+            if (!checkboxStates[i].checkIsOn) {
+                allSelected = false;
+                break;
+            }
+        }
 
-    //     //pre-build index with everything
-    //     this._buildIndexTable(projects, this._getUniqueCategories(projects));
-    // }
+        if (allSelected) turnOnSelAll();
+        else turnOffSelAll();
 
-        // _createCategoryCheckbox(parent, id) {
-    //     const container = document.createElement('div');
-    //     const newCat = document.createElement('input');
-    //     newCat.setAttribute('type', 'checkbox');
-    //     newCat.id = id;
-    //     newCat.setAttribute('name', id);
-    //     newCat.classList.add("tgl");
-    //     newCat.classList.add("tgl-skewed");
-    //     newCat.checked = true;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", id);
-    //     label.classList.add("tgl-btn");
-    //     // label.textContent = id;
-    //     label.setAttribute('data-tg-off',id);
-    //     label.setAttribute('data-tg-on', id);
-    //     // label.textContent = id;
-    //     label.style.width = (id.length*0.7) + 'em';
-    //     container.append(newCat, label);
-    //     parent.append(container);
+    }
 
-    //     return newCat;
-    // }
-
-    // _createSelAllCheckbox(parent) {
-    //     const container = document.createElement('div');
-    //     const selAll = document.createElement('input');
-    //     selAll.setAttribute('type', 'checkbox');
-    //     selAll.id = 'selAll';
-    //     selAll.setAttribute('name', selAll.id);
-    //     selAll.classList.add("tgl");
-    //     selAll.classList.add("tgl-skewed");
-    //     selAll.checked = true;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", selAll.id);
-    //     // lbl_selAll.textContent = 'All';
-    //     label.classList.add("tgl-btn");
-    //     label.setAttribute('data-tg-off','All');
-    //     label.setAttribute('data-tg-on', 'All');
-    //     label.style.width = 3 + 'em';
-    //     container.append(selAll, label);
-    //     parent.append(container);
-    // }
-    // _createSelNoneCheckbox(parent) {
-    //     const container = document.createElement('div');
-    //     const selNone = document.createElement('input');
-    //     selNone.setAttribute('type', 'checkbox');
-    //     selNone.id = 'selNone';
-    //     selNone.setAttribute('name', selNone.id);
-    //     selNone.classList.add("tgl");
-    //     selNone.classList.add("tgl-skewed");
-    //     selNone.checked = false;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", selNone.id);
-    //     label.classList.add("tgl-btn");
-    //     label.setAttribute('data-tg-off','None');
-    //     label.setAttribute('data-tg-on', 'None')
-    //     label.style.width = 4 + 'em';
-    //     container.append(selNone, label);
-    //     parent.append(container);
-    // }
+    function turnOnSelNone() {
+        let none = Object.assign(selNoneState) as CategoryCheckboxState;
+        none.checkIsOn = true;
+        setSelNoneState(none);
+    }
+    function turnOffSelNone() {
+        let none = Object.assign(selNoneState) as CategoryCheckboxState;
+        none.checkIsOn = false;
+        setSelNoneState(none);
+    }
+    function turnOnSelAll() {
+        let all = Object.assign(selAllState) as CategoryCheckboxState;
+        all.checkIsOn = true;
+        setSelAllState(all);
+    }
+    function turnOffSelAll() {
+        let all = Object.assign(selAllState) as CategoryCheckboxState;
+        all.checkIsOn = false;
+        setSelAllState(all);
+    }
 
     return (
         <div className='projectFilter'>
-            {categories.map(c => {
-                return <CategoryCheckbox id={c} key={c}/>;
+            <CategoryCheckbox 
+            state = {selAllState}
+            toggleCheckHandler={allSelected}/>
+            <CategoryCheckbox 
+            state = {selNoneState}
+            toggleCheckHandler={noneSelected}/>
+            {checkboxStates.map(state => {
+                return (
+                <CategoryCheckbox 
+                state={state}
+                toggleCheckHandler={categorySelected}
+                key={state.id}/>
+                )
             })}
         </div>
     )

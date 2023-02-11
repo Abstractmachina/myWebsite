@@ -2,7 +2,6 @@ import React, { FC, ReactElement, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import ProjectFilterGroup from './ProjectFilterGroup';
 
-
 type IndexProps = {
     show:boolean,
     getCategoriesHandler: () => string[] | null
@@ -10,10 +9,32 @@ type IndexProps = {
 
 const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler}):ReactElement => {
 
+    
     useEffect(() => {
     })
 
     // //========= INDEX TAB ======================
+
+    // _prebuildIndexTab(projects) {
+    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
+    //     this._removeAllChildren(filterContainer); //reset container
+
+
+    //     this._createSelAllCheckbox(filterContainer);
+    //     this._createSelNoneCheckbox(filterContainer);
+        
+
+    //     let categoryFilters = this._getUniqueCategories(projects);
+
+    //     // create checkbox for each category
+    //     categoryFilters.forEach(ca => {
+    //         const newCat = this._createCategoryCheckbox(filterContainer, ca.toString());
+    //         this._bindCategoryCheckbox(newCat, filterContainer, projects);
+    //     });
+
+    //     //pre-build index with everything
+    //     this._buildIndexTable(projects, this._getUniqueCategories(projects));
+    // }
 
     // _buildIndexTable(projects, categoryFilters) {
 

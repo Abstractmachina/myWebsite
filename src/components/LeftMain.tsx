@@ -23,7 +23,6 @@ const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHand
         callContactCardHandler();
     }
     function handleCallIndexTab() {
-        console.log("leftmain: call index invoked")
         callIndexTabHandler();
     }
 

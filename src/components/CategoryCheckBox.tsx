@@ -1,56 +1,35 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import ProjectFilterGroup from './ProjectFilterGroup';
+import { CategoryCheckboxState } from './ProjectFilterGroup';
 
 type CategoryCheckBoxProps = {
-    id: string;
+    state: CategoryCheckboxState;
+    toggleCheckHandler: (id?:string) => void;
 }
 
-const CategoryCheckbox : FC<CategoryCheckBoxProps> = ( {id}):ReactElement => {
+const CategoryCheckbox : FC<CategoryCheckBoxProps> = ( {state, toggleCheckHandler}):ReactElement => {
 
-    const [isChecked, setChecked] = useState(true);
-        // _createCategoryCheckbox(parent, id) {
-    //     const container = document.createElement('div');
-    //     const newCat = document.createElement('input');
-    //     newCat.setAttribute('type', 'checkbox');
-    //     newCat.id = id;
-    //     newCat.setAttribute('name', id);
-    //     newCat.classList.add("tgl");
-    //     newCat.classList.add("tgl-skewed");
-    //     newCat.checked = true;
-    //     const label = document.createElement('label');
-    //     label.setAttribute("for", id);
-    //     label.classList.add("tgl-btn");
-    //     // label.textContent = id;
-    //     label.setAttribute('data-tg-off',id);
-    //     label.setAttribute('data-tg-on', id);
-    //     // label.textContent = id;
-    //     label.style.width = (id.length*0.7) + 'em';
-    //     container.append(newCat, label);
-    //     parent.append(container);
+    // const [isChecked, setChecked] = useState(initState);
 
-    //     return newCat;
-    // }
 
     function toggleCheck(e:any) {
-        console.log(e.target.htmlFor);
-        setChecked(!isChecked);
+        toggleCheckHandler(state.id);
     }
 
     return (
-        <div className="checkboxContainer" id={id} onClick={toggleCheck}>
+        <div className="checkboxContainer" >
             <input 
             type="checkbox" 
-            name={id} 
-            id={id}
+            name={state.id} 
+            id={state.id}
             className= "tgl" 
-            checked={isChecked}></input>
+            checked={state.checkIsOn}
+            onChange={toggleCheck}></input>
             <label 
-            htmlFor={id} 
+            htmlFor={state.id} 
             className="tgl-btn"
-            data-tg-off={id}
-            data-tg-on ={id}
-            style={{width:  (id.length*0.7) + 'em'}}>
+            data-tg-off={state.id}
+            data-tg-on ={state.id}
+            style={{width:  (state.id.length*0.7) + 'em'}}>
             </label>
         </div>
     )

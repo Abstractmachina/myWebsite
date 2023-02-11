@@ -8,7 +8,6 @@ const IndexArrow : FC<IndexArrowProps> = ({clickHandler}): ReactElement => {
 
     function handleClick(e:any) {
         e.stopPropagation();
-        console.log("indexarrow clicked")
         clickHandler();
     }
 

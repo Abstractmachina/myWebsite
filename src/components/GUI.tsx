@@ -22,6 +22,8 @@ type GuiProps = {
 
 const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
 
+ 
+
     const _swipeSensitivity:number = 60;
 
     const [showContact, setShowContact] = useState(false);
@@ -36,7 +38,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler}): ReactElement => {
     }
 
     function callIndexTab() {
-        console.log("gui: call index invoked")
         setShowIndex(true);
     }
     function hideIndexTab() {
