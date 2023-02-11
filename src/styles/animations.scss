@@ -31,15 +31,20 @@
 
 .slideFromRight-enter {
     left:calc(100% - 25px) ;
+    opacity: 0;
+
 }
 
 .slideFromRight-enter-active {
     left:50% !important;
-    transition: left 200ms ease-out 
+    opacity: 1;
+    transition: all 200ms ease-out 
 }
 
 .slideFromRight-enter-done {
     left:50% !important;
+    opacity: 1;
+
 }
 
 .slideFromRight-exit {

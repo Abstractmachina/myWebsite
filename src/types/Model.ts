@@ -1,8 +1,6 @@
-import { LinkedList } from "./LinkedList";
 import Project from "./Project";
 
 class Model {
-
     private _projects: Map<string, Project> | null;
 
     constructor(projects: Map<string, Project>) {

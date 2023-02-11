@@ -1,11 +1,8 @@
 import React, { FC, useState } from 'react';
 import loadProjects from '../projects/loadProjects';
+import ContentElement from '../types/ContentElement';
 import { ProjectInfo } from '../types/interfaces';
 import Model from '../types/Model';
-
-// import Model from './Model.js';
-// import GUI from './GUI.js'
-// import loadProjects from "./OLD/projects/loadProjects";
 import GUI from './GUI';
 
 const Controller : FC  = () => {
@@ -42,11 +39,29 @@ const Controller : FC  = () => {
         return infoObjects;
     }
 
+    function getContent(id:string) : ContentElement[] {
+        let contentArray = new Array<ContentElement>();
+        if (_model.Projects !== null) {
+            let node = _model.Projects.get(id)?.Content?.Head;
+            while (node !== null && node !== undefined){
+                contentArray.push(node.Value);
+                node = node.Next;
+            }
+
+
+
+        }
+        return contentArray;
+    }
+
 
     // _view is the GUI component
 
     return (
-            <GUI getCategoriesHandler={getCategories} getProjectInfoHandler={getProjectInfo}/>
+            <GUI 
+            getCategoriesHandler={getCategories} 
+            getProjectInfoHandler={getProjectInfo}
+            getContentHandler={getContent}/>
     );
 } 
 export default Controller;

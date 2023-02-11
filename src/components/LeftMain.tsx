@@ -12,18 +12,23 @@ import ReturnArrow from "./ReturnArrow";
 type LeftMainProps = {
     callContactCardHandler: () => void;
     callIndexTabHandler: () => void;
+    callAboutPageHandler: () => void;
     hideIndexTabHandler: () => void;
     hideContactCardHandler: () => void;
-
+    hideProjectTabHandler: () => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHandler, hideIndexTabHandler, hideContactCardHandler}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHandler, callAboutPageHandler, hideIndexTabHandler, hideContactCardHandler, hideProjectTabHandler}): ReactElement => {
 
     function handleCallContactCard() {
         callContactCardHandler();
     }
     function handleCallIndexTab() {
         callIndexTabHandler();
+    }
+
+    function handleCallAboutPage() {
+        callAboutPageHandler();
     }
 
     function handleExitAllTabs(e:any) {
@@ -46,6 +51,7 @@ const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHand
 
         if (hideIndex)hideIndexTabHandler();
         if (hideContact) hideContactCardHandler();
+        hideProjectTabHandler();
     }
 
     return(
@@ -59,7 +65,7 @@ const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHand
                 <p>
                     I am a multi-disciplinary designer and developer operating at the intersection of design, technology and art. I like to solve problems and build things. I am professionally trained in architecture and computer science.
                 </p>
-                <div id="btn_profile">
+                <div id="btn_profile" onClick={handleCallAboutPage}>
                     <div>
                         Full Profile
                     </div>

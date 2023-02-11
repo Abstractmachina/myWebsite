@@ -3,9 +3,15 @@ import { ProjectInfo } from '../types/interfaces';
 
 type IndexTableProps = {
     projectInfo: ProjectInfo[];
+    selectProjectHandler: (id:string) => void;
 }
 
-const ProjectIndexTable : FC<IndexTableProps> = ( {projectInfo}):ReactElement => {
+const ProjectIndexTable : FC<IndexTableProps> = ( {projectInfo, selectProjectHandler}):ReactElement => {
+
+
+    function handleSelectProject(e:any, id:string) {
+        selectProjectHandler(id);
+    }
 
     return (
         <div className="indexTableContainer">
@@ -18,7 +24,7 @@ const ProjectIndexTable : FC<IndexTableProps> = ( {projectInfo}):ReactElement =>
                 <tbody>
                     {projectInfo.map(p => {
                         return (
-                            <tr id={p.id}>
+                            <tr id={p.id} key={p.id} onClick={(e) => handleSelectProject(e, p.id) }>
                                 <td>{p.year}</td>
                                 <td>{p.title}</td>
                                 <td>{p.location}</td>

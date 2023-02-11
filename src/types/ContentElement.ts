@@ -19,6 +19,15 @@ class ContentElement {
         let output = `ContentElement(${this._tag}, ${this._content}, innerHtml:${this._innerHtml}, attributes: ${this._attributes}, children: ${this._children})`;
         return output;
     }
+
+    get Tag():string {
+        return this._tag;
+    }
+    get Content():string|number{ return this._content}
+    get HasInnerHtml():boolean {return this._innerHtml}
+    get Attributes():[string,string][] | undefined {return this._attributes} 
+    get Children() : ContentElement[] | undefined {return this._children}
+
 }
 
 export default ContentElement;

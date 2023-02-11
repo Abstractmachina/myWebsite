@@ -3,31 +3,41 @@ import preview_design from '../assets/matnet/fab_05.jpg';
 import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
 
-
-
 import React, { FC, ReactElement, useState } from 'react';
+import { ProjectInfo } from '../types/interfaces';
+import ContentElement from '../types/ContentElement';
+
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
 import AboutTab from './AboutTab';
-import IndexTab from './IndexTab';
+import IndexTabController from './IndexTabController';
 import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 
-import '../styles/animations.scss'
-import { ProjectInfo } from '../types/interfaces';
+import '../styles/style_main.scss';
+import '../styles/style_anim_projectArrow.scss';
+import '../styles/style_anim_checkboxes.scss';
+import '../styles/style_mobile.scss';
+import '../styles/AboutTab.scss';
+import '../styles/animations.scss';
+import '../styles/IndexTab.scss';
 
 type GuiProps = {
     getCategoriesHandler: () => string[] | null;
     getProjectInfoHandler: (categories:string[]) => ProjectInfo[];
+    getContentHandler: (id:string) => ContentElement[];
 }
 
-const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): ReactElement => {
+const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
 
     const _swipeSensitivity:number = 60;
 
     const [showContact, setShowContact] = useState(false);
     const [showIndex, setShowIndex] = useState(false);
+    const [showProject, setShowProject] = useState(false);
+
+    const [currentProjectContent, setCurrentProjectContent] = useState(new Array<ContentElement>());
 
 
     function callContactCard() {
@@ -44,6 +54,17 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): React
         setShowIndex(false);
     }
 
+    function callProjectTab() {
+        setShowProject(true);
+    }
+    function hideProjectTab() {
+        setShowProject(false);
+    }
+
+    function callAboutPage() {
+
+    }
+
     function handleGetCategories():string[] | null {
         return getCategoriesHandler();
     }
@@ -52,38 +73,63 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): React
         return getProjectInfoHandler(categories);
     }
 
-       // onProjectPageCalled = (id) => {
-    //     const project = this._model.getProject(id);
-    //     this._view.displayProject(project.HtmlContent);
+    function handleSelectProject(id:string) {
+        let content = getContentHandler(id);
+        setCurrentProjectContent(content);
+        callProjectTab();
+    }
+
+    // function handleGetContent() {
+    //     getContentHandler();
+    // }
+
+    // bindCallProjectPages(handler) {
+    //     const table = document.querySelector('.projectIndexTable');
+    //     const rows = table.querySelectorAll('tr');
+    //     for (let i = 0; i < rows.length; i++) {
+    //         const row = rows[i];
+    //         row.addEventListener('click', () => {
+    //             handler(row.id);
+    //             for (let j = 0; j < rows.length; j++) {
+    //                 rows[j].classList.remove('selected');
+    //             }
+    //             row.classList.add('selected');
+    //         })
+    //     }
     // }
 
     return (
         <div className='gui'>
             <LeftMain 
-            callContactCardHandler={callContactCard} 
-            callIndexTabHandler={callIndexTab} 
-            hideIndexTabHandler= {hideIndexTab}
-            hideContactCardHandler = {hideContactCard}/>
+                callContactCardHandler={callContactCard} 
+                callIndexTabHandler={callIndexTab} 
+                callAboutPageHandler={callAboutPage}
+                hideIndexTabHandler= {hideIndexTab}
+                hideContactCardHandler = {hideContactCard}
+                hideProjectTabHandler = {hideProjectTab}/>
             <RightMain/>
             <Footer/>
             <AboutTab/>
-            <IndexTab show={showIndex} getCategoriesHandler={handleGetCategories} getProjectInfoHandler={handleGetProjectInfo}/>
-            <ProjectTab/>
-            <ContactTab show={showContact} hideContact={hideContactCard}/>
+            <IndexTabController 
+                show={showIndex} 
+                getCategoriesHandler={handleGetCategories} 
+                getProjectInfoHandler={handleGetProjectInfo}
+                selectProjectHandler={handleSelectProject}/>
+            <ProjectTab 
+                show={showProject} 
+                content={currentProjectContent}/>
+            <ContactTab 
+                show={showContact} 
+                hideContact={hideContactCard}/>
         </div>
     );
 
     //     //setup bindings
-    //     this._bindProfileButton();
+
     //     this._bindExitTabsOnLeftMainClicked();
-    //     this._bindCallIndex();
-    //     this._bindSelAllCheckbox();
-    //     this._bindSelNoneCheckbox();
     //     this._bindTabLeftEdges();
     //     this._bindSwipeProjectExit();
     //     this._bindSwipeAboutExit();
-    //     this._bindCallContactCard();
-    //     this._bindExitContactCard();
     //     this._bindSwipeIndexExit();
     //     this._bindSwipeMainMenu();
         
@@ -91,28 +137,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): React
     
     // //==================    BINDINGS =====================================
     
-    // _bindProfileButton() {
-    //     const btn_profile = this._leftMain.querySelector('#btn_profile');
-    //     btn_profile.addEventListener('click', (e) => {
-    //         //transition in about tab
-    //         let target = e.target;
-
-    //         while (target.parentNode) {
-    //             target = target.parentNode;
-    //             if (target.id === 'btn_profile') {
-    //                 document.querySelector('.about').classList.toggle('slideInFromRight');
-    //                 break;
-    //             }
-    //         }
-            
-    //     });
-    // }
-
-    // _bindCallIndex() {
-    //     this._btn_index.addEventListener('click', () => {
-    //         this._enterIndexTab();
-    //     });
-    // }
 
     // _bindExitTabsOnLeftMainClicked() {
     //     this._leftMain.addEventListener('click', (e) =>{
@@ -138,20 +162,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler}): React
     //     });
     // }
 
-    // bindCallProjectPages(handler) {
-    //     const table = document.querySelector('.projectIndexTable');
-    //     const rows = table.querySelectorAll('tr');
-    //     for (let i = 0; i < rows.length; i++) {
-    //         const row = rows[i];
-    //         row.addEventListener('click', () => {
-    //             handler(row.id);
-    //             for (let j = 0; j < rows.length; j++) {
-    //                 rows[j].classList.remove('selected');
-    //             }
-    //             row.classList.add('selected');
-    //         })
-    //     }
-    // }
+
 
     // _bindTabLeftEdges() {
     //     const edges = document.querySelectorAll('.leftEdge');

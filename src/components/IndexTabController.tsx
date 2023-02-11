@@ -8,9 +8,10 @@ type IndexProps = {
     show:boolean,
     getCategoriesHandler: () => string[] | null,
     getProjectInfoHandler: (categoryFilters: string[]) => ProjectInfo[],
+    selectProjectHandler: (id:string) => void;
 }
 
-const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler}):ReactElement => {
+const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler, selectProjectHandler}):ReactElement => {
 
     
     const [projectInfo, setProjectInfo] = useState(new Array<ProjectInfo>());
@@ -33,6 +34,10 @@ const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoH
         setProjectInfo(infoObjects);
     }
 
+    function handleSelectProject(id:string) {
+        selectProjectHandler(id);
+    }
+
     return (
         <CSSTransition
             in={show}
@@ -45,11 +50,11 @@ const IndexTab : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoH
                 <ProjectFilterGroup 
                     getCategoriesHandler={handleGetCategories}
                     filterRequestHandler={handleFilterRequest}/>
-                <ProjectIndexTable projectInfo={projectInfo}/>
+                <ProjectIndexTable projectInfo={projectInfo} selectProjectHandler={handleSelectProject}/>
             </div>
         </CSSTransition>
     )
 };
 
 
-export default IndexTab;
+export default IndexTabController;
