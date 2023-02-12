@@ -1,5 +1,7 @@
 
-
+/**
+ * A generic class that holds HTML-like information of elements. ContentElement objects are intended to be processed by a converter class/method to be useful for specific frameworks/GUIs (e.g. React or HTML).
+ */
 class ContentElement {
     private _tag:string = '';
     private _content: string|number = '';
@@ -18,6 +20,42 @@ class ContentElement {
     toString() :string {
         let output = `ContentElement(${this._tag}, ${this._content}, innerHtml:${this._innerHtml}, attributes: ${this._attributes}, children: ${this._children})`;
         return output;
+    }
+
+    /**
+     * Creates an Image ContentElement from provided source path.
+     * @remarks 
+     * @param src - relative path of image
+     * @returns a new ContentElement
+     */
+    static Image(src:string) : ContentElement {
+        return new ContentElement('img', 
+            '', 
+            false, 
+            {
+                attributes: {"src": src} }
+        );
+    }
+
+    static Figure(imgSrc:string = '', caption:string = '') : ContentElement {
+        
+        let figure = new ContentElement('figure', 
+            '',
+            false,
+            {
+                children: [
+                    new ContentElement("img", '', false, {
+                        attributes: {src: imgSrc}
+                    }),
+                    new ContentElement('figcaption', `fig: ${caption}`, false)
+                ]
+            }
+        )
+        return figure;    
+    }
+    
+    static H3(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('h3', content, hasInnerHTML);
     }
 
     get Tag():string {return this._tag;}

@@ -1,6 +1,5 @@
 import Project from "../types/Project"
-import React, {ReactElement} from 'react';
-// import { createElementText, createFigure } from "../scripts/util";
+import ContentElement from "../types/ContentElement";
 
 //media
 import cat0 from '../assets/printFast1/catalog0.jpg';
@@ -11,7 +10,6 @@ import dia0 from '../assets/printFast1/diagram00.jpg';
 import dia1 from '../assets/printFast1/diagram01.jpg';
 import print0 from '../assets/printFast1/print0.jpg';
 import print1 from '../assets/printFast1/print1.jpg';
-import ContentElement from "../types/ContentElement";
 
 const printFast1 = () => {
     let proj = new Project("Print Fast, Pile High V1!", 2018, "Shanghai, China");
@@ -60,71 +58,52 @@ const printFast1 = () => {
                 attributes: {className: 'projectVideoContainer'}
             }
         ),
-        new ContentElement('figure', 
-            '',
+        ContentElement.Figure(print0, 'Students operating robot'),
+        ContentElement.Figure(print1, 'Students working around the lab'),
+        ContentElement.Figure(cat1, 'print failures. Accidental beauty is sometimes also found'),
+        ContentElement.Figure(cat2, 'Successful prints. Over time, failures turn to sucesses, turn to refined objects'),
+        ContentElement.Figure(cat3, 'Quantity in iterative design trumps quality'),
+    );
+            
+    //FEATURES
+    proj.pushContents(
+        new ContentElement('h2', 'Features', false),
+        new ContentElement('p', 
+            'The plugin implements the SDF function approach to generate 3D-printable forms outlined in the paper <em>Function Representation for Robotic 3D Printed Concrete</em> (Bhooshan 2018).', 
+            true),
+        new ContentElement('ul', 
+            '', 
+            false, 
+            { children: [
+                new ContentElement('li', "Blending, boolean and plane trimming operations to manipulate field functions", false),
+                new ContentElement('li', "Robotic kinematic simulation and GCode Generation for direct fabrication link", false),
+                new ContentElement('li', "Display components to visualize geometric output", false),
+                ]
+            }
+        ),
+        ContentElement.Figure(dia0,'Summary diagram'),
+        ContentElement.Figure(dia1,'Basic principle of Frep-modeling'),
+    )
+
+
+    //TECHNOLOGIES
+    proj.pushContents(
+        new ContentElement('h2', 
+            'Technologies',
+            false),
+        new ContentElement('ul', 
+            '', 
             false,
             {
                 children: [
-                    new ContentElement("img", '', false, {
-                        attributes: {src: print0}
-                    }),
-                    new ContentElement('figcaption', 'fig: Students operating robot', false)
+                new ContentElement('li', 'C#', false),
+                new ContentElement('li', 'KukaPRC for robotic kinematic simulation and GCode generation', false),
+                new ContentElement('li', 'SpatialSlur - A geometric processing library', false),
+                new ContentElement('li', '2.5D data matrix implementation in Grasshopper', false),
                 ]
             }
-        )
-    );
-
-    // const figure = document.createElement('figure');
-    // const img = new Image();
-    // img.src = source;
-    // const capt = document.createElement('figcaption');
-    // capt.textContent = 'fig: ' + caption;
-    // figure.append(img, capt);
-            
-        // const img_print0 = createFigure(print0, "Students operating robot")
-        // const img_print1 = createFigure(print1, "students working around the lab");
-        // const img_cat1 = createFigure(cat1, 'print failures. Accidental beauty is sometimes also found');
-        // const img_cat2 = createFigure(cat2, 'Successful prints. Over time, failures turn to sucesses, turn to refined objects');
-        // const  img_cat3 = createFigure(cat3, 'Quantity in iterative design trumps quality');
-    
-        // proj.pushContents(introHeading, intro0, intro1, vid_failures,img_print0, img_print1, img_cat1, img_cat2,img_cat3);
-
-        // //Intro
-
-    // proj.pushContents(introHeading, intro0, intro1, vid_failures,img_print0, img_print1, img_cat1, img_cat2,img_cat3);
-
-
-
-    // //FEATURES
-    // const featureHeading = createElementText('h2', 
-    //     "Features");
-    // const feature = document.createElement('p');
-    // feature.innerHTML = 
-    //     "The plugin implements the SDF function approach to generate 3D-printable forms outlined in the paper <em>Function Representation for Robotic 3D Printed Concrete</em> (Bhooshan 2018).";
-
-    // const featureList = document.createElement('ul');
-    // const p1 = document.createElement('li');
-    // p1.textContent = "Blending, boolean and plane trimming operations to manipulate field functions";
-    // const p2 = document.createElement('li');
-    // p2.textContent = "Robotic kinematic simulation and GCode Generation for direct fabrication link";
-    // const p3 = document.createElement('li');
-    // p3.textContent = "Display components to visualize geometric output";
-    // featureList.append(p1,p2,p3);
-
-    // const img_diagram0 = createFigure(dia0, 'Summary diagram');
-    // const img_diagram1 = createFigure(dia1, 'Basic principle of Frep-modeling');
-
-    // proj.pushContents(featureHeading, feature, img_diagram0, img_diagram1, featureList);
-
-    // //TECHNOLOGIES
-    // const techHeading = createElementText('h2', 'Technologies');
-    // const tech = document.createElement('ul');
-    // const tech1 = createElementText('li', 'C#');
-    // const tech2 = createElementText('li', 'KukaPRC for robotic kinematic simulation and GCode generation');
-    // const tech3 = createElementText('li', 'SpatialSlur');
-    // const tech4 = createElementText('li', '2.5D data matrix implementation in Grasshopper');
-    // tech.append(tech1, tech2, tech3,tech4);
-
+        ),
+    )
     return proj;
 };
 

@@ -23,52 +23,42 @@ const matnet = () => {
 
     proj.Subtitle = "Mass-Customized Housing for Cohesive Communities. AADRL Master Thesis"
 
-    const title = new ContentElement('h1', proj.Title, false);
-    const subtitle = new ContentElement('h2', proj.Subtitle, false);
-    const year = new ContentElement('h5', 'Project Year: ' + proj.Year, false);
-    const location = new ContentElement('h5', 'Project Location: ' + proj.Location, false);
-
-    const img_cover = new ContentElement(
-        'img', 
-        '', 
-        false, 
-         {attributes: {"src":render_facade} }
-    );
-
-    const introHeading =  new ContentElement('h3', 
-        "Introduction", false);
-    const intro =  new ContentElement('p', 
-        'Material Networks is the culmination of my research at the Architectural Association - Design Research Lab. The project engages with the rapid digitization of the built environment and looks at how design agency can adapt to a fully automated, computer-driven world while bringing the human element to the forefront of the discourse. Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.', false);
-
-    const team =  new ContentElement('p', 'Design Team: Taole Chen, Suchart (Bon) Ouypornchaisakul, Jeffrey Widjaja<br>Tutors: Shajay Bhooshan, Alicia Nahmad<br><a href="https://drl.aaschool.ac.uk/">AADRL</a>', true);
-
-    const img_interior = new ContentElement(
-        'img', 
-        '', 
-        false, 
-        {attributes: {"src":render_interior} }
+    proj.pushContents(
+        new ContentElement('h1', proj.Title, false),
+        new ContentElement('h2', proj.Subtitle, false),
+        new ContentElement('h5', 'Project Year: ' + proj.Year, false),
+        new ContentElement('h5', 'Project Location: ' + proj.Location, false),
+        ContentElement.Image(render_facade),
+        new ContentElement('h3', "Introduction", false),
+        new ContentElement('p', 
+            'Material Networks is the culmination of my research at the Architectural Association - Design Research Lab. The project engages with the rapid digitization of the built environment and looks at how design agency can adapt to a fully automated, computer-driven world while bringing the human element to the forefront of the discourse. Material Networks proposes a negotiated communal housing system that provides custom-tailored neighborhoods to cohesive communities tied by their shared cultures, economies and governance. Building-scale additive manufacturing is investigated as an automated fabrication technology that can deliver mass-customized, integrated dwellings through a generative AI framework.', 
+            false
+        ),
+        new ContentElement('p', 
+            'Design Team: Taole Chen, Suchart (Bon) Ouypornchaisakul, Jeffrey Widjaja<br>Tutors: Shajay Bhooshan, Alicia Nahmad<br><a href="https://drl.aaschool.ac.uk/">AADRL</a>', 
+            true),
+        ContentElement.Image(render_interior)
     )
-    proj.pushContents(title, subtitle, year, location, img_cover, introHeading, intro, team, img_interior);
 
-    // //level 0 neighborhood
-    // const neighHead = createElementText('h3', "Level 0 Neighborhood");
-    // const neighsubHead = createElementText('h4', 'The Building as a Network')
-    // const neigh0 = createElementText('p', 
-    //     "Co-opting techniques from complex network analysis, at the neighborhood level, the research looks into developing an operational tool for extracting meaningful spatial relationship from the social network of a community.");
-    // const neigh1 = createElementText('p', 
-    //     'The social relationships of a given community are captured in a relational roster in the form of an encoded data matrix, allowing computers to easily read and process the information. The data matrix is subsequently used to construct a network graph. The graph is useful because it captures multi-scalar information in a single, cohesive data structure, opening up computational ways of engaging with the information.');
-    // const neigh2 = createElementText('p', 
-    //     'The graph is given agency by deploying a rule-based growth algorithm on the project site. A path-finding logic is used to generate schemes, with specific rule determining the resulting character of the neighborhood while ensuring the computed spatial relationships are maintained. The decoupling of formal agency from the hands of the human designer signifies a crucial step towards a fully autonomous construction framework. Yet, with the rule-based system, designers are still given control without the possibility to resort to the sculpting of form, thus prioritizing a logic-driven approach, rather than aesthetics.');
+    //level 0 neighborhood
+    proj.pushContents(
+        new ContentElement('h3', "Level 0 Neighborhood", false),
+        new ContentElement('h4', 'The Building as a Network', false),
+        new ContentElement('p', 
+            "Co-opting techniques from complex network analysis, at the neighborhood level, the research looks into developing an operational tool for extracting meaningful spatial relationship from the social network of a community.", false),
+            new ContentElement('p', 
+            'The social relationships of a given community are captured in a relational roster in the form of an encoded data matrix, allowing computers to easily read and process the information. The data matrix is subsequently used to construct a network graph. The graph is useful because it captures multi-scalar information in a single, cohesive data structure, opening up computational ways of engaging with the information.', false),
+            new ContentElement('p', 
+            'The graph is given agency by deploying a rule-based growth algorithm on the project site. A path-finding logic is used to generate schemes, with specific rule determining the resulting character of the neighborhood while ensuring the computed spatial relationships are maintained. The decoupling of formal agency from the hands of the human designer signifies a crucial step towards a fully autonomous construction framework. Yet, with the rule-based system, designers are still given control without the possibility to resort to the sculpting of form, thus prioritizing a logic-driven approach, rather than aesthetics.',false),
+        ContentElement.Image(anim_zoomScales_00),
+        ContentElement.Image(anim_growth_all),
+        ContentElement.Image(anim_growth_turntable)
+    ),
 
-    // const vid_zoomScales = createImage(anim_zoomScales_00);
-    // const vid_growth_all = createImage(anim_growth_all);
-    // const vid_growth_turntable = createImage(anim_growth_turntable);
-
-    // proj.pushContents(neighHead, neighsubHead, neigh0, neigh1, vid_zoomScales, neigh2, vid_growth_all, vid_growth_turntable);
-
-    // //level 1 home
-    // const unitHead = createElementText('h3', 
-    //     "Level 1 Home");
+    //level 1 home
+    proj.pushContents(
+        ContentElement.H3("Level 1 Home"),
+        
     // const unitSubHead = createElementText('h4', 
     //     'Home Is What You Do')
     // const unit0 = createElementText('p', 
