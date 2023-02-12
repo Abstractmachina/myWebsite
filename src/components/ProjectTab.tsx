@@ -2,7 +2,6 @@ import React, {FC, ReactElement} from 'react'
 import { CSSTransition } from 'react-transition-group';
 import ContentConverter from '../types/ContentConverter';
 import ContentElement from '../types/ContentElement';
-import Project from '../types/Project';
 
 type ProjectTabProps = {
     show:boolean;
@@ -16,7 +15,8 @@ const ProjectTab : FC<ProjectTabProps> = ({show, content}) : ReactElement => {
             in={show}
             appear={true}
             timeout={200}
-            classNames="slideFromRight">
+            classNames="slideFromRight"
+            unmountOnExit={true}>
             <div className="projectTab">
                 <div className="leftEdge">close</div>
                 <div className="projectContentContainer">

@@ -74,6 +74,8 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     }
 
     function handleSelectProject(id:string) {
+        setCurrentProjectContent(new Array<ContentElement>());
+
         let content = getContentHandler(id);
         setCurrentProjectContent(content);
         callProjectTab();

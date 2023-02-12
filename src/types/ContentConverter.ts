@@ -14,7 +14,6 @@ class ContentConverter {
             el = React.createElement(content.Tag, props, null );
         }
         else if (content.HasInnerHtml) {
-        
             props.dangerouslySetInnerHTML = 
             {
                 __html: content.Content,
