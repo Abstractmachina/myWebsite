@@ -1,5 +1,6 @@
 import React, {FC, ReactElement} from 'react'
 import { CSSTransition } from 'react-transition-group';
+import ContentConverter from '../types/ContentConverter';
 import ContentElement from '../types/ContentElement';
 import Project from '../types/Project';
 
@@ -19,20 +20,9 @@ const ProjectTab : FC<ProjectTabProps> = ({show, content}) : ReactElement => {
             <div className="projectTab">
                 <div className="leftEdge">close</div>
                 <div className="projectContentContainer">
-                    { 
-                    content.map( c=> {
-                        let props: Record<string, any> = { };
-                        if (c.Tag === 'img') props.src = (c.Attributes) ? c.Attributes["src"] : '';
-
-                        const el = React.createElement(c.Tag, {}, c.Content );
-                        el.key = idx++;
-                        
-                        return el;
-                        // switch (c.Tag) {
-                        //     case 'p':
-                        //         return (<p></p>)
-                        // }
-                        
+                    { content.map( c => {
+                        return ContentConverter.convertReact(c, idx.toString());
+                        idx++;
                     }) }
                 </div>
             </div>

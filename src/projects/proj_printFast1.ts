@@ -38,7 +38,7 @@ const printFast1 = () => {
         "img", 
         '', 
         false, 
-        { attributes: [["src", cat0]] }
+        { attributes: {"src": cat0}}
     );
     proj.pushContents(title, subtitle, year, location, git, img_cover, team);
         // //Intro

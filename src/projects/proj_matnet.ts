@@ -32,7 +32,7 @@ const matnet = () => {
         'img', 
         '', 
         false, 
-        {attributes: [["src",render_facade]] }
+         {attributes: {"src":render_facade} }
     );
 
     const introHeading =  new ContentElement('h3', 
@@ -46,7 +46,7 @@ const matnet = () => {
         'img', 
         '', 
         false, 
-        {attributes: [["src",render_interior]] }
+        {attributes: {"src":render_interior} }
     )
     proj.pushContents(title, subtitle, year, location, img_cover, introHeading, intro, team, img_interior);
 
