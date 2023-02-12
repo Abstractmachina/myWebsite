@@ -2,7 +2,7 @@
 /**
  * A generic class that holds HTML-like information of elements. ContentElement objects are intended to be processed by a converter class/method to be useful for specific frameworks/GUIs (e.g. React or HTML).
  */
-class ContentElement {
+export class ContentElement {
     private _tag:string = '';
     private _content: string|number = '';
     private _innerHtml:boolean = false;
@@ -53,10 +53,30 @@ class ContentElement {
         )
         return figure;    
     }
+
+    static VimeoClip(src:string, classes:string) : ContentElement{
+        return new ContentElement(
+            'div',
+            `<div style="padding:56.25% 0 0 0;position:relative"><iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="From Graph to Construction"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>`,
+            true,
+            { attributes: {
+                className: classes,
+                }
+            }
+        )
+    }
     
     static H3(content:string, hasInnerHTML:boolean = false) : ContentElement {
         return new ContentElement('h3', content, hasInnerHTML);
     }
+    static H4(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('h4', content, hasInnerHTML);
+    }
+    static P(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('p', content, hasInnerHTML);
+    }
+
+
 
     get Tag():string {return this._tag;}
     get Content():string|number{ return this._content}
