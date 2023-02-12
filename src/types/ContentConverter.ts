@@ -5,6 +5,7 @@ import React from 'react';
 
 class ContentConverter {
 
+    //Recursively builds react dom from ContentElement object. 
     static convertFromContentElement(content: ContentElement, key?:string): React.ReactElement {
         let props: Record<string, any> = { };
         let el;
@@ -43,6 +44,7 @@ class ContentConverter {
         return el;
     }
 
+    
     static buildDOM(el: ContentElement) : React.ReactElement[] | null {
 
         if (!el.Children) return null;
