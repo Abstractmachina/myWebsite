@@ -65,6 +65,13 @@ export class ContentElement {
             }
         )
     }
+
+    static UL(listItems:ContentElement[]) : ContentElement {
+        return new ContentElement('ul', null, false, {
+            children: listItems,
+            }
+        );
+    }
     
     static H1(content:string, hasInnerHTML:boolean = false) : ContentElement {
         return new ContentElement('h1', content, hasInnerHTML);
