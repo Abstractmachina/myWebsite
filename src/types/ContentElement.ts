@@ -4,12 +4,12 @@
  */
 export class ContentElement {
     private _tag:string = '';
-    private _content: string|number = '';
+    private _content: string|number|null = null;
     private _innerHtml:boolean = false;
     private _attributes?: Record<string, string>;
     private _children?: ContentElement[];
 
-    constructor(tag:string, content:string|number, innerHtml: boolean, obj: { attributes?: Record<string,string>, children?: ContentElement[] } = {}) {
+    constructor(tag:string, content:string|number|null, innerHtml: boolean = false, obj: { attributes?: Record<string,string>, children?: ContentElement[] } = {}) {
         this._tag = tag;
         this._content = content;
         this._innerHtml = innerHtml;
@@ -66,11 +66,20 @@ export class ContentElement {
         )
     }
     
+    static H1(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('h1', content, hasInnerHTML);
+    }
+    static H2(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('h2', content, hasInnerHTML);
+    }
     static H3(content:string, hasInnerHTML:boolean = false) : ContentElement {
         return new ContentElement('h3', content, hasInnerHTML);
     }
     static H4(content:string, hasInnerHTML:boolean = false) : ContentElement {
         return new ContentElement('h4', content, hasInnerHTML);
+    }
+    static H5(content:string, hasInnerHTML:boolean = false) : ContentElement {
+        return new ContentElement('h5', content, hasInnerHTML);
     }
     static P(content:string, hasInnerHTML:boolean = false) : ContentElement {
         return new ContentElement('p', content, hasInnerHTML);
@@ -79,7 +88,7 @@ export class ContentElement {
 
 
     get Tag():string {return this._tag;}
-    get Content():string|number{ return this._content}
+    get Content():string|number|null { return this._content}
     get HasInnerHtml():boolean {return this._innerHtml}
     get Attributes():Record<string,string> | undefined {return this._attributes} 
     get Children() : ContentElement[] | undefined {return this._children}
