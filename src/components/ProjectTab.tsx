@@ -21,8 +21,9 @@ const ProjectTab : FC<ProjectTabProps> = ({show, content}) : ReactElement => {
                 <div className="leftEdge">close</div>
                 <div className="projectContentContainer">
                     { content.map( c => {
-                        return ContentConverter.convertReact(c, idx.toString());
                         idx++;
+                        return ContentConverter.convertFromContentElement(c, idx.toString());
+                        
                     }) }
                 </div>
             </div>

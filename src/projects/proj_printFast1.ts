@@ -23,43 +23,73 @@ const printFast1 = () => {
     proj.addCategory("design");
     proj.addCategory("code");
 
-
-    // const title = createElementText('h1', proj.Title);
-    const title  = new ContentElement("h1", proj.Title, false);
-    const subtitle = new ContentElement('h2', proj.Subtitle, false);
-    const year = new ContentElement('h5', 'Project Year: ' + proj.Year, false);
-    const location = new ContentElement('h5', 'Project Location: ' + proj.Location, false);
-
-    const git = new ContentElement('h5', '<a href=https://github.com/Abstractmachina/PrintFastPileHigh_V2>Github</a>', true);
-
-    const team = new ContentElement('p', '<strong>Team:</strong> Shajay Bhooshan, Taole Chen, Federico Borello, Xuexin (Snow) Duan<br><strong>Assistants:</strong> Yifan Zhou, Ce Li<br>', true);
-  
-    const img_cover = new ContentElement(
-        "img", 
-        '', 
-        false, 
-        { attributes: {"src": cat0}}
+    proj.pushContents(
+        new ContentElement("h1", proj.Title, false),
+        new ContentElement('h2', proj.Subtitle, false),
+        new ContentElement('h5', 'Project Year: ' + proj.Year, false),
+        new ContentElement('h5', 'Project Location: ' + proj.Location, false),
+        new ContentElement('h5', 
+            '<a href=https://github.com/Abstractmachina/PrintFastPileHigh_V2>Github</a>', 
+            true),
+        new ContentElement('p', 
+            '<strong>Team:</strong> Shajay Bhooshan, Taole Chen, Federico Borello, Xuexin (Snow) Duan<br><strong>Assistants:</strong> Yifan Zhou, Ce Li<br>', 
+            true),
+        new ContentElement(
+            "img", 
+            '', 
+            false, 
+            { attributes: {"src": cat0}}
+        )
     );
-    proj.pushContents(title, subtitle, year, location, git, img_cover, team);
-        // //Intro
-    // const introHeading = createElementText('h3', 
-    //     "Introduction");
-    // const intro0 = createElementText('p', 
-    //     "Print Fast Pile High was a series of workshops initiated by the ZHCode team to develop design methodologies for 3D printing applications, more specifically the workshops served as a way to combine principles found in unreinforced masonry and imaging techniques gleaned from the medical imaging field. A novel technique using function-representation (Frep) to generate 3D printable shapes is applied to clay printing. The students were given the challenge to print fast and stack high, thus giving them a fun constraint to test their designs on. The first workshop was held in Shanghai, China at Tongji University for the occasion of the Digital Futures Conference where leaders from various disciplines come together to explore the implications of digital technologies.");
-    // const intro1 = createElementText('p', 
-    //     "Students were encouraged to iterate fast and fail fast, building an intuitive understanding of the design space in the process. A custom toolkit connecting design with fabrication developed specifically for this workshop took out the need for the students to learn the non-essential details and get to designing from day 1.")
+
+    //INTRODUCTION
+    proj.pushContents(
+        new ContentElement('h3', 
+            "Introduction", 
+            false),
+        new ContentElement('p', 
+            "Print Fast Pile High was a series of workshops initiated by the ZHCode team to develop design methodologies for 3D printing applications, more specifically the workshops served as a way to combine principles found in unreinforced masonry and imaging techniques gleaned from the medical imaging field. A novel technique using function-representation (Frep) to generate 3D printable shapes is applied to clay printing. The students were given the challenge to print fast and stack high, thus giving them a fun constraint to test their designs on. The first workshop was held in Shanghai, China at Tongji University for the occasion of the Digital Futures Conference where leaders from various disciplines come together to explore the implications of digital technologies.", 
+            false),
+        new ContentElement('p',
+            "Students were encouraged to iterate fast and fail fast, building an intuitive understanding of the design space in the process. A custom toolkit connecting design with fabrication developed specifically for this workshop took out the need for the students to learn the non-essential details and get to designing from day 1.",
+            false),
+        new ContentElement('div', 
+            '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/792779095?h=c1320e9415&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Print Fast Pile High - Clay 3D printing failures"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>',
+            true,
+            {
+                attributes: {className: 'projectVideoContainer'}
+            }
+        ),
+        new ContentElement('figure', 
+            '',
+            false,
+            {
+                children: [
+                    new ContentElement("img", '', false, {
+                        attributes: {src: print0}
+                    }),
+                    new ContentElement('figcaption', 'fig: Students operating robot', false)
+                ]
+            }
+        )
+    );
+
+    // const figure = document.createElement('figure');
+    // const img = new Image();
+    // img.src = source;
+    // const capt = document.createElement('figcaption');
+    // capt.textContent = 'fig: ' + caption;
+    // figure.append(img, capt);
+            
+        // const img_print0 = createFigure(print0, "Students operating robot")
+        // const img_print1 = createFigure(print1, "students working around the lab");
+        // const img_cat1 = createFigure(cat1, 'print failures. Accidental beauty is sometimes also found');
+        // const img_cat2 = createFigure(cat2, 'Successful prints. Over time, failures turn to sucesses, turn to refined objects');
+        // const  img_cat3 = createFigure(cat3, 'Quantity in iterative design trumps quality');
     
-    // const vid_failures = document.createElement('div');
-    // vid_failures.classList.add('projectVideoContainer');
-    // vid_failures.innerHTML = 
-    //     '<div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/792779095?h=c1320e9415&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Print Fast Pile High - Clay 3D printing failures"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>';
+        // proj.pushContents(introHeading, intro0, intro1, vid_failures,img_print0, img_print1, img_cat1, img_cat2,img_cat3);
 
-
-    // const img_print0 = createFigure(print0, "Students operating robot")
-    // const img_print1 = createFigure(print1, "students working around the lab");
-    // const img_cat1 = createFigure(cat1, 'print failures. Accidental beauty is sometimes also found');
-    // const img_cat2 = createFigure(cat2, 'Successful prints. Over time, failures turn to sucesses, turn to refined objects');
-    // const  img_cat3 = createFigure(cat3, 'Quantity in iterative design trumps quality');
+        // //Intro
 
     // proj.pushContents(introHeading, intro0, intro1, vid_failures,img_print0, img_print1, img_cat1, img_cat2,img_cat3);
 
