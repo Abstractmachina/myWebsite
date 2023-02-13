@@ -37,6 +37,14 @@ export class ContentElement {
         );
     }
 
+    static Images(...args:string[]) :ContentElement[] {
+        const output = new Array<ContentElement>();
+        for (let i = 0; i < args.length; i++) {
+            output.push(ContentElement.Image(args[i]));
+        }
+        return output;
+    }
+
     static Figure(imgSrc:string = '', caption:string = '') : ContentElement {
         
         let figure = new ContentElement('figure', 
