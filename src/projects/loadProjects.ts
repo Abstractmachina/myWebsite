@@ -8,7 +8,7 @@ import matnet from './proj_matnet';
 import drones from './proj_drones';
 import nlp4ms from "./proj_nlp4ms";
 import organic from "./proj_organic";
-// import londonBldg from "./proj_londonB";
+import londonBldg from "./proj_londonB";
 // import gaudi from "./proj_gaudi";
 // import barbican from "./proj_barbican";
 
@@ -22,7 +22,7 @@ const loadProjects = (): Map<string, Project> => {
     projects.set('drones', drones());
     projects.set('nlp4ms', nlp4ms());
     projects.set('organic', organic());
-    // projects.set('londonB', londonBldg());
+    projects.set('londonB', londonBldg());
     // projects.set('gaudi', gaudi());
     // projects.set('barbican', barbican());
 

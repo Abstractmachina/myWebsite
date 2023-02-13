@@ -19,7 +19,7 @@ import i12 from '../assets/organic/oc_yoga-5056.jpg';
 import i13 from '../assets/organic/oc_yoga-5069.jpg';
 
 
-const organic = () => {
+const organic = () : Project => {
     let proj = new Project("Organic Code Apparel", 2022, "Jeju, South Korea");
 
     proj.addCategory("art");
@@ -28,7 +28,6 @@ const organic = () => {
     proj.Subtitle = "Product Shoot for Bralette and Top Series";
 
 
-    //HEADING
      //HEADING
      proj.pushContents(
         ce.H1(proj.Title),
