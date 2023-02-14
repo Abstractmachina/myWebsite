@@ -3,7 +3,7 @@ import preview_design from '../assets/matnet/fab_05.jpg';
 import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
 
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
@@ -32,12 +32,22 @@ type GuiProps = {
     getContentHandler: (id:string) => ContentElement[];
 }
 
+type TabStates = {
+    ContactTab: boolean,
+    IndexTab:boolean,
+    ProjectTab:boolean,
+    AboutTab:boolean,
+}
+
 const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
 
     const location = useLocation();
     const background = location.state && location.state.background;
-    console.log(background);
     const _swipeSensitivity:number = 60;
+
+
+    let states: TabStates;
+
 
     const [showContact, setShowContact] = useState(false);
     const [showIndex, setShowIndex] = useState(false);
@@ -89,7 +99,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
     return (
         <div className='gui'> 
-            {/* <LeftMain 
+            <LeftMain 
                 callContactCardHandler={callContactCard} 
                 callIndexTabHandler={callIndexTab} 
                 callAboutPageHandler={callAboutPage}
@@ -97,14 +107,9 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 hideContactCardHandler = {hideContactCard}
                 hideProjectTabHandler = {hideProjectTab}/>
             <RightMain/>
-            <Footer/> */}
-
-            <Routes location={background||location}>
-                <Route path='/' element={<Main />} >
-                    <Route path='/about' element={<AboutTab/>} />
-                    <Route path='/contact' element={<ContactTab/>} />
-                </Route>
-            {/* <IndexTabController 
+            <Footer/>
+            <AboutTab/>
+            <IndexTabController 
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
                 getProjectInfoHandler={handleGetProjectInfo}
@@ -114,17 +119,15 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 content={currentProjectContent}/>
             <ContactTab 
                 show={showContact} 
-                hideContact={hideContactCard}/> */}
-            
+                hideContact={hideContactCard}/>
         
-            </Routes>
-            {background && (
+            {/* {background && (
             <Routes>
                 <Route path="/about" element={<AboutTab />} />
                 <Route path='/contact' element={<ContactTab/>} />
 
             </Routes>
-             )}
+             )} */}
             
         </div>
     );

@@ -1,4 +1,5 @@
-import React, {FC, ReactElement} from 'react'
+import React, {FC, ReactElement, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import ContentConverter from '../types/ContentConverter';
 import ContentElement from '../types/ContentElement';
@@ -9,6 +10,15 @@ type ProjectTabProps = {
 }
 
 const ProjectTab : FC<ProjectTabProps> = ({show, content}) : ReactElement => {
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(show);
+        if (show) navigate('/projects');
+        else navigate(-1);
+    })
+
     let idx = 0;
     return (
         <CSSTransition

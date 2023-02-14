@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { useNavigate } from 'react-router-dom';
 
 const AboutTab = () => {
 
+    const navigate = useNavigate();
     const [show, setShow] = useState(false);
 
     function toggleThisPage(e:any) {
+        
+        if (!show) navigate('/about');
+        else {
+            navigate(-1);
+        }
+
         setShow(!show);
+
     }
 
     return (
