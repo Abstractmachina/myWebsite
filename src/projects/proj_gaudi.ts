@@ -18,30 +18,26 @@ const gaudi = () : Project => {
     proj.addCategory("ink");
 
     proj.pushContents(
-        
-    const title = createElementText('h1', proj.Title);
-    const subtitle = createElementText('h2', proj.Subtitle);
-    const year = createElementText('h5', 'Project Year: ' + proj.Year);
-    const location = createElementText('h5', 'Project Location: ' + proj.Location);
+        ce.H1(proj.Title),
+        ce.H2(proj.Subtitle),
+        ce.H5('Project Year: ' + proj.Year),
+        ce.H5('Project Location: ' + proj.Location),
+        ce.H5('<a href=https://www.inprnt.com/gallery/taole.chen/>Buy Prints</a>', true),
+    );
 
-    const brandLink = document.createElement('h5');
-    brandLink.innerHTML = '<a href=https://www.inprnt.com/gallery/taole.chen/>Buy Prints</a>'
+    proj.pushContents(
+        ce.H3("Introduction"),
+        ce.P('Studies of the Sagrada Familia in ink. The cathedral is designed by the great Gaudi, one of the greats in architecture. One of my favorite buildings.'),
+    );
 
-    const introHeading = createElementText('h3', 
-        "Introduction");
-    const intro = createElementText('p', 
-        'Studies of the Sagrada Familia in ink. The cathedral is designed by the great Gaudi, one of the greats in architecture. One of my favorite buildings.');
-
-    proj.pushContents(title, year, location, brandLink, introHeading, intro);
-
-    const img00 = createFigure(g00, "Section perspective of the grand nave");
-    const img01 = createFigure(g01, "A detail view from the transept looking up");
-    const img02 = createImage(g02);
-    const img03 = createImage(g03);
-    const img04 = createImage(g04);
-    const img05 = createImage(g05);
-
-    proj.pushContents(img00, img01, img02, img03, img04, img05)
+    proj.pushContents(
+        ce.Figure(g00, "Section perspective of the grand nave"),
+        ce.Figure(g01, "A detail view from the transept looking up"),
+        ce.Image(g02),
+        ce.Image(g03),
+        ce.Image(g04),
+        ce.Image(g05),
+    );
 
     return proj;
 };

@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { BrowserRouter as Router} from 'react-router-dom';
 import loadProjects from '../projects/loadProjects';
 import ContentElement from '../types/ContentElement';
 import { ProjectInfo } from '../types/interfaces';
@@ -36,6 +37,9 @@ const Controller : FC  = () => {
                 }
             })
         }
+        //sort projects descending by year
+        infoObjects.sort((a, b) => b.year - a.year);
+
         return infoObjects;
     }
 
@@ -47,9 +51,6 @@ const Controller : FC  = () => {
                 contentArray.push(node.Value);
                 node = node.Next;
             }
-
-
-
         }
         return contentArray;
     }
@@ -58,10 +59,12 @@ const Controller : FC  = () => {
     // _view is the GUI component
 
     return (
+        <Router>
             <GUI 
             getCategoriesHandler={getCategories} 
             getProjectInfoHandler={getProjectInfo}
             getContentHandler={getContent}/>
+        </Router>
     );
 } 
 export default Controller;

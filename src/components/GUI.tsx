@@ -6,7 +6,10 @@ import preview_art from '../assets/barbican_00.jpg';
 import React, { FC, ReactElement, useState } from 'react';
 import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 
+
+import Main from './Main';
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
@@ -31,6 +34,9 @@ type GuiProps = {
 
 const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
 
+    const location = useLocation();
+    const background = location.state && location.state.background;
+    console.log(background);
     const _swipeSensitivity:number = 60;
 
     const [showContact, setShowContact] = useState(false);
@@ -81,28 +87,9 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
         callProjectTab();
     }
 
-    // function handleGetContent() {
-    //     getContentHandler();
-    // }
-
-    // bindCallProjectPages(handler) {
-    //     const table = document.querySelector('.projectIndexTable');
-    //     const rows = table.querySelectorAll('tr');
-    //     for (let i = 0; i < rows.length; i++) {
-    //         const row = rows[i];
-    //         row.addEventListener('click', () => {
-    //             handler(row.id);
-    //             for (let j = 0; j < rows.length; j++) {
-    //                 rows[j].classList.remove('selected');
-    //             }
-    //             row.classList.add('selected');
-    //         })
-    //     }
-    // }
-
     return (
-        <div className='gui'>
-            <LeftMain 
+        <div className='gui'> 
+            {/* <LeftMain 
                 callContactCardHandler={callContactCard} 
                 callIndexTabHandler={callIndexTab} 
                 callAboutPageHandler={callAboutPage}
@@ -110,9 +97,14 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 hideContactCardHandler = {hideContactCard}
                 hideProjectTabHandler = {hideProjectTab}/>
             <RightMain/>
-            <Footer/>
-            <AboutTab/>
-            <IndexTabController 
+            <Footer/> */}
+
+            <Routes location={background||location}>
+                <Route path='/' element={<Main />} >
+                    <Route path='/about' element={<AboutTab/>} />
+                    <Route path='/contact' element={<ContactTab/>} />
+                </Route>
+            {/* <IndexTabController 
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
                 getProjectInfoHandler={handleGetProjectInfo}
@@ -122,7 +114,18 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 content={currentProjectContent}/>
             <ContactTab 
                 show={showContact} 
-                hideContact={hideContactCard}/>
+                hideContact={hideContactCard}/> */}
+            
+        
+            </Routes>
+            {background && (
+            <Routes>
+                <Route path="/about" element={<AboutTab />} />
+                <Route path='/contact' element={<ContactTab/>} />
+
+            </Routes>
+             )}
+            
         </div>
     );
 
@@ -162,41 +165,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     //                 this._aboutTab.classList.remove('slideInFromRight');
     //             }
     //     });
-    // }
-
-
-
-    // _bindTabLeftEdges() {
-    //     const edges = document.querySelectorAll('.leftEdge');
-
-    //     for (let i = 0; i < edges.length;i++) {
-    //         let e = edges[i];
-    //         let parent = e.parentNode;
-
-    //         e.addEventListener('click', () => {
-    //             parent.classList.toggle('slideInFromRight');
-    //             parent.style.left = null;
-    //             parent.style.width = null;
-    //             this.clearAllSelectedProjects();
-    //         });
-    //         e.addEventListener('mouseover', () => {
-    //             var style = window.getComputedStyle(parent),
-    //                 left = style.getPropertyValue('left');
-    //                 let splits = left.split('px');
-    //                 let shift = parseFloat(splits[0]) - 5;
-    //                 parent.style.left = shift + 'px';
-
-    //                 let width = style.getPropertyValue('width');
-    //                 let w_splits = width.split('px');
-    //                 let w_shift = parseFloat(w_splits[0]) + 5;
-    //                 parent.style.width = w_shift + 'px';
-
-    //         })
-    //         e.addEventListener('mouseout', () => {
-    //             parent.style.left = null;
-    //             parent.style.width = null;
-    //         })
-    //     }
     // }
 
     // clearAllSelectedProjects() {
@@ -369,121 +337,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     //         }
     //     });
     // }
-
-
-    // /**
-    //  * Populates Project tab container with content and slides into view.
-    //  * @param {<div>} htmlContent ... html div containing all page layout elements
-    //  */
-    // displayProject(htmlContent) {
-    //     const animationClass = 'slideInFromRight';
-
-    //     const contentContainer = this._projectTab.querySelector('.projectContentContainer');
-    //     //if project page already shown, slide out, swap content and slide back in.
-    //     //timeout added to allow animation to finish.
-    //     if (this._projectTab.classList.contains(animationClass)) {
-    //         this._projectTab.classList.remove(animationClass);
-    //         this._removeAllChildren(contentContainer);
-    //         setTimeout(() => {
-    //             // this._addCloseProjectButton();
-    //             contentContainer.appendChild(htmlContent);
-    //             this._projectTab.classList.add(animationClass);
-    //         }, 200);
-    //         return;
-    //     }
-
-    //     this._removeAllChildren(contentContainer);
-    //     // this._addCloseProjectButton();
-    //     contentContainer.appendChild(htmlContent);
-    //     this._projectTab.classList.add(animationClass);
-
-    // }
-
-    // // _addCloseProjectButton() {
-    // //     const closeProject = document.createElement('div');
-    // //     closeProject.classList.add('closeProject');
-    // //     this._projectTab.appendChild(closeProject);
-
-    // //     closeProject.addEventListener('click', () => {
-    // //         this._projectTab.classList.remove('slideInFromRight');
-    // //     });
-
-    // //     return closeProject;
-    // // }
-
-    // _bindCallContactCard() {
-    //     const callElements = document.querySelectorAll('.contactCall');
-    //     console.log(callElements);
-
-    //     for (let i = 0; i < callElements.length; i++) {
-    //         let e = callElements[i];
-    //         e.addEventListener('click', () => {
-    //             const contactCard = document.querySelector('.contact');
-    //             this._enterContactCard();
-    //         });
-    //     }
-    // }
-
-    // _bindExitContactCard() {
-    //     const card = this._contactCard;
-
-    //     const bottomEdge = card.querySelector('.bottomEdge');
-    //     bottomEdge.addEventListener('click', () => {
-    //         this._exitContactCard();
-    //     })
-
-    //     bindSwipeEvent(card, 'up', 60, () => {
-    //         this._exitContactCard();
-    //     })
-    // }
-
-    // //======================    ANIMATION   ============================
-
-    // _enterAboutTab() {
-    //     this._aboutTab.classList.add('slideInFromRight');
-    // }
-    // _exitAboutTab() {
-    //     this._aboutTab.classList.remove('slideInFromRight');
-    // }
-    // _enterIndexTab() {
-    //     this._indexTab.classList.add('slideUp');
-    // }
-    // _exitIndexTab() {
-    //     this._indexTab.classList.remove('slideUp');
-
-    // }
-    // _enterContactCard() {
-    //     this._contactCard.classList.add('slideDown');
-    // }
-    // _exitContactCard() {
-    //     this._contactCard.classList.remove('slideDown');
-    // }
-
-    // // ==========================   UTILITY ===============================
-    //  /**
-    //  * 
-    //  * @param {Array[Object]} projectData ... field labeled 'categories' required
-    //  * @returns an array of unique categories
-    //  */
-    //  _getUniqueCategories(projectData) {
-    //     let categories = new Set();
-    //     projectData.forEach(p => {
-    //         p.categories.forEach(c => {
-    //             categories.add(c);
-    //         });
-    //     });
-    //     return Array.from(categories);
-    // }
-
-    // /**
-    //  * clear an element
-    //  * @param {HTML Element} element 
-    //  */
-    //     _removeAllChildren(element) {
-    //         while (element.lastChild) {
-    //             element.removeChild(element.lastChild);
-    //         }
-    //     }
 }
 
 export default GUI;
