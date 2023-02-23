@@ -43,8 +43,7 @@ const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getPr
             in={show}
             appear={true}
             timeout={200}
-            classNames="slideFromBottom"
-        >
+            classNames="slideFromBottom">
             <div className="projectIndex">
                 <div className="topEdge"></div>
                 <ProjectFilterGroup 

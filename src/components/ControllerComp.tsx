@@ -6,7 +6,7 @@ import { ProjectInfo } from '../types/interfaces';
 import Model from '../types/Model';
 import GUI from './GUI';
 
-const Controller : FC  = () => {
+const ControllerComp : FC  = () => {
     const _model : Model = new Model(loadProjects());
     // let p = _model.Projects?.get("printFast1");
     // console.log(p?.Content?.toString());
@@ -67,4 +67,4 @@ const Controller : FC  = () => {
         </Router>
     );
 } 
-export default Controller;
+export default ControllerComp;

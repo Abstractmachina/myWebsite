@@ -14,9 +14,9 @@ const ProjectTab : FC<ProjectTabProps> = ({show, content}) : ReactElement => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(show);
-        if (show) navigate('/projects');
-        else navigate(-1);
+        // console.log(show);
+        // if (show) navigate('/projects');
+        // else navigate(-1);
     })
 
     let idx = 0;

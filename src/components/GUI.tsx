@@ -6,10 +6,11 @@ import preview_art from '../assets/barbican_00.jpg';
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 
 import Main from './Main';
+
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
@@ -25,6 +26,8 @@ import '../styles/style_mobile.scss';
 import '../styles/AboutTab.scss';
 import '../styles/animations.scss';
 import '../styles/IndexTab.scss';
+import TestDrawer from './TestDrawer';
+import Controller from '../types/Controller';
 
 type GuiProps = {
     getCategoriesHandler: () => string[] | null;
@@ -42,12 +45,13 @@ type TabStates = {
 const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
 
     const location = useLocation();
-    const background = location.state && location.state.background;
+    const navigate = useNavigate();
+    // const background = location.state && location.state.background;
     const _swipeSensitivity:number = 60;
-
 
     let states: TabStates;
 
+    const[controller, setController] = useState(new Controller());
 
     const [showContact, setShowContact] = useState(false);
     const [showIndex, setShowIndex] = useState(false);
@@ -57,7 +61,9 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
 
     function callContactCard() {
-         setShowContact(true);
+        setShowContact(true);
+
+
     }
     function hideContactCard() {
         setShowContact(false);
@@ -65,6 +71,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
     function callIndexTab() {
         setShowIndex(true);
+        window.history.pushState(null, '', '/projects');
     }
     function hideIndexTab() {
         setShowIndex(false);
@@ -98,6 +105,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     }
 
     return (
+
         <div className='gui'> 
             <LeftMain 
                 callContactCardHandler={callContactCard} 
@@ -121,6 +129,12 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 show={showContact} 
                 hideContact={hideContactCard}/>
         
+
+        <Routes>
+                <Route path="/" element={<AboutTab />} />
+
+        </Routes>
+
             {/* {background && (
             <Routes>
                 <Route path="/about" element={<AboutTab />} />

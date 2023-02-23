@@ -6,7 +6,7 @@ import preview_art from '../assets/barbican_00.jpg';
 import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
-import { BrowserRouter as Router, Route, Routes, Navigate, Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, Link, useLocation, Outlet } from 'react-router-dom';
 
 
 import LeftMain from './LeftMain';
@@ -25,38 +25,40 @@ import '../styles/AboutTab.scss';
 import '../styles/animations.scss';
 import '../styles/IndexTab.scss';
 
+// type MainProps = {
+//     getCategoriesHandler: () => string[] | null;
+//     getProjectInfoHandler: (categories:string[]) => ProjectInfo[];
+//     getContentHandler: (id:string) => ContentElement[];
+// }
 
-const Main:FC = ({}): ReactElement => {
+const TestDrawer:FC = ({}): ReactElement => {
     const location = useLocation();
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        window.addEventListener('popstate', (e) => {
-            console.log( "main: ");
-            console.log(e.target);
-        })
-    }, [])
+useEffect(() => {
+    window.addEventListener('popstate', (e) => {
+        console.log("testdrawer: ");
+        console.log(e);})
+}, []);
 
-    function openDrawer() {
-        // console.log(location)
-        // console.log(navigate);
-        window.history.pushState({num:49}, '', '/about');
-
-    }
-    
     return (
-        <div className='testMain'>
+        <div className='testDrawer'>
+            {/* <LeftMain 
+                callContactCardHandler={callContactCard} 
+                callIndexTabHandler={callIndexTab} 
+                callAboutPageHandler={callAboutPage}
+                hideIndexTabHandler= {hideIndexTab}
+                hideContactCardHandler = {hideContactCard}
+                hideProjectTabHandler = {hideProjectTab}/> */}
+            {/* <RightMain/> */}
+            {/* <Footer/> */}
 
-            <h2>Create contextual drawer navigation</h2>
-            <button id="btn_openDrawer" onClick={openDrawer}>
-                Open Drawer
-            </button>
+            <h2>Drawer</h2>
             {/* <Link to="/about" state={{ background: location }}>
-                Open Drawer
-            </Link> */}
-            <Outlet/>
+                Open Modal
+            </Link>
+            <Outlet/> */}
         </div>
     );
 }
 
-export default Main;
+export default TestDrawer;

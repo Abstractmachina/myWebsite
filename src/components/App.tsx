@@ -1,9 +1,9 @@
 import React from 'react';
-import Controller from './Controller';
+import ControllerComp from './ControllerComp';
 
 function App() {
   return (
-        <Controller/>
+        <ControllerComp/>
   );
 }
 
