@@ -10,6 +10,16 @@ import GUI from './GUI';
 import Main from './Main';
 import ProjectPage from './ProjectPage';
 
+import '../styles/style_main.scss';
+import '../styles/style_anim_projectArrow.scss';
+import '../styles/style_anim_checkboxes.scss';
+import '../styles/style_mobile.scss';
+import '../styles/AboutTab.scss';
+import '../styles/animations.scss';
+import '../styles/IndexTab.scss';
+import '../styles/ProjectPage.scss';
+import '../styles/ContactTab.scss';
+
 const MainController : FC  = () => {
     const _model : Model = new Model(loadProjects());
     

@@ -16,14 +16,7 @@ import AboutTab from './AboutTab';
 import IndexTabController from './IndexTabController';
 import ContactTab from './ContactTab';
 
-import '../styles/style_main.scss';
-import '../styles/style_anim_projectArrow.scss';
-import '../styles/style_anim_checkboxes.scss';
-import '../styles/style_mobile.scss';
-import '../styles/AboutTab.scss';
-import '../styles/animations.scss';
-import '../styles/IndexTab.scss';
-import '../styles/ProjectPage.scss';
+
 
 
 
@@ -50,22 +43,15 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
     useEffect(() => {
         //call index tab if stored in history
         if (window.sessionStorage.getItem('indexState') === 'on') {
-            callIndexTab();
+            setIndexCardState(true);
             //reset index state
             window.sessionStorage.setItem('indexState', 'off');
         }
     },[])
 
-    function setContactCard(state:boolean) {
-        setShowContact(state);
-    }
+    function setContactCardState(state:boolean) { setShowContact(state);}
 
-    function callIndexTab() {
-        setShowIndex(true);
-    }
-    function hideIndexTab() {
-        setShowIndex(false);
-    }
+    function setIndexCardState(state:boolean) { setShowIndex(state); }
     function callProjectTab() {
         setShowProject(true);
     }
@@ -95,14 +81,13 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
     return (
         <div className='gui'>
             <LeftMain 
-                setContactCardState={setContactCard} 
-                callIndexTabHandler={callIndexTab} 
+                setContactCardState={setContactCardState} 
+                setIndexTabState={setIndexCardState} 
                 setAboutState={setAboutPage}
-                hideIndexTabHandler= {hideIndexTab}
                 hideProjectTabHandler = {hideProjectTab}/>
             <RightMain/>
             <Footer/>
-            <AboutTab show={showAbout} setState={setAboutPage} setContactState={setContactCard}/>
+            <AboutTab show={showAbout} setState={setAboutPage} setContactState={setContactCardState}/>
             <IndexTabController 
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
@@ -110,7 +95,7 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
                 selectProjectHandler={handleSelectProject}/>
             <ContactTab 
                 show={showContact} 
-                setContactState={setContactCard}/>
+                setContactState={setContactCardState}/>
         </div>
     );
 }

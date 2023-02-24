@@ -11,11 +11,10 @@ type AboutProps = {
 }
 
 const variants = {
-    open: { opacity: 1, left: 'calc(100% - 25px)' },
-    closed: { opacity: 1, left: '50%' },
+    closed: { left: 'calc(100% - 25px)' },
+    open: { left: '50%' },
   }
   
-
 const AboutTab: FC<AboutProps> = ({show, setState, setContactState}) : ReactElement => {
 
     function toggleThisPage(e:any) {

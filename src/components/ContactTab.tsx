@@ -6,11 +6,17 @@ import linkedinLogo from '../assets/logo_linkedin.svg';
 import React, { FC, useState, ReactElement, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
+import {motion} from 'framer-motion'
 
 type ContactProps = {
     show: boolean;
     setContactState: (state:boolean) => void;
 }
+
+const variants = {
+    closed: { bottom: '100%' },
+    open: { bottom: '50%' },
+  }
 
 const ContactTab : FC<ContactProps> = ( {show, setContactState}):ReactElement => {
 
@@ -19,12 +25,12 @@ const ContactTab : FC<ContactProps> = ( {show, setContactState}):ReactElement =>
     }
 
     return (
-        <CSSTransition
-        in = {show}
-        timeout={0}
-        classNames="slideFromTop"
-        unmountOnExit>
-        <div className='contact'>
+        <motion.div 
+            className='contact'
+            initial={{bottom: '100%'}}
+            animate={show ? "open" : "closed"}
+            variants={variants}
+        >
             <div className='contactWrapper'>
                 <h1>Contact</h1>
                 <h2>taole.chen@protonmail.com</h2>
@@ -38,8 +44,7 @@ const ContactTab : FC<ContactProps> = ( {show, setContactState}):ReactElement =>
                 </div>
             </div>
             <div className='bottomEdge' onClick={handleHideContact}>close</div>
-        </div>
-        </CSSTransition>
+        </motion.div>
     );
 }
 

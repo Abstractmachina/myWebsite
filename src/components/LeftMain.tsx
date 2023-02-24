@@ -11,20 +11,18 @@ import ReturnArrow from "./ReturnArrow";
 
 type LeftMainProps = {
     setContactCardState: (state:boolean) => void;
-    callIndexTabHandler: () => void;
+    setIndexTabState: (state:boolean) => void;
     setAboutState: (state:boolean) => void;
-    hideIndexTabHandler: () => void;
-    // hideContactCardHandler: () => void;
     hideProjectTabHandler: () => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {setContactCardState, callIndexTabHandler, setAboutState, hideIndexTabHandler, hideProjectTabHandler}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, setAboutState, hideProjectTabHandler}): ReactElement => {
 
     function handleCallContactCard() {
         setContactCardState(true);
     }
     function handleCallIndexTab() {
-        callIndexTabHandler();
+        setIndexTabState(true);
     }
 
     function handleCallAboutPage() {
@@ -32,6 +30,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, callIndexTabHandler
     }
 
     function handleExitAllTabs(e:any) {
+        console.log("asdfas")
         let element = e.target;
 
         //switches for checking if wrong element was clicked
@@ -49,9 +48,10 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, callIndexTabHandler
             element = element.parentNode;
         }
 
-        if (hideIndex)hideIndexTabHandler();
+        if (hideIndex)setIndexTabState(false);
         if (hideContact) setContactCardState(false);
         hideProjectTabHandler();
+        setAboutState(false);
     }
 
     return(
