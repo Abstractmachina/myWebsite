@@ -1,17 +1,16 @@
 import React, { FC, useState } from 'react';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import loadProjects from '../projects/loadProjects';
 import ContentElement from '../types/ContentElement';
 import { ProjectInfo } from '../types/interfaces';
 import Model from '../types/Model';
 import GUI from './GUI';
 
+import Main from './Main';
+import ProjectPage from './ProjectPage';
+
 const ControllerComp : FC  = () => {
     const _model : Model = new Model(loadProjects());
-    // let p = _model.Projects?.get("printFast1");
-    // console.log(p?.Content?.toString());
-
-    const [categories, setCategories] = useState(_model.GetUniqueCategories());
     
     function getCategories(): string[] | null {
         return _model.GetUniqueCategories();
@@ -60,10 +59,18 @@ const ControllerComp : FC  = () => {
 
     return (
         <Router>
-            <GUI 
+            <Routes>
+                <Route path="/" element={<Main 
+                getCategoriesHandler={getCategories} 
+                getProjectInfoHandler={getProjectInfo}
+                getContentHandler={getContent}/>} />
+                <Route path="/:projectName" 
+                    element={<ProjectPage fetchProjectContent={getContent}/>} />
+            </Routes>
+            {/* <GUI 
             getCategoriesHandler={getCategories} 
             getProjectInfoHandler={getProjectInfo}
-            getContentHandler={getContent}/>
+            getContentHandler={getContent}/> */}
         </Router>
     );
 } 

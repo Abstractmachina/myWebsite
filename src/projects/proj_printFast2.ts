@@ -54,13 +54,13 @@ const printFast2 = () : Project => {
 
     //FEATURES
     proj.pushContents(
-        ce.H2("Features"),
+        ce.H3("Features"),
         ce.P("In terms of features, the toolkit is roughly the same. A main difference is the implementation as a GH plugin and the addition of concurrent computing, making it more robust and much faster.", true),
     );
 
     //TECHNOLOGIES
     proj.pushContents(
-        ce.H2('Technologies'),
+        ce.H3('Technologies'),
         new ce('ul', null, false, {
             children: [
                 new ce('li', 'C#'),

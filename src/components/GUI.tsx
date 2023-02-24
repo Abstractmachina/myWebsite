@@ -8,9 +8,6 @@ import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
-
-import Main from './Main';
-
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
@@ -19,6 +16,8 @@ import IndexTabController from './IndexTabController';
 import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 
+import Main from './Main';
+
 import '../styles/style_main.scss';
 import '../styles/style_anim_projectArrow.scss';
 import '../styles/style_anim_checkboxes.scss';
@@ -26,8 +25,6 @@ import '../styles/style_mobile.scss';
 import '../styles/AboutTab.scss';
 import '../styles/animations.scss';
 import '../styles/IndexTab.scss';
-import TestDrawer from './TestDrawer';
-import Controller from '../types/Controller';
 
 type GuiProps = {
     getCategoriesHandler: () => string[] | null;
@@ -51,7 +48,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
     let states: TabStates;
 
-    const[controller, setController] = useState(new Controller());
 
     const [showContact, setShowContact] = useState(false);
     const [showIndex, setShowIndex] = useState(false);
@@ -62,8 +58,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
     function callContactCard() {
         setShowContact(true);
-
-
     }
     function hideContactCard() {
         setShowContact(false);
@@ -71,7 +65,8 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
 
     function callIndexTab() {
         setShowIndex(true);
-        window.history.pushState(null, '', '/projects');
+        // window.history.pushState(null, '', '/projects');
+        navigate('/projects');
     }
     function hideIndexTab() {
         setShowIndex(false);
@@ -107,7 +102,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     return (
 
         <div className='gui'> 
-            <LeftMain 
+            {/* <LeftMain 
                 callContactCardHandler={callContactCard} 
                 callIndexTabHandler={callIndexTab} 
                 callAboutPageHandler={callAboutPage}
@@ -127,13 +122,16 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
                 content={currentProjectContent}/>
             <ContactTab 
                 show={showContact} 
-                hideContact={hideContactCard}/>
+                hideContact={hideContactCard}/> */}
         
 
-        <Routes>
-                <Route path="/" element={<AboutTab />} />
+        {/* <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/projects" element={<ProjectTab 
+                show={showProject} 
+                content={currentProjectContent}/>} />
 
-        </Routes>
+        </Routes> */}
 
             {/* {background && (
             <Routes>

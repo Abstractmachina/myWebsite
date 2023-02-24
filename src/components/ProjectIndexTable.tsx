@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProjectInfo } from '../types/interfaces';
 
 type IndexTableProps = {
@@ -8,9 +9,10 @@ type IndexTableProps = {
 
 const ProjectIndexTable : FC<IndexTableProps> = ( {projectInfo, selectProjectHandler}):ReactElement => {
 
-
+    const navigate = useNavigate();
     function handleSelectProject(e:any, id:string) {
-        selectProjectHandler(id);
+        window.sessionStorage.setItem('indexState', 'on');
+        navigate('../' + id);
     }
 
     return (

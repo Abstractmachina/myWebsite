@@ -24,37 +24,112 @@ import '../styles/style_mobile.scss';
 import '../styles/AboutTab.scss';
 import '../styles/animations.scss';
 import '../styles/IndexTab.scss';
+import '../styles/ProjectPage.scss';
 
 
-const Main:FC = ({}): ReactElement => {
+
+
+type MainProps = {
+    getCategoriesHandler: () => string[] | null;
+    getProjectInfoHandler: (categories:string[]) => ProjectInfo[];
+    getContentHandler: (id:string) => ContentElement[];
+}
+
+const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
     const location = useLocation();
     const navigate = useNavigate();
+    // const background = location.state && location.state.background;
+    const _swipeSensitivity:number = 60;
+
+    const [showContact, setShowContact] = useState(false);
+    const [showIndex, setShowIndex] = useState(false);
+    const [showProject, setShowProject] = useState(false);
+
+    const [currentProjectContent, setCurrentProjectContent] = useState(new Array<ContentElement>());
+
 
     useEffect(() => {
-        window.addEventListener('popstate', (e) => {
-            console.log( "main: ");
-            console.log(e.target);
-        })
-    }, [])
+        if (window.sessionStorage.getItem('indexState') === 'on') {
+            callIndexTab();
+            window.sessionStorage.setItem('indexState', 'off');
+        }
+    },[])
 
-    function openDrawer() {
-        // console.log(location)
-        // console.log(navigate);
-        window.history.pushState({num:49}, '', '/about');
+    function callContactCard() {
+        setShowContact(true);
+    }
+    function hideContactCard() {
+        setShowContact(false);
+    }
+
+    function callIndexTab() {
+        setShowIndex(true);
+        // window.history.pushState(null, '', '/projects');
+        // navigate('/projects');
+    }
+    function hideIndexTab() {
+        setShowIndex(false);
+    }
+
+    function callProjectTab() {
+        setShowProject(true);
+    }
+    function hideProjectTab() {
+        setShowProject(false);
+    }
+
+    function callAboutPage() {
 
     }
+
+    function handleGetCategories():string[] | null {
+        return getCategoriesHandler();
+    }
+
+    function handleGetProjectInfo(categories:string[]):|ProjectInfo[] {
+        return getProjectInfoHandler(categories);
+    }
+
+    function handleSelectProject(id:string) {
+        setCurrentProjectContent(new Array<ContentElement>());
+
+        let content = getContentHandler(id);
+        setCurrentProjectContent(content);
+        callProjectTab();
+    }
+
     
     return (
-        <div className='testMain'>
+        <div className='gui'>
+            <LeftMain 
+                callContactCardHandler={callContactCard} 
+                callIndexTabHandler={callIndexTab} 
+                callAboutPageHandler={callAboutPage}
+                hideIndexTabHandler= {hideIndexTab}
+                hideContactCardHandler = {hideContactCard}
+                hideProjectTabHandler = {hideProjectTab}/>
+            <RightMain/>
+            <Footer/>
+            <AboutTab/>
+            <IndexTabController 
+                show={showIndex} 
+                getCategoriesHandler={handleGetCategories} 
+                getProjectInfoHandler={handleGetProjectInfo}
+                selectProjectHandler={handleSelectProject}/>
+            <ProjectTab 
+                show={showProject} 
+                content={currentProjectContent}/>
+            <ContactTab 
+                show={showContact} 
+                hideContact={hideContactCard}/>
 
-            <h2>Create contextual drawer navigation</h2>
+
+
+            {/* <h2>Create contextual drawer navigation</h2>
             <button id="btn_openDrawer" onClick={openDrawer}>
                 Open Drawer
             </button>
-            {/* <Link to="/about" state={{ background: location }}>
-                Open Drawer
-            </Link> */}
-            <Outlet/>
+            <Outlet/> */}
         </div>
     );
 }
