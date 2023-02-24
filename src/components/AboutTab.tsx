@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 
 import {motion} from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 
 type AboutProps = {
     show:boolean;
@@ -10,12 +11,20 @@ type AboutProps = {
     setContactState: (state:boolean) => void;
 }
 
-const variants = {
+const desktopVariants = {
     closed: { left: 'calc(100% - 25px)' },
     open: { left: '50%' },
-  }
+}
+const mobileVariants = {
+    closed: { left: 'calc(100% - 25px)' },
+    open: { left: '0%' },
+}
   
 const AboutTab: FC<AboutProps> = ({show, setState, setContactState}) : ReactElement => {
+
+    const isDesktop = useMediaQuery({
+        query: '(min-width:600px)'
+    })
 
     function toggleThisPage(e:any) {
         setState(!show);
@@ -29,7 +38,7 @@ const AboutTab: FC<AboutProps> = ({show, setState, setContactState}) : ReactElem
         <motion.div 
             className="about"
             animate={show ? "open" : "closed"}
-            variants={variants}
+            variants={isDesktop ? desktopVariants : mobileVariants}
         >
             <div className="leftEdge" onClick={toggleThisPage}>information</div>
             <div className="aboutContainer">

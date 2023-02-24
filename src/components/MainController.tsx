@@ -5,7 +5,7 @@ import loadProjects from '../projects/loadProjects';
 import ContentElement from '../types/ContentElement';
 import { ProjectInfo } from '../types/interfaces';
 import Model from '../types/Model';
-import GUI from './GUI';
+// import GUI from './GUI';
 
 import Main from './Main';
 import ProjectPage from './ProjectPage';

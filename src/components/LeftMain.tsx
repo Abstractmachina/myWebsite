@@ -36,6 +36,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
         //switches for checking if wrong element was clicked
         let hideIndex = true;
         let hideContact = true;
+        let hideAbout = true;
 
         while (element) {
             if (element.id === "projectArrow") {
@@ -44,6 +45,9 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
             if (element.classList.contains("contactCall")) {
                 hideContact = false;
             }
+            if (element.id === "btn_profile") {
+                hideAbout = false;
+            }
             if (element.classList.contains("left")) break;
             element = element.parentNode;
         }
@@ -51,7 +55,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
         if (hideIndex)setIndexTabState(false);
         if (hideContact) setContactCardState(false);
         setProjectTabState(false);
-        setAboutState(false);
+        if (hideAbout) setAboutState(false);
     }
 
     return(

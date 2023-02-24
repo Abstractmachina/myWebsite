@@ -45,3 +45,14 @@
     padding: 6em 5em;
     overflow: auto;
 }
+
+@media (max-width: 600px) {
+
+    .about {
+        width: 100%;
+        .aboutContainer {
+            overflow: auto;
+            padding: 3em 2em;
+        }
+    }
+}

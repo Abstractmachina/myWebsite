@@ -29,10 +29,11 @@
 }
 
 .projectIndexTable {
-    width: 100%;
+    
+    width: 95%;
     padding: 0em 1em;
     border-collapse: collapse;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .projectIndexTable th {
@@ -58,4 +59,13 @@
 
  .selected {
     background-color: $color_active;
+}
+
+
+@media (max-width: 600px) {
+
+    .projectIndex {
+        width: calc(100% - 25px);
+        height:65%;
+    }
 }

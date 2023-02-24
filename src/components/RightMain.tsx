@@ -1,8 +1,5 @@
 import PreviewObject from "../types/PreviewObject";
 
-import preview_design from '../assets/matnet/fab_05.jpg';
-import preview_code from '../assets/lbd/HiveMindClasses.jpg';
-import preview_art from '../assets/barbican_00.jpg';
 import { FC, useEffect, useRef, useState } from "react";
 import { getCenterPos, getRandomPoint } from "../scripts/util";
 
@@ -35,6 +32,7 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
 
     useEffect(()=> {
 
+        //if no preview, reset style and return
         if (!previewObj.show) {
             let style: PreviewStyle = {
                 opacity : 0,
@@ -43,6 +41,7 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
                 top: 0
             }
             setPreviewStyle(style);
+            _dismissBanner();
             return;
         }
 
@@ -50,7 +49,6 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
         let x:number|undefined, y:number|undefined;
         
         let element:HTMLElement | null = null;
-        let textContent:string = '';
         if (previewObj.category === "design") {
             element = designRef.current;    
         }
@@ -67,9 +65,6 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
             x = rect.left;
             y = rect.top;
         }
-
-        if (x && y) console.log(x + ' ' + y);
-
         if (previewObj.show) {
             let style: PreviewStyle = {
                 opacity : 1,
@@ -80,13 +75,12 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
 
             setPreviewStyle(style);
 
-            if (rect)
-            spawnBanner(rect, 200, previewObj.category);
+            if (rect) _spawnBanner(rect, 200, previewObj.category);
         }
 
     }, [previewObj])
 
-    function spawnBanner(spawnRect:DOMRect, range:number, content:string) {
+    function _spawnBanner(spawnRect:DOMRect, range:number, content:string) {
 
             let {x, y} = getCenterPos(spawnRect)
 
@@ -100,6 +94,17 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
 
             setBannerContent(content);
             setBannerStyle(style);
+    }
+
+    function _dismissBanner() {
+        let style: BannerStyle = {
+            left :0,
+            top : 0,
+            opacity:0,
+        }
+
+        setBannerContent('');
+        setBannerStyle(style);
     }
 
     return (
@@ -117,71 +122,3 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
 };
 
 export default RightMain;
-
-
-    // //===============   HOVER PREVIEW   ===========================
-    // bindHoverProjects(handler) {
-    //     const table = document.querySelector('.projectIndexTable');
-    //     const rows = table.querySelectorAll('tr');
-
-    //     for (let i = 0; i < rows.length; i++) {
-    //         const row = rows[i];
-    //         const categories = handler(row.id);
-    //         row.addEventListener('mouseover', () => {
-    //             this._callPreviewCircles(categories);
-    //         });
-    //         row.addEventListener('mouseout', () => {
-    //             this._dismissPreviewCircles(categories);
-    //         })
-    //     }
-    // }
-
-
-// //populate preview circles with predefined graphics
-    // _callPreviewCircles(categories) {
-    //     if (categories.has("design")) {
-    //         const container = this._rightMain.querySelector(".circleDesign");
-    //         container.style.backgroundImage = "url(" + preview_design + ")";
-    //         this._instantiateBanner(container, 200, 'DESIGN');
-    //     }
-    //     if (categories.has("code")) {
-    //         const container = this._rightMain.querySelector(".circleCode");
-    //         container.style.backgroundImage = "url(" + preview_code + ")";
-    //         this._instantiateBanner(container, 200, 'CODE');
-    //     }
-    //     if (categories.has("art")) {
-    //         const container = this._rightMain.querySelector(".circleArt");
-    //         container.style.backgroundImage = "url(" + preview_art + ")";
-    //         this._instantiateBanner(container, 200, 'ART');
-
-    //     }
-    // }
-
-    // _dismissPreviewCircles(categories) {
-    //     const circles = this._rightMain.querySelectorAll('.circle');
-    //     for (let i = 0; i < circles.length; i++) {
-    //         const c = circles[i];
-    //         c.style.backgroundImage = null;
-    //     }
-    //     const banners = this._app.querySelectorAll('.banner');
-    //     for (let i = 0 ; i < banners.length;i++) {
-    //         this._app.removeChild(banners[i]);
-    //     }
-    // }
-
-    // _instantiateBanner(spawnElement, range, content) {
-    //     const banner = document.createElement('div');
-    //         banner.textContent = content;
-    //         banner.classList.add('banner');
-
-    //         let {x, y} = getCenterPos(spawnElement)
-
-    //         let {newX, newY} = getRandomPoint(x,y, range);
-
-    //         banner.style.left = newX + 'px';
-    //         banner.style.top = newY + 'px';
-
-    //         this._app.append(banner);
-
-    //         return banner;
-    // }
