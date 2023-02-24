@@ -4,6 +4,7 @@ import preview_design from '../assets/matnet/fab_05.jpg';
 import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
 import { FC, useEffect, useRef, useState } from "react";
+import { getCenterPos, getRandomPoint } from "../scripts/util";
 
 type RightMainProps = {
     previewObj: PreviewObject;
@@ -16,14 +17,21 @@ type PreviewStyle = {
     opacity:number;
 }
 
+type BannerStyle = {
+    left: number;
+    top: number;
+    opacity:number;
+}
+
 const RightMain : FC<RightMainProps> = ({previewObj}) => {
 
     const designRef = useRef<HTMLDivElement>(null);
     const codeRef = useRef<HTMLDivElement>(null);
     const artRef = useRef<HTMLDivElement>(null);
-    const previewRef = useRef<HTMLDivElement>(null);
 
-    const [previewStyle, setPreviewStyle] = useState<PreviewStyle>({left:0, top:0, backgroundImage:'', opacity: 0})
+    const [previewStyle, setPreviewStyle] = useState<PreviewStyle>({left:0, top:0, backgroundImage:'', opacity: 0});
+    const [bannerStyle, setBannerStyle] = useState<BannerStyle>({left:0, top:0, opacity: 0});
+    const [bannerContent, setBannerContent] = useState<string>('');
 
     useEffect(()=> {
 
@@ -40,16 +48,20 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
 
         //get absolute position of circle in viewport
         let x:number|undefined, y:number|undefined;
-        let rect: DOMRect | undefined = undefined;
+        
+        let element:HTMLElement | null = null;
+        let textContent:string = '';
         if (previewObj.category === "design") {
-            rect = designRef.current?.getBoundingClientRect();            
+            element = designRef.current;    
         }
         else if (previewObj.category === "code") {
-            rect = codeRef.current?.getBoundingClientRect();
+            element = codeRef.current;    
         }
         else if (previewObj.category === "art") {
-            rect = artRef.current?.getBoundingClientRect();
+            element = artRef.current;    
         }
+
+        let rect: DOMRect | undefined = element?.getBoundingClientRect();
 
         if (rect) {
             x = rect.left;
@@ -67,10 +79,28 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
             }
 
             setPreviewStyle(style);
+
+            if (rect)
+            spawnBanner(rect, 200, previewObj.category);
         }
 
     }, [previewObj])
 
+    function spawnBanner(spawnRect:DOMRect, range:number, content:string) {
+
+            let {x, y} = getCenterPos(spawnRect)
+
+            let {newX, newY} = getRandomPoint(x,y, range);
+
+            let style: BannerStyle = {
+                left :newX,
+                top : newY,
+                opacity:1,
+            }
+
+            setBannerContent(content);
+            setBannerStyle(style);
+    }
 
     return (
         <main className="mainContainer right">
@@ -80,7 +110,8 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
                 <div className="circle circleCode" ref={codeRef}/>
                 <div className="circle circleArt" ref={artRef}/>
             </div>
-            <div className="preview" ref={previewRef} style={previewStyle}></div>
+            <div className="preview" style={previewStyle}></div>
+            <div className="banner" style={bannerStyle}>{bannerContent}</div>
         </main>
     )
 };
