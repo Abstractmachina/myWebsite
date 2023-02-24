@@ -81,13 +81,14 @@ const MainController : FC  = () => {
         if (project.Categories.has("design")) {
             result.category = 'design';
         } 
-        if (project.Categories.has("code")) {
+        else if (project.Categories.has("code")) {
             result.category = 'code';
         }
-        if (project.Categories.has("art")) {
+        else if (project.Categories.has("art")) {
             result.category = 'art';
 
         }
+        else return undefined;
        
         //set img
         let node = project.Content?.Head;

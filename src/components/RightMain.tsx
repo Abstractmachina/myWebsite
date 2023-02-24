@@ -3,10 +3,17 @@ import PreviewObject from "../types/PreviewObject";
 import preview_design from '../assets/matnet/fab_05.jpg';
 import preview_code from '../assets/lbd/HiveMindClasses.jpg';
 import preview_art from '../assets/barbican_00.jpg';
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
 type RightMainProps = {
     previewObj: PreviewObject;
+}
+
+type PreviewStyle = {
+    left: number;
+    top: number;
+    backgroundImage: string;
+    opacity:number;
 }
 
 const RightMain : FC<RightMainProps> = ({previewObj}) => {
@@ -16,25 +23,51 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
     const artRef = useRef<HTMLDivElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
 
+    const [previewStyle, setPreviewStyle] = useState<PreviewStyle>({left:0, top:0, backgroundImage:'', opacity: 0})
+
     useEffect(()=> {
 
-        console.log("RightMain");
-        console.log(previewObj);
+        if (!previewObj.show) {
+            let style: PreviewStyle = {
+                opacity : 0,
+                backgroundImage : '',
+                left:  0,
+                top: 0
+            }
+            setPreviewStyle(style);
+            return;
+        }
+
+        //get absolute position of circle in viewport
         let x:number|undefined, y:number|undefined;
+        let rect: DOMRect | undefined = undefined;
         if (previewObj.category === "design") {
-            x = designRef.current?.offsetLeft;
-            y = designRef.current?.offsetTop;
+            rect = designRef.current?.getBoundingClientRect();            
         }
         else if (previewObj.category === "code") {
-            x = codeRef.current?.offsetLeft;
-            y = codeRef.current?.offsetTop;
+            rect = codeRef.current?.getBoundingClientRect();
         }
         else if (previewObj.category === "art") {
-            x = artRef.current?.offsetLeft;
-            y = artRef.current?.offsetTop;
+            rect = artRef.current?.getBoundingClientRect();
+        }
+
+        if (rect) {
+            x = rect.left;
+            y = rect.top;
         }
 
         if (x && y) console.log(x + ' ' + y);
+
+        if (previewObj.show) {
+            let style: PreviewStyle = {
+                opacity : 1,
+                backgroundImage : `url(${previewObj.img})`,
+                left:  x ? x : 0,
+                top: y ? y : 0
+            }
+
+            setPreviewStyle(style);
+        }
 
     }, [previewObj])
 
@@ -47,7 +80,7 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
                 <div className="circle circleCode" ref={codeRef}/>
                 <div className="circle circleArt" ref={artRef}/>
             </div>
-            <div className="preview" ref={previewRef}></div>
+            <div className="preview" ref={previewRef} style={previewStyle}></div>
         </main>
     )
 };

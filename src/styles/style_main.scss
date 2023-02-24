@@ -198,6 +198,16 @@ p{
 
 
 /* ======   CIRCLE PREVIEWS     =======*/
+
+.preview {
+    position: fixed;
+    z-index:100;
+    width: 18em;
+    height: 18em;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}
 .banner {
     position:fixed;
     color: $color_accent;
