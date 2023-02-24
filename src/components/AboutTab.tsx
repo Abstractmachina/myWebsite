@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC, ReactElement } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 
-const AboutTab = () => {
+type AboutProps = {
+    show:boolean;
+    setState: (state:boolean) => void;
+}
+
+const AboutTab: FC<AboutProps> = ({show, setState}) : ReactElement => {
 
     const navigate = useNavigate();
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
 
     function toggleThisPage(e:any) {
-        setShow(!show);
+        setState(!show);
     }
 
     return (
