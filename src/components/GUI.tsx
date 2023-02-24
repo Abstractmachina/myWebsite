@@ -12,7 +12,7 @@ import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
 import AboutTab from './AboutTab';
-import IndexTabController from './IndexTabController';
+import IndexTabController from './IndexController';
 import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 
@@ -145,8 +145,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     );
 
     //     //setup bindings
-
-    //     this._bindExitTabsOnLeftMainClicked();
     //     this._bindTabLeftEdges();
     //     this._bindSwipeProjectExit();
     //     this._bindSwipeAboutExit();
@@ -155,40 +153,6 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
         
     // }
     
-    // //==================    BINDINGS =====================================
-    
-
-    // _bindExitTabsOnLeftMainClicked() {
-    //     this._leftMain.addEventListener('click', (e) =>{
-    //             // e.stopPropagation();
-
-
-    //             let t = e.target;
-    //             let isProjectArrow = false;
-    //             let isProfileButton = false;
-    //             while (t.parentNode) {
-    //                 if (t.id === 'projectArrow') isProjectArrow = true;
-    //                 if (t.id === 'btn_profile') isProfileButton = true;
-    //                 t = t.parentNode
-
-    //             }
-    //             if (!isProjectArrow) {
-    //                 this._exitIndexTab();
-    //                 this._projectTab.classList.remove('slideInFromRight');
-    //             }
-    //             if (!isProfileButton) {
-    //                 this._aboutTab.classList.remove('slideInFromRight');
-    //             }
-    //     });
-    // }
-
-    // clearAllSelectedProjects() {
-    //     const projectselections = document.querySelectorAll('.selected');
-    //     for (let i = 0; i < projectselections.length; i++) {
-    //         projectselections[i].classList.remove('selected');
-    //     }
-    // }
-
 
     // //===================   SWIPES  ================================
     // _bindSwipeProjectExit() {
@@ -228,130 +192,7 @@ const GUI:FC <GuiProps> = ({getCategoriesHandler, getProjectInfoHandler, getCont
     // }
 
 
-    // //===============   HOVER PREVIEW   ===========================
-    // bindHoverProjects(handler) {
-    //     const table = document.querySelector('.projectIndexTable');
-    //     const rows = table.querySelectorAll('tr');
 
-    //     for (let i = 0; i < rows.length; i++) {
-    //         const row = rows[i];
-    //         const categories = handler(row.id);
-    //         row.addEventListener('mouseover', () => {
-    //             this._callPreviewCircles(categories);
-    //         });
-    //         row.addEventListener('mouseout', () => {
-    //             this._dismissPreviewCircles(categories);
-    //         })
-    //     }
-    // }
-
-    // //populate preview circles with predefined graphics
-    // _callPreviewCircles(categories) {
-    //     if (categories.has("design")) {
-    //         const container = this._rightMain.querySelector(".circleDesign");
-    //         container.style.backgroundImage = "url(" + preview_design + ")";
-    //         this._instantiateBanner(container, 200, 'DESIGN');
-    //     }
-    //     if (categories.has("code")) {
-    //         const container = this._rightMain.querySelector(".circleCode");
-    //         container.style.backgroundImage = "url(" + preview_code + ")";
-    //         this._instantiateBanner(container, 200, 'CODE');
-    //     }
-    //     if (categories.has("art")) {
-    //         const container = this._rightMain.querySelector(".circleArt");
-    //         container.style.backgroundImage = "url(" + preview_art + ")";
-    //         this._instantiateBanner(container, 200, 'ART');
-
-    //     }
-    // }
-
-    // _dismissPreviewCircles(categories) {
-    //     const circles = this._rightMain.querySelectorAll('.circle');
-    //     for (let i = 0; i < circles.length; i++) {
-    //         const c = circles[i];
-    //         c.style.backgroundImage = null;
-    //     }
-    //     const banners = this._app.querySelectorAll('.banner');
-    //     for (let i = 0 ; i < banners.length;i++) {
-    //         this._app.removeChild(banners[i]);
-    //     }
-    // }
-
-    // _instantiateBanner(spawnElement, range, content) {
-    //     const banner = document.createElement('div');
-    //         banner.textContent = content;
-    //         banner.classList.add('banner');
-
-    //         let {x, y} = getCenterPos(spawnElement)
-
-    //         let {newX, newY} = getRandomPoint(x,y, range);
-
-    //         banner.style.left = newX + 'px';
-    //         banner.style.top = newY + 'px';
-
-    //         this._app.append(banner);
-
-    //         return banner;
-    // }
-
-    // _bindCategoryCheckbox(newCat, parent, projects) {
-
-    //         //query checkbox states and rebuild index on click
-    //         newCat.addEventListener('change', (e) => {
-    //             let checkBoxes = parent.querySelectorAll('input');
-
-    //             //return only the ids that are checked
-    //             let filtered = [...checkBoxes]
-    //                 .filter(box => box.checked === true)
-    //                 .map(box => box.id);
-
-    //             let table = document.querySelector(".projectIndexTable");
-    //             this._buildIndexTable(projects, filtered);
-
-    //             let noneCheck = parent.querySelector('#selNone');
-    //             noneCheck.checked = false;
-    //         });
-    // }
-
-    // _bindSelAllCheckbox() {
-    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-    //     const selAll = filterContainer.querySelector('#selAll');
-
-    //     selAll.addEventListener('change', () => {
-    //         if (selAll.checked) {
-    //             //get all checkboxes, turn on
-    //             const allChecks = filterContainer.querySelectorAll('input');
-    //             for (let i = 0; i < allChecks.length; i++) {
-    //                 const box = allChecks[i];
-    //                 if (box.id === 'selNone') box.checked = false;
-    //                 else if (box.id !== 'selAll') {
-    //                     box.checked = true;
-    //                     const e = new Event("change");
-    //                     box.dispatchEvent(e);
-    //                 } 
-    //             }
-    //         }
-    //     });
-    // }
-
-    // _bindSelNoneCheckbox() {
-    //     const filterContainer = this._indexTab.querySelector('.' + this._projectFilterClass);
-    //     const selNone = filterContainer.querySelector('#selNone');
-
-    //     selNone.addEventListener('change', () => {
-    //         if (selNone.checked) {
-    //             //get all checkboxes, turn on
-    //             const allChecks = filterContainer.querySelectorAll('input');
-    //             for (let i = 0; i < allChecks.length; i++) {
-    //                 const box = allChecks[i];
-    //                 if (box.id === selNone.id) continue;
-    //                 box.checked = false;
-    //                 const e = new Event("change");
-    //                 box.dispatchEvent(e);
-    //             }
-    //         }
-    //     });
-    // }
 }
 
 export default GUI;

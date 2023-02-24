@@ -13,7 +13,7 @@ import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
 import AboutTab from './AboutTab';
-import IndexTabController from './IndexTabController';
+import IndexTabController from './IndexController';
 import ProjectTab from './ProjectTab';
 import ContactTab from './ContactTab';
 

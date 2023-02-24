@@ -13,10 +13,10 @@ type LeftMainProps = {
     setContactCardState: (state:boolean) => void;
     setIndexTabState: (state:boolean) => void;
     setAboutState: (state:boolean) => void;
-    hideProjectTabHandler: () => void;
+    setProjectTabState: (state:boolean) => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, setAboutState, hideProjectTabHandler}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, setAboutState, setProjectTabState}): ReactElement => {
 
     function handleCallContactCard() {
         setContactCardState(true);
@@ -50,7 +50,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
 
         if (hideIndex)setIndexTabState(false);
         if (hideContact) setContactCardState(false);
-        hideProjectTabHandler();
+        setProjectTabState(false);
         setAboutState(false);
     }
 

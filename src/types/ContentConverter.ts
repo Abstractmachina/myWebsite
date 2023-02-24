@@ -5,7 +5,9 @@ import React from 'react';
 
 class ContentConverter {
 
-    //Recursively builds react dom from ContentElement object. 
+    /**
+     * Recursively builds react dom from ContentElement object. 
+     */
     static convertFromContentElement(content: ContentElement, key?:string): React.ReactElement {
         let props: Record<string, any> = { };
         let el;
@@ -27,7 +29,6 @@ class ContentConverter {
 
         if (content.Tag === 'img') 
         {
-            
             el = React.createElement(content.Tag, props, null );
         }
         else if (content.HasInnerHtml) {

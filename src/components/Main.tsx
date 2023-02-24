@@ -1,43 +1,45 @@
-// import pArrowBase from '../assets/arrow_projectIndex_base.svg';
-import preview_design from '../assets/matnet/fab_05.jpg';
-import preview_code from '../assets/lbd/HiveMindClasses.jpg';
-import preview_art from '../assets/barbican_00.jpg';
 
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+//types
+import PreviewObject from '../types/PreviewObject';
 import { ProjectInfo } from '../types/interfaces';
 import ContentElement from '../types/ContentElement';
+
+//React
+import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-
+//React Components
 import LeftMain from './LeftMain';
 import RightMain from './RightMain';
 import Footer from './Footer';
 import AboutTab from './AboutTab';
-import IndexTabController from './IndexTabController';
+import IndexController from './IndexController';
 import ContactTab from './ContactTab';
-
-
-
-
-
 
 type MainProps = {
     getCategoriesHandler: () => string[] | null;
     getProjectInfoHandler: (categories:string[]) => ProjectInfo[];
     getContentHandler: (id:string) => ContentElement[];
+    getPreviewData: (id:string) => PreviewObject | undefined;
 }
 
-const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler}): ReactElement => {
+const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler, getPreviewData}): ReactElement => {
     const location = useLocation();
     const navigate = useNavigate();
     const _swipeSensitivity:number = 60;
 
-    const [showContact, setShowContact] = useState(false);
-    const [showIndex, setShowIndex] = useState(false);
-    const [showProject, setShowProject] = useState(false);
-    const [showAbout, setShowAbout] = useState(false);
+    const [showContact, setShowContact] = useState<boolean>(false);
+    const [showIndex, setShowIndex] = useState<boolean>(false);
+    const [showProject, setShowProject] = useState<boolean>(false);
+    const [showAbout, setShowAbout] = useState<boolean>(false);
 
-    const [currentProjectContent, setCurrentProjectContent] = useState(new Array<ContentElement>());
+    const [currentProjectContent, setCurrentProjectContent] = useState<ContentElement[]>(new Array<ContentElement>());
+
+    const [projectPreview, setProjectPreview] = useState<PreviewObject>({
+        show:false,
+        img:'',
+        category: ''
+    })
 
 
     useEffect(() => {
@@ -50,17 +52,9 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
     },[])
 
     function setContactCardState(state:boolean) { setShowContact(state);}
-
     function setIndexCardState(state:boolean) { setShowIndex(state); }
-    function callProjectTab() {
-        setShowProject(true);
-    }
-    function hideProjectTab() {
-        setShowProject(false);
-    }
-    function setAboutPage(state:boolean) {
-        setShowAbout(state);
-    }
+    function setProjectTabState(state:boolean) { setShowProject(state); }
+    function setAboutPageState(state:boolean) { setShowAbout(state);}
 
     function handleGetCategories():string[] | null {
         return getCategoriesHandler();
@@ -75,7 +69,20 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
 
         let content = getContentHandler(id);
         setCurrentProjectContent(content);
-        callProjectTab();
+        setProjectTabState(true);
+    }
+
+    function handleCallPreview(id:string){
+        //fetch project data
+        const obj = getPreviewData(id);
+        //
+        // const pObj:PreviewObject = {show: true, img:'', category: ''}
+        if (obj) setProjectPreview(obj);
+    }
+
+    function handleDissmissPreview() {
+        const pObj:PreviewObject = {show: false, img:'', category: ''}
+        setProjectPreview(pObj);
     }
 
     return (
@@ -83,16 +90,18 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
             <LeftMain 
                 setContactCardState={setContactCardState} 
                 setIndexTabState={setIndexCardState} 
-                setAboutState={setAboutPage}
-                hideProjectTabHandler = {hideProjectTab}/>
-            <RightMain/>
+                setAboutState={setAboutPageState}
+                setProjectTabState = {setProjectTabState}/>
+            <RightMain previewObj={projectPreview}/>
             <Footer/>
-            <AboutTab show={showAbout} setState={setAboutPage} setContactState={setContactCardState}/>
-            <IndexTabController 
+            <AboutTab show={showAbout} setState={setAboutPageState} setContactState={setContactCardState}/>
+            <IndexController 
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
                 getProjectInfoHandler={handleGetProjectInfo}
-                selectProjectHandler={handleSelectProject}/>
+                selectProjectHandler={handleSelectProject}
+                propagateCallPreview={handleCallPreview}
+                propagateDismissPreview={handleDissmissPreview}/>
             <ContactTab 
                 show={showContact} 
                 setContactState={setContactCardState}/>

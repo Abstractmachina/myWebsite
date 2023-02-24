@@ -1,4 +1,5 @@
 import Project from "../types/Project";
+import img00 from "../assets/myWebsite/website_00.jpg";
 import {ContentElement as ce} from "../types/ContentElement";
 
 const myWebsite = ():Project => {
@@ -19,14 +20,18 @@ const myWebsite = ():Project => {
         ce.H2(project.Subtitle),
         ce.H5('Project Year: ' + project.Year),
         ce.H5('Project Location: ' + project.Location),
-         ce.H5('<a href="https://github.com/Abstractmachina/myWebsite">Github</a>', true),
+        ce.H5('<a href="https://github.com/Abstractmachina/myWebsite">Github</a>', true),
     );
+
+   
 
     //intro
     project.pushContents(
         ce.H3('Introduction'),
         ce.P('This website was built completely from scratch by me to showcase the projects I have done over the years. It served as a great project to put everything I have learned about web development into practice. Please feel free to browse around and I am happy to receive any and all feedback.'),
     );
+    
+    project.pushContent(ce.Image(img00));
 
     //features
     project.pushContents(

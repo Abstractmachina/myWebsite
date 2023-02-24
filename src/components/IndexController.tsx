@@ -2,16 +2,18 @@ import React, { FC, ReactElement, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ProjectInfo } from '../types/interfaces';
 import ProjectFilterGroup from './ProjectFilterGroup';
-import ProjectIndexTable from './ProjectIndexTable';
+import IndexTable from './IndexTable';
 
 type IndexProps = {
     show:boolean,
     getCategoriesHandler: () => string[] | null,
     getProjectInfoHandler: (categoryFilters: string[]) => ProjectInfo[],
     selectProjectHandler: (id:string) => void;
+    propagateCallPreview: (id:string) => void;
+    propagateDismissPreview: () => void;
 }
 
-const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler, selectProjectHandler}):ReactElement => {
+const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler, selectProjectHandler, propagateCallPreview, propagateDismissPreview}):ReactElement => {
 
     
     const [projectInfo, setProjectInfo] = useState(new Array<ProjectInfo>());
@@ -38,6 +40,14 @@ const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getPr
         selectProjectHandler(id);
     }
 
+    function CallPreviewHandler(id:string) {
+        propagateCallPreview(id);
+    }
+
+    function DismissPreviewHandler() {
+        propagateDismissPreview();
+    }
+
     return (
         <CSSTransition
             in={show}
@@ -49,7 +59,7 @@ const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getPr
                 <ProjectFilterGroup 
                     getCategoriesHandler={handleGetCategories}
                     filterRequestHandler={handleFilterRequest}/>
-                <ProjectIndexTable projectInfo={projectInfo} selectProjectHandler={handleSelectProject}/>
+                <IndexTable projectInfo={projectInfo} propagateCallPreview={propagateCallPreview} propagateDismissPreview={DismissPreviewHandler}/>
             </div>
         </CSSTransition>
     )
