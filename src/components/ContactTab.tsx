@@ -5,26 +5,17 @@ import linkedinLogo from '../assets/logo_linkedin.svg';
 
 import React, { FC, useState, ReactElement, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { useNavigate } from 'react-router-dom';
 
 
 type ContactProps = {
     show: boolean;
-    hideContact: () => void;
+    setContactState: (state:boolean) => void;
 }
 
-const ContactTab : FC<ContactProps> = ( {show, hideContact}):ReactElement => {
-
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // if (show) navigate('/contact');
-        // else navigate('../');
-
-    }, [show])
+const ContactTab : FC<ContactProps> = ( {show, setContactState}):ReactElement => {
 
     function handleHideContact() {
-        hideContact();
+        setContactState(false);
     }
 
     return (

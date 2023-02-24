@@ -56,11 +56,8 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
         }
     },[])
 
-    function callContactCard() {
-        setShowContact(true);
-    }
-    function hideContactCard() {
-        setShowContact(false);
+    function setContactCard(state:boolean) {
+        setShowContact(state);
     }
 
     function callIndexTab() {
@@ -74,9 +71,6 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
     }
     function hideProjectTab() {
         setShowProject(false);
-    }
-    function callAboutPage() {
-        setShowAbout(true);
     }
     function setAboutPage(state:boolean) {
         setShowAbout(state);
@@ -101,15 +95,14 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
     return (
         <div className='gui'>
             <LeftMain 
-                callContactCardHandler={callContactCard} 
+                setContactCardState={setContactCard} 
                 callIndexTabHandler={callIndexTab} 
-                callAboutPageHandler={callAboutPage}
+                setAboutState={setAboutPage}
                 hideIndexTabHandler= {hideIndexTab}
-                hideContactCardHandler = {hideContactCard}
                 hideProjectTabHandler = {hideProjectTab}/>
             <RightMain/>
             <Footer/>
-            <AboutTab show={showAbout} setState={setAboutPage}/>
+            <AboutTab show={showAbout} setState={setAboutPage} setContactState={setContactCard}/>
             <IndexTabController 
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
@@ -117,7 +110,7 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
                 selectProjectHandler={handleSelectProject}/>
             <ContactTab 
                 show={showContact} 
-                hideContact={hideContactCard}/>
+                setContactState={setContactCard}/>
         </div>
     );
 }

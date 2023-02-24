@@ -10,25 +10,25 @@ import IndexArrow from "./IndexArrow";
 import ReturnArrow from "./ReturnArrow";
 
 type LeftMainProps = {
-    callContactCardHandler: () => void;
+    setContactCardState: (state:boolean) => void;
     callIndexTabHandler: () => void;
-    callAboutPageHandler: () => void;
+    setAboutState: (state:boolean) => void;
     hideIndexTabHandler: () => void;
-    hideContactCardHandler: () => void;
+    // hideContactCardHandler: () => void;
     hideProjectTabHandler: () => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHandler, callAboutPageHandler, hideIndexTabHandler, hideContactCardHandler, hideProjectTabHandler}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {setContactCardState, callIndexTabHandler, setAboutState, hideIndexTabHandler, hideProjectTabHandler}): ReactElement => {
 
     function handleCallContactCard() {
-        callContactCardHandler();
+        setContactCardState(true);
     }
     function handleCallIndexTab() {
         callIndexTabHandler();
     }
 
     function handleCallAboutPage() {
-        callAboutPageHandler();
+        setAboutState(true);
     }
 
     function handleExitAllTabs(e:any) {
@@ -50,7 +50,7 @@ const LeftMain : FC<LeftMainProps> = ( {callContactCardHandler, callIndexTabHand
         }
 
         if (hideIndex)hideIndexTabHandler();
-        if (hideContact) hideContactCardHandler();
+        if (hideContact) setContactCardState(false);
         hideProjectTabHandler();
     }
 
