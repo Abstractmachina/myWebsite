@@ -7,19 +7,6 @@ const AboutTab = () => {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
 
-
-    useEffect(() => {
-        if (show)
-        // window.history.pushState(null, '', '/about');
-        navigate('/about');
-
-        else {
-            navigate('../');
-        }
-
-    }, [show])
-
-
     function toggleThisPage(e:any) {
         setShow(!show);
     }

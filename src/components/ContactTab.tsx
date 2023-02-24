@@ -18,8 +18,8 @@ const ContactTab : FC<ContactProps> = ( {show, hideContact}):ReactElement => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (show) navigate('/contact');
-        else navigate('../');
+        // if (show) navigate('/contact');
+        // else navigate('../');
 
     }, [show])
 

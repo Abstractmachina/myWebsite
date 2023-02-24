@@ -64,20 +64,16 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
 
     function callIndexTab() {
         setShowIndex(true);
-        // window.history.pushState(null, '', '/projects');
-        // navigate('/projects');
     }
     function hideIndexTab() {
         setShowIndex(false);
     }
-
     function callProjectTab() {
         setShowProject(true);
     }
     function hideProjectTab() {
         setShowProject(false);
     }
-
     function callAboutPage() {
 
     }
@@ -116,20 +112,9 @@ const Main:FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getCon
                 getCategoriesHandler={handleGetCategories} 
                 getProjectInfoHandler={handleGetProjectInfo}
                 selectProjectHandler={handleSelectProject}/>
-            <ProjectTab 
-                show={showProject} 
-                content={currentProjectContent}/>
             <ContactTab 
                 show={showContact} 
                 hideContact={hideContactCard}/>
-
-
-
-            {/* <h2>Create contextual drawer navigation</h2>
-            <button id="btn_openDrawer" onClick={openDrawer}>
-                Open Drawer
-            </button>
-            <Outlet/> */}
         </div>
     );
 }

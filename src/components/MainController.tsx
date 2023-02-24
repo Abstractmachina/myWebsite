@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import loadProjects from '../projects/loadProjects';
@@ -9,7 +10,7 @@ import GUI from './GUI';
 import Main from './Main';
 import ProjectPage from './ProjectPage';
 
-const ControllerComp : FC  = () => {
+const MainController : FC  = () => {
     const _model : Model = new Model(loadProjects());
     
     function getCategories(): string[] | null {
@@ -54,11 +55,8 @@ const ControllerComp : FC  = () => {
         return contentArray;
     }
 
-
-    // _view is the GUI component
-
     return (
-        <Router>
+        <AnimatePresence>
             <Routes>
                 <Route path="/" element={<Main 
                 getCategoriesHandler={getCategories} 
@@ -66,12 +64,13 @@ const ControllerComp : FC  = () => {
                 getContentHandler={getContent}/>} />
                 <Route path="/:projectName" 
                     element={<ProjectPage fetchProjectContent={getContent}/>} />
-            </Routes>
             {/* <GUI 
             getCategoriesHandler={getCategories} 
             getProjectInfoHandler={getProjectInfo}
             getContentHandler={getContent}/> */}
-        </Router>
+            </Routes>
+
+        </AnimatePresence>
     );
 } 
-export default ControllerComp;
+export default MainController;

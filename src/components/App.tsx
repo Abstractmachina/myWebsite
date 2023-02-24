@@ -1,9 +1,13 @@
 import React from 'react';
-import ControllerComp from './ControllerComp';
+import MainController from './MainController';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
-        <ControllerComp/>
+    <Router>
+      <MainController/>
+
+    </Router>
   );
 }
 

@@ -4,6 +4,8 @@ import { CSSTransition } from 'react-transition-group';
 import ContentConverter from '../types/ContentConverter';
 import ContentElement from '../types/ContentElement';
 
+import {motion} from 'framer-motion';
+
 type ProjectPageProps = {
     fetchProjectContent: (pid:string) => ContentElement[];
 }
@@ -23,52 +25,38 @@ const ProjectPage : FC<ProjectPageProps> = ({fetchProjectContent}) : ReactElemen
             const content = fetchProjectContent(projectName);
             setProjectContent(content);
         }
-
     }, []);
 
     //equivalent to pressing back button. 
-    //TODO: figure out how to restore state with index called
     function handleBackToIndex() {
         navigate("../");
     }
 
     let idx = 0;
     return (
-        <div className='projectPage'>
-            <div className="projectContentContainer">
-                { projectContent.map( c => {
-                    idx++;
-                    return ContentConverter.convertFromContentElement(c, idx.toString());
-                    
-                }) }
+        <motion.div 
+            className='projectPage'
+            initial={{opacity:0}}
+            animate={{opacity:1, transition: {duration: 0.5}}}
+            exit={{opacity:0}}
+        >
+            <div className='scrollContainer'>
+                <div className="projectContentContainer">
+                    { projectContent.map( c => {
+                        idx++;
+                        return ContentConverter.convertFromContentElement(c, idx.toString());
+                        
+                    }) }
+                </div>
             </div>
             
-            <div className='backToIndex' onClick={handleBackToIndex}>
-                <hr style={{
-                    color: "black",
-                    backgroundColor: "black",
-                    height: 1
-                }}/>
+            <motion.div className='backToIndex' onClick={handleBackToIndex}
+                whileHover={{height:'3em', transition: {duration: 0.2}}}
+            >
+                <hr />
                 Index
-            </div>
-        </div>
-        // <CSSTransition
-        //     in={show}
-        //     appear={true}
-        //     timeout={200}
-        //     classNames="slideFromRight"
-        //     unmountOnExit={true}>
-        //     <div className="projectTab">
-        //         <div className="leftEdge">close</div>
-        //         <div className="projectContentContainer">
-        //             { content.map( c => {
-        //                 idx++;
-        //                 return ContentConverter.convertFromContentElement(c, idx.toString());
-                        
-        //             }) }
-        //         </div>
-        //     </div>
-        // </CSSTransition>
+            </motion.div>
+        </motion.div>
     );
 };
 
