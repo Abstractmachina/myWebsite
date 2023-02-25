@@ -1,0 +1,58 @@
+@import "themes";
+.about {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    
+    top: 0%;
+    width: 50%;
+    height: 100%;
+    left:calc(100% - 25px);
+    background-color: $color_paper;
+    z-index: 10;
+    opacity: 1;
+    
+    p {
+        margin: 1em 0em;
+    }
+
+    hr {
+        border: 0 none;
+        height: 1px;
+        background-color: #eee;
+        margin-bottom: 2em;
+    }
+    
+     h3 {
+        font-weight: 200;
+        margin-bottom: -0.4em;
+        margin-top: 6em;
+    
+    }
+    
+    .links{
+        display: flex;
+        justify-content:space-between;
+        flex-wrap: wrap;
+        font-size: 0.8em;
+        margin-bottom: 3em;
+    
+    }
+}
+
+.aboutContainer {
+    padding: 6em 5em;
+    overflow: auto;
+}
+
+@media (max-width: 600px) {
+
+    .about {
+        width: 100%;
+        .aboutContainer {
+            overflow: auto;
+            padding: 3em 2em;
+        }
+    }
+}

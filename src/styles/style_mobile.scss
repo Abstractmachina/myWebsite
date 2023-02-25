@@ -1,5 +1,5 @@
 @media (max-width: 600px) {
-    .root {
+    #root, #root>* {
         display: block;
         flex-direction: column;
         overflow: hidden;
@@ -20,6 +20,11 @@
         }
     }   
 
+    .right {
+        left: 100%;
+        visibility: hidden;
+    }
+
     .contact {
         .contactWrapper {
             & h1 {
@@ -37,74 +42,9 @@
 
     }
 
-    .about {
-        width: 100%;
-        .aboutContainer {
-            overflow: auto;
-            padding: 3em 2em;
-        }
-    }
-
-    
-
-    .projectIndex {
-        width: 100%;
-        height:65%;
-    }
-    
-    .projectIndexSlideIn {
-        top: 35%;
-    }
-    
-    
-    .projectTab {
-        width: 100vw;
-
-        h1 {
-            font-size: 1.5em;
-        }
-        h2{
-            font-size: 1.2em;
-            font-weight: 600;
-        }
-        h3{
-            font-size: 1.1em;
-
-        }
-        h4{
-            font-weight: 600;
-            margin-top: 0.5em;
-        }
-        h5{
-            font-weight: 600;
-            margin-bottom: -0.3em;
-        }
-
-        ul{
-            padding-left: 1.5em;
-        }
-        img{
-            margin-top: 1em;
-            margin-bottom: -1em;
-        }
-
-        figure{
-            margin: 0;
-        }
-        
-        figcaption {
-            margin-top: 1em;
-        }
-        
-    }
-
     .projectContentContainer {
         padding: 3em 1em;
         padding-right: 3.5em;
-    }
-
-    .slideInFromRight {
-        left: 5px;
     }
 
     .footer {
@@ -135,6 +75,7 @@
         }
     
     }
+
     @keyframes animation-line-looped {
         0% {
           left: 140px;
@@ -181,6 +122,10 @@
             width: auto;
         }
       }
+
+    footer {
+        width: 100%;
+    }
     
 }
 
