@@ -20,6 +20,11 @@
         }
     }   
 
+    .right {
+        left: 100%;
+        visibility: hidden;
+    }
+
     .contact {
         .contactWrapper {
             & h1 {

@@ -3,8 +3,7 @@ import instalogo from '../assets/logo_insta.svg';
 import linkedinLogo from '../assets/logo_linkedin.svg';
 // import cvLogo from '../assets/logo_cv.svg';
 
-import React, { FC, useState, ReactElement, useEffect } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import React, { FC, ReactElement } from 'react';
 
 import {motion} from 'framer-motion'
 

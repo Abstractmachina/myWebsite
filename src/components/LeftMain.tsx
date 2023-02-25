@@ -10,10 +10,10 @@ type LeftMainProps = {
     setContactCardState: (state:boolean) => void;
     setIndexTabState: (state:boolean) => void;
     setAboutState: (state:boolean) => void;
-    setProjectTabState: (state:boolean) => void;
+    // setProjectTabState: (state:boolean) => void;
 }
 
-const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, setAboutState, setProjectTabState}): ReactElement => {
+const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, setAboutState}): ReactElement => {
 
     function handleCallContactCard() {
         setContactCardState(true);
@@ -50,7 +50,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
 
         if (hideIndex)setIndexTabState(false);
         if (hideContact) setContactCardState(false);
-        setProjectTabState(false);
+        // setProjectTabState(false);
         if (hideAbout) setAboutState(false);
     }
 
@@ -75,7 +75,16 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
     }
 
     return(
-    <motion.main className="mainContainer left" 
+    <motion.main 
+        className="mainContainer left" 
+        initial={{top:'100%'}}
+        animate={{
+            top:0,
+            transition: {
+                ease: "easeOut",
+                duration: 0.4,
+            }
+        }}
         onClick={(e) =>handleExitAllTabs(e)}
         onPanEnd={handlePan}
     >

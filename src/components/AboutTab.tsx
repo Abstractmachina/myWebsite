@@ -1,6 +1,4 @@
-import React, { useState, useEffect, FC, ReactElement } from 'react';
-import { CSSTransition } from 'react-transition-group';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, ReactElement } from 'react';
 
 import {motion, PanInfo} from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';

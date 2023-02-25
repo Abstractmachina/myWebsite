@@ -3,6 +3,8 @@ import PreviewObject from "../types/PreviewObject";
 import { FC, useEffect, useRef, useState } from "react";
 import { getCenterPos, getRandomPoint } from "../scripts/util";
 
+import {motion} from 'framer-motion'
+
 type RightMainProps = {
     previewObj: PreviewObject;
 }
@@ -108,7 +110,18 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
     }
 
     return (
-        <main className="mainContainer right">
+        <motion.main 
+            className="mainContainer right"
+            initial={{bottom: '100%'}}
+            animate={{bottom: 0,
+                transition: {
+                    ease: "easeOut",
+                    duration: 0.4,
+                    delay: 0.2
+                },
+                
+            }}
+        >
             <div className="background"></div>
             <div className="circleContainer">
                 <div className="circle circleDesign" ref={designRef}/>
@@ -117,7 +130,7 @@ const RightMain : FC<RightMainProps> = ({previewObj}) => {
             </div>
             <div className="preview" style={previewStyle}></div>
             <div className="banner" style={bannerStyle}>{bannerContent}</div>
-        </main>
+        </motion.main>
     )
 };
 

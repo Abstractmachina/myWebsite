@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProjectInfo } from '../types/interfaces';
 

@@ -1,10 +1,9 @@
 import React, {FC, ReactElement, useEffect, useState} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
 import ContentConverter from '../types/ContentConverter';
 import ContentElement from '../types/ContentElement';
 
-import {motion} from 'framer-motion';
+import {motion, useAnimationControls} from 'framer-motion';
 
 type ProjectPageProps = {
     fetchProjectContent: (pid:string) => ContentElement[];
@@ -13,6 +12,7 @@ type ProjectPageProps = {
 const ProjectPage : FC<ProjectPageProps> = ({fetchProjectContent}) : ReactElement => {
 
     const navigate = useNavigate();
+    const animation = useAnimationControls()
     
     const {projectName} = useParams(); //gets proj id for fetching content
 
@@ -25,32 +25,55 @@ const ProjectPage : FC<ProjectPageProps> = ({fetchProjectContent}) : ReactElemen
             const content = fetchProjectContent(projectName);
             setProjectContent(content);
         }
+
+        backTabInSequence();
     }, []);
+
 
     //equivalent to pressing back button. 
     function handleBackToIndex() {
         navigate("../");
     }
 
-    let idx = 0;
+    async function backTabInSequence() {
+        await animation.start({opacity:1});
+        animation.start({height: '2em',
+        transition: {
+            ease:'easeInOut',
+            duration:0.5}});
+    }
+
+
     return (
         <motion.div 
             className='projectPage'
-            initial={{opacity:0}}
+            initial={{opacity:1}}
             animate={{opacity:1, transition: {duration: 0.5}}}
             exit={{opacity:0}}
         >
             <div className='scrollContainer'>
                 <div className="projectContentContainer">
-                    { projectContent.map( c => {
-                        idx++;
-                        return ContentConverter.convertFromContentElement(c, idx.toString());
-                        
+                    { projectContent.map( (c, i) => {
+                        let el = ContentConverter.convertFromContentElement(c, i.toString());
+                        return <motion.div
+                            initial={{opacity: 0, translateY:100}}
+                            animate={{opacity:1, translateY: 0}}
+                            transition={{
+                                duration:0.3, 
+                                delay: 0.2 +  i*0.03}}
+                        >{el}</motion.div>
                     }) }
                 </div>
             </div>
             
-            <motion.div className='backToIndex' onClick={handleBackToIndex}
+            <motion.div 
+                className='backToIndex' 
+                onClick={handleBackToIndex}
+                initial={{
+                    opacity:1,
+                    height: '60%'}}
+                animate={animation}
+                exit={{height: '100%'}}
                 whileHover={{height:'3em', transition: {duration: 0.2}}}
             >
                 <hr />

@@ -1,5 +1,4 @@
 import { LinkedList } from "./LinkedList";
-import React from 'react';
 import ContentElement from "./ContentElement";
 
 class Project {

@@ -6,7 +6,6 @@ import ContentElement from '../types/ContentElement';
 
 //React
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 //React Components
 import LeftMain from './LeftMain';
@@ -24,15 +23,10 @@ type MainProps = {
 }
 
 const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler, getPreviewData}): ReactElement => {
-    const location = useLocation();
-    const navigate = useNavigate();
 
     const [showContact, setShowContact] = useState<boolean>(false);
     const [showIndex, setShowIndex] = useState<boolean>(false);
-    const [showProject, setShowProject] = useState<boolean>(false);
     const [showAbout, setShowAbout] = useState<boolean>(false);
-
-    const [currentProjectContent, setCurrentProjectContent] = useState<ContentElement[]>(new Array<ContentElement>());
 
     const [projectPreview, setProjectPreview] = useState<PreviewObject>({
         show:false,
@@ -52,7 +46,7 @@ const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getC
 
     function setContactCardState(state:boolean) { setShowContact(state);}
     function setIndexCardState(state:boolean) { setShowIndex(state); }
-    function setProjectTabState(state:boolean) { setShowProject(state); }
+    // function setProjectTabState(state:boolean) { setShowProject(state); }
     function setAboutPageState(state:boolean) { setShowAbout(state);}
 
     function handleGetCategories():string[] | null {
@@ -61,14 +55,6 @@ const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getC
 
     function handleGetProjectInfo(categories:string[]):|ProjectInfo[] {
         return getProjectInfoHandler(categories);
-    }
-
-    function handleSelectProject(id:string) {
-        setCurrentProjectContent(new Array<ContentElement>());
-
-        let content = getContentHandler(id);
-        setCurrentProjectContent(content);
-        setProjectTabState(true);
     }
 
     function handleCallPreview(id:string){
@@ -90,7 +76,7 @@ const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getC
                 setContactCardState={setContactCardState} 
                 setIndexTabState={setIndexCardState} 
                 setAboutState={setAboutPageState}
-                setProjectTabState = {setProjectTabState}/>
+            />
             <RightMain previewObj={projectPreview}/>
             <Footer/>
             <AboutTab show={showAbout} setState={setAboutPageState} setContactState={setContactCardState}/>
@@ -98,7 +84,6 @@ const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getC
                 show={showIndex} 
                 getCategoriesHandler={handleGetCategories} 
                 getProjectInfoHandler={handleGetProjectInfo}
-                selectProjectHandler={handleSelectProject}
                 propagateCallPreview={handleCallPreview}
                 propagateDismissPreview={handleDissmissPreview}/>
             <ContactTab 

@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { FC, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import loadProjects from '../projects/loadProjects';
 import ContentElement from '../types/ContentElement';
 import { ProjectInfo } from '../types/interfaces';
@@ -10,9 +10,9 @@ import Model from '../types/Model';
 import Main from './Main';
 import ProjectPage from './ProjectPage';
 
-import '../styles/style_main.scss';
-import '../styles/style_anim_projectArrow.scss';
-import '../styles/style_anim_checkboxes.scss';
+import '../styles/main.scss';
+import '../styles/anim_projectArrow.scss';
+import '../styles/anim_checkboxes.scss';
 import '../styles/style_mobile.scss';
 import '../styles/AboutTab.scss';
 import '../styles/IndexTab.scss';
