@@ -71,13 +71,25 @@ const ProjectPage : FC<ProjectPageProps> = ({fetchProjectContent}) : ReactElemen
                 onClick={handleBackToIndex}
                 initial={{
                     opacity:1,
-                    height: '60%'}}
-                animate={animation}
-                exit={{height: '100%'}}
-                whileHover={{height:'3em', transition: {duration: 0.2}}}
+                    height: '60%'}
+                }
+                animate={ {
+                    height: '2em',
+                    transition: {
+                        ease:'easeInOut',
+                        duration:0.5}}
+                }
+                whileHover={{
+                    height:'3em', 
+                    transition: {
+                        duration: 0.1}}
+                }
             >
                 <hr />
-                Index
+                <div>
+                    Index
+                </div>
+                
             </motion.div>
         </motion.div>
     );

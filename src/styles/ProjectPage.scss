@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 2em;
 }
 
 .projectContentContainer {
@@ -23,7 +24,6 @@
     display: flex;
     flex-direction: column;
     padding: 2em 3em;
-    padding-bottom: 5em;    
     max-width: 800px;
 
     img {
@@ -65,12 +65,15 @@
     p {
         margin-bottom: 1em;
     }
+
+    &:last-child{
+        margin-bottom: 5em;
+    }
     
 }
 
 .backToIndex {
 
-    
     position: fixed;
     width: 100%;
     height: 2em;
@@ -80,6 +83,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    gap: 0.5em;
     cursor: pointer;
     
     hr {
@@ -88,4 +92,6 @@
         background-Color: black;
         height: 2px;
     }
+
+
 }

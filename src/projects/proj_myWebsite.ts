@@ -28,7 +28,7 @@ const myWebsite = ():Project => {
     //intro
     project.pushContents(
         ce.H3('Introduction'),
-        ce.P('This website was built completely from scratch by me to showcase the projects I have done over the years. It served as a great project to put everything I have learned about web development into practice. Please feel free to browse around and I am happy to receive any and all feedback.'),
+        ce.P('I built this website from the ground up to showcase the body of work I have done over the years. Additionally, it serves as a sandbox environment for me to test out web development-related ideas. Please feel free to browse around and I am happy to receive any and all feedback.'),
     );
     
     project.pushContent(ce.Image(img00));
@@ -38,12 +38,12 @@ const myWebsite = ():Project => {
         ce.H3('Features'),
         new ce("ul", null, false, {
             children: [
-                new ce("li", 'MVC architecture allows for future re-use of the core logic in different graphical environments.'),
-                new ce("li", 'Vanilla JS only to keep the project lightweight and because the goal was to practice my JS skills, rather than my knowledge on libraries'),
-                new ce("li", 'Unit testing for core classes'),
+                new ce("li", 'MVC architecture allows for future re-use of the core logic in different graphical environments'),
+                new ce("li", 'Originally developed in vanilla JS, I have recently migrated it to Reactjs and TypeScript to ensure future maintainability and to practice my front-end skills'),
+                new ce("li", 'React-Router and Framer Motion added'),
+                new ce("li", 'Generic ContentElement class with HTML-like syntax for content building. Elements are converted into language-specific elements for implementation (e.g. HTML or JSX)'),
                 new ce("li", 'Streamlined method for adding more projects as packaged objects in the future to improve maintainability'),
-                new ce("li", 'Projects are searchable by category to ease navigation'),
-                new ce("li", 'Responsive design'),
+                new ce("li", 'Responsive client-side design'),
             ]
         }
         )
@@ -54,7 +54,7 @@ const myWebsite = ():Project => {
         ce.H3('Technologies'),
         new ce('ul', null, false, {
             children: [
-                new ce('li', 'HTML, SCSS, JS'),
+                new ce('li', 'HTML, Sass, TypeScript, Reactjs, React Router, Framer Motion, Figma'),
                 new ce('li', 'Jest Unit Testing'),
                 new ce('li', 'Webpack asset bundling'),
             ]
@@ -64,9 +64,13 @@ const myWebsite = ():Project => {
     //development
     project.pushContents(
         ce.H3('Development'),
+        ce.P('This website is continually being improved. Features will be added and upgraded as I learn more.'),
         new ce('ul', null, false, {
             children: [
-                new ce('li', 'blog section'),
+                new ce('li', 'Redux state managaement'),
+                new ce('li', 'front-end testing'),
+                new ce('li', 'separate art and design section'),
+                new ce('li', 'content management system'),
             ]
         }
         )
