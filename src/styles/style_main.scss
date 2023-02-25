@@ -52,6 +52,7 @@ p{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    touch-action: none;
 
     &>*  {
         margin-left: 4em;

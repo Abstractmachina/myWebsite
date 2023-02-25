@@ -4,6 +4,8 @@ import { ProjectInfo } from '../types/interfaces';
 import ProjectFilterGroup from './ProjectFilterGroup';
 import IndexTable from './IndexTable';
 
+import {motion} from 'framer-motion'
+
 type IndexProps = {
     show:boolean,
     getCategoriesHandler: () => string[] | null,
@@ -11,6 +13,11 @@ type IndexProps = {
     selectProjectHandler: (id:string) => void;
     propagateCallPreview: (id:string) => void;
     propagateDismissPreview: () => void;
+}
+
+const variants = {
+    closed: { top: '100%' },
+    open: { top: '40%' },
 }
 
 const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getProjectInfoHandler, selectProjectHandler, propagateCallPreview, propagateDismissPreview}):ReactElement => {
@@ -36,10 +43,6 @@ const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getPr
         setProjectInfo(infoObjects);
     }
 
-    function handleSelectProject(id:string) {
-        selectProjectHandler(id);
-    }
-
     function CallPreviewHandler(id:string) {
         propagateCallPreview(id);
     }
@@ -49,19 +52,16 @@ const IndexTabController : FC<IndexProps> = ( {show, getCategoriesHandler, getPr
     }
 
     return (
-        <CSSTransition
-            in={show}
-            appear={true}
-            timeout={200}
-            classNames="slideFromBottom">
-            <div className="projectIndex">
-                <div className="topEdge"></div>
-                <ProjectFilterGroup 
-                    getCategoriesHandler={handleGetCategories}
-                    filterRequestHandler={handleFilterRequest}/>
-                <IndexTable projectInfo={projectInfo} propagateCallPreview={propagateCallPreview} propagateDismissPreview={DismissPreviewHandler}/>
-            </div>
-        </CSSTransition>
+        <motion.div className="projectIndex"
+            animate={show ? "open" : "closed"}
+            variants={variants}
+        >
+            <div className="topEdge"></div>
+            <ProjectFilterGroup 
+                getCategoriesHandler={handleGetCategories}
+                filterRequestHandler={handleFilterRequest}/>
+            <IndexTable projectInfo={projectInfo} propagateCallPreview={propagateCallPreview} propagateDismissPreview={DismissPreviewHandler}/>
+        </motion.div>
     )
 };
 

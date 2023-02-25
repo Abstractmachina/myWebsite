@@ -26,7 +26,6 @@ type MainProps = {
 const Main : FC<MainProps> = ({getCategoriesHandler, getProjectInfoHandler, getContentHandler, getPreviewData}): ReactElement => {
     const location = useLocation();
     const navigate = useNavigate();
-    const _swipeSensitivity:number = 60;
 
     const [showContact, setShowContact] = useState<boolean>(false);
     const [showIndex, setShowIndex] = useState<boolean>(false);

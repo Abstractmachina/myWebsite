@@ -1,13 +1,10 @@
-// import loadReturnArrow from "./loadReturnArrow";
-// import { createElementText } from "../scripts/util";
-// import loadLogo from "./loadLogo";
-// import loadProjectArrow from "./loadProjectArrow";
-
-
 import React, { FC, ReactElement } from "react";
 import Logo from "./Logo";
 import IndexArrow from "./IndexArrow";
 import ReturnArrow from "./ReturnArrow";
+
+import {motion, PanInfo} from 'framer-motion'
+import { SWIPE_THRESHOLD } from "../CONSTANTS";
 
 type LeftMainProps = {
     setContactCardState: (state:boolean) => void;
@@ -30,7 +27,6 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
     }
 
     function handleExitAllTabs(e:any) {
-        console.log("asdfas")
         let element = e.target;
 
         //switches for checking if wrong element was clicked
@@ -58,9 +54,34 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
         if (hideAbout) setAboutState(false);
     }
 
+    function handlePan(e:any, info:PanInfo) {
+       
+
+        let offsetX = info.offset.x;
+        let offsetY = info.offset.y;
+
+        //left swipe
+        if (offsetX+ SWIPE_THRESHOLD < 0) { 
+            setAboutState(true);
+        }
+        //up swipe
+        if (offsetY + SWIPE_THRESHOLD < 0) { 
+            setIndexTabState(true);
+        }
+        //dow n swipe
+        if (offsetY - SWIPE_THRESHOLD > 0) { 
+            setContactCardState(true);
+        }
+    }
+
     return(
-    <main className="mainContainer left" onClick={(e) =>handleExitAllTabs(e)}>
-        <div className="logo contactCall" onClick={handleCallContactCard}>
+    <motion.main className="mainContainer left" 
+        onClick={(e) =>handleExitAllTabs(e)}
+        onPanEnd={handlePan}
+    >
+        <div className="logo contactCall" 
+            onClick={handleCallContactCard}
+        >
             <Logo/>
             <h2>design | code | art</h2>
         </div>
@@ -78,7 +99,7 @@ const LeftMain : FC<LeftMainProps> = ( {setContactCardState, setIndexTabState, s
             </div>
             <IndexArrow clickHandler={handleCallIndexTab}/>
         </header>
-    </main>
+    </motion.main>
     );
 }
 

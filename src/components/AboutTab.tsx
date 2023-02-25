@@ -2,8 +2,9 @@ import React, { useState, useEffect, FC, ReactElement } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 
-import {motion} from 'framer-motion';
+import {motion, PanInfo} from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
+import { SWIPE_THRESHOLD } from '../CONSTANTS';
 
 type AboutProps = {
     show:boolean;
@@ -34,11 +35,20 @@ const AboutTab: FC<AboutProps> = ({show, setState, setContactState}) : ReactElem
         setContactState(true);
     }
 
+    function handlePan(e:any, info: PanInfo) {
+        const offsetX = info.offset.x;
+
+        if (offsetX-SWIPE_THRESHOLD > 0) {
+            setState(false);
+        }
+    }
+
     return (
         <motion.div 
             className="about"
             animate={show ? "open" : "closed"}
             variants={isDesktop ? desktopVariants : mobileVariants}
+            onPanEnd={handlePan}
         >
             <div className="leftEdge" onClick={toggleThisPage}>information</div>
             <div className="aboutContainer">
