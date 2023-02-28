@@ -8,9 +8,6 @@ type CategoryCheckBoxProps = {
 
 const CategoryCheckbox : FC<CategoryCheckBoxProps> = ( {state, toggleCheckHandler}):ReactElement => {
 
-    // const [isChecked, setChecked] = useState(initState);
-
-
     function toggleCheck(e:any) {
         toggleCheckHandler(state.id);
     }

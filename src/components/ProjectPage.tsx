@@ -50,8 +50,9 @@ const ProjectPage : FC<ProjectPageProps> = ({fetchProjectContent}) : ReactElemen
             initial={{opacity:1}}
             animate={{opacity:1, transition: {duration: 0.5}}}
             exit={{opacity:0}}
+            data-testid='mainComponent'
         >
-            <div className='scrollContainer'>
+            <div className='scrollContainer' >
                 <div className="projectContentContainer">
                     { projectContent.map( (c, i) => {
                         let el = ContentConverter.convertFromContentElement(c, i.toString());
