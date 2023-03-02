@@ -1,5 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
+
+import {Link} from 'react-router-dom'
 import {motion, PanInfo} from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 import { SWIPE_THRESHOLD } from '../CONSTANTS';
@@ -52,7 +54,7 @@ const AboutTab: FC<AboutProps> = ({show, setState, setContactState}) : ReactElem
             <div className="aboutContainer">
                 <div className="links">
                     <a>taole.chen@protonmail.com</a>
-                    <a href="'https://www.instagram.com/taole.chen/">Instagram</a>
+                    <a href="https://www.instagram.com/taole.chen/" target='_blank'>Instagram</a>
                 </div>
                 <p>I am currently open for new projects. If you're looking to collaborate, please feel free to <a href="#" className="contactCall" onClick={callContactCard}>get in touch!</a>
                 </p>
