@@ -34,7 +34,10 @@ const ProjectIndexTable : FC<IndexTableProps> = ( {projectInfo, propagateCallPre
             <table className="projectIndexTable">
                 <thead>
                     <tr>
-                        <th>Year</th><th>Title</th><th>Location</th><th>Categories</th> 
+                        <th>Year</th>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Categories</th> 
                     </tr>
                 </thead>
                 <tbody>
