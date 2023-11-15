@@ -19,13 +19,15 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "sass": "^1.58.0",
+    "serve": "^14.2.1",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
+    "start": "serve build -s -n -L -p $PORT",
     "test": "react-scripts test",
     "test2": "jest",
     "test2:watch": "jest --watch",
